@@ -11,6 +11,7 @@ Resolution order matters: person, then weekday, then — for Eunice — season, 
 nothing else.
 """
 
+import hashlib
 import json
 import os
 
@@ -28,6 +29,14 @@ data = {
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
+
+def _digest(rel):
+    p = os.path.join(BASE, "..", "hub", rel)
+    import hashlib as _h
+    return _h.sha1(open(p, "rb").read()).hexdigest()[:8]
+
+ASSET_V = {"css": _digest("app.css"), "js": _digest("app.js")}
+
 HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +49,7 @@ HTML = """<!DOCTYPE html>
 <meta name="apple-mobile-web-app-title" content="Pairwell">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="app.css?v=__CSSV__">
 <style>
   body{
     background:var(--bg);color:var(--text);
@@ -136,7 +145,7 @@ HTML = """<!DOCTYPE html>
   <span>v3</span>
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=__JSV__"></script>
 <script>
 const D = __DATA__;
 
@@ -336,7 +345,7 @@ PW.registerServiceWorker("sw.js");
 </html>
 """
 
-html = HTML.replace("__DATA__", data_json)
+html = HTML.replace("__DATA__", data_json).replace("__CSSV__", ASSET_V["css"]).replace("__JSV__", ASSET_V["js"])
 with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
 print("written index.html  (%d bytes)" % len(html))

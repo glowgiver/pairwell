@@ -33,6 +33,16 @@ if unmatched:
 
 videos_json = json.dumps(videos, ensure_ascii=False)
 
+def _digest(rel):
+    """Content hash for a shared asset, so a stale HTTP cache entry cannot
+    outlive a change. The service worker revalidates eventually; this closes
+    the window before it does."""
+    import hashlib
+    p = os.path.join(BASE, "..", "hub", rel)
+    return hashlib.sha1(open(p, "rb").read()).hexdigest()[:8]
+
+ASSET_V = {"css": _digest("app.css"), "js": _digest("app.js")}
+
 html = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +50,7 @@ html = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Workout · Pairwell</title>
 <meta name="theme-color" content="#0B1220">
-<link rel="stylesheet" href="../app.css">
+<link rel="stylesheet" href="../app.css?v=__CSSV__">
 <style>
   /* Palette lives in ../app.css — only the accent choice is page-local. */
   :root{ --accent:var(--train); }
@@ -198,7 +208,7 @@ html = """<!DOCTYPE html>
 <div class="pills" id="pills"></div>
 <div class="stage" id="stage"></div>
 
-<script src="../app.js"></script>
+<script src="../app.js?v=__JSV__"></script>
 <script>
 const T = __DATA__;
 const VIDEOS = __VIDEOS__;
@@ -463,7 +473,8 @@ saveState();
 </html>
 """
 
-html = html.replace("__DATA__", data_json)
+html = html.replace("__DATA__", data_json)\
+        .replace("__CSSV__", ASSET_V["css"]).replace("__JSV__", ASSET_V["js"])
 html = html.replace("__VIDEOS__", videos_json)
 
 with open(OUT_PATH, "w", encoding="utf-8") as f:

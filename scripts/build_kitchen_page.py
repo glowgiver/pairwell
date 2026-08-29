@@ -24,6 +24,16 @@ data = {
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
+def _digest(rel):
+    """Content hash for a shared asset, so a stale HTTP cache entry cannot
+    outlive a change. The service worker revalidates eventually; this closes
+    the window before it does."""
+    import hashlib
+    p = os.path.join(BASE, "..", "hub", rel)
+    return hashlib.sha1(open(p, "rb").read()).hexdigest()[:8]
+
+ASSET_V = {"css": _digest("app.css"), "js": _digest("app.js")}
+
 HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +41,7 @@ HTML = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kitchen · Pairwell</title>
 <meta name="theme-color" content="#0B1220">
-<link rel="stylesheet" href="../app.css">
+<link rel="stylesheet" href="../app.css?v=__CSSV__">
 <style>
   :root{ --accent:var(--food); }
 
@@ -174,7 +184,7 @@ HTML = """<!DOCTYPE html>
 <p class="sub" id="sub"></p>
 <div id="stage"></div>
 
-<script src="../app.js"></script>
+<script src="../app.js?v=__JSV__"></script>
 <script>
 const D = __DATA__;
 
@@ -319,7 +329,8 @@ render();
 </html>
 """
 
-html = HTML.replace("__DATA__", data_json)
+html = HTML.replace("__DATA__", data_json)\
+        .replace("__CSSV__", ASSET_V["css"]).replace("__JSV__", ASSET_V["js"])
 with open(OUT, "w", encoding="utf-8") as f:
     f.write(html)
 print("written kitchen/index.html  (%d bytes)" % len(html))
