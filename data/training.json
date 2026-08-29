@@ -1,6 +1,7 @@
 {
   "_source": "workout_hub.html — full re-translation of all cues, 2026-08-29",
   "_supersedes": "earlier training.json draft — this is the authoritative extraction",
+  "_measured": "Gym loads dated 2026-08-29 were read off the machines, not estimated: cable row 42.5 kg P / 27 kg E, face pull 12.5 kg P / 5 kg E, rear delt fly 6.8 kg P, biceps curl 5 kg P / 2.5 kg E. Everything else in this file is still the number the plan was written with. The glute drive machine turned out not to exist at this gym on the same day.",
   "meta": {
     "title": "Workout Hub · Philipp & Eunice · 2026",
     "edition": "Lean Athletic Edition",
@@ -122,7 +123,7 @@
     "gym": [
       "cable tower",
       "machines",
-      "glute drive",
+      "dumbbells + sandbags",
       "leg press"
     ],
     "home": [
@@ -284,7 +285,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "35 kg",
+                "load": "42.5 kg",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -298,7 +299,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "9 kg",
+                "load": "6.8 kg",
                 "rir": "RIR 1",
                 "rest": "60s"
               },
@@ -312,7 +313,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "10 kg",
+                "load": "12.5 kg",
                 "rir": "RIR 1",
                 "rest": "45s"
               },
@@ -340,7 +341,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "15 kg",
+                "load": "5 kg",
                 "rir": "RIR 2",
                 "rest": "45s"
               },
@@ -358,7 +359,7 @@
           "note": "Monday alone in the gym. Deliberately machines only: fixed path, nothing can go wrong, no spotting needed. Cable exercises happen Friday with Philipp.",
           "exercises": [
             {
-              "name": "Glute Drive Machine",
+              "name": "Hip Thrust (Dumbbell or Sandbag)",
               "ref": "priority #1",
               "focus": "g",
               "tier": "primary",
@@ -368,7 +369,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Fresh first — your top exercise. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look."
+              "cue": "Fresh first — your top exercise. There is no glute drive machine at this gym, so: shoulders against a bench, dumbbell or sandbag across the hips, feet flat and close. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look."
             },
             {
               "name": "Leg Press (wide + high)",
@@ -493,14 +494,14 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "20 kg",
+                "load": "27 kg",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
               "cue": "Sit upright, pull to the belly, shoulder blades together. Posture plus the defined back look."
             },
             {
-              "name": "Glute Drive Machine",
+              "name": "Hip Thrust (Dumbbell or Sandbag)",
               "ref": "glutes 2x/week",
               "focus": "g",
               "tier": "primary",
@@ -510,7 +511,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Glutes again — twice a week is what drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
+              "cue": "Glutes again — twice a week is what drives growth. Same setup as Monday: bench under the shoulders, weight across the hips. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
             },
             {
               "name": "Rear Delt + Face Pull",
@@ -520,7 +521,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "shared station",
+                "load": "5 kg",
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
@@ -534,7 +535,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "7.5 kg",
+                "load": "2.5 kg",
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
@@ -779,7 +780,7 @@
           "exercises": [
             {
               "name": "Band Hip Thrust",
-              "ref": "gym: Glute Drive",
+              "ref": "gym: Hip Thrust",
               "focus": "g",
               "tier": "primary",
               "sets": 4,
@@ -924,7 +925,7 @@
             },
             {
               "name": "Band Hip Thrust",
-              "ref": "gym: Glute Drive",
+              "ref": "gym: Hip Thrust",
               "focus": "g",
               "tier": "primary",
               "sets": 3,
@@ -1667,6 +1668,7 @@
   },
   "_gaps": [
     "Sessions still duplicate exercise objects instead of referencing exercises.json by id",
-    "Eunice's exact per-exercise loads for some maintenance movements are ranges, not individually confirmed"
+    "Eunice's loads are confirmed for the row, face pull and biceps curl only. Her hip thrust, leg press, adductor, leg curl, chest press, triceps and ab machine still carry no load at all — only RIR.",
+    "Hip Thrust (Dumbbell or Sandbag) has no demo video; it replaced the glute drive machine on 2026-08-29."
   ]
 }

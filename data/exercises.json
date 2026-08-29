@@ -5,7 +5,8 @@
     "19 exercises had competing cues across sessions; the longest was kept as the canonical cue and the rest sit in _cueVariants for review",
     "demo videos were picked by search and each one was confirmed live via YouTube's oEmbed endpoint, but nobody has watched them - check a few before trusting them in the gym",
     "sessions in training.json still carry full exercise objects; switching them to id references is a separate step, so this file is additive and breaks nothing yet",
-    "probable further duplicates left alone on purpose, since merging them would change the plan: band-face-pull vs band-face-pull-mid-anchor, band-seated-row vs band-seated-row-low-anchor, band-squat-wide vs band-squat-wide-high, band-chest-press vs band-chest-press-high-to-low"
+    "probable further duplicates left alone on purpose, since merging them would change the plan: band-face-pull vs band-face-pull-mid-anchor, band-seated-row vs band-seated-row-low-anchor, band-squat-wide vs band-squat-wide-high, band-chest-press vs band-chest-press-high-to-low",
+    "hip-thrust-dumbbell has no demo video. It replaced glute-drive-machine on 2026-08-29 when the gym turned out not to have the machine, and no replacement clip has been picked yet."
   ],
   "exercises": {
     "ab-machine": {
@@ -663,30 +664,6 @@
         "travel/philipp/push"
       ]
     },
-    "band-squat-wide-high": {
-      "id": "band-squat-wide-high",
-      "name": "Band Squat (wide + high)",
-      "equipment": "band",
-      "locations": [
-        "home"
-      ],
-      "focus": "g",
-      "muscles": [
-        "glutes",
-        "adductors"
-      ],
-      "cue": "Stand on the tube, feet wider, handles at the shoulders, 3s down. Inner thigh plus glutes.",
-      "video": {
-        "id": "jz47v0Uj1cY",
-        "url": "https://www.youtube.com/watch?v=jz47v0Uj1cY",
-        "title": "Resistance Band Squat 2025 - 4 Squat Exercises with Bands!",
-        "channel": "Clench Fitness",
-        "verified": "2026-08-29"
-      },
-      "_usedIn": [
-        "home/eunice/solo"
-      ]
-    },
     "band-squat-wide": {
       "id": "band-squat-wide",
       "name": "Band Squat (wide)",
@@ -710,6 +687,30 @@
       },
       "_usedIn": [
         "travel/eunice/solo"
+      ]
+    },
+    "band-squat-wide-high": {
+      "id": "band-squat-wide-high",
+      "name": "Band Squat (wide + high)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes",
+        "adductors"
+      ],
+      "cue": "Stand on the tube, feet wider, handles at the shoulders, 3s down. Inner thigh plus glutes.",
+      "video": {
+        "id": "jz47v0Uj1cY",
+        "url": "https://www.youtube.com/watch?v=jz47v0Uj1cY",
+        "title": "Resistance Band Squat 2025 - 4 Squat Exercises with Bands!",
+        "channel": "Clench Fitness",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/eunice/solo"
       ]
     },
     "band-triceps-pushdown": {
@@ -969,31 +970,21 @@
         "travel/eunice/pull"
       ]
     },
-    "glute-drive-machine": {
-      "id": "glute-drive-machine",
-      "name": "Glute Drive Machine",
-      "equipment": "machine",
+    "hip-thrust-dumbbell": {
+      "id": "hip-thrust-dumbbell",
+      "name": "Hip Thrust (Dumbbell or Sandbag)",
+      "equipment": "free weight",
       "locations": [
         "gym"
       ],
       "focus": "g",
       "muscles": [
-        "glutes"
+        "glutes",
+        "hamstrings"
       ],
-      "cue": "Fresh first — your top exercise. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look.",
-      "video": {
-        "id": "D-2CRYjRees",
-        "url": "https://www.youtube.com/watch?v=D-2CRYjRees",
-        "title": "Hip Thrust Machine: How to use the Nautilus Glute Drive",
-        "channel": "Dani Blizz Fit",
-        "verified": "2026-08-29"
-      },
-      "_cueVariants": [
-        {
-          "cue": "Fresh first — top exercise. Full hip extension, 1s hold at top, squeeze. 4 sets — glutes are the goal.",
-          "from": "gym/eunice/solo"
-        }
-      ],
+      "cue": "Fresh first — your top exercise. There is no glute drive machine at this gym, so: shoulders against a bench, dumbbell or sandbag across the hips, feet flat and close. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look.",
+      "video": null,
+      "_replaces": "glute-drive-machine — the machine is not in this gym. Its demo video was specifically about the Nautilus Glute Drive, so it was dropped rather than carried over.",
       "_usedIn": [
         "gym/eunice/solo",
         "gym/eunice/pull"
