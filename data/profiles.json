@@ -1,8 +1,12 @@
 {
   "_source": "Core_Health_Logic.md",
-  "priorityHierarchy": ["protein", "fiber", "fat", "calories"],
+  "priorityHierarchy": [
+    "protein",
+    "fiber",
+    "fat",
+    "calories"
+  ],
   "priorityNote": "Protein is non-negotiable. All other macros flex around it.",
-
   "people": {
     "philipp": {
       "displayName": "Philipp",
@@ -20,23 +24,43 @@
         "fiberG": 6,
         "fatG": 10,
         "ingredients": [
-          { "item": "Magerquark", "amount": "150 g" },
-          { "item": "Whey Protein", "amount": "30 g" },
-          { "item": "Haferflocken", "amount": "20 g" },
-          { "item": "Geschrotete Leinsamen", "amount": "15 g" },
-          { "item": "Kreatin", "amount": "5 g" },
-          { "item": "Ceylon Zimt", "amount": "1 TL" },
-          { "item": "Wasser", "amount": "nach Bedarf" }
+          {
+            "item": "Magerquark",
+            "amount": "150 g"
+          },
+          {
+            "item": "Whey Protein",
+            "amount": "30 g"
+          },
+          {
+            "item": "Haferflocken",
+            "amount": "20 g"
+          },
+          {
+            "item": "Geschrotete Leinsamen",
+            "amount": "15 g"
+          },
+          {
+            "item": "Kreatin",
+            "amount": "5 g"
+          },
+          {
+            "item": "Ceylon Zimt",
+            "amount": "1 TL"
+          },
+          {
+            "item": "Wasser",
+            "amount": "nach Bedarf"
+          }
         ]
       },
       "snackBudgetAfterMirrorMeals": {
-        "calories": 340,
+        "calories": 250,
         "proteinG": 36,
-        "note": "1600 - 410 (breakfast) - 850 (lunch+dinner) = remainder"
+        "note": "1600 - 410 (breakfast) - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
       },
       "aestheticGoal": "lean athletic, K-drama V-taper, not bulky"
     },
-
     "eunice": {
       "displayName": "Eunice",
       "role": "healthy teacher",
@@ -49,9 +73,9 @@
       },
       "fixedBreakfast": null,
       "breakfastPlusSnackBudget": {
-        "calories": 730,
+        "calories": 640,
         "proteinG": 25,
-        "note": "1580 - 850 (lunch+dinner) = remainder, breakfast not fixed yet"
+        "note": "1580 - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
       },
       "aestheticGoal": "curvier, defined, strong lower body already present",
       "notes": [
@@ -60,14 +84,24 @@
       ]
     }
   },
-
   "mirrorMeals": {
-    "note": "Lunch and dinner are identical in size/macros for both people",
-    "lunch":  { "calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15" },
-    "dinner": { "calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15" }
+    "note": "Lunch and dinner are identical in size and macros for both people. Fat is the residual, not a goal: protein and fibre are hit first and fat lands where it lands inside the range.",
+    "lunch": {
+      "calories": 470,
+      "proteinG": 40,
+      "fiberG": 14,
+      "fatG": "8-12"
+    },
+    "dinner": {
+      "calories": 470,
+      "proteinG": 40,
+      "fiberG": 14,
+      "fatG": "8-12"
+    },
+    "_revised": "2026-08-29 — was 425 kcal / 17 g fibre / 12-15 g fat on 1.5 Asian Base blocks. That target could not be cooked: the cheapest combination of these staples reaching it came to 533 kcal, 108 kcal over, at every meal. Raised to 470 kcal on 1 block with 14 g fibre, which the same search reaches at 432 kcal — leaving real slack for sauce and aromatics instead of sitting on the theoretical floor. Run scripts/check_targets.py after touching any of these numbers."
   },
-
   "_gaps": [
-    "Eunice's breakfast is not fixed yet — only a budget envelope exists (730 kcal / 25g protein)."
+    "Eunice's breakfast is not fixed yet — only a budget envelope exists.",
+    "The four daily targets do not close: Philipp's imply 1662 kcal against a 1600 budget, Eunice's 1598 against 1580. scripts/check_targets.py reports both. Fat is the target crowded out in every arrangement — 164 g protein plus 45 g fibre leaves it landing near 35 g, not 52."
   ]
 }

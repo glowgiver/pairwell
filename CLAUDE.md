@@ -39,7 +39,9 @@ pairwell/
 │   ├── training.json      14 sessions; still holds full exercise objects
 │   ├── exercises.json     canonical library — 43 movements, one cue, one demo video
 │   ├── routines.json      skincare (both people, two different shapes) + hair
-│   └── kitchen.json       standards + Asian Base Block; no recipes yet
+│   ├── kitchen.json       standards + Asian Base Block + energyFactors
+│   ├── foods.json         58 ingredients, per 100 g — so recipes hold no macros
+│   └── recipes.json       dishes as amounts only; macros derived, never typed
 │
 ├── scripts/
 │   ├── build_hub_page.py        all four sources → the Today screen
@@ -47,6 +49,8 @@ pairwell/
 │   ├── build_routines_page.py   routines.json → skincare + hair pages
 │   ├── build_kitchen_page.py    kitchen.json → splitter + method
 │   ├── recompute_macros.py      derives kitchen macros; holds no data itself
+│   ├── adapt_recipe.py          fits a found recipe to the mirror-meal target
+│   ├── check_targets.py         are the targets themselves arithmetically possible?
 │   ├── check_routine_rules.py   checks both protocols against their own rules
 │   ├── verify_videos.py         re-checks all 43 demo links for rot
 │   ├── make_backup_doc.py       routines.json → backups/ standalone HTML
@@ -140,6 +144,30 @@ Rules learned the hard way:
 - **Escape everything** interpolated into `innerHTML` via `esc()`.
 - Every page: `← Hub` link top left, the person switcher top right.
 
+## Recipes — the division of labour
+
+They find dishes; the repo decides the grams. A recipe is stored as **amounts
+only**. `scripts/adapt_recipe.py` derives every macro from `foods.json`, then
+scales exactly two things — the ingredients tagged `role: "protein"` and those
+tagged `role: "fiber"` — to hit the target. Aromatics, sauce and vegetables are
+the dish's character and are never touched.
+
+It solves both targets **simultaneously**, not one after the other: legumes carry
+protein and meat carries no fibre, so sequential adjustment overshoots. Two
+equations, two unknowns. Then it rounds to weighable amounts and re-derives from
+the rounded grams, so the report describes the food that will actually be cooked.
+
+**No macro is ever typed for a dish.** This is the same rule the Asian Base Block
+learned the hard way, and it is the reason a recipe cannot be added by pasting a
+nutrition panel — the ingredients go in, the numbers come out.
+
+```
+data/recipes.json + data/foods.json --[adapt_recipe.py]--> grams + a fit report
+```
+
+`check_targets.py` is the other half: it asks whether a target can be hit at all
+before anyone cooks against it. Today it says no — see Known gaps.
+
 ## Privacy
 
 Zero external requests. No analytics, no CDN, no web fonts. Demo videos are
@@ -173,11 +201,27 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
 
 ## Known gaps
 
-- **Kitchen has no recipes.** `cookedWeightG` for the Asian Base Block is an
-  estimate; weigh a batch and re-run `recompute_macros.py`. The custom food in
-  MacroFactor may still hold the old 105 kcal/100 g — it should be 140.
-- **Kitchen has one recipe, not a library.** The Base Block and the splitter
-  work; actual dishes are still to be written.
+- **The mirror-meal target cannot be cooked.** 425 kcal / 40 g protein / 17 g
+  fibre / 12 g fat, minus the 1.5 mandated Base blocks, leaves 246 kcal to carry
+  33.5 g protein, 14.6 g fibre and 10.3 g fat — macros whose own energy content
+  is 257 kcal, before any digestible carbohydrate. It is unreachable by ~11 kcal
+  at the theoretical floor and by far more in real food. The kitchen page now
+  shows this check live (`energyFactors` in `kitchen.json`). Until fibre per meal
+  drops or the meal grows, **no recipe can satisfy the spec** — which is why a
+  recipe recommender would be building on sand.
+- **`cookedWeightG` is estimated, not weighed.** Weigh a batch, type it into the
+  splitter, re-run `recompute_macros.py`. The custom food in MacroFactor may
+  still hold the old 105 kcal/100 g — it should be 140.
+- **Kitchen has one recipe, not a library.** The Base Block, the splitter, the
+  day ledger and the adapter all work; the library holds a single real dish
+  (Philipp's breakfast). Dishes come from them, never invented here.
+- **The daily targets are over-specified too.** Philipp's four targets imply
+  1662 kcal against a 1600 budget, Eunice's 1598 against 1580. `check_targets.py`
+  reports both. Philipp's 62 kcal gap is the one worth resolving.
+- **Philipp's breakfast is written down twice** — typed in `profiles.json`
+  (410 kcal) and derived from `recipes.json` (380). The typed figures drive the
+  day ledger. Generic tables versus an unknown original; the packets would settle
+  it. `check_targets.py` prints the disagreement rather than picking a winner.
 - **No MacroFactor import.** Designed in the product audit, not built. No export
   file has ever been seen, so the importer must discover the schema rather than
   assume column names.

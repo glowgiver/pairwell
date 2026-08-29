@@ -1,4 +1,4 @@
-"""Build hub/kitchen/index.html from kitchen.json + profiles.json.
+"""Build hub/kitchen/index.html from kitchen.json + profiles.json + recipes.json.
 
 The page answers the two questions actually asked in a kitchen:
 
@@ -16,11 +16,20 @@ import os
 BASE = os.path.dirname(__file__)
 KITCHEN = os.path.join(BASE, "..", "data", "kitchen.json")
 PROFILES = os.path.join(BASE, "..", "data", "profiles.json")
+RECIPES = os.path.join(BASE, "..", "data", "recipes.json")
+FOODS = os.path.join(BASE, "..", "data", "foods.json")
 OUT = os.path.join(BASE, "..", "hub", "kitchen", "index.html")
+
+# Recipes carry only ids and grams; the names live in foods.json. Ship a lookup
+# of just the names — the nutrition tables are the build's business, not the page's.
+_foods = json.load(open(FOODS, encoding="utf-8"))["foods"]
+_recipes = json.load(open(RECIPES, encoding="utf-8"))["recipes"]
 
 data = {
     "kitchen": json.load(open(KITCHEN, encoding="utf-8")),
     "profiles": json.load(open(PROFILES, encoding="utf-8")),
+    "recipes": _recipes,
+    "foodNames": dict((k, v["name"]) for k, v in _foods.items()),
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
@@ -75,6 +84,42 @@ HTML = """<!DOCTYPE html>
   }
   .ch .meta{font-family:var(--f-data);font-size:13px;color:var(--muted2);margin-left:auto}
   .ch .title{font-size:17px;font-weight:600;width:100%;margin-top:3px;letter-spacing:-.01em}
+
+  /* ---- the day ledger: what the person switcher is for on this page ---- */
+  .ledger{padding:2px 0}
+  .lrow{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:13px 18px;align-items:baseline}
+  .lrow+.lrow{border-top:1px solid var(--line)}
+  .lrow .lb{font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .lrow .ls span.tag{
+    font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);
+  }
+  .lrow .lv{
+    font-family:var(--f-data);font-size:16px;font-weight:600;
+    font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
+  }
+  .lrow .ls{grid-column:1/-1;display:flex;gap:13px;flex-wrap:wrap;margin-top:5px}
+  .lrow .ls span{font-family:var(--f-data);font-size:13px;color:var(--muted2);
+    font-variant-numeric:tabular-nums}
+  .lrow .ls b{color:var(--text);font-weight:600}
+  .lrow.left{background:var(--surface-2)}
+  .lrow.left .lb{color:var(--accent)}
+  .lrow.left .lv{color:var(--accent)}
+  .lrow .ls span.short b{color:var(--warn)}
+
+  .empty{
+    padding:16px 18px;font-family:var(--f-read);font-size:15px;
+    line-height:1.6;color:var(--muted);
+  }
+  .rmac{display:flex;gap:13px;flex-wrap:wrap;padding:0 18px 14px}
+  .rmac span{font-family:var(--f-data);font-size:13px;color:var(--muted2);
+    font-variant-numeric:tabular-nums}
+  .rmac b{color:var(--text);font-weight:600}
+  .card details{
+    background:transparent;border:0;border-top:1px solid var(--line);
+    border-radius:0;margin:0;
+  }
+  .card details summary{font-size:15px;font-weight:500;color:var(--muted)}
+  .card details[open] summary{color:var(--text);border-bottom:1px solid var(--line)}
 
   /* ---- the splitter: the reason this page exists ---- */
   .weigh{padding:18px}
@@ -145,6 +190,8 @@ HTML = """<!DOCTYPE html>
     text-transform:uppercase;color:var(--accent);margin-bottom:6px;
   }
   .flag p{margin:0;font-family:var(--f-read);font-size:15px;line-height:1.6;color:var(--muted)}
+  .flag.warn{border-left-color:var(--warn);background:var(--warn-fill)}
+  .flag.warn .ft{color:var(--warn)}
 
   details{
     background:var(--surface);border:1px solid var(--line);
@@ -195,6 +242,72 @@ function esc(s){
 }
 function n1(v){ return (Math.round(v*10)/10).toFixed(1).replace(/\\.0$/,""); }
 function n0(v){ return Math.round(v); }
+/* mirrorMeals.fatG is the range "12-15", deliberately. Print it, do not round it. */
+function g(v){ return isFinite(v) ? n0(v) : String(v); }
+
+/* Every figure in the ledger is derived here rather than read from the
+   pre-computed budget fields in profiles.json. Those fields agree today; the
+   point is that they cannot silently stop agreeing. */
+function mealsOfDay(who){
+  var prof = D.profiles.people[who];
+  var t = prof.dailyTargets;
+  var mm = D.profiles.mirrorMeals;
+  var rows = [];
+
+  if(prof.fixedBreakfast){
+    var b = prof.fixedBreakfast;
+    rows.push({ label:"Breakfast", tag:"fixed", kcal:b.calories, p:b.proteinG,
+                fib:b.fiberG, fat:b.fatG, ing:b.ingredients });
+  }
+  ["lunch","dinner"].forEach(function(k){
+    var m = mm[k];
+    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1), tag:"mirror",
+                kcal:m.calories, p:m.proteinG, fib:m.fiberG, fat:m.fatG });
+  });
+
+  var used = rows.reduce(function(a,r){
+    a.kcal += r.kcal; a.p += r.p; a.fib += r.fib || 0;
+    return a;
+  }, {kcal:0, p:0, fib:0});
+
+  rows.push({
+    label: prof.fixedBreakfast ? "Left for snacks" : "Left for breakfast + snacks",
+    tag: "open", left: true,
+    kcal: t.calories - used.kcal,
+    p:    t.proteinG - used.p,
+    fib:  t.fiberG   - used.fib
+  });
+  return rows;
+}
+
+/* What the rest of the plate has to deliver once the carb base is on it.
+   This is recipeChecks.proteinCheck made arithmetic instead of advisory. */
+function mealRemainder(){
+  var blocks = base.blockRules.standardLeanDish;
+  var pb = comp.perBlock;
+  var m = D.profiles.mirrorMeals.lunch;
+  var fatLo = parseFloat(String(m.fatG).split("-")[0]);
+  return {
+    blocks: blocks,
+    from:  { kcal:pb.calories*blocks, p:pb.proteinG*blocks,
+             fib:pb.fiberG*blocks, fat:pb.fatG*blocks },
+    need:  { kcal:m.calories - pb.calories*blocks,
+             p:  m.proteinG - pb.proteinG*blocks,
+             fib:m.fiberG   - pb.fiberG*blocks,
+             fat:fatLo      - pb.fatG*blocks }
+  };
+}
+
+/* Can the target be hit at all? Price the macros it asks for at their own
+   energy content. If that floor is above the calories left, no choice of
+   ingredient rescues it — the target contradicts itself. */
+function feasibility(){
+  var r = mealRemainder();
+  var f = D.kitchen.energyFactors;
+  if(!f) return null;
+  var floor = r.need.p*f.proteinG + r.need.fat*f.fatG + r.need.fib*f.fiberG;
+  return { floor:floor, have:r.need.kcal, over:floor - r.need.kcal };
+}
 
 var base = D.kitchen.asianMacroBase;
 var comp = base.computed;
@@ -235,6 +348,117 @@ function splitHTML(){
       '</div></div>';
   }
   return '<div class="split">' + half("p","Philipp") + half("e","Eunice") + '</div>';
+}
+
+function ledgerHTML(who){
+  var prof = D.profiles.people[who];
+  var rows = mealsOfDay(who);
+
+  var body = rows.map(function(r){
+    var short = r.left && r.fib != null && r.fib <= 2 ? " short" : "";
+    return '<div class="lrow' + (r.left ? ' left' : '') + '">' +
+      '<div class="lb">' + esc(r.label) + '</div>' +
+      '<div class="lv">' + n0(r.kcal) + ' kcal</div>' +
+      '<div class="ls"><span class="tag">' + esc(r.tag) + '</span>' +
+        '<span>P <b>' + g(r.p) + ' g</b></span>' +
+        (r.fib == null ? '' : '<span class="' + short.trim() + '">Fib <b>' +
+                              g(r.fib) + ' g</b></span>') +
+        (r.fat == null ? '' : '<span>F <b>' + g(r.fat) + ' g</b></span>') +
+      '</div></div>';
+  }).join("");
+
+  var t = prof.dailyTargets;
+  var card = '<div class="card"><div class="ch"><span class="k">' +
+    esc(PW.PEOPLE[who].name) + '\u2019s day</span>' +
+    '<span class="meta">' + n0(t.calories) + ' kcal &middot; ' + n0(t.proteinG) + ' g P</span>' +
+    '</div><div class="ledger">' + body + '</div></div>';
+
+  /* The ingredients only exist for whoever has a fixed breakfast. */
+  if(prof.fixedBreakfast){
+    card += '<details><summary>' + esc(PW.PEOPLE[who].name) +
+      '\u2019s breakfast, as built</summary><div class="dl">' +
+      prof.fixedBreakfast.ingredients.map(function(i){
+        return '<div><div class="dk">' + esc(i.item) + '</div>' +
+               '<div class="dv"><strong>' + esc(i.amount) + '</strong></div></div>';
+      }).join("") + '</div></details>';
+  }
+  return card;
+}
+
+function mealHTML(){
+  var r = mealRemainder();
+  var m = D.profiles.mirrorMeals.lunch;
+  return '<div class="card"><div class="ch"><span class="k">One mirror meal</span>' +
+    '<span class="meta">' + n0(m.calories) + ' kcal target</span>' +
+    '<span class="title">What the plate still needs</span></div>' +
+    '<div class="ledger">' +
+      '<div class="lrow"><div class="lb">' + n1(r.blocks) + ' Asian Base block' +
+        (r.blocks === 1 ? '' : 's') + '</div>' +
+        '<div class="lv">' + n0(r.from.kcal) + ' kcal</div>' +
+        '<div class="ls"><span class="tag">carb base</span>' +
+        '<span>P <b>' + n1(r.from.p) + ' g</b></span>' +
+        '<span>Fib <b>' + n1(r.from.fib) + ' g</b></span>' +
+        '<span>F <b>' + n1(r.from.fat) + ' g</b></span></div></div>' +
+      '<div class="lrow left"><div class="lb">Protein source + veg</div>' +
+        '<div class="lv">' + n0(r.need.kcal) + ' kcal</div>' +
+        '<div class="ls"><span class="tag">the rest</span>' +
+        '<span>P <b>' + n1(r.need.p) + ' g</b></span>' +
+        '<span>Fib <b>' + n1(r.need.fib) + ' g</b></span>' +
+        '<span>F <b>' + n1(r.need.fat) + ' g</b></span></div></div>' +
+    '</div></div>' + feasibilityHTML();
+}
+
+function feasibilityHTML(){
+  var f = feasibility();
+  if(!f || f.over <= 0) return "";
+  return '<div class="flag warn"><div class="ft">This target cannot be cooked</div><p>' +
+    'Those macros are worth ' + n0(f.floor) + ' kcal on their own \u2014 protein at 4, fat at 9, ' +
+    'fibre at 2 kcal per gram \u2014 but only ' + n0(f.have) + ' kcal are left for them. ' +
+    'That is ' + n0(f.over) + ' kcal over before any digestible carbohydrate comes along for ' +
+    'the ride, so no ingredient choice fixes it. Either the fibre per meal comes down or the ' +
+    'meal gets bigger.' +
+    '</p></div>';
+}
+
+/* Recipes whose `person` is null belong to both — that is what a mirror meal is. */
+function recipesFor(who){
+  return (D.recipes || []).filter(function(r){
+    return !r.person || r.person === who;
+  });
+}
+
+function recipesHTML(who){
+  var list = recipesFor(who);
+  var head = '<div class="card"><div class="ch"><span class="k">Recipes</span>' +
+    '<span class="meta">' + list.length + ' for ' + esc(PW.PEOPLE[who].name) + '</span></div>';
+
+  if(!list.length){
+    return head + '<div class="empty">Nothing here yet. Find a dish you like ' +
+      'anywhere \u2014 it gets fitted to the mirror-meal target, and its macros are ' +
+      'worked out from the amounts rather than taken on trust.</div></div>';
+  }
+
+  return head + list.map(function(r){
+    var c = r.computed || {};
+    var ing = (r.ingredients || []).map(function(i){
+      return '<li><div class="t">' + esc(D.foodNames[i.food] || i.food) + '</div>' +
+             '<div class="amt">' + esc(i.note || (i.g + " g")) + '</div></li>';
+    }).join("");
+    var steps = (r.steps || []).map(function(st,i){
+      return '<li><span class="n">' + (i+1) + '</span><div class="t">' + esc(st) + '</div></li>';
+    }).join("");
+    return '<div class="lrow"><div class="lb">' + esc(r.title) + '</div>' +
+      '<div class="lv">' + n0(c.calories || 0) + ' kcal</div>' +
+      '<div class="ls"><span class="tag">' + esc(r.slot) + '</span>' +
+        '<span>P <b>' + n1(c.proteinG || 0) + ' g</b></span>' +
+        '<span>Fib <b>' + n1(c.fiberG || 0) + ' g</b></span>' +
+        '<span>F <b>' + n1(c.fatG || 0) + ' g</b></span>' +
+      '</div></div>' +
+      '<details><summary>Ingredients and method</summary>' +
+        '<ul class="ing">' + ing + '</ul>' +
+        (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
+      '</details>';
+  }).join("") + '</div>';
 }
 
 function render(){
@@ -307,7 +531,9 @@ function render(){
           '</div><div class="dv">' + esc(D.kitchen.culinaryStandards[k]) + '</div></div>';
       }).join("") + '</div></details>';
 
-  document.getElementById("stage").innerHTML = splitter + estimated + ing + steps + extras;
+  document.getElementById("stage").innerHTML =
+    ledgerHTML(PW.get()) + mealHTML() + recipesHTML(PW.get()) +
+    splitter + estimated + ing + steps + extras;
 
   var input = document.getElementById("w");
   input.addEventListener("input", function(){
@@ -324,6 +550,7 @@ PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("kitchen", "../");
 render();
+window.addEventListener("pw:person", render);
 </script>
 
 </body>

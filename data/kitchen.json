@@ -5,7 +5,9 @@
     "Core_Health_Logic.md"
   ],
   "_changelog": [
-    "2026-08-29 — Asian Base Block macros corrected. The file previously carried three independently hand-maintained figures (per-block macros, per-100g-cooked macros, batch yield) that contradicted each other by ~34%. The per-100g-cooked value of 105 kcal implied a cooked weight of ~1126 g, which is more than goes into the pot. Since MacroFactor logging uses grams, the wrong one of the two was in daily use. Ingredients now carry their own nutrition, cooked weight is a single declared field, and every macro below is DERIVED by scripts/recompute_macros.py. Do not edit the 'computed' blocks by hand."
+    "2026-08-29 — Asian Base Block macros corrected. The file previously carried three independently hand-maintained figures (per-block macros, per-100g-cooked macros, batch yield) that contradicted each other by ~34%. The per-100g-cooked value of 105 kcal implied a cooked weight of ~1126 g, which is more than goes into the pot. Since MacroFactor logging uses grams, the wrong one of the two was in daily use. Ingredients now carry their own nutrition, cooked weight is a single declared field, and every macro below is DERIVED by scripts/recompute_macros.py. Do not edit the 'computed' blocks by hand.",
+    "2026-08-29 — energyFactors added so the kitchen page can check a meal target against its own arithmetic. First result: the mirror-meal spec overshoots its calorie budget by ~10 kcal at the theoretical floor, i.e. it is unreachable, not merely difficult. No recipe can satisfy it.",
+    "2026-08-29 — mirror meal raised to 470 kcal on 1 block with 14 g fibre, after a search over the kitchen's own staples showed the old 425/17/1.5 spec had a floor of 533 kcal. Block ladder halved to 0.5 / 1 / 1.5."
   ],
   "hardware": {
     "device": "Ninja Foodi OL750UK SmartLid",
@@ -157,9 +159,9 @@
       "gramsPerBlock": 85.0
     },
     "blockRules": {
-      "saucyOrCalorieDense": 1,
-      "standardLeanDish": 1.5,
-      "extremelyLeanProtein": 2
+      "saucyOrCalorieDense": 0.5,
+      "standardLeanDish": 1,
+      "extremelyLeanProtein": 1.5
     },
     "substitutions": {
       "quinoaUnavailable": {
@@ -168,14 +170,15 @@
         "ninjaSettings": "unchanged — Pressure Cook High, 4 min + 10 min Natural Release",
         "_note": "changing the water also changes the cooked weight — re-weigh and re-run the calculator"
       }
-    }
+    },
+    "_blockRulesNote": "Halved on 2026-08-29. The old ladder (1 / 1.5 / 2) spent 179 kcal of a 425 kcal meal on the carb base, which is what made the target unreachable."
   },
   "recipeOutputFormat": {
-    "_note": "This describes how recipes should be written up in conversation, not how the app stores them. Kept here deliberately, but it is documentation, not app data.",
+    "_note": "The shape of the report scripts/adapt_recipe.py prints. Product language is English, so the block names are too; ingredient names stay German, because that is what is on the packet.",
     "order": [
-      "Block 1 — Änderungen zum Original",
-      "Block 2 — Neue Makros (Ziel vs. Ergebnis Tabelle: Kalorien, Protein, Ballaststoffe, Fett, Asian Base Blocks)",
-      "Block 3 — Ninja OL750 Schritt-für-Schritt (nummeriert, mit Modus/Stufe/Zeit)"
+      "Block 1 — what changed from the original",
+      "Block 2 — target vs result (calories, protein, fibre, fat)",
+      "Block 3 — Ninja OL750 method, numbered, with mode/level/time"
     ]
   },
   "recipeChecks": {
@@ -209,11 +212,17 @@
     ]
   },
   "_gaps": [
+    "the revised mirror-meal target (470 kcal / 40 P / 14 fibre on 1 block) is reachable but untested against a real cooked dish — the first recipe will say whether 14 g of fibre fits in the box alongside everything else.",
     "cookedWeightG is estimated, not weighed — the single highest-value measurement to take on the next batch",
     "no actual recipes yet: this file holds standards and one carb base, but zero dishes. 'What do we commonly meal-prep?' is still unanswerable.",
     "per-ingredient nutrition comes from generic tables, not the actual packaging",
     "meal-history / rating log (👍/👎 per dish) not yet built",
-    "shopping list generator logic not yet formalized as data",
-    "17 g fiber per meal (mirrorMeals) is ambitious alongside the 'no bulky salad piles' rule — verify against a real cooked dish"
-  ]
+    "shopping list generator logic not yet formalized as data"
+  ],
+  "energyFactors": {
+    "_note": "Atwater factors, kcal per gram. Present for one purpose: to check whether a meal target is arithmetically reachable before anyone tries to cook it. Fibre is priced at the generous 2 kcal/g; the digestible carbohydrate that carries it in real food costs more on top.",
+    "proteinG": 4,
+    "fatG": 9,
+    "fiberG": 2
+  }
 }

@@ -1,0 +1,81 @@
+{
+  "_purpose": "Dishes, stored as amounts only. Every macro is derived by scripts/adapt_recipe.py from data/foods.json — the same rule the Asian Base Block follows. Nobody types a calorie figure for a dish.",
+  "_workflow": [
+    "1. Find a recipe anywhere. Keep the link.",
+    "2. Add it here as ingredients + grams + steps. Amounts as found, not as wished.",
+    "3. Run scripts/adapt_recipe.py. It scales the protein and fibre sources to hit the target and reports what it changed.",
+    "4. Cook it. If the real thing differs, fix the grams here, not the macros."
+  ],
+  "_schema": {
+    "id": "kebab-case, unique",
+    "title": "display name",
+    "slot": "mirror | breakfast | snack — mirror dishes are adapted to profiles.mirrorMeals",
+    "person": "philipp | eunice | null — null means both, which is the point of a mirror meal",
+    "servings": "how many portions the amounts below produce",
+    "blocks": "Asian Base blocks per serving; 0 for dishes that carry their own carb",
+    "source": "where it came from — a link, or who it belongs to",
+    "ingredients": "[{ food: id from foods.json, g: grams, note?: 'as bought' }]",
+    "steps": "Ninja OL750 method, numbered, with mode/level/time where it matters",
+    "computed": "written by the script — do not edit by hand",
+    "adapted": "written by the script — what it had to change to hit the target"
+  },
+  "recipes": [
+    {
+      "id": "magerquark-bowl",
+      "title": "Magerquark-Protein-Bowl",
+      "slot": "breakfast",
+      "person": "philipp",
+      "servings": 1,
+      "blocks": 0,
+      "source": "Philipp's own routine — the fixed breakfast in profiles.json",
+      "fixed": true,
+      "_fixedNote": "slot breakfast + fixed:true means the adapter reports its macros but never rescales it. It is not a target to be hit; it is a thing he eats.",
+      "ingredients": [
+        {
+          "food": "magerquark",
+          "g": 150
+        },
+        {
+          "food": "whey",
+          "g": 30
+        },
+        {
+          "food": "haferflocken",
+          "g": 20
+        },
+        {
+          "food": "leinsamen",
+          "g": 15
+        },
+        {
+          "food": "kreatin",
+          "g": 5
+        },
+        {
+          "food": "zimt",
+          "g": 2.6,
+          "note": "1 TL"
+        }
+      ],
+      "steps": [
+        "Magerquark in eine Schüssel geben",
+        "Whey einrühren bis glatt, Wasser nach Bedarf für die Konsistenz",
+        "Haferflocken und geschrotete Leinsamen unterheben",
+        "Kreatin und Ceylon Zimt einrühren",
+        "Direkt essen, oder kalt stellen für festere Konsistenz"
+      ],
+      "computed": {
+        "calories": 379.8,
+        "proteinG": 47.5,
+        "carbsG": 20.6,
+        "fiberG": 7.5,
+        "fatG": 9.7,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    }
+  ]
+}
