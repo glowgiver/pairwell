@@ -2,10 +2,36 @@ import json, os
 
 BASE = os.path.dirname(__file__)
 DATA_PATH = os.path.join(BASE, "..", "data", "training.json")
+LIB_PATH = os.path.join(BASE, "..", "data", "exercises.json")
 OUT_PATH = os.path.join(BASE, "..", "hub", "workout", "index.html")
 
 data = json.load(open(DATA_PATH, encoding="utf-8"))
 data_json = json.dumps(data, ensure_ascii=False)
+
+# Demo links live in the exercise library. Sessions still carry their own
+# exercise objects, so match on name (and on the aliases the library records
+# for movements that were filed under two names).
+lib = json.load(open(LIB_PATH, encoding="utf-8"))
+videos = {}
+for entry in lib["exercises"].values():
+    v = entry.get("video")
+    if not v:
+        continue
+    for name in [entry["name"]] + entry.get("aliases", []):
+        videos[name] = v["url"]
+
+session_names = {
+    e["name"]
+    for loc in data["sessions"].values()
+    for person in loc.values()
+    for s in person.values()
+    for e in s["exercises"]
+}
+unmatched = sorted(session_names - set(videos))
+if unmatched:
+    print("WARNING: no demo video for:", ", ".join(unmatched))
+
+videos_json = json.dumps(videos, ensure_ascii=False)
 
 html = """<!DOCTYPE html>
 <html lang="en">
@@ -105,8 +131,22 @@ html = """<!DOCTYPE html>
   .ex{border-bottom:1px solid var(--line);padding:12px 18px}
   .ex:last-child{border-bottom:none}
   .ex.maint{background:rgba(255,255,255,.015)}
+  .ex-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .ex-name{font-size:14.5px;font-weight:700;margin-bottom:2px}
   .ex-ref{font-size:10.5px;color:var(--muted2);margin-bottom:6px}
+
+  /* Demo link. A plain link, not an embed: an iframe would load YouTube for
+     every exercise on the page, including the ones nobody opens. */
+  .demo{
+    flex:none;display:inline-flex;align-items:center;gap:6px;
+    min-height:36px;padding:0 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--surface-2);
+    color:var(--accent);text-decoration:none;
+    font-size:12px;font-weight:600;
+  }
+  .demo svg{width:13px;height:13px;fill:currentColor}
+  .demo:active{background:var(--accent);color:#fff}
+  .demo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tag-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
   .tag{font-size:10px;padding:2.5px 8px;border-radius:5px;border:1px solid var(--line);color:var(--muted)}
   .tag.sr{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
@@ -159,6 +199,7 @@ html = """<!DOCTYPE html>
 <script src="../app.js"></script>
 <script>
 const T = __DATA__;
+const VIDEOS = __VIDEOS__;
 
 function esc(s){
   return String(s == null ? "" : s)
@@ -239,9 +280,16 @@ function exHTML(e){
       '<div class="duo-half e"><span class="who">Eunice</span><strong>' + esc(e.euniceLoad) + '</strong></div>' +
       '</div>';
   }
+  var demo = VIDEOS[e.name]
+    ? '<a class="demo" href="' + esc(VIDEOS[e.name]) + '" target="_blank" rel="noopener noreferrer"' +
+      ' aria-label="Watch a demo of ' + esc(e.name) + '">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Demo</a>'
+    : '';
+
   return '<div class="ex' + (e.tier === "maint" ? " maint" : "") + '">' +
-    '<div class="ex-name">' + esc(e.name) + '</div>' +
-    (e.ref ? '<div class="ex-ref">' + esc(e.ref) + '</div>' : '') +
+    '<div class="ex-head"><div><div class="ex-name">' + esc(e.name) + '</div>' +
+    (e.ref ? '<div class="ex-ref">' + esc(e.ref) + '</div>' : '') + '</div>' +
+    demo + '</div>' +
     '<div class="tag-row">' +
       '<span class="tag sr">' + esc(e.sets) + ' × ' + esc(e.reps) + '</span>' +
       '<span class="tag">' + esc(FOCUS_LABEL[e.focus]) + '</span>' +
@@ -385,6 +433,7 @@ renderStage();
 """
 
 html = html.replace("__DATA__", data_json)
+html = html.replace("__VIDEOS__", videos_json)
 
 with open(OUT_PATH, "w", encoding="utf-8") as f:
     f.write(html)

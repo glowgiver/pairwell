@@ -1,0 +1,1336 @@
+{
+  "_purpose": "Canonical exercise library. One entry per movement, with one cue and one demo video. training.json sessions should reference these ids instead of repeating the movement 98 times.",
+  "_generated": "extracted from data/training.json on 2026-08-29",
+  "_gaps": [
+    "19 exercises had competing cues across sessions; the longest was kept as the canonical cue and the rest sit in _cueVariants for review",
+    "demo videos were picked by search and each one was confirmed live via YouTube's oEmbed endpoint, but nobody has watched them - check a few before trusting them in the gym",
+    "sessions in training.json still carry full exercise objects; switching them to id references is a separate step, so this file is additive and breaks nothing yet",
+    "probable further duplicates left alone on purpose, since merging them would change the plan: band-face-pull vs band-face-pull-mid-anchor, band-seated-row vs band-seated-row-low-anchor, band-squat-wide vs band-squat-wide-high, band-chest-press vs band-chest-press-high-to-low"
+  ],
+  "exercises": {
+    "ab-machine": {
+      "id": "ab-machine",
+      "name": "Ab Machine",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "c",
+      "muscles": [
+        "abs"
+      ],
+      "cue": "Maintenance, weighted fixed path.",
+      "video": {
+        "id": "G8937xqkxDo",
+        "url": "https://www.youtube.com/watch?v=G8937xqkxDo",
+        "title": "Machine Crunch | Proper Form Tutorial for Stronger Abs",
+        "channel": "FIT.nl",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "adductor-machine": {
+      "id": "adductor-machine",
+      "name": "Adductor Machine",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "adductors"
+      ],
+      "cue": "Slow squeeze (3s in), controlled release.",
+      "video": {
+        "id": "fpVHoidfg60",
+        "url": "https://www.youtube.com/watch?v=fpVHoidfg60",
+        "title": "How To Do The SEATED HIP ADDUCTION MACHINE | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "band-adductor-squeeze-lying": {
+      "id": "band-adductor-squeeze-lying",
+      "name": "Band Adductor Squeeze (lying)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "g",
+      "muscles": [
+        "adductors"
+      ],
+      "cue": "Band around ankles, on back, legs apart, 3s squeeze together.",
+      "video": {
+        "id": "aPA3ONyWK6I",
+        "url": "https://www.youtube.com/watch?v=aPA3ONyWK6I",
+        "title": "BEST 4 Inner Thigh Exercises with Resistance Band",
+        "channel": "Criticalbench",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/eunice/solo"
+      ]
+    },
+    "band-biceps-curl": {
+      "id": "band-biceps-curl",
+      "name": "Band Biceps Curl",
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "biceps"
+      ],
+      "cue": "Stand on band, elbows fixed, slow down.",
+      "video": {
+        "id": "PXLF19Oqe3M",
+        "url": "https://www.youtube.com/watch?v=PXLF19Oqe3M",
+        "title": "HOW TO DO Standing Biceps Curl with Resistance Bands",
+        "channel": "Bodylastics",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Stand on tube, elbows fixed.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Maintenance.",
+          "from": "home/philipp/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/pull",
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/philipp/pull",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-chest-press": {
+      "id": "band-chest-press",
+      "name": "Band Chest Press",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "a",
+      "muscles": [
+        "chest",
+        "front delts",
+        "triceps"
+      ],
+      "cue": "Low anchor behind, stand away from door, press forward-upward.",
+      "video": {
+        "id": "4B6O2dHDjBw",
+        "url": "https://www.youtube.com/watch?v=4B6O2dHDjBw",
+        "title": "Effective Standing Chest Press with Resistance Band: Form and Technique",
+        "channel": "Amy Connell",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/philipp/push"
+      ]
+    },
+    "band-chest-press-high-to-low": {
+      "id": "band-chest-press-high-to-low",
+      "name": "Band Chest Press (high-to-low)",
+      "equipment": "band",
+      "locations": [
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "lower chest",
+        "triceps"
+      ],
+      "cue": "Anchor high, press forward-downward.",
+      "video": {
+        "id": "4iVpEZ-Vl8U",
+        "url": "https://www.youtube.com/watch?v=4iVpEZ-Vl8U",
+        "title": "Standing Decline Chest Press Using Resistance Bands",
+        "channel": "Home Gym Fitness Channel",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "travel/philipp/push"
+      ]
+    },
+    "band-face-pull": {
+      "id": "band-face-pull",
+      "name": "Band Face Pull",
+      "equipment": "band",
+      "locations": [
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "upper back"
+      ],
+      "cue": "Maintenance, anchor at head height.",
+      "video": {
+        "id": "Q77ORURfeYc",
+        "url": "https://www.youtube.com/watch?v=Q77ORURfeYc",
+        "title": "Band Face Pull (door anchor)",
+        "channel": "Caroline Juster",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "travel/philipp/pull"
+      ]
+    },
+    "band-face-pull-mid-anchor": {
+      "id": "band-face-pull-mid-anchor",
+      "name": "Band Face Pull (mid anchor)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "upper back"
+      ],
+      "cue": "Maintenance — anchor at head height.",
+      "video": {
+        "id": "Q77ORURfeYc",
+        "url": "https://www.youtube.com/watch?v=Q77ORURfeYc",
+        "title": "Band Face Pull (door anchor)",
+        "channel": "Caroline Juster",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/philipp/pull"
+      ]
+    },
+    "band-hip-thrust": {
+      "id": "band-hip-thrust",
+      "name": "Band Hip Thrust",
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "cue": "First — glutes are priority. Tube over feet, shoulders on couch, handles over hips.",
+      "video": {
+        "id": "P9Mlds5wr1I",
+        "url": "https://www.youtube.com/watch?v=P9Mlds5wr1I",
+        "title": "Banded Hip Thrusts: A Powerful Exercise for Stronger Glutes",
+        "channel": "TurnFit - Vancouver Personal Trainers",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Tube over hips, shoulders supported, 2s squeeze at top.",
+          "from": "home/shared/sun"
+        },
+        {
+          "cue": "First. Tube over feet, shoulders supported.",
+          "from": "travel/eunice/solo"
+        },
+        {
+          "cue": "Tube over hips, 2s squeeze.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Glutes 2x/week.",
+          "from": "home/eunice/pull"
+        },
+        {
+          "cue": "Tube over hips.",
+          "from": "travel/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/eunice/solo",
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/eunice/solo",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-kneeling-crunch": {
+      "id": "band-kneeling-crunch",
+      "name": "Band Kneeling Crunch",
+      "aliases": [
+        "Kneeling Band Crunch"
+      ],
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "c",
+      "muscles": [
+        "abs"
+      ],
+      "cue": "Anchor high, kneeling.",
+      "video": {
+        "id": "g3EVVCKsfmw",
+        "url": "https://www.youtube.com/watch?v=g3EVVCKsfmw",
+        "title": "How To Do A KNEELING RESISTANCE BAND CRUNCH | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/philipp/push",
+        "travel/philipp/push"
+      ]
+    },
+    "band-lat-pulldown-kneeling": {
+      "id": "band-lat-pulldown-kneeling",
+      "name": "Band Lat Pulldown (kneeling)",
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "lats",
+        "biceps"
+      ],
+      "cue": "Anchor at top of door, kneeling, wide grip, elbows down-out to ribs.",
+      "video": {
+        "id": "SkT4rqrmH-M",
+        "url": "https://www.youtube.com/watch?v=SkT4rqrmH-M",
+        "title": "How To Do A KNEELING RESISTANCE BAND PULLDOWN | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Anchor top, kneeling — replaces pull-up, no bar needed.",
+          "from": "home/philipp/pull"
+        },
+        {
+          "cue": "Anchor top, elbows down-out, squeeze lats.",
+          "from": "home/shared/sun"
+        },
+        {
+          "cue": "Anchor top, shoulder blades down.",
+          "from": "home/eunice/pull"
+        },
+        {
+          "cue": "Anchor top, elbows down-out.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Only vertical pull.",
+          "from": "travel/philipp/push"
+        },
+        {
+          "cue": "Replaces pull-up.",
+          "from": "travel/philipp/pull"
+        },
+        {
+          "cue": "Anchor top.",
+          "from": "travel/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/push",
+        "home/philipp/pull",
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/philipp/push",
+        "travel/philipp/pull",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-lateral-raise-cross-body": {
+      "id": "band-lateral-raise-cross-body",
+      "name": "Band Lateral Raise (cross-body)",
+      "aliases": [
+        "Cross-Body Band Lateral Raise"
+      ],
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "side delts"
+      ],
+      "cue": "Stand on the band with the opposite foot so it crosses the body — keeps tension at the bottom like the cable.",
+      "video": {
+        "id": "pBMcoR_7fd8",
+        "url": "https://www.youtube.com/watch?v=pBMcoR_7fd8",
+        "title": "Resistance Band 1-arm Cross-Body Lateral Raises",
+        "channel": "The Transformation Club",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Opposite foot on tube for tension at bottom. Too heavy? Foot closer to center.",
+          "from": "travel/philipp/push"
+        },
+        {
+          "cue": "Opposite foot on band, lead with elbow to shoulder height.",
+          "from": "home/shared/sun"
+        },
+        {
+          "cue": "Emphasized shoulder for Hwasa silhouette.",
+          "from": "home/eunice/pull"
+        },
+        {
+          "cue": "Opposite foot on tube, lead with elbow.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Emphasized shoulder for silhouette.",
+          "from": "travel/eunice/pull"
+        },
+        {
+          "cue": "2nd side-delt hit.",
+          "from": "home/philipp/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/push",
+        "home/philipp/pull",
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/philipp/push",
+        "travel/philipp/pull",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-overhead-triceps-extension": {
+      "id": "band-overhead-triceps-extension",
+      "name": "Band Overhead Triceps Extension",
+      "equipment": "band",
+      "locations": [
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "triceps (long head)"
+      ],
+      "cue": "Low anchor, handles behind head, elbows high.",
+      "video": {
+        "id": "8GVCO0oklnI",
+        "url": "https://www.youtube.com/watch?v=8GVCO0oklnI",
+        "title": "Banded Overhead Tricep Extension",
+        "channel": "OPEX Fitness",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "travel/eunice/solo"
+        }
+      ],
+      "_usedIn": [
+        "travel/philipp/push",
+        "travel/eunice/solo"
+      ]
+    },
+    "band-rdl-bilateral": {
+      "id": "band-rdl-bilateral",
+      "name": "Band RDL (bilateral)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "g",
+      "muscles": [
+        "hamstrings",
+        "glutes"
+      ],
+      "cue": "Maintenance. Carabiners folded into one handle, stand on loop.",
+      "video": {
+        "id": "NaKsZos0bIY",
+        "url": "https://www.youtube.com/watch?v=NaKsZos0bIY",
+        "title": "Resistance Band Romanian Deadlifts (RDL)",
+        "channel": "Clear Cut Fitness",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Hamstrings.",
+          "from": "home/eunice/solo"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/pull",
+        "home/eunice/solo"
+      ]
+    },
+    "band-rear-delt-pull-apart": {
+      "id": "band-rear-delt-pull-apart",
+      "name": "Band Rear Delt Pull-Apart",
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "rhomboids"
+      ],
+      "cue": "No anchor: band in both hands, arms straight, pull apart to chest.",
+      "video": {
+        "id": "9IWz8v44mXs",
+        "url": "https://www.youtube.com/watch?v=9IWz8v44mXs",
+        "title": "Band Pull Apart for Rear Delt - How To",
+        "channel": "Annie Cooper",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Band in both hands, pull apart to chest.",
+          "from": "home/eunice/pull"
+        },
+        {
+          "cue": "No anchor, arms straight, pull apart.",
+          "from": "travel/philipp/pull"
+        },
+        {
+          "cue": "Tube in front, pull apart to chest.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Tube in both hands, pull apart.",
+          "from": "travel/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/pull",
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/philipp/pull",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-seated-row": {
+      "id": "band-seated-row",
+      "name": "Band Seated Row",
+      "aliases": [
+        "Seated Band Row"
+      ],
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "mid back",
+        "lats",
+        "biceps"
+      ],
+      "cue": "Sit on floor, tube around both feet, upright, no momentum.",
+      "video": {
+        "id": "mnP10HI18uI",
+        "url": "https://www.youtube.com/watch?v=mnP10HI18uI",
+        "title": "SEATED RESISTANCE BAND ROW | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Around both feet, upright, pull to belly, no momentum.",
+          "from": "home/shared/sun"
+        },
+        {
+          "cue": "Around both feet or low anchor, upright.",
+          "from": "home/eunice/pull"
+        },
+        {
+          "cue": "Tube around both feet, upright.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Tube around both feet.",
+          "from": "travel/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/eunice/pull",
+        "home/shared/sun",
+        "travel/philipp/pull",
+        "travel/eunice/pull",
+        "travel/shared/sun"
+      ]
+    },
+    "band-seated-row-low-anchor": {
+      "id": "band-seated-row-low-anchor",
+      "name": "Band Seated Row (low anchor)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "a",
+      "muscles": [
+        "mid back",
+        "lats",
+        "biceps"
+      ],
+      "cue": "Low anchor or looped around both feet, sit upright, pull to belly.",
+      "video": {
+        "id": "TBNt2DBvkl4",
+        "url": "https://www.youtube.com/watch?v=TBNt2DBvkl4",
+        "title": "How To: Resistance Band Seated Row",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/philipp/pull"
+      ]
+    },
+    "band-single-leg-rdl": {
+      "id": "band-single-leg-rdl",
+      "name": "Band Single-Leg RDL",
+      "equipment": "band",
+      "locations": [
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "hamstrings",
+        "glutes"
+      ],
+      "cue": "One foot on tube, soft knee, 3s down.",
+      "video": {
+        "id": "j7juujU49-A",
+        "url": "https://www.youtube.com/watch?v=j7juujU49-A",
+        "title": "Single Leg Romanian Deadlift (RDL) Resistance Band Exercise",
+        "channel": "PLAE",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "travel/philipp/pull"
+        }
+      ],
+      "_usedIn": [
+        "travel/philipp/pull",
+        "travel/eunice/solo"
+      ]
+    },
+    "band-squat-light": {
+      "id": "band-squat-light",
+      "name": "Band Squat (light)",
+      "equipment": "band",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "quads",
+        "glutes"
+      ],
+      "cue": "Maintenance — hold only.",
+      "video": {
+        "id": "duP-UZsfOaQ",
+        "url": "https://www.youtube.com/watch?v=duP-UZsfOaQ",
+        "title": "How To Do Resistance Band Squat",
+        "channel": "Get Healthy U - with Chris Freytag",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "travel/philipp/push"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/push",
+        "travel/philipp/push"
+      ]
+    },
+    "band-squat-wide-high": {
+      "id": "band-squat-wide-high",
+      "name": "Band Squat (wide + high)",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes",
+        "adductors"
+      ],
+      "cue": "Stand on tube, feet wider, handles at shoulders, 3s down.",
+      "video": {
+        "id": "jz47v0Uj1cY",
+        "url": "https://www.youtube.com/watch?v=jz47v0Uj1cY",
+        "title": "Resistance Band Squat 2025 - 4 Squat Exercises with Bands!",
+        "channel": "Clench Fitness",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "home/eunice/solo"
+      ]
+    },
+    "band-squat-wide": {
+      "id": "band-squat-wide",
+      "name": "Band Squat (wide)",
+      "equipment": "band",
+      "locations": [
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "quads",
+        "glutes",
+        "adductors"
+      ],
+      "cue": "Stand on tube, feet wide, 3s down.",
+      "video": {
+        "id": "duP-UZsfOaQ",
+        "url": "https://www.youtube.com/watch?v=duP-UZsfOaQ",
+        "title": "How To Do Resistance Band Squat",
+        "channel": "Get Healthy U - with Chris Freytag",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "travel/eunice/solo"
+      ]
+    },
+    "band-triceps-pushdown": {
+      "id": "band-triceps-pushdown",
+      "name": "Band Triceps Pushdown",
+      "equipment": "band",
+      "locations": [
+        "home"
+      ],
+      "focus": "a",
+      "muscles": [
+        "triceps"
+      ],
+      "cue": "High anchor, elbows fixed at sides.",
+      "video": {
+        "id": "gOq6Ig1skxA",
+        "url": "https://www.youtube.com/watch?v=gOq6Ig1skxA",
+        "title": "Resistance Band Tricep Push Down (w/ Door Anchor)",
+        "channel": "Outright Fitness and Performance",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "home/eunice/solo"
+        }
+      ],
+      "_usedIn": [
+        "home/philipp/push",
+        "home/eunice/solo"
+      ]
+    },
+    "cable-biceps-curl": {
+      "id": "cable-biceps-curl",
+      "name": "Cable Biceps Curl",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "biceps"
+      ],
+      "cue": "Maintenance.",
+      "video": {
+        "id": "16aEi1a68E0",
+        "url": "https://www.youtube.com/watch?v=16aEi1a68E0",
+        "title": "How to Do the Cable Biceps Curl With Perfect Form | Form Check | Men’s Health Muscle",
+        "channel": "Men’s Health Muscle",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/pull",
+        "gym/eunice/pull"
+      ]
+    },
+    "cable-chest-press-high-to-low": {
+      "id": "cable-chest-press-high-to-low",
+      "name": "Cable Chest Press (high-to-low)",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "lower chest",
+        "triceps"
+      ],
+      "cue": "Anchor high, stand away from tower, press forward-downward across the chest. 4 sets — chest is second focus.",
+      "video": {
+        "id": "1XHA9ikNOCI",
+        "url": "https://www.youtube.com/watch?v=1XHA9ikNOCI",
+        "title": "Costal (high to low) Cable Chest Press | Form Tutorial",
+        "channel": "Physique Development",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/push"
+      ]
+    },
+    "cable-crunch": {
+      "id": "cable-crunch",
+      "name": "Cable Crunch",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "c",
+      "muscles": [
+        "abs"
+      ],
+      "cue": "Fold ribs to hips, hands fixed at ears.",
+      "video": {
+        "id": "kc0PRn372lo",
+        "url": "https://www.youtube.com/watch?v=kc0PRn372lo",
+        "title": "How To Do A KNEELING CABLE CRUNCH | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance, kneeling.",
+          "from": "gym/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "gym/philipp/push",
+        "gym/eunice/pull"
+      ]
+    },
+    "cable-face-pull": {
+      "id": "cable-face-pull",
+      "name": "Cable Face Pull",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "upper back"
+      ],
+      "cue": "Maintenance — antagonist to all pressing.",
+      "video": {
+        "id": "eTCBSFlCJ_s",
+        "url": "https://www.youtube.com/watch?v=eTCBSFlCJ_s",
+        "title": "How to do a Face Pull | Proper Form & Technique | NASM",
+        "channel": "National Academy of Sports Medicine (NASM)",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/pull"
+      ]
+    },
+    "cable-lateral-raise": {
+      "id": "cable-lateral-raise",
+      "name": "Cable Lateral Raise",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "side delts"
+      ],
+      "cue": "Fresh first — most important move for the look. Constant tension at the bottom. Lead with the elbow to shoulder height. Goal: clean 15 → then 6 kg.",
+      "video": {
+        "id": "qitQHqNZbeM",
+        "url": "https://www.youtube.com/watch?v=qitQHqNZbeM",
+        "title": "How to PROPERLY Cable Lateral Raise (TRY THIS!)",
+        "channel": "Colossus Fitness",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "New for her. Emphasized shoulder makes the waist look narrower — the Hwasa effect.",
+          "from": "gym/eunice/pull"
+        },
+        {
+          "cue": "2nd side-delt hit of the week.",
+          "from": "gym/philipp/pull"
+        }
+      ],
+      "_usedIn": [
+        "gym/philipp/push",
+        "gym/philipp/pull",
+        "gym/eunice/pull"
+      ]
+    },
+    "cable-row-neutral": {
+      "id": "cable-row-neutral",
+      "name": "Cable Row (neutral)",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "mid back",
+        "lats",
+        "biceps"
+      ],
+      "cue": "Sit upright, pull to belly, elbows close, moderate — don't overload.",
+      "video": {
+        "id": "xjlz8lRXOOI",
+        "url": "https://www.youtube.com/watch?v=xjlz8lRXOOI",
+        "title": "How To Do A NEUTRAL GRIP SEATED CABLE ROW | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Posture + defined back look.",
+          "from": "gym/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "gym/philipp/pull",
+        "gym/eunice/pull"
+      ]
+    },
+    "chest-press-machine": {
+      "id": "chest-press-machine",
+      "name": "Chest Press Machine",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "chest",
+        "front delts",
+        "triceps"
+      ],
+      "cue": "Maintenance — fixed path, nothing to set up.",
+      "video": {
+        "id": "pLofEAcfsO8",
+        "url": "https://www.youtube.com/watch?v=pLofEAcfsO8",
+        "title": "Machine Chest Press | Proper Form Tutorial for a Stronger Chest",
+        "channel": "FIT.nl",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "dead-bug": {
+      "id": "dead-bug",
+      "name": "Dead Bug",
+      "equipment": "bodyweight",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "c",
+      "muscles": [
+        "deep core"
+      ],
+      "cue": "Maintenance, lower back flat.",
+      "video": {
+        "id": "bxn9FBrt4-A",
+        "url": "https://www.youtube.com/watch?v=bxn9FBrt4-A",
+        "title": "How to do a Dead Bug | Proper Form & Technique | NASM",
+        "channel": "National Academy of Sports Medicine (NASM)",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "home/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "home/eunice/solo",
+        "home/eunice/pull",
+        "travel/eunice/solo",
+        "travel/eunice/pull"
+      ]
+    },
+    "glute-drive-machine": {
+      "id": "glute-drive-machine",
+      "name": "Glute Drive Machine",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes"
+      ],
+      "cue": "Glutes again — 2x/week drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)",
+      "video": {
+        "id": "D-2CRYjRees",
+        "url": "https://www.youtube.com/watch?v=D-2CRYjRees",
+        "title": "Hip Thrust Machine: How to use the Nautilus Glute Drive",
+        "channel": "Dani Blizz Fit",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Fresh first — top exercise. Full hip extension, 1s hold at top, squeeze. 4 sets — glutes are the goal.",
+          "from": "gym/eunice/solo"
+        }
+      ],
+      "_usedIn": [
+        "gym/eunice/solo",
+        "gym/eunice/pull"
+      ]
+    },
+    "hollow-hold": {
+      "id": "hollow-hold",
+      "name": "Hollow Hold",
+      "aliases": [
+        "Hollow Body Hold",
+        "Hollow Hold / Dead Bug"
+      ],
+      "equipment": "bodyweight",
+      "locations": [
+        "gym",
+        "home",
+        "travel"
+      ],
+      "focus": "c",
+      "muscles": [
+        "deep core"
+      ],
+      "cue": "Core finisher — each own variant, lower back flat.",
+      "video": {
+        "id": "hf00_b2sRdc",
+        "url": "https://www.youtube.com/watch?v=hf00_b2sRdc",
+        "title": "How to Perfect Your Hollow Hold | Form Check | Men's Health",
+        "channel": "Men's Health",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Lower back flat, extend legs to progress.",
+          "from": "travel/philipp/push"
+        },
+        {
+          "cue": "Core finisher, lower back flat.",
+          "from": "travel/shared/sun"
+        },
+        {
+          "cue": "Lower back flat, build to 40s.",
+          "from": "home/philipp/push"
+        },
+        {
+          "cue": "Lower back flat, arms long.",
+          "from": "gym/philipp/push"
+        }
+      ],
+      "_usedIn": [
+        "gym/philipp/push",
+        "home/philipp/push",
+        "home/shared/sun",
+        "travel/philipp/push",
+        "travel/shared/sun"
+      ]
+    },
+    "lateral-lunge-tempo": {
+      "id": "lateral-lunge-tempo",
+      "name": "Lateral Lunge (tempo)",
+      "equipment": "bodyweight",
+      "locations": [
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "adductors",
+        "glutes",
+        "quads"
+      ],
+      "cue": "Wide step to side, sit into hip, other leg straight.",
+      "video": {
+        "id": "gwWv7aPcD88",
+        "url": "https://www.youtube.com/watch?v=gwWv7aPcD88",
+        "title": "How To Series | LATERAL LUNGE",
+        "channel": "The Hybrid Athlete",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "travel/eunice/solo"
+      ]
+    },
+    "leg-press-light": {
+      "id": "leg-press-light",
+      "name": "Leg Press (light)",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "quads",
+        "glutes"
+      ],
+      "cue": "Maintenance only — hold, don't build. High reps, light weight, never progress.",
+      "video": {
+        "id": "aTgiRNwi7eY",
+        "url": "https://www.youtube.com/watch?v=aTgiRNwi7eY",
+        "title": "Glute Focused Leg Press: How To",
+        "channel": "Hammer Fitness",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/push"
+      ]
+    },
+    "leg-press-wide-high": {
+      "id": "leg-press-wide-high",
+      "name": "Leg Press (wide + high)",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes",
+        "adductors",
+        "hamstrings"
+      ],
+      "cue": "Feet wide and high, knees out.",
+      "video": {
+        "id": "OIq-tsCx_9k",
+        "url": "https://www.youtube.com/watch?v=OIq-tsCx_9k",
+        "title": "High and Wide Leg Press: How To",
+        "channel": "Hammer Fitness",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "push-up-knee-or-standard": {
+      "id": "push-up-knee-or-standard",
+      "name": "Push-Up (knee or standard)",
+      "equipment": "bodyweight",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "chest",
+        "triceps",
+        "front delts"
+      ],
+      "cue": "Maintenance. Knee version to regress, 3s down.",
+      "video": {
+        "id": "utzhPQuXWcA",
+        "url": "https://www.youtube.com/watch?v=utzhPQuXWcA",
+        "title": "Kneeling Push Up: how to do it perfectly and the three most common mistakes.",
+        "channel": "Get Exercise Confident",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Maintenance.",
+          "from": "travel/eunice/solo"
+        }
+      ],
+      "_usedIn": [
+        "home/eunice/solo",
+        "travel/eunice/solo"
+      ]
+    },
+    "rear-delt-face-pull": {
+      "id": "rear-delt-face-pull",
+      "name": "Rear Delt + Face Pull",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "upper back"
+      ],
+      "cue": "New — was completely missing. Rear delt fly into face pull.",
+      "video": {
+        "id": "eTCBSFlCJ_s",
+        "url": "https://www.youtube.com/watch?v=eTCBSFlCJ_s",
+        "title": "How to do a Face Pull | Proper Form & Technique | NASM",
+        "channel": "National Academy of Sports Medicine (NASM)",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/pull"
+      ]
+    },
+    "rear-delt-fly-cable": {
+      "id": "rear-delt-fly-cable",
+      "name": "Rear Delt Fly (Cable)",
+      "equipment": "cable",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts"
+      ],
+      "cue": "Arms nearly straight, lead with pinkies.",
+      "video": {
+        "id": "ATSjVXoOgVg",
+        "url": "https://www.youtube.com/watch?v=ATSjVXoOgVg",
+        "title": "How To Do Cable Rear Delt Fly | Exercise Demo",
+        "channel": "OriGym",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/pull"
+      ]
+    },
+    "seated-hamstring-curl": {
+      "id": "seated-hamstring-curl",
+      "name": "Seated Hamstring Curl",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "hamstrings"
+      ],
+      "cue": "Maintenance, controlled, no momentum.",
+      "video": {
+        "id": "Wy1SwoY2aaQ",
+        "url": "https://www.youtube.com/watch?v=Wy1SwoY2aaQ",
+        "title": "How to PROPERLY Seated Hamstring Curl (FIX THIS NOW)",
+        "channel": "Colossus Fitness",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/pull"
+      ]
+    },
+    "seated-leg-curl": {
+      "id": "seated-leg-curl",
+      "name": "Seated Leg Curl",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "g",
+      "muscles": [
+        "hamstrings"
+      ],
+      "cue": "Antagonist to leg press.",
+      "video": {
+        "id": "14OrOWlM5QU",
+        "url": "https://www.youtube.com/watch?v=14OrOWlM5QU",
+        "title": "Seated Leg Curl | Proper Form & Hamstring Exercise Demo",
+        "channel": "PrazeNation",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "triceps-machine": {
+      "id": "triceps-machine",
+      "name": "Triceps Machine",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "triceps"
+      ],
+      "cue": "Maintenance, machine instead of cable rope for solo simplicity.",
+      "video": {
+        "id": "j4XSuFLiZ6I",
+        "url": "https://www.youtube.com/watch?v=j4XSuFLiZ6I",
+        "title": "How To Do A SEATED MACHINE TRICEPS EXTENSION | Exercise Demonstration Video and Guide",
+        "channel": "Live Lean TV Daily Exercises",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/eunice/solo"
+      ]
+    },
+    "triceps-pushdown-rope": {
+      "id": "triceps-pushdown-rope",
+      "name": "Triceps Pushdown (Rope)",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "triceps"
+      ],
+      "cue": "Elbows fixed at sides, separate the rope at the bottom, brief hold.",
+      "video": {
+        "id": "vPeQu_L-1n0",
+        "url": "https://www.youtube.com/watch?v=vPeQu_L-1n0",
+        "title": "How to Do Tricep Pushdowns with a Rope (Step-by-Step Breakdown)",
+        "channel": "REP",
+        "verified": "2026-08-29"
+      },
+      "_usedIn": [
+        "gym/philipp/push"
+      ]
+    },
+    "wide-lat-pulldown": {
+      "id": "wide-lat-pulldown",
+      "name": "Wide Lat Pulldown",
+      "equipment": "machine",
+      "locations": [
+        "gym"
+      ],
+      "focus": "a",
+      "muscles": [
+        "lats",
+        "biceps"
+      ],
+      "cue": "Second most important taper muscle after side delt — trained in both sessions.",
+      "video": {
+        "id": "7JnP8dFbS14",
+        "url": "https://www.youtube.com/watch?v=7JnP8dFbS14",
+        "title": "How To Do A Wide Grip Lat Pulldown",
+        "channel": "PureGym",
+        "verified": "2026-08-29"
+      },
+      "_cueVariants": [
+        {
+          "cue": "Replaces removed pull-up — that thickened upper trap and shortened neckline.",
+          "from": "gym/philipp/pull"
+        },
+        {
+          "cue": "Back width makes the waist look smaller.",
+          "from": "gym/eunice/pull"
+        }
+      ],
+      "_usedIn": [
+        "gym/philipp/push",
+        "gym/philipp/pull",
+        "gym/eunice/pull"
+      ]
+    }
+  }
+}
