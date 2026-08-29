@@ -172,6 +172,13 @@ HTML = """<!DOCTYPE html>
     display:block;margin-top:7px;font-family:var(--f-data);font-size:13px;
     color:var(--accent);letter-spacing:.01em;
   }
+  /* The second step is the one that gets forgotten, so it gets its own line
+     rather than trailing off the end of a paragraph. */
+  .rnote .then{
+    display:block;margin-top:11px;padding-top:11px;
+    border-top:1px solid var(--line);
+  }
+  .rnote .then b{display:block;margin-bottom:2px}
   .card details[open] summary{color:var(--text);border-bottom:1px solid var(--line)}
 
   /* ---- the splitter: the reason this page exists ---- */
@@ -485,9 +492,12 @@ function recipesFor(who){
    is the one thing about the kitchen module that is not self-evident. */
 function addNote(){
   return '<div class="rnote">More dishes go in the <b>inbox</b> folder \u2014 one per ' +
-    'file. The ingredients and amounts as you found them, or just a photo of them; ' +
-    'they get fitted to the target from there.' +
-    '<span class="path">Files \u203a iCloud Drive \u203a Pairwell \u203a inbox</span></div>';
+    'file. The ingredients and amounts as you found them, or just a photo of them. ' +
+    'Do not adjust anything to fit; that is the job of the next step.' +
+    '<span class="path">Files \u203a iCloud Drive \u203a Pairwell \u203a inbox</span>' +
+    '<span class="then"><b>Then ask Claude Code to read the inbox.</b>' +
+    'Nothing happens on its own \u2014 the files sit there until someone runs it. ' +
+    'It works out the grams, and says what to add if a dish comes up short.</span></div>';
 }
 
 /* What to hunt for. The envelope is derived from the same two files the rest of
