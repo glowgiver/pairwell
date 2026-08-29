@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+"""Build hub/kitchen/index.html from kitchen.json + profiles.json.
+
+The page answers the two questions actually asked in a kitchen:
+
+  "How do I cook the base?"   — ingredients and Ninja steps
+  "How much do we each get?"  — weigh the pan, get two portions and their macros
+
+The splitter is the point. Everything else on the page is reference. All macros
+come from the derived block in kitchen.json, never from hand-typed figures —
+see scripts/recompute_macros.py for why that matters.
+"""
+
+import json
+import os
+
+BASE = os.path.dirname(__file__)
+KITCHEN = os.path.join(BASE, "..", "data", "kitchen.json")
+PROFILES = os.path.join(BASE, "..", "data", "profiles.json")
+OUT = os.path.join(BASE, "..", "hub", "kitchen", "index.html")
+
+data = {
+    "kitchen": json.load(open(KITCHEN, encoding="utf-8")),
+    "profiles": json.load(open(PROFILES, encoding="utf-8")),
+}
+data_json = json.dumps(data, ensure_ascii=False)
+
+HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -150,14 +176,14 @@
 
 <script src="../app.js"></script>
 <script>
-const D = {"kitchen": {"_source": ["Asian_Carb_Base.md", "Cooking_Standards.md", "Core_Health_Logic.md"], "_changelog": ["2026-08-29 — Asian Base Block macros corrected. The file previously carried three independently hand-maintained figures (per-block macros, per-100g-cooked macros, batch yield) that contradicted each other by ~34%. The per-100g-cooked value of 105 kcal implied a cooked weight of ~1126 g, which is more than goes into the pot. Since MacroFactor logging uses grams, the wrong one of the two was in daily use. Ingredients now carry their own nutrition, cooked weight is a single declared field, and every macro below is DERIVED by scripts/recompute_macros.py. Do not edit the 'computed' blocks by hand."], "hardware": {"device": "Ninja Foodi OL750UK SmartLid", "primaryModes": ["Pressure Cook", "Air Fry", "Steam-Air Fry", "Sauté/Sear"], "philosophy": "prefer one-pot dishes to save time and cleanup"}, "culinaryStandards": {"flavorProfile": "anti-spartan — Mediterranean, Asian, always with an aroma base", "texture": "always aim for contrast — crispy + juicy", "sauceBase": "low-calorie — Magerquark, mustard, or stock", "lunchboxFiber": "space-saving sources only — lentils, finely grated vegetables, spinach; no bulky salad piles"}, "asianMacroBase": {"purpose": "carb component with more protein/fiber than plain rice, lower volume, high satiety", "portionSize": "100-120 ml silicone mold", "_nutritionSource": "Generic composition tables, not brand labels. Calories are reliable within a few percent; protein and fiber vary most between brands. When convenient, replace per100gRaw with the numbers from your actual packaging and re-run scripts/recompute_macros.py.", "ingredients": [{"item": "Jasminreis", "amount": "210 g", "g": 210, "per100gRaw": {"calories": 360, "proteinG": 6.7, "carbsG": 79.0, "fiberG": 1.3, "fatG": 0.6}}, {"item": "Quinoa", "amount": "45 g", "g": 45, "per100gRaw": {"calories": 368, "proteinG": 14.1, "carbsG": 64.0, "fiberG": 7.0, "fatG": 6.1}}, {"item": "Rote Linsen (trocken)", "amount": "30 g", "g": 30, "per100gRaw": {"calories": 350, "proteinG": 24.0, "carbsG": 60.0, "fiberG": 11.0, "fatG": 1.1}}, {"item": "Edamame (geschält, TK)", "amount": "130 g", "g": 130, "per100gRaw": {"calories": 120, "proteinG": 11.0, "carbsG": 9.0, "fiberG": 5.0, "fatG": 5.0}}, {"item": "Gemüsebrühepulver", "amount": "1 TL", "g": 4, "per100gRaw": {"calories": 200, "proteinG": 7.0, "carbsG": 30.0, "fiberG": 0.0, "fatG": 5.0}}, {"item": "Sojasauce (low sodium)", "amount": "1 TL", "g": 6, "per100gRaw": {"calories": 53, "proteinG": 8.1, "carbsG": 4.9, "fiberG": 0.8, "fatG": 0.1}}, {"item": "Wasser", "amount": "450 ml", "g": 450, "isWater": true, "per100gRaw": {"calories": 0, "proteinG": 0, "carbsG": 0, "fiberG": 0, "fatG": 0}}], "steps": ["Reis, Quinoa, rote Linsen waschen bis Wasser klar ist", "Wasser mit Brühepulver und Sojasauce mischen, in Innentopf geben", "Reis, Quinoa, Linsen zugeben — Edamame noch NICHT", "SmartLid auf Pressure, Modus Pressure Cook, Stufe High, 4 Minuten", "10 Minuten Natural Release, dann Restdruck manuell ablassen", "Mit Gabel auflockern, Edamame unterheben, 5-10 Min offen ausdampfen lassen", "GARGEWICHT WIEGEN und in yield.cookedWeightG eintragen, dann scripts/recompute_macros.py laufen lassen", "In 100-120 ml Silikonformen pressen, abkühlen, einfrieren/kühlen"], "yield": {"cookedWeightG": 850, "_status": "ESTIMATED", "_note": "425 g raw solids plus the water retained after the 5-10 min steam-off. This is the ONE number that must be measured. Weigh the next batch, put the real figure here, re-run scripts/recompute_macros.py — every macro in this file follows from it. An estimate that is 50 g off shifts kcal/100g by about 6%.", "blocks": 10}, "computed": {"_generated": "by scripts/recompute_macros.py — do not edit by hand", "rawSolidsG": 425, "batchTotal": {"calories": 1193.8, "proteinG": 42.7, "carbsG": 225.9, "fiberG": 15.7, "fatG": 11.0}, "per100gCooked": {"calories": 140.4, "proteinG": 5.0, "carbsG": 26.6, "fiberG": 1.9, "fatG": 1.3}, "perBlock": {"calories": 119.4, "proteinG": 4.3, "carbsG": 22.6, "fiberG": 1.6, "fatG": 1.1}, "gramsPerBlock": 85.0}, "blockRules": {"saucyOrCalorieDense": 1, "standardLeanDish": 1.5, "extremelyLeanProtein": 2}, "substitutions": {"quinoaUnavailable": {"replaceWith": "Bulgur", "waterAdjustment": "reduce water from 450ml to 425ml proportionally (tested: 540ml→510ml at larger batch size)", "ninjaSettings": "unchanged — Pressure Cook High, 4 min + 10 min Natural Release", "_note": "changing the water also changes the cooked weight — re-weigh and re-run the calculator"}}}, "recipeOutputFormat": {"_note": "This describes how recipes should be written up in conversation, not how the app stores them. Kept here deliberately, but it is documentation, not app data.", "order": ["Block 1 — Änderungen zum Original", "Block 2 — Neue Makros (Ziel vs. Ergebnis Tabelle: Kalorien, Protein, Ballaststoffe, Fett, Asian Base Blocks)", "Block 3 — Ninja OL750 Schritt-für-Schritt (nummeriert, mit Modus/Stufe/Zeit)"]}, "recipeChecks": {"proteinCheck": "the MEAL totals 40 g protein, including whatever the Asian Base Blocks contribute — size the protein source to make up the difference, do not add 40 g on top", "fatCheck": "minimize fat to 12-15g per meal", "fiberCheck": "prefer space-saving sources — lentils, spinach, grated vegetables", "_fixed2026_08_29": "proteinCheck previously read 'raise protein source to 40g per portion', which contradicted mirrorMeals (40 g for the whole meal) and would have overshot the target on every recipe."}, "macroFactorLogging": {"asianBaseCustomFoodPer100gCooked": {"_generated": "by scripts/recompute_macros.py — do not edit by hand", "calories": 140.4, "proteinG": 5.0, "carbsG": 26.6, "fiberG": 1.9, "fatG": 1.3}, "note": "both partners log ~150g each in their individual MacroFactor accounts", "_actionRequired": "The custom food in MacroFactor still holds the old 105 kcal/100g. Update it to the value below, otherwise the correction only exists in this file."}, "eunicePreferences": {"note": "hard constraint — dish selection must pass her taste test", "cuisineAffinity": ["Taiwanese braised dishes", "Japanese-adjacent flavors", "Vietnamese"], "avoid": ["expensive specialty imports", "flavor sacrificed purely for macro precision"]}, "_gaps": ["cookedWeightG is estimated, not weighed — the single highest-value measurement to take on the next batch", "no actual recipes yet: this file holds standards and one carb base, but zero dishes. 'What do we commonly meal-prep?' is still unanswerable.", "per-ingredient nutrition comes from generic tables, not the actual packaging", "meal-history / rating log (👍/👎 per dish) not yet built", "shopping list generator logic not yet formalized as data", "17 g fiber per meal (mirrorMeals) is ambitious alongside the 'no bulky salad piles' rule — verify against a real cooked dish"]}, "profiles": {"_source": "Core_Health_Logic.md", "priorityHierarchy": ["protein", "fiber", "fat", "calories"], "priorityNote": "Protein is non-negotiable. All other macros flex around it.", "people": {"philipp": {"displayName": "Philipp", "role": "biohacker", "dailyTargets": {"calories": 1600, "proteinG": 164, "fiberG": 45, "fatG": 52, "netCarbsG": 112}, "fixedBreakfast": {"calories": 410, "proteinG": 48, "fiberG": 6, "fatG": 10, "ingredients": [{"item": "Magerquark", "amount": "150 g"}, {"item": "Whey Protein", "amount": "30 g"}, {"item": "Haferflocken", "amount": "20 g"}, {"item": "Geschrotete Leinsamen", "amount": "15 g"}, {"item": "Kreatin", "amount": "5 g"}, {"item": "Ceylon Zimt", "amount": "1 TL"}, {"item": "Wasser", "amount": "nach Bedarf"}]}, "snackBudgetAfterMirrorMeals": {"calories": 340, "proteinG": 36, "note": "1600 - 410 (breakfast) - 850 (lunch+dinner) = remainder"}, "aestheticGoal": "lean athletic, K-drama V-taper, not bulky"}, "eunice": {"displayName": "Eunice", "role": "healthy teacher", "dailyTargets": {"calories": 1580, "proteinG": 105, "fiberG": 35, "fatG": 52, "netCarbsG": 160}, "fixedBreakfast": null, "breakfastPlusSnackBudget": {"calories": 730, "proteinG": 25, "note": "1580 - 850 (lunch+dinner) = remainder, breakfast not fixed yet"}, "aestheticGoal": "curvier, defined, strong lower body already present", "notes": ["picky eater, strong taste preferences — recipe selection must pass her taste test", "~1 year training experience, naturally strong lower body development"]}}, "mirrorMeals": {"note": "Lunch and dinner are identical in size/macros for both people", "lunch": {"calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15"}, "dinner": {"calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15"}}, "_gaps": ["Eunice's breakfast is not fixed yet — only a budget envelope exists (730 kcal / 25g protein)."]}};
+const D = __DATA__;
 
 function esc(s){
   return String(s == null ? "" : s)
     .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;");
 }
-function n1(v){ return (Math.round(v*10)/10).toFixed(1).replace(/\.0$/,""); }
+function n1(v){ return (Math.round(v*10)/10).toFixed(1).replace(/\\.0$/,""); }
 function n0(v){ return Math.round(v); }
 
 var base = D.kitchen.asianMacroBase;
@@ -291,3 +317,9 @@ render();
 
 </body>
 </html>
+"""
+
+html = HTML.replace("__DATA__", data_json)
+with open(OUT, "w", encoding="utf-8") as f:
+    f.write(html)
+print("written kitchen/index.html  (%d bytes)" % len(html))

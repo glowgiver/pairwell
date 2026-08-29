@@ -22,8 +22,10 @@ they run by hand — there is no watcher.
 After changing anything in `data/`, rebuild:
 
 ```bash
+python3 scripts/build_hub_page.py       # the Today screen
+python3 scripts/build_routines_page.py  # skincare + hair
 python3 scripts/build_workout_page.py
-python3 scripts/build_routines_page.py
+python3 scripts/build_kitchen_page.py
 ```
 
 Then bump `const CACHE` in `hub/sw.js` so both phones pick up the new version.
@@ -37,6 +39,8 @@ Then bump `const CACHE` in `hub/sw.js` so both phones pick up the new version.
 | `recompute_macros.py` | derives every macro in kitchen.json from ingredients + one measured cooked weight |
 | `check_routine_rules.py` | checks the seasonal skincare plan against its own safety rules |
 | `verify_videos.py` | re-checks all 43 exercise demo links for rot |
+| `build_hub_page.py` | profiles + training + routines + kitchen → the Today screen |
+| `build_kitchen_page.py` | kitchen.json → the batch splitter and method |
 | `make_backup_doc.py` | regenerates the standalone protocol backup in `backups/` |
 
 `scripts/_archive/` holds a one-time migration that must not be run again; it
@@ -57,5 +61,7 @@ locate a person do not.
 
 ## State
 
-Skincare, hair and workout are built. Kitchen is not — it needs a recipe model
-first. See `CLAUDE.md` for the architecture rules.
+All four modules are built, plus a Today screen that resolves person, weekday,
+season and protocol phase before it renders. Kitchen currently covers the Asian
+Base Block and the batch splitter; a wider recipe library is still to come.
+See `CLAUDE.md` for the architecture rules.

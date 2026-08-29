@@ -69,12 +69,12 @@
       },
       {
         "day": "Sat",
-        "what": "Spaziergang",
+        "what": "Walk",
         "type": "move"
       },
       {
         "day": "Sun",
-        "what": "Shared",
+        "what": "Together",
         "type": "training"
       }
     ],
@@ -111,7 +111,7 @@
       },
       {
         "day": "Sun",
-        "what": "Shared",
+        "what": "Together",
         "type": "training"
       }
     ]

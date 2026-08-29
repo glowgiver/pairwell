@@ -48,20 +48,20 @@ html = """<!DOCTYPE html>
   body{
     background:var(--bg);
     color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--f-ui);
     -webkit-font-smoothing:antialiased;
     min-height:100dvh;
     padding:
       calc(env(safe-area-inset-top) + 22px)
       calc(env(safe-area-inset-right) + 16px)
-      calc(env(safe-area-inset-bottom) + 32px)
+      calc(var(--bar) + 26px)
       calc(env(safe-area-inset-left) + 16px);
     max-width:640px;
     margin:0 auto;
   }
 
   h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 4px;color:var(--train)}
-  .sub{font-size:14px;color:var(--muted);margin:0 0 20px}
+  .sub{font-family:var(--f-read);font-size:15px;color:var(--muted);margin:0 0 20px;line-height:1.55}
 
   /* location pills */
   .pills{display:flex;gap:8px;margin-bottom:16px}
@@ -72,7 +72,7 @@ html = """<!DOCTYPE html>
     color:var(--muted);transition:background .15s;
   }
   .pill b{display:block;font-size:15px;font-weight:700;color:var(--text)}
-  .pill span{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
+  .pill span{display:block;font-family:var(--f-data);font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
   .pill[aria-pressed="true"]{background:var(--train);border-color:var(--train)}
   .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:var(--bg)}
   .pill[aria-pressed="true"] span{color:rgba(11,18,32,.72)}
@@ -87,15 +87,15 @@ html = """<!DOCTYPE html>
   .profile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
   .pname{font-size:19px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .pbadge{
-    font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    font-family:var(--f-data);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
     padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--bg);
   }
   .pgoal{font-size:13.5px;color:var(--muted);margin-top:3px;font-style:italic}
   .pmeta{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
-  .pmeta div{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2)}
+  .pmeta div{font-family:var(--f-data);font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2)}
   .pmeta strong{display:block;font-size:13px;color:var(--text);text-transform:none;letter-spacing:0;margin-top:2px;font-weight:700}
 
-  .notice{padding:12px 18px;font-size:14px;line-height:1.55;color:var(--muted);border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .notice{padding:12px 18px;font-family:var(--f-read);font-size:15px;line-height:1.6;color:var(--muted);border-bottom:1px solid var(--line);background:var(--surface-2)}
   .notice strong{color:var(--text)}
 
   .sess-tabs{display:flex;border-bottom:1px solid var(--line)}
@@ -105,7 +105,7 @@ html = """<!DOCTYPE html>
     background:none;border:0;border-bottom:2px solid transparent;
     font-family:inherit;
   }
-  .sess-tab span{display:block;font-size:13px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+  .sess-tab span{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
   .sess-tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
   .sess-tab.together[aria-selected="true"]{border-bottom-color:var(--eunice)}
   .sess-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
@@ -113,12 +113,12 @@ html = """<!DOCTYPE html>
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
   .sess-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
   .sess-focus{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:3px}
-  .sess-dur{display:block;font-size:13px;font-weight:400;color:var(--muted2);margin-top:3px}
+  .sess-dur{display:block;font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:13px;font-weight:400;color:var(--muted2);margin-top:3px}
 
   .opt-banner{
     margin:14px 18px 0;padding:11px 14px;border-radius:10px;
     border:1px dashed var(--line);background:var(--surface-2);
-    font-size:14px;color:var(--muted);line-height:1.6;
+    font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.6;
   }
   .opt-banner strong{color:var(--text)}
 
@@ -127,14 +127,14 @@ html = """<!DOCTYPE html>
   .tier-dot.primary{background:var(--accent)}
   .tier-dot.maint{background:var(--muted2)}
   .tier-name{font-size:15px;font-weight:700}
-  .tier-desc{font-size:13px;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-left:auto}
+  .tier-desc{font-family:var(--f-data);font-size:13px;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-left:auto}
 
   .ex{border-bottom:1px solid var(--line);padding:12px 18px}
   .ex:last-child{border-bottom:none}
   .ex.maint{background:rgba(255,255,255,.015)}
   .ex-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
   .ex-name{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
-  .ex-ref{font-size:13px;color:var(--muted2);margin-bottom:6px}
+  .ex-ref{font-family:var(--f-data);font-size:13px;color:var(--muted2);margin-bottom:6px}
 
   /* Demo link. A plain link, not an embed: an iframe would load YouTube for
      every exercise on the page, including the ones nobody opens. */
@@ -149,18 +149,18 @@ html = """<!DOCTYPE html>
   .demo:active{background:var(--accent);color:var(--bg)}
   .demo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tag-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
-  .tag{font-size:13px;padding:4px 10px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+  .tag{font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:13px;padding:4px 10px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
   .tag.sr{background:var(--accent);color:var(--bg);border-color:var(--accent);
     font-weight:700;font-size:15px;padding:4px 11px;letter-spacing:.01em}
   .tag.load{background:var(--surface-2);color:var(--text);border-color:var(--line)}
-  .ex-cue{font-size:14.5px;color:var(--muted);line-height:1.55}
+  .ex-cue{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.6}
   .ex-cue strong{color:var(--text)}
 
   .duo{display:flex;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
   .duo-half{flex:1;padding:10px 12px;font-size:14px;line-height:1.45}
   .duo-half.p{background:rgba(90,141,238,.08);border-right:1px solid var(--line)}
   .duo-half.e{background:rgba(201,166,242,.08)}
-  .duo-half .who{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);display:block;margin-bottom:3px}
+  .duo-half .who{font-family:var(--f-data);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);display:block;margin-bottom:3px}
   .duo-half strong{color:var(--text)}
 
   /* guide */
@@ -168,19 +168,19 @@ html = """<!DOCTYPE html>
   .ref-card{margin:14px 18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
   .ref-head{padding:13px 15px;border-bottom:1px solid var(--line);background:var(--surface-2)}
   .ref-title{font-size:18px;font-weight:700}
-  .ref-intro{font-size:14px;color:var(--muted);line-height:1.55;margin-top:5px}
+  .ref-intro{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.55;margin-top:5px}
   .ref-intro strong{color:var(--text)}
   .ref-body{padding:4px 15px}
   .ref-item{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
   .ref-item:last-child{border-bottom:none}
-  .ref-item-k{font-size:13px;font-weight:700;color:var(--accent)}
-  .ref-item-v{font-size:14.5px;color:var(--muted);line-height:1.55}
+  .ref-item-k{font-family:var(--f-data);font-size:13px;font-weight:700;color:var(--accent)}
+  .ref-item-v{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.55}
   .ref-item-v strong{color:var(--text)}
   .hr-zone{display:flex;gap:6px;margin:10px 0}
   .hrz{flex:1;text-align:center;padding:9px 6px;border-radius:8px;border:1px solid var(--line)}
   .hrz.z2{background:rgba(90,141,238,.1);border-color:var(--accent)}
-  .hrz-n{font-size:18px;font-weight:700}
-  .hrz-l{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);margin-top:2px}
+  .hrz-n{font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:18px;font-weight:700}
+  .hrz-l{font-family:var(--f-data);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);margin-top:2px}
 
   @media (prefers-reduced-motion:reduce){ * { transition:none !important } }
 </style>
@@ -444,6 +444,7 @@ function guideHTML(){
 
 PW.mountRail();
 PW.mountSwitcher(document.getElementById("switcher"));
+PW.mountTabs("workout", "../");
 
 // Switching person keeps the location but resets the session, since the
 // two people don't train the same split.

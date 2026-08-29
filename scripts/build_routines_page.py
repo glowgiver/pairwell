@@ -29,18 +29,18 @@ data_json = json.dumps(data, ensure_ascii=False)
 SHARED_CSS = """
   body{
     background:var(--bg);color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--f-ui);
     -webkit-font-smoothing:antialiased;
     min-height:100dvh;max-width:600px;margin:0 auto;
     padding:
       calc(env(safe-area-inset-top) + 20px)
       calc(env(safe-area-inset-right) + 18px)
-      calc(env(safe-area-inset-bottom) + 40px)
+      calc(var(--bar) + 26px)
       calc(env(safe-area-inset-left) + 18px);
   }
 
   h1{font-size:29px;font-weight:700;letter-spacing:-.02em;margin:0 0 4px;color:var(--accent)}
-  .sub{font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.5}
+  .sub{font-family:var(--f-read);font-size:15.5px;color:var(--muted);margin:0 0 20px;line-height:1.6}
 
   /* Type floor: 14px for secondary, 16px+ for anything you act on.
      This page is read standing at a sink. */
@@ -53,10 +53,10 @@ SHARED_CSS = """
     padding:15px 18px 12px;border-bottom:1px solid var(--line);
   }
   .card-head .k{
-    font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    font-family:var(--f-data);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
     color:var(--accent);
   }
-  .card-head .meta{font-size:13px;color:var(--muted2);margin-left:auto}
+  .card-head .meta{font-family:var(--f-data);font-size:13px;color:var(--muted2);margin-left:auto}
   .card-head .focus{font-size:15px;color:var(--text);font-weight:600;width:100%;margin-top:2px}
 
   ol.steps{list-style:none;margin:0;padding:6px 0}
@@ -66,14 +66,14 @@ SHARED_CSS = """
   }
   ol.steps li + li{border-top:1px solid var(--line)}
   ol.steps .n{
-    font-size:13px;font-weight:700;color:var(--muted2);
+    font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--muted2);
     font-variant-numeric:tabular-nums;
   }
   ol.steps .t{font-size:16.5px;font-weight:600;line-height:1.35}
-  ol.steps .p{font-size:14.5px;color:var(--muted);margin-top:3px;line-height:1.45}
-  ol.steps .h{font-size:14px;color:var(--muted2);margin-top:3px;line-height:1.45;font-style:italic}
+  ol.steps .p{font-size:15px;color:var(--muted);margin-top:3px;line-height:1.45}
+  ol.steps .h{font-family:var(--f-read);font-size:15px;color:var(--muted2);margin-top:4px;line-height:1.55}
 
-  .empty{padding:20px 18px;font-size:15px;color:var(--muted);line-height:1.55}
+  .empty{padding:20px 18px;font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.55}
 
   /* day strip */
   .days{display:flex;gap:5px;margin-bottom:14px}
@@ -83,14 +83,14 @@ SHARED_CSS = """
     color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;
     cursor:pointer;padding:6px 2px;
   }
-  .day small{display:block;font-size:11.5px;font-weight:400;color:var(--muted2);margin-top:2px}
+  .day small{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);margin-top:2px}
   .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
   .day[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   .season{
     display:inline-flex;align-items:center;gap:8px;
-    font-size:13px;color:var(--muted);
+    font-family:var(--f-data);font-size:13px;color:var(--muted);
     background:var(--surface-2);border:1px solid var(--line);
     border-radius:9px;padding:7px 12px;margin-bottom:14px;
   }
@@ -105,7 +105,7 @@ SHARED_CSS = """
     font-family:inherit;font-size:14px;color:var(--muted);cursor:pointer;
   }
   .phase-toggle .pl{
-    font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);
+    font-family:var(--f-data);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);
   }
   .phase-toggle b{color:var(--text);font-weight:600}
   .phase-toggle .chev{
@@ -122,12 +122,12 @@ SHARED_CSS = """
     color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;
     cursor:pointer;padding:6px 4px;
   }
-  .phase small{display:block;font-size:10.5px;font-weight:400;color:var(--muted2);margin-top:2px}
+  .phase small{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);margin-top:2px}
   .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
   .phase[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .phase:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .phase-note{
-    font-size:13.5px;color:var(--muted);line-height:1.5;
+    font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.5;
     margin-bottom:14px;padding-left:2px;
   }
 
@@ -142,11 +142,11 @@ SHARED_CSS = """
   }
   .rule.critical{border-left-color:#F4666F;background:rgba(244,102,111,.10)}
   .rule .rt{
-    font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    font-family:var(--f-data);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
     color:var(--muted2);margin-bottom:6px;display:flex;align-items:center;gap:7px;
   }
   .rule.critical .rt{color:#F4666F}
-  .rule p{margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .rule p{margin:0;font-family:var(--f-read);font-size:15px;line-height:1.6;color:var(--muted)}
   .rule.critical p{color:var(--text)}
 
   /* progressive disclosure */
@@ -169,8 +169,8 @@ SHARED_CSS = """
   details summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   .dl{padding:2px 18px 16px}
   .dl div{padding:9px 0;border-top:1px solid var(--line)}
-  .dl .dk{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
-  .dl .dv{font-size:14.5px;line-height:1.5;color:var(--muted)}
+  .dl .dk{font-family:var(--f-data);font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+  .dl .dv{font-family:var(--f-read);font-size:15px;line-height:1.6;color:var(--muted)}
   .dl .dv strong{color:var(--text)}
 
   .foot{font-size:13px;color:var(--muted2);line-height:1.6;margin-top:20px}
@@ -483,6 +483,7 @@ function renderStage(){
 
 PW.mountRail();
 PW.mountSwitcher(document.getElementById("switcher"));
+PW.mountTabs("skincare", "../");
 window.addEventListener("pw:person", renderStage);
 
 renderDays();
@@ -514,7 +515,7 @@ __CSS__
   .both b{color:var(--text);font-weight:600}
   .card.other{opacity:.5}
   .inline-caution{
-    padding:11px 18px 14px;font-size:14px;line-height:1.5;
+    padding:11px 18px 14px;font-family:var(--f-read);font-size:15px;line-height:1.55;
     color:var(--muted2);border-top:1px solid var(--line);
   }
 </style>

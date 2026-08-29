@@ -42,8 +42,10 @@ pairwell/
 │   └── kitchen.json       standards + Asian Base Block; no recipes yet
 │
 ├── scripts/
+│   ├── build_hub_page.py        all four sources → the Today screen
 │   ├── build_workout_page.py    training.json + exercises.json → workout page
 │   ├── build_routines_page.py   routines.json → skincare + hair pages
+│   ├── build_kitchen_page.py    kitchen.json → splitter + method
 │   ├── recompute_macros.py      derives kitchen macros; holds no data itself
 │   ├── check_routine_rules.py   checks both protocols against their own rules
 │   ├── verify_videos.py         re-checks all 43 demo links for rot
@@ -63,8 +65,7 @@ pairwell/
     ├── app.css            the one palette — pages must not redefine tokens
     ├── app.js             the one person model (PW.get / PW.set / mountSwitcher)
     ├── manifest.json · sw.js · icons/
-    ├── skincare/ · hair/ · workout/     built
-    └── kitchen/                          placeholder — needs a recipe model first
+    └── skincare/ · hair/ · workout/ · kitchen/   all generated
 ```
 
 ## Person handling
@@ -106,8 +107,16 @@ Dark theme, tokens in `hub/app.css`. Accents: `--skin` teal, `--hair` violet,
 
 Rules learned the hard way:
 
-- **Type floor.** 13px for secondary, 15px+ for anything actionable. The workout
-  page still violates this (8.5–10.5px) and is due a typography pass.
+- **Type floor.** 13px for secondary, 15px+ for anything actionable. All five
+  pages hold this. The single exception is the bottom-bar labels at 12px, where
+  the 22px icon carries the meaning and the target is 58px.
+- **Contrast.** Everything clears WCAG AA (4.5:1) against its *composited*
+  background. Note the trap: white on `--skin` / `--hair` / `--train` / `--food`
+  fails (1.78–3.24) — those accents are built to carry dark text. Filled chips
+  and active pills use `var(--bg)` as ink.
+- **Three type roles**, all device-resident because web fonts are banned here:
+  `--f-ui` for what you scan, `--f-read` for what you read, `--f-data` for what
+  you check. Numbers get `font-variant-numeric: tabular-nums`.
 - **44px minimum touch targets** (`var(--tap)`).
 - **Real `<button>`s** with `aria-pressed` / `aria-selected`, never click-handling
   `<div>`s.
@@ -131,8 +140,10 @@ already — see the "Generalise locating detail" commit.
 which contains the contents of `hub/` at its root.
 
 ```bash
+python3 scripts/build_hub_page.py       # Today screen
+python3 scripts/build_routines_page.py  # skincare + hair
 python3 scripts/build_workout_page.py
-python3 scripts/build_routines_page.py
+python3 scripts/build_kitchen_page.py
 # bump `const CACHE = "hub-vX"` in hub/sw.js
 git add -A && git commit -m "..."
 git push
@@ -148,8 +159,8 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
 - **Kitchen has no recipes.** `cookedWeightG` for the Asian Base Block is an
   estimate; weigh a batch and re-run `recompute_macros.py`. The custom food in
   MacroFactor may still hold the old 105 kcal/100 g — it should be 140.
-- **No Today screen.** `weeklyRhythm`, the seasonal plans and `am.steps` are all
-  present and unused. This is the highest-value next build.
+- **Kitchen has one recipe, not a library.** The Base Block and the splitter
+  work; actual dishes are still to be written.
 - **Sessions still duplicate exercise objects** instead of referencing
   `exercises.json` by id.
 - **Philipp's PM steps** are unrecorded.
