@@ -1,7 +1,9 @@
 {
-  "name": "Hub",
-  "short_name": "Hub",
-  "description": "Personal command center",
+  "id": "/pairwell/",
+  "name": "Pairwell",
+  "short_name": "Pairwell",
+  "description": "Skincare, hair, workouts and kitchen for two people.",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
