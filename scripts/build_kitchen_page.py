@@ -39,8 +39,20 @@ def strip_body(profiles):
     out.pop("_bodyNote", None)
     return out
 
+def strip_buildonly(kitchen):
+    """topUps is for adapt_recipe.py, not for the browser.
+
+    Same reasoning as shipping only foodNames: the page renders none of it,
+    so it has no business being inlined into every phone that opens Kitchen.
+    """
+    import copy
+    out = copy.deepcopy(kitchen)
+    out.pop("topUps", None)
+    return out
+
+
 data = {
-    "kitchen": json.load(open(KITCHEN, encoding="utf-8")),
+    "kitchen": strip_buildonly(json.load(open(KITCHEN, encoding="utf-8"))),
     "profiles": strip_body(json.load(open(PROFILES, encoding="utf-8"))),
     "recipes": _recipes,
     "foodNames": dict((k, v["name"]) for k, v in _foods.items()),

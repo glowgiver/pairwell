@@ -5,6 +5,10 @@ servings: 2
 slot: mirror          # mirror | breakfast | snack
 person: both          # both | philipp | eunice
 blocks: 1             # Asian Base blocks per serving, 0 if the dish carries its own carb
+cuisine: asian        # optional: asian | european | mediterranean | indian | mexican
+                      # only used to decide what may be ADDED if the dish comes
+                      # up short — no cuisine means nothing gets filtered out,
+                      # so chickpeas may get proposed for a Thai curry
 
 ## Ingredients
 300 g Hähnchenbrust
@@ -40,6 +44,11 @@ blocks: 1             # Asian Base blocks per serving, 0 if the dish carries its
 #
 # NOT worth your time: printing a web page to PDF. It is mostly cookie banner
 # and advertising, and the amounts end up harder to find, not easier.
+#
+# If a dish misses the target, adapt_recipe.py does not just shrug: it proposes
+# what to ADD, in grams, then re-fits the whole dish around the addition — so
+# the chicken comes back down when the lentils go in. Proposals only; it never
+# edits a recipe by itself.
 #
 # Then: python3 scripts/read_inbox.py
 # ---------------------------------------------------------------------------

@@ -195,6 +195,7 @@ def main():
             "person": None if person in ("both", "", "none") else person,
             "servings": int(float(meta.get("servings", 1))),
             "blocks": float(meta.get("blocks", 1)),
+            "cuisine": (meta.get("cuisine") or "").strip().lower() or None,
             "source": meta.get("source", "inbox/" + r["file"]),
             "ingredients": [{"food": i["food"], "g": i["g"]} for i in r["ingredients"]],
             "steps": r["steps"], "computed": {}, "adapted": {},

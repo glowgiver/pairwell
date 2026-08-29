@@ -224,5 +224,147 @@
     "proteinG": 4,
     "fatG": 9,
     "fiberG": 2
+  },
+  "topUps": {
+    "_purpose": "What adapt_recipe.py may PROPOSE adding when scaling the dish's own ingredients cannot reach the target. Proposals only — the script prints them with exact grams and never edits a recipe. Adding something to a dish changes the dish, and that is a cooking decision.",
+    "_whyCurated": "foods.json has cheaper options than these on paper. Flohsamenschalen is 2.5 kcal per gram of fibre and would win every time, but nobody wants psyllium husk stirred into a braise. This list is what actually belongs in a dish, ranked afterwards by cost.",
+    "_cuisines": "A candidate is offered when the recipe declares no cuisine, or declares one this candidate lists. 'any' fits everything.",
+    "fiber": [
+      {
+        "food": "rote_linsen_gekocht",
+        "goesWith": [
+          "any"
+        ],
+        "note": "dissolves into sauce; safest default",
+        "maxG": 150,
+        "kind": "dense"
+      },
+      {
+        "food": "belugalinsen_gekocht",
+        "goesWith": [
+          "any"
+        ],
+        "note": "holds its shape, better when the dish should stay chunky",
+        "maxG": 150,
+        "kind": "dense"
+      },
+      {
+        "food": "edamame",
+        "goesWith": [
+          "asian"
+        ],
+        "note": "carries protein too, so it closes both gaps at once",
+        "maxG": 150,
+        "kind": "dense"
+      },
+      {
+        "food": "kichererbsen_gekocht",
+        "goesWith": [
+          "mediterranean",
+          "indian",
+          "european"
+        ],
+        "maxG": 150,
+        "kind": "dense"
+      },
+      {
+        "food": "schwarze_bohnen",
+        "goesWith": [
+          "mexican",
+          "american",
+          "european"
+        ],
+        "maxG": 150,
+        "kind": "dense"
+      },
+      {
+        "food": "blattspinat",
+        "goesWith": [
+          "any"
+        ],
+        "note": "cheapest in calories, but bulky — wilts into almost anything",
+        "maxG": 200,
+        "kind": "bulky"
+      },
+      {
+        "food": "brokkoli",
+        "goesWith": [
+          "any",
+          "asian",
+          "european"
+        ],
+        "maxG": 200,
+        "kind": "bulky"
+      },
+      {
+        "food": "weisskohl",
+        "goesWith": [
+          "asian",
+          "european"
+        ],
+        "note": "very cheap fibre where the dish can take the volume",
+        "maxG": 200,
+        "kind": "bulky"
+      }
+    ],
+    "protein": [
+      {
+        "food": "garnelen",
+        "goesWith": [
+          "asian",
+          "mediterranean"
+        ],
+        "maxG": 200
+      },
+      {
+        "food": "huehnerbrust",
+        "goesWith": [
+          "any"
+        ],
+        "maxG": 200
+      },
+      {
+        "food": "putenbrust",
+        "goesWith": [
+          "any"
+        ],
+        "maxG": 200
+      },
+      {
+        "food": "kabeljau",
+        "goesWith": [
+          "asian",
+          "mediterranean",
+          "european"
+        ],
+        "maxG": 200
+      },
+      {
+        "food": "tofu",
+        "goesWith": [
+          "asian"
+        ],
+        "maxG": 200
+      },
+      {
+        "food": "eiklar",
+        "goesWith": [
+          "any"
+        ],
+        "note": "adds protein and almost nothing else; last resort, not a flavour",
+        "maxG": 200
+      },
+      {
+        "food": "magerquark",
+        "goesWith": [
+          "cold",
+          "breakfast",
+          "european"
+        ],
+        "note": "only where the dish is not heated after adding it",
+        "maxG": 250
+      }
+    ],
+    "_maxG": "Most a serving can sensibly carry of that one thing. Without this the ranking picks whatever is cheapest per gram of fibre and proposes 478 g of spinach — the exact failure inbox/WHAT-TO-LOOK-FOR.md already warns about. When no single candidate fits under its cap, the script proposes a split instead, which is the shape the brief asks for anyway."
   }
 }

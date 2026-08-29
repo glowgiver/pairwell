@@ -123,7 +123,189 @@ def solve(recipe, foods, block, target):
     return (changes, notes), None
 
 
-def report(recipe, foods, block, target, changes, notes):
+def _cands(kitchen, role, cuisine):
+    """Curated shortlist, filtered by what the dish will accept.
+
+    foods.json has cheaper options on paper — psyllium husk wins fibre on
+    arithmetic and loses it in a braise. The list in kitchen.json is what
+    belongs in food; cost only ranks what is already acceptable.
+    """
+    out = []
+    for c in (kitchen.get("topUps") or {}).get(role, []):
+        goes = c.get("goesWith") or ["any"]
+        if cuisine and "any" not in goes and cuisine not in goes:
+            continue
+        out.append(c)
+    return out
+
+
+def _yield_of(foods, c, key):
+    return foods[c["food"]]["per100g"][key] / 100.0
+
+
+def _cost(foods, c, grams):
+    per = foods[c["food"]]["per100g"]
+    return (per["calories"] * grams / 100.0, per["proteinG"] * grams / 100.0)
+
+
+def _fiber_options(foods, cands, gap):
+    """Single ingredients that close the gap under their own volume cap,
+    and failing that, the two-part split the kitchen brief actually asks for.
+
+    Ranked by calories, but only among things that fit in a lunchbox. Cheapest
+    per gram of fibre is spinach, and 478 g of it is not dinner.
+    """
+    singles, splits = [], []
+    for c in cands:
+        y = _yield_of(foods, c, "fiberG")
+        if not y:
+            continue
+        g = gap / y
+        if g <= c["maxG"]:
+            kcal, prot = _cost(foods, c, g)
+            singles.append((kcal, [(c, g)], prot))
+    if singles:
+        singles.sort(key=lambda r: r[0])
+        return singles, "single"
+
+    for bulky in [c for c in cands if c.get("kind") == "bulky"]:
+        yb = _yield_of(foods, bulky, "fiberG")
+        gb = bulky["maxG"]
+        rest = gap - yb * gb
+        if rest <= 0:
+            continue
+        for d in [c for c in cands if c.get("kind") == "dense"]:
+            yd = _yield_of(foods, d, "fiberG")
+            if not yd:
+                continue
+            gd = rest / yd
+            if gd > d["maxG"]:
+                continue
+            k1, p1 = _cost(foods, bulky, gb)
+            k2, p2 = _cost(foods, d, gd)
+            splits.append((k1 + k2, [(bulky, gb), (d, gd)], p1 + p2))
+    splits.sort(key=lambda r: r[0])
+    return splits, "split"
+
+
+def topups(recipe, foods, block, kitchen, target, result):
+    """Scaling moved what was already in the pan. This says what to add.
+
+    Proposals, printed. Nothing is written back: putting lentils in a dish is
+    a decision about the dish, and the script does not get to make it.
+    """
+    gap_p = target["proteinG"] - result["proteinG"]
+    gap_f = target["fiberG"] - result["fiberG"]
+    if gap_p < 1.0 and gap_f < 0.5:
+        return
+
+    cuisine = recipe.get("cuisine")
+    n = float(recipe.get("servings", 1))
+    print("\nBLOCK 2b — what to add, since rescaling did not get there\n")
+    if cuisine:
+        art = "an" if cuisine[0].lower() in "aeiou" else "a"
+        print("  filtered to what suits %s %s dish" % (art, cuisine))
+    else:
+        print("  this recipe declares no cuisine, so nothing is filtered out —")
+        print("  add \"cuisine\" to it and this list gets shorter and better")
+
+    added_kcal, added_p = 0.0, 0.0
+    picks = []
+
+    if gap_f >= 0.5:
+        print("\n  Fibre short by %.1f g:" % gap_f)
+        opts, kind = _fiber_options(foods, _cands(kitchen, "fiber", cuisine), gap_f)
+        if not opts:
+            print("    nothing on the shortlist closes this, alone or in a pair.")
+            print("    The dish is too far from the target — look for another.")
+        else:
+            if kind == "split":
+                print("    no single ingredient closes it inside a sensible")
+                print("    portion, so these are pairs — bulk plus density:")
+            for kcal, parts, prot in opts[:3]:
+                desc = " + ".join("%s %.0f g" % (foods[c["food"]]["name"], weighable(g))
+                                  for c, g in parts)
+                extra = "  (+%.1f g protein)" % prot if prot >= 1.0 else ""
+                print("    %-52s %+4.0f kcal%s" % (desc, kcal, extra))
+            for c, g in opts[0][1]:
+                if c.get("note"):
+                    print("      %s: %s" % (foods[c["food"]]["name"], c["note"]))
+            added_kcal, added_p = opts[0][0], opts[0][2]
+            picks.extend((c["food"], g) for c, g in opts[0][1])
+            print("    grams are per serving (x%.0f for the batch)" % n)
+
+    gap_p2 = gap_p - added_p
+    if gap_p2 >= 1.0:
+        label = "Protein short by %.1f g" % gap_p
+        if added_p >= 1.0:
+            label += " — %.1f g after the fibre pick above" % gap_p2
+        print("\n  %s:" % label)
+        rows = []
+        for c in _cands(kitchen, "protein", cuisine):
+            y = _yield_of(foods, c, "proteinG")
+            if not y:
+                continue
+            g = gap_p2 / y
+            if g > c["maxG"]:
+                continue
+            rows.append((_cost(foods, c, g)[0], g, c))
+        rows.sort(key=lambda r: r[0])
+        if not rows:
+            print("    nothing closes this inside a sensible portion.")
+        for kcal, g, c in rows[:3]:
+            note = "  — " + c["note"] if c.get("note") else ""
+            print("    %-26s %5.0f g/serving  %+4.0f kcal%s"
+                  % (foods[c["food"]]["name"], weighable(g), kcal, note))
+        if rows:
+            added_kcal += rows[0][0]
+            picks.append((rows[0][2]["food"], rows[0][1]))
+
+    if not picks:
+        return
+
+    # Adding a legume adds protein as well as fibre, so the meat has to come
+    # down. Saying "+148 kcal and it fits" without re-solving is the same
+    # sequential mistake solve() exists to avoid — do the whole thing again
+    # with the addition in the pan, and print the dish that actually works.
+    import copy
+    r2 = copy.deepcopy(recipe)
+    for food_id, g in picks:
+        r2["ingredients"].append({"food": food_id, "g": weighable(g) * n})
+    out2, err2 = solve(r2, foods, block, target)
+    print("\n  Take the first of each and re-fit the whole dish:\n")
+    if err2:
+        print("    still cannot be fitted — %s" % err2)
+        return
+    changes2, notes2 = out2
+    for i, g in changes2.items():
+        r2["ingredients"][i]["g"] = g
+    final = totals(r2, foods, block)
+    orig_g = dict((ing["food"], ing["g"]) for ing in recipe["ingredients"])
+    for ing in r2["ingredients"]:
+        was = orig_g.get(ing["food"])
+        name = foods[ing["food"]]["name"]
+        if was is None:
+            print("    %-28s %6s      %6.0f g   NEW" % (name, "", ing["g"]))
+        elif abs(was - ing["g"]) > 0.5:
+            print("    %-28s %6.0f g  ->  %6.0f g" % (name, was, ing["g"]))
+    print("\n    %-14s %8s %8s" % ("", "target", "result"))
+    for label, key in (("Calories", "calories"), ("Protein", "proteinG"),
+                       ("Fibre", "fiberG"), ("Fat", "fatG")):
+        t = target[key]
+        print("    %-14s %8s %8.1f" % (label, t if isinstance(t, str) else "%.0f" % t,
+                                       final[key]))
+    for nt in notes2 or []:
+        print("    ! " + nt)
+    fat_lo = float(str(target["fatG"]).split("-")[0])
+    if final["fatG"] < fat_lo:
+        short = fat_lo - final["fatG"]
+        print("\n    Still %.1f g short on fat: %.0f g of oil, +%.0f kcal, "
+              "meal at %.0f." % (short, short, short * 9,
+                                 final["calories"] + short * 9))
+    print("\n    Amounts are for the whole recipe (%d servings), as written." % n)
+
+
+def report(recipe, foods, block, target, changes, notes, kitchen=None):
     orig = [ing["g"] for ing in recipe["ingredients"]]
     for i, g in (changes or {}).items():
         recipe["ingredients"][i]["g"] = g
@@ -171,6 +353,9 @@ def report(recipe, foods, block, target, changes, notes):
             print("\n  Fat is %.1f g short. %.0f g of oil closes it and costs %.0f kcal,"
                   % (short, short, short * 9))
             print("  which would put the meal at %.0f kcal." % (result["calories"] + short * 9))
+
+        if kitchen:
+            topups(recipe, foods, block, kitchen, target, result)
     else:
         print("\nBLOCK 2 — macros (per serving)\n")
         for label, key, unit in (("Calories", "calories", "kcal"), ("Protein", "proteinG", "g"),
@@ -217,10 +402,13 @@ def main():
         if target:
             out, err = solve(r, foods, block, target)
             if err:
-                print("\n%s: %s" % (r["title"], err))
+                # not fatal any more: the dish cannot be rescaled into the
+                # target, which is exactly when the top-up list is worth
+                # printing. Keep the target so the gap is still measured.
+                notes = ["could not rescale: " + err]
             else:
                 changes, notes = out
-        result = report(r, foods, block, target, changes, notes)
+        result = report(r, foods, block, target, changes, notes, kitchen)
         r["computed"] = dict((k, round(v, 1)) for k, v in result.items())
         r["computed"]["_generated"] = "by scripts/adapt_recipe.py — do not edit by hand"
         r["adapted"] = {"target": "mirrorMeals" if target else "none (not rescaled)",

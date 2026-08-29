@@ -166,6 +166,29 @@ protein and meat carries no fibre, so sequential adjustment overshoots. Two
 equations, two unknowns. Then it rounds to weighable amounts and re-derives from
 the rounded grams, so the report describes the food that will actually be cooked.
 
+When rescaling cannot reach the target — usually because the dish has no
+fibre source at all — the adapter does not stop at saying so. It proposes what
+to **add**, in grams, from a curated shortlist in `kitchen.json` (`topUps`),
+then **re-fits the whole dish around the addition**. That second step is the
+point: 125 g of lentils brings 12 g of protein with its fibre, so the chicken
+has to come down, and reporting the addition without re-solving would repeat
+the sequential mistake `solve()` exists to avoid.
+
+Two rules keep the shortlist honest:
+
+- **It is curated, not derived.** `foods.json` knows psyllium husk is 2.5 kcal
+  per gram of fibre and would propose it every time. `topUps` lists what
+  belongs in food; cost only ranks what is already acceptable.
+- **Every candidate has a `maxG`.** Without it the ranking proposed 478 g of
+  spinach per serving — the exact failure `inbox/WHAT-TO-LOOK-FOR.md` warns
+  about. When nothing fits under its cap, the script proposes a **pair**,
+  bulk plus density, which is the shape the brief asks for anyway.
+
+Proposals are printed, never applied. Adding an ingredient changes the dish,
+and that is a cooking decision. A recipe may declare `cuisine` to filter the
+shortlist; without one nothing is filtered and chickpeas may turn up in a Thai
+curry.
+
 **No macro is ever typed for a dish.** This is the same rule the Asian Base Block
 learned the hard way, and it is the reason a recipe cannot be added by pasting a
 nutrition panel — the ingredients go in, the numbers come out.
