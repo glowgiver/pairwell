@@ -65,9 +65,9 @@
     color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;
     cursor:pointer;padding:6px 2px;
   }
-  .day small{display:block;font-size:10px;font-weight:400;color:var(--muted2);margin-top:2px}
-  .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-  .day[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+  .day small{display:block;font-size:11.5px;font-weight:400;color:var(--muted2);margin-top:2px}
+  .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .day[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   .season{
@@ -79,6 +79,24 @@
   .season b{color:var(--text);font-weight:600}
 
   /* phase strip — which stage of the protocol he is on */
+  .phase-bar{margin-bottom:12px}
+  .phase-toggle{
+    display:inline-flex;align-items:center;gap:9px;
+    min-height:var(--tap);padding:0 14px;border-radius:11px;
+    border:1px solid var(--line);background:var(--surface);
+    font-family:inherit;font-size:14px;color:var(--muted);cursor:pointer;
+  }
+  .phase-toggle .pl{
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);
+  }
+  .phase-toggle b{color:var(--text);font-weight:600}
+  .phase-toggle .chev{
+    width:7px;height:7px;border-right:2px solid var(--muted2);
+    border-bottom:2px solid var(--muted2);transform:rotate(45deg);margin-left:2px;
+  }
+  .phase-toggle[aria-expanded="true"] .chev{transform:rotate(-135deg)}
+  .phase-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   .phases{display:flex;gap:5px;margin-bottom:10px}
   .phase{
     flex:1;min-height:var(--tap);border-radius:11px;
@@ -87,8 +105,8 @@
     cursor:pointer;padding:6px 4px;
   }
   .phase small{display:block;font-size:10.5px;font-weight:400;color:var(--muted2);margin-top:2px}
-  .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-  .phase[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+  .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .phase[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .phase:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .phase-note{
     font-size:13.5px;color:var(--muted);line-height:1.5;
@@ -188,6 +206,7 @@ function stepList(steps, render){
 
 
 var state = { day: todayKey() };
+var phasePanelOpen = false;
 
 function person(){ return PW.get(); }
 function routine(){ return R.skincare[person()]; }
@@ -251,15 +270,27 @@ function buildPhasedPM(r){
   return out;
 }
 
+/* One line by default. The strip and its explanation only matter when you are
+   deciding whether to move phase — roughly every four weeks — so they do not
+   get to push the routine below the fold every day. */
 function phaseHTML(r){
   var cur = currentPhase(r);
-  return '<div class="phases" id="phases" role="group" aria-label="Protocol phase">' +
-    r.phases.map(function(p){
-      return '<button type="button" class="phase" data-phase="' + esc(p.id) + '"' +
-        ' aria-pressed="' + (p.id === cur.id) + '">' + esc(p.label) +
-        '<small>' + esc(p.subtitle) + '</small></button>';
-    }).join("") + '</div>' +
-    '<div class="phase-note">' + esc(cur.note) + '</div>';
+  var open = phasePanelOpen;
+  var strip = open
+    ? '<div class="phases" id="phases" role="group" aria-label="Protocol phase">' +
+        r.phases.map(function(p){
+          return '<button type="button" class="phase" data-phase="' + esc(p.id) + '"' +
+            ' aria-pressed="' + (p.id === cur.id) + '">' + esc(p.label) +
+            '<small>' + esc(p.subtitle) + '</small></button>';
+        }).join("") + '</div>' +
+        '<div class="phase-note">' + esc(cur.note) + '</div>'
+    : '';
+  return '<div class="phase-bar">' +
+      '<button type="button" class="phase-toggle" id="phaseToggle" aria-expanded="' + open + '">' +
+        '<span class="pl">Phase</span><b>' + esc(cur.label) + '</b>' +
+        '<span class="chev" aria-hidden="true"></span>' +
+      '</button>' +
+    '</div>' + strip;
 }
 
 function ruleHTML(rule){
@@ -398,11 +429,19 @@ function renderStage(){
   stage.innerHTML = (eveningFirst ? evening + morning : morning + evening) + dayRules + details;
 
   /* Phase strip lives above the stage, so wire it after each render. */
+  var toggle = document.getElementById("phaseToggle");
+  if(toggle){
+    toggle.addEventListener("click", function(){
+      phasePanelOpen = !phasePanelOpen;
+      renderStage();
+    });
+  }
   var ph = document.getElementById("phases");
   if(ph){
     ph.querySelectorAll("[data-phase]").forEach(function(b){
       b.addEventListener("click", function(){
         try { localStorage.setItem("hub.phase." + person(), b.getAttribute("data-phase")); }catch(e){}
+        phasePanelOpen = false;
         renderStage();
       });
     });

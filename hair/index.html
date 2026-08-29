@@ -65,9 +65,9 @@
     color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;
     cursor:pointer;padding:6px 2px;
   }
-  .day small{display:block;font-size:10px;font-weight:400;color:var(--muted2);margin-top:2px}
-  .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-  .day[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+  .day small{display:block;font-size:11.5px;font-weight:400;color:var(--muted2);margin-top:2px}
+  .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .day[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   .season{
@@ -79,6 +79,24 @@
   .season b{color:var(--text);font-weight:600}
 
   /* phase strip — which stage of the protocol he is on */
+  .phase-bar{margin-bottom:12px}
+  .phase-toggle{
+    display:inline-flex;align-items:center;gap:9px;
+    min-height:var(--tap);padding:0 14px;border-radius:11px;
+    border:1px solid var(--line);background:var(--surface);
+    font-family:inherit;font-size:14px;color:var(--muted);cursor:pointer;
+  }
+  .phase-toggle .pl{
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);
+  }
+  .phase-toggle b{color:var(--text);font-weight:600}
+  .phase-toggle .chev{
+    width:7px;height:7px;border-right:2px solid var(--muted2);
+    border-bottom:2px solid var(--muted2);transform:rotate(45deg);margin-left:2px;
+  }
+  .phase-toggle[aria-expanded="true"] .chev{transform:rotate(-135deg)}
+  .phase-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   .phases{display:flex;gap:5px;margin-bottom:10px}
   .phase{
     flex:1;min-height:var(--tap);border-radius:11px;
@@ -87,8 +105,8 @@
     cursor:pointer;padding:6px 4px;
   }
   .phase small{display:block;font-size:10.5px;font-weight:400;color:var(--muted2);margin-top:2px}
-  .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-  .phase[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+  .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .phase[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
   .phase:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .phase-note{
     font-size:13.5px;color:var(--muted);line-height:1.5;
