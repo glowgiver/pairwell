@@ -1,6 +1,6 @@
 {
   "_purpose": "Canonical exercise library. One entry per movement, with one cue and one demo video. training.json sessions should reference these ids instead of repeating the movement 98 times.",
-  "_generated": "extracted from data/training.json on 2026-08-29",
+  "_generated": "from data/training.json — cues re-translated in full from workout_hub.html, 2026-08-29",
   "_gaps": [
     "19 exercises had competing cues across sessions; the longest was kept as the canonical cue and the rest sit in _cueVariants for review",
     "demo videos were picked by search and each one was confirmed live via YouTube's oEmbed endpoint, but nobody has watched them - check a few before trusting them in the gym",
@@ -19,7 +19,7 @@
       "muscles": [
         "abs"
       ],
-      "cue": "Maintenance, weighted fixed path.",
+      "cue": "Maintenance. Fixed ab machine with a weight stack — fold under control, slow on the way back.",
       "video": {
         "id": "G8937xqkxDo",
         "url": "https://www.youtube.com/watch?v=G8937xqkxDo",
@@ -42,7 +42,7 @@
       "muscles": [
         "adductors"
       ],
-      "cue": "Slow squeeze (3s in), controlled release.",
+      "cue": "Squeeze the pads together slowly (3s in), controlled on the way back. The best inner-thigh exercise there is.",
       "video": {
         "id": "fpVHoidfg60",
         "url": "https://www.youtube.com/watch?v=fpVHoidfg60",
@@ -65,7 +65,7 @@
       "muscles": [
         "adductors"
       ],
-      "cue": "Band around ankles, on back, legs apart, 3s squeeze together.",
+      "cue": "Band around the ankles, on your back, legs apart, squeeze together for 3s, open under control for 2s. Burns fast.",
       "video": {
         "id": "aPA3ONyWK6I",
         "url": "https://www.youtube.com/watch?v=aPA3ONyWK6I",
@@ -89,7 +89,7 @@
       "muscles": [
         "biceps"
       ],
-      "cue": "Stand on band, elbows fixed, slow down.",
+      "cue": "Maintenance. Stand on the band, elbows fixed, curl up, squeeze, slow on the way down.",
       "video": {
         "id": "PXLF19Oqe3M",
         "url": "https://www.youtube.com/watch?v=PXLF19Oqe3M",
@@ -129,7 +129,7 @@
         "front delts",
         "triceps"
       ],
-      "cue": "Low anchor behind, stand away from door, press forward-upward.",
+      "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward. Feels almost identical to the cable. More tubes = more resistance.",
       "video": {
         "id": "4B6O2dHDjBw",
         "url": "https://www.youtube.com/watch?v=4B6O2dHDjBw",
@@ -153,7 +153,7 @@
         "lower chest",
         "triceps"
       ],
-      "cue": "Anchor high, press forward-downward.",
+      "cue": "Anchor high, away from the door, press forward and downward. The angle hits the upper chest automatically.",
       "video": {
         "id": "4iVpEZ-Vl8U",
         "url": "https://www.youtube.com/watch?v=4iVpEZ-Vl8U",
@@ -177,7 +177,7 @@
         "rear delts",
         "upper back"
       ],
-      "cue": "Maintenance, anchor at head height.",
+      "cue": "Maintenance. Anchor the tube at head height, pull to the forehead, elbows high and wide, rotate externally.",
       "video": {
         "id": "Q77ORURfeYc",
         "url": "https://www.youtube.com/watch?v=Q77ORURfeYc",
@@ -201,7 +201,7 @@
         "rear delts",
         "upper back"
       ],
-      "cue": "Maintenance — anchor at head height.",
+      "cue": "Maintenance. Anchor at head height, pull to the forehead, elbows high and wide, rotate externally.",
       "video": {
         "id": "Q77ORURfeYc",
         "url": "https://www.youtube.com/watch?v=Q77ORURfeYc",
@@ -226,7 +226,7 @@
         "glutes",
         "hamstrings"
       ],
-      "cue": "First — glutes are priority. Tube over feet, shoulders on couch, handles over hips.",
+      "cue": "First — glutes are the priority. Tube over the feet (under the arch), shoulders on the sofa, handles over the hips. Your bodyweight anchors the tube. Drive up, squeeze 2s at the top.",
       "video": {
         "id": "P9Mlds5wr1I",
         "url": "https://www.youtube.com/watch?v=P9Mlds5wr1I",
@@ -280,7 +280,7 @@
       "muscles": [
         "abs"
       ],
-      "cue": "Anchor high, kneeling.",
+      "cue": "Anchor the band high, kneeling, fold the ribs towards the hips, hands fixed at the ears.",
       "video": {
         "id": "g3EVVCKsfmw",
         "url": "https://www.youtube.com/watch?v=g3EVVCKsfmw",
@@ -306,7 +306,7 @@
         "lats",
         "biceps"
       ],
-      "cue": "Anchor at top of door, kneeling, wide grip, elbows down-out to ribs.",
+      "cue": "Anchor the band at the very top of the door. Kneeling, wide grip, pull the elbows down and out towards the ribs, squeeze the lats.",
       "video": {
         "id": "SkT4rqrmH-M",
         "url": "https://www.youtube.com/watch?v=SkT4rqrmH-M",
@@ -370,7 +370,7 @@
       "muscles": [
         "side delts"
       ],
-      "cue": "Stand on the band with the opposite foot so it crosses the body — keeps tension at the bottom like the cable.",
+      "cue": "Stand on the band with the opposite foot so it crosses the body — that keeps the tension at the bottom the way the cable does. Lead with the elbow.",
       "video": {
         "id": "pBMcoR_7fd8",
         "url": "https://www.youtube.com/watch?v=pBMcoR_7fd8",
@@ -426,7 +426,7 @@
       "muscles": [
         "triceps (long head)"
       ],
-      "cue": "Low anchor, handles behind head, elbows high.",
+      "cue": "Anchor the tube low, stand away from the door, handles behind the head, elbows high and forward, extend upward. Only the forearms move.",
       "video": {
         "id": "8GVCO0oklnI",
         "url": "https://www.youtube.com/watch?v=8GVCO0oklnI",
@@ -457,7 +457,7 @@
         "hamstrings",
         "glutes"
       ],
-      "cue": "Maintenance. Carabiners folded into one handle, stand on loop.",
+      "cue": "Maintenance. Carabiners into one handle, stand on the loop, hinge back with a soft knee, 3s down, squeeze the glutes.",
       "video": {
         "id": "NaKsZos0bIY",
         "url": "https://www.youtube.com/watch?v=NaKsZos0bIY",
@@ -489,7 +489,7 @@
         "rear delts",
         "rhomboids"
       ],
-      "cue": "No anchor: band in both hands, arms straight, pull apart to chest.",
+      "cue": "No anchor: band in both hands in front, arms straight, pull apart to the chest, lead with the little fingers.",
       "video": {
         "id": "9IWz8v44mXs",
         "url": "https://www.youtube.com/watch?v=9IWz8v44mXs",
@@ -541,7 +541,7 @@
         "lats",
         "biceps"
       ],
-      "cue": "Sit on floor, tube around both feet, upright, no momentum.",
+      "cue": "Sit on the floor, tube around both feet, upright, pull to the belly, shoulder blades together, no swing.",
       "video": {
         "id": "mnP10HI18uI",
         "url": "https://www.youtube.com/watch?v=mnP10HI18uI",
@@ -588,7 +588,7 @@
         "lats",
         "biceps"
       ],
-      "cue": "Low anchor or looped around both feet, sit upright, pull to belly.",
+      "cue": "Low anchor, or looped around both feet. Sit upright, pull to the belly, shoulder blades together.",
       "video": {
         "id": "TBNt2DBvkl4",
         "url": "https://www.youtube.com/watch?v=TBNt2DBvkl4",
@@ -612,7 +612,7 @@
         "hamstrings",
         "glutes"
       ],
-      "cue": "One foot on tube, soft knee, 3s down.",
+      "cue": "Maintenance. One foot on the tube, handle in the opposite hand, hinge in with a soft knee, 3s down.",
       "video": {
         "id": "j7juujU49-A",
         "url": "https://www.youtube.com/watch?v=j7juujU49-A",
@@ -644,7 +644,7 @@
         "quads",
         "glutes"
       ],
-      "cue": "Maintenance — hold only.",
+      "cue": "Maintenance. Stand on the tube, handles at the shoulders, high reps, light. Just hold.",
       "video": {
         "id": "duP-UZsfOaQ",
         "url": "https://www.youtube.com/watch?v=duP-UZsfOaQ",
@@ -675,7 +675,7 @@
         "glutes",
         "adductors"
       ],
-      "cue": "Stand on tube, feet wider, handles at shoulders, 3s down.",
+      "cue": "Stand on the tube, feet wider, handles at the shoulders, 3s down. Inner thigh plus glutes.",
       "video": {
         "id": "jz47v0Uj1cY",
         "url": "https://www.youtube.com/watch?v=jz47v0Uj1cY",
@@ -700,7 +700,7 @@
         "glutes",
         "adductors"
       ],
-      "cue": "Stand on tube, feet wide, 3s down.",
+      "cue": "Stand on the tube, feet wide, handles at the shoulders, 3s down, knees tracking over the toes.",
       "video": {
         "id": "duP-UZsfOaQ",
         "url": "https://www.youtube.com/watch?v=duP-UZsfOaQ",
@@ -723,7 +723,7 @@
       "muscles": [
         "triceps"
       ],
-      "cue": "High anchor, elbows fixed at sides.",
+      "cue": "High anchor, elbows fixed at your sides, press down until straight, squeeze.",
       "video": {
         "id": "gOq6Ig1skxA",
         "url": "https://www.youtube.com/watch?v=gOq6Ig1skxA",
@@ -753,7 +753,7 @@
       "muscles": [
         "biceps"
       ],
-      "cue": "Maintenance.",
+      "cue": "Maintenance. Elbows fixed, constant tension, brief squeeze at the top. Covers what the pulldown and row don't fully reach.",
       "video": {
         "id": "16aEi1a68E0",
         "url": "https://www.youtube.com/watch?v=16aEi1a68E0",
@@ -778,7 +778,7 @@
         "lower chest",
         "triceps"
       ],
-      "cue": "Anchor high, stand away from tower, press forward-downward across the chest. 4 sets — chest is second focus.",
+      "cue": "Anchor high, stand away from the tower, press forward and downward in front of the chest. The downward angle hits the upper chest automatically — the athletic line under the collarbone. 4 sets, because chest is your second focus.",
       "video": {
         "id": "1XHA9ikNOCI",
         "url": "https://www.youtube.com/watch?v=1XHA9ikNOCI",
@@ -801,7 +801,7 @@
       "muscles": [
         "abs"
       ],
-      "cue": "Fold ribs to hips, hands fixed at ears.",
+      "cue": "Fold the ribs towards the hips like a jackknife, hands fixed at the ears. Slow on the way back — that is the eccentric load.",
       "video": {
         "id": "kc0PRn372lo",
         "url": "https://www.youtube.com/watch?v=kc0PRn372lo",
@@ -832,7 +832,7 @@
         "rear delts",
         "upper back"
       ],
-      "cue": "Maintenance — antagonist to all pressing.",
+      "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands finish beside the ears.",
       "video": {
         "id": "eTCBSFlCJ_s",
         "url": "https://www.youtube.com/watch?v=eTCBSFlCJ_s",
@@ -855,7 +855,7 @@
       "muscles": [
         "side delts"
       ],
-      "cue": "Fresh first — most important move for the look. Constant tension at the bottom. Lead with the elbow to shoulder height. Goal: clean 15 → then 6 kg.",
+      "cue": "Fresh first — the most important move for the look. Constant tension at the bottom, where a dumbbell would give you none. Arm slightly bent, lead with the elbow to shoulder height. Goal: a clean 15, then 6 kg.",
       "video": {
         "id": "qitQHqNZbeM",
         "url": "https://www.youtube.com/watch?v=qitQHqNZbeM",
@@ -892,7 +892,7 @@
         "lats",
         "biceps"
       ],
-      "cue": "Sit upright, pull to belly, elbows close, moderate — don't overload.",
+      "cue": "Sit upright, handle to the belly, elbows close to the body, shoulder blades together. Builds posture without thickening the neck — stay moderate, don't heave.",
       "video": {
         "id": "xjlz8lRXOOI",
         "url": "https://www.youtube.com/watch?v=xjlz8lRXOOI",
@@ -924,7 +924,7 @@
         "front delts",
         "triceps"
       ],
-      "cue": "Maintenance — fixed path, nothing to set up.",
+      "cue": "Maintenance. Sit down, handles at chest height, press forward, controlled return. Fixed path, nothing to set up.",
       "video": {
         "id": "pLofEAcfsO8",
         "url": "https://www.youtube.com/watch?v=pLofEAcfsO8",
@@ -948,7 +948,7 @@
       "muscles": [
         "deep core"
       ],
-      "cue": "Maintenance, lower back flat.",
+      "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend.",
       "video": {
         "id": "bxn9FBrt4-A",
         "url": "https://www.youtube.com/watch?v=bxn9FBrt4-A",
@@ -980,7 +980,7 @@
       "muscles": [
         "glutes"
       ],
-      "cue": "Glutes again — 2x/week drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)",
+      "cue": "Fresh first — your top exercise. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look.",
       "video": {
         "id": "D-2CRYjRees",
         "url": "https://www.youtube.com/watch?v=D-2CRYjRees",
@@ -1016,7 +1016,7 @@
       "muscles": [
         "deep core"
       ],
-      "cue": "Core finisher — each own variant, lower back flat.",
+      "cue": "Lower back flat on the floor, arms long. Builds the deep abdominal tension that visually tightens the waist.",
       "video": {
         "id": "hf00_b2sRdc",
         "url": "https://www.youtube.com/watch?v=hf00_b2sRdc",
@@ -1063,7 +1063,7 @@
         "glutes",
         "quads"
       ],
-      "cue": "Wide step to side, sit into hip, other leg straight.",
+      "cue": "Step wide to the side, sit into the hip, other leg straight, back to the middle. Slow — inner thigh plus glute.",
       "video": {
         "id": "gwWv7aPcD88",
         "url": "https://www.youtube.com/watch?v=gwWv7aPcD88",
@@ -1087,7 +1087,7 @@
         "quads",
         "glutes"
       ],
-      "cue": "Maintenance only — hold, don't build. High reps, light weight, never progress.",
+      "cue": "Maintenance — hold, don't build. High reps, light weight, never progress. Keeps the legs lean and defined without making them thicker.",
       "video": {
         "id": "aTgiRNwi7eY",
         "url": "https://www.youtube.com/watch?v=aTgiRNwi7eY",
@@ -1112,7 +1112,7 @@
         "adductors",
         "hamstrings"
       ],
-      "cue": "Feet wide and high, knees out.",
+      "cue": "Feet wide and high on the platform, knees out — inner thigh plus glutes. Shapes the front of the leg.",
       "video": {
         "id": "OIq-tsCx_9k",
         "url": "https://www.youtube.com/watch?v=OIq-tsCx_9k",
@@ -1138,7 +1138,7 @@
         "triceps",
         "front delts"
       ],
-      "cue": "Maintenance. Knee version to regress, 3s down.",
+      "cue": "Maintenance. Knee version to regress, 3s down. Chest and triceps in one.",
       "video": {
         "id": "utzhPQuXWcA",
         "url": "https://www.youtube.com/watch?v=utzhPQuXWcA",
@@ -1169,7 +1169,7 @@
         "rear delts",
         "upper back"
       ],
-      "cue": "New — was completely missing. Rear delt fly into face pull.",
+      "cue": "New — this was missing entirely. Rear delt fly straight into a face pull. Rear shoulder, posture and shoulder health in one.",
       "video": {
         "id": "eTCBSFlCJ_s",
         "url": "https://www.youtube.com/watch?v=eTCBSFlCJ_s",
@@ -1192,7 +1192,7 @@
       "muscles": [
         "rear delts"
       ],
-      "cue": "Arms nearly straight, lead with pinkies.",
+      "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together.",
       "video": {
         "id": "ATSjVXoOgVg",
         "url": "https://www.youtube.com/watch?v=ATSjVXoOgVg",
@@ -1215,7 +1215,7 @@
       "muscles": [
         "hamstrings"
       ],
-      "cue": "Maintenance, controlled, no momentum.",
+      "cue": "Maintenance. Holds the back of the leg — important for posture and for how trousers sit. Controlled, no swing.",
       "video": {
         "id": "Wy1SwoY2aaQ",
         "url": "https://www.youtube.com/watch?v=Wy1SwoY2aaQ",
@@ -1238,7 +1238,7 @@
       "muscles": [
         "hamstrings"
       ],
-      "cue": "Antagonist to leg press.",
+      "cue": "Back of the leg — the counterpart to the leg press. Pull the heels under the seat, squeeze, controlled return.",
       "video": {
         "id": "14OrOWlM5QU",
         "url": "https://www.youtube.com/watch?v=14OrOWlM5QU",
@@ -1261,7 +1261,7 @@
       "muscles": [
         "triceps"
       ],
-      "cue": "Maintenance, machine instead of cable rope for solo simplicity.",
+      "cue": "Maintenance. The machine instead of the cable rope — simpler on your own. Back of the upper arm, the 'underarm' area.",
       "video": {
         "id": "j4XSuFLiZ6I",
         "url": "https://www.youtube.com/watch?v=j4XSuFLiZ6I",
@@ -1284,7 +1284,7 @@
       "muscles": [
         "triceps"
       ],
-      "cue": "Elbows fixed at sides, separate the rope at the bottom, brief hold.",
+      "cue": "Was completely buried in the old plan — now a fixture. Elbows fixed at your sides, pull the rope apart at the bottom, brief hold. A defined arm, not mass.",
       "video": {
         "id": "vPeQu_L-1n0",
         "url": "https://www.youtube.com/watch?v=vPeQu_L-1n0",
@@ -1308,7 +1308,7 @@
         "lats",
         "biceps"
       ],
-      "cue": "Second most important taper muscle after side delt — trained in both sessions.",
+      "cue": "Second lat hit of the week. Replaces the pull-up you cut — that would have thickened the upper traps and shortened the neckline. The pulldown builds width without that drawback.",
       "video": {
         "id": "7JnP8dFbS14",
         "url": "https://www.youtube.com/watch?v=7JnP8dFbS14",

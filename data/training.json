@@ -1,5 +1,5 @@
 {
-  "_source": "Workout_Hub_Philipp_and_Eunice.html (uploaded 2026-08-28)",
+  "_source": "workout_hub.html — full re-translation of all cues, 2026-08-29",
   "_supersedes": "earlier training.json draft — this is the authoritative extraction",
   "meta": {
     "title": "Workout Hub · Philipp & Eunice · 2026",
@@ -159,7 +159,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "Fresh first — most important move for the look. Constant tension at the bottom. Lead with the elbow to shoulder height. Goal: clean 15 → then 6 kg."
+              "cue": "Fresh first — the most important move for the look. Constant tension at the bottom, where a dumbbell would give you none. Arm slightly bent, lead with the elbow to shoulder height. Goal: a clean 15, then 6 kg."
             },
             {
               "name": "Cable Chest Press (high-to-low)",
@@ -173,7 +173,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Anchor high, stand away from tower, press forward-downward across the chest. 4 sets — chest is second focus."
+              "cue": "Anchor high, stand away from the tower, press forward and downward in front of the chest. The downward angle hits the upper chest automatically — the athletic line under the collarbone. 4 sets, because chest is your second focus."
             },
             {
               "name": "Wide Lat Pulldown",
@@ -187,7 +187,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Second most important taper muscle after side delt — trained in both sessions."
+              "cue": "Second most important taper muscle after the side delt — which is why it is in both sessions. Pull the bar to the upper chest, feel the lats, controlled on the way back."
             },
             {
               "name": "Triceps Pushdown (Rope)",
@@ -201,7 +201,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "Elbows fixed at sides, separate the rope at the bottom, brief hold."
+              "cue": "Was completely buried in the old plan — now a fixture. Elbows fixed at your sides, pull the rope apart at the bottom, brief hold. A defined arm, not mass."
             },
             {
               "name": "Leg Press (light)",
@@ -215,7 +215,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance only — hold, don't build. High reps, light weight, never progress."
+              "cue": "Maintenance — hold, don't build. High reps, light weight, never progress. Keeps the legs lean and defined without making them thicker."
             },
             {
               "name": "Cable Crunch",
@@ -229,7 +229,7 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Fold ribs to hips, hands fixed at ears."
+              "cue": "Fold the ribs towards the hips like a jackknife, hands fixed at the ears. Slow on the way back — that is the eccentric load."
             },
             {
               "name": "Hollow Hold",
@@ -241,9 +241,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Lower back flat, arms long."
+              "cue": "Lower back flat on the floor, arms long. Builds the deep abdominal tension that visually tightens the waist."
             }
-          ]
+          ],
+          "durationMin": 50
         },
         "pull": {
           "title": "Pull + Posture",
@@ -262,7 +263,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "2nd side-delt hit of the week."
+              "cue": "Second side-delt hit of the week. Exactly like Tuesday — constant tension, lead with the elbow. Six side-delt sets a week is the core of the taper."
             },
             {
               "name": "Wide Lat Pulldown",
@@ -276,7 +277,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Replaces removed pull-up — that thickened upper trap and shortened neckline."
+              "cue": "Second lat hit of the week. Replaces the pull-up you cut — that would have thickened the upper traps and shortened the neckline. The pulldown builds width without that drawback."
             },
             {
               "name": "Cable Row (neutral)",
@@ -290,7 +291,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Sit upright, pull to belly, elbows close, moderate — don't overload."
+              "cue": "Sit upright, handle to the belly, elbows close to the body, shoulder blades together. Builds posture without thickening the neck — stay moderate, don't heave."
             },
             {
               "name": "Rear Delt Fly (Cable)",
@@ -304,7 +305,7 @@
                 "rir": "RIR 1",
                 "rest": "60s"
               },
-              "cue": "Arms nearly straight, lead with pinkies."
+              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together."
             },
             {
               "name": "Cable Face Pull",
@@ -318,7 +319,7 @@
                 "rir": "RIR 1",
                 "rest": "45s"
               },
-              "cue": "Maintenance — antagonist to all pressing."
+              "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands finish beside the ears."
             },
             {
               "name": "Seated Hamstring Curl",
@@ -332,7 +333,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance, controlled, no momentum."
+              "cue": "Maintenance. Holds the back of the leg — important for posture and for how trousers sit. Controlled, no swing."
             },
             {
               "name": "Cable Biceps Curl",
@@ -346,9 +347,10 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Elbows fixed, constant tension, brief squeeze at the top. Covers what the pulldown and row don't fully reach."
             }
-          ]
+          ],
+          "durationMin": 50
         }
       },
       "eunice": {
@@ -369,7 +371,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Fresh first — top exercise. Full hip extension, 1s hold at top, squeeze. 4 sets — glutes are the goal."
+              "cue": "Fresh first — your top exercise. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look."
             },
             {
               "name": "Leg Press (wide + high)",
@@ -382,7 +384,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Feet wide and high, knees out."
+              "cue": "Feet wide and high on the platform, knees out — inner thigh plus glutes. Shapes the front of the leg."
             },
             {
               "name": "Adductor Machine",
@@ -395,7 +397,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "Slow squeeze (3s in), controlled release."
+              "cue": "Squeeze the pads together slowly (3s in), controlled on the way back. The best inner-thigh exercise there is."
             },
             {
               "name": "Seated Leg Curl",
@@ -408,7 +410,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Antagonist to leg press."
+              "cue": "Back of the leg — the counterpart to the leg press. Pull the heels under the seat, squeeze, controlled return."
             },
             {
               "name": "Chest Press Machine",
@@ -421,7 +423,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Maintenance — fixed path, nothing to set up."
+              "cue": "Maintenance. Sit down, handles at chest height, press forward, controlled return. Fixed path, nothing to set up."
             },
             {
               "name": "Triceps Machine",
@@ -434,7 +436,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "Maintenance, machine instead of cable rope for solo simplicity."
+              "cue": "Maintenance. The machine instead of the cable rope — simpler on your own. Back of the upper arm, the 'underarm' area."
             },
             {
               "name": "Ab Machine",
@@ -447,9 +449,10 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance, weighted fixed path."
+              "cue": "Maintenance. Fixed ab machine with a weight stack — fold under control, slow on the way back."
             }
-          ]
+          ],
+          "durationMin": 50
         },
         "pull": {
           "title": "Upper + Glutes",
@@ -469,7 +472,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "New for her. Emphasized shoulder makes the waist look narrower — the Hwasa effect."
+              "cue": "New for you. An emphasised shoulder makes the waist look narrower — exactly the Hwasa effect. Lead with the elbow to shoulder height."
             },
             {
               "name": "Wide Lat Pulldown",
@@ -483,7 +486,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Back width makes the waist look smaller."
+              "cue": "Bar to the upper chest, squeeze the lats. The back width that makes the waist look smaller."
             },
             {
               "name": "Cable Row (neutral)",
@@ -497,7 +500,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Posture + defined back look."
+              "cue": "Sit upright, pull to the belly, shoulder blades together. Posture plus the defined back look."
             },
             {
               "name": "Glute Drive Machine",
@@ -510,7 +513,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Glutes again — 2x/week drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
+              "cue": "Glutes again — twice a week is what drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
             },
             {
               "name": "Rear Delt + Face Pull",
@@ -524,7 +527,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "New — was completely missing. Rear delt fly into face pull."
+              "cue": "New — this was missing entirely. Rear delt fly straight into a face pull. Rear shoulder, posture and shoulder health in one."
             },
             {
               "name": "Cable Biceps Curl",
@@ -538,7 +541,7 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Elbows fixed at your sides, curl up and squeeze, slow on the way down. Toned comes from control, not weight."
             },
             {
               "name": "Cable Crunch",
@@ -551,9 +554,10 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance, kneeling."
+              "cue": "Maintenance. Kneeling, fold the ribs towards the hips, hands fixed at the ears, slow on the way back."
             }
-          ]
+          ],
+          "durationMin": 55
         }
       }
     },
@@ -576,7 +580,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "Stand on the band with the opposite foot so it crosses the body — keeps tension at the bottom like the cable."
+              "cue": "Stand on the band with the opposite foot so it crosses the body — that keeps the tension at the bottom the way the cable does. Lead with the elbow."
             },
             {
               "name": "Band Chest Press",
@@ -590,7 +594,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Low anchor behind, stand away from door, press forward-upward."
+              "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward. Feels almost identical to the cable. More tubes = more resistance."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -604,7 +608,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Anchor at top of door, kneeling, wide grip, elbows down-out to ribs."
+              "cue": "Anchor the band at the very top of the door. Kneeling, wide grip, pull the elbows down and out towards the ribs, squeeze the lats."
             },
             {
               "name": "Band Triceps Pushdown",
@@ -618,7 +622,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "High anchor, elbows fixed at sides."
+              "cue": "High anchor, elbows fixed at your sides, press down until straight, squeeze."
             },
             {
               "name": "Band Squat (light)",
@@ -632,7 +636,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance — hold only."
+              "cue": "Maintenance. Stand on the tube, handles at the shoulders, high reps, light. Just hold."
             },
             {
               "name": "Band Kneeling Crunch",
@@ -646,7 +650,7 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Anchor high, kneeling."
+              "cue": "Anchor the band high, kneeling, fold the ribs towards the hips, hands fixed at the ears."
             },
             {
               "name": "Hollow Hold",
@@ -658,9 +662,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Lower back flat, build to 40s."
+              "cue": "Lower back flat, arms long. Build up to 40s."
             }
-          ]
+          ],
+          "durationMin": 45
         },
         "pull": {
           "title": "Pull + Posture",
@@ -679,7 +684,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "2nd side-delt hit."
+              "cue": "Second side-delt hit. Opposite foot on the band for tension at the bottom, lead with the elbow."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -693,7 +698,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Anchor top, kneeling — replaces pull-up, no bar needed."
+              "cue": "Anchor the band high, kneeling, wide, elbows down and out — replaces the pull-up, no bar needed."
             },
             {
               "name": "Band Seated Row (low anchor)",
@@ -707,7 +712,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Low anchor or looped around both feet, sit upright, pull to belly."
+              "cue": "Low anchor, or looped around both feet. Sit upright, pull to the belly, shoulder blades together."
             },
             {
               "name": "Band Rear Delt Pull-Apart",
@@ -721,7 +726,7 @@
                 "rir": "RIR 1",
                 "rest": "60s"
               },
-              "cue": "No anchor: band in both hands, arms straight, pull apart to chest."
+              "cue": "No anchor: band in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
             },
             {
               "name": "Band Face Pull (mid anchor)",
@@ -735,7 +740,7 @@
                 "rir": "RIR 1",
                 "rest": "45s"
               },
-              "cue": "Maintenance — anchor at head height."
+              "cue": "Maintenance. Anchor at head height, pull to the forehead, elbows high and wide, rotate externally."
             },
             {
               "name": "Band RDL (bilateral)",
@@ -749,7 +754,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance. Carabiners folded into one handle, stand on loop."
+              "cue": "Maintenance. Carabiners into one handle, stand on the loop, hinge back with a soft knee, 3s down, squeeze the glutes."
             },
             {
               "name": "Band Biceps Curl",
@@ -763,9 +768,10 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Stand on the band, elbows fixed, curl up, squeeze, slow on the way down."
             }
-          ]
+          ],
+          "durationMin": 45
         }
       },
       "eunice": {
@@ -786,7 +792,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "First — glutes are priority. Tube over feet, shoulders on couch, handles over hips."
+              "cue": "First — glutes are the priority. Tube over the feet (under the arch), shoulders on the sofa, handles over the hips. Your bodyweight anchors the tube. Drive up, squeeze 2s at the top."
             },
             {
               "name": "Band Squat (wide + high)",
@@ -800,7 +806,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Stand on tube, feet wider, handles at shoulders, 3s down."
+              "cue": "Stand on the tube, feet wider, handles at the shoulders, 3s down. Inner thigh plus glutes."
             },
             {
               "name": "Band Adductor Squeeze (lying)",
@@ -814,7 +820,7 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "cue": "Band around ankles, on back, legs apart, 3s squeeze together."
+              "cue": "Band around the ankles, on your back, legs apart, squeeze together for 3s, open under control for 2s. Burns fast."
             },
             {
               "name": "Band RDL (bilateral)",
@@ -828,7 +834,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Hamstrings."
+              "cue": "Back of the leg. Carabiners into one handle, stand on it, soft knee, 3s hinging back, squeeze the glutes."
             },
             {
               "name": "Push-Up (knee or standard)",
@@ -841,7 +847,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Maintenance. Knee version to regress, 3s down."
+              "cue": "Maintenance. Knee version to regress, 3s down. Chest and triceps in one."
             },
             {
               "name": "Band Triceps Pushdown",
@@ -855,7 +861,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. High anchor, elbows fixed, press down until straight."
             },
             {
               "name": "Dead Bug",
@@ -867,9 +873,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Maintenance, lower back flat."
+              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
             }
-          ]
+          ],
+          "durationMin": 45
         },
         "pull": {
           "title": "Upper + Glutes",
@@ -888,7 +895,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Emphasized shoulder for Hwasa silhouette."
+              "cue": "An emphasised shoulder for the Hwasa silhouette. Opposite foot on the band, lead with the elbow."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -902,7 +909,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Anchor top, shoulder blades down."
+              "cue": "Anchor the band high, pull the shoulder blades down — back width frames the waist."
             },
             {
               "name": "Band Seated Row",
@@ -916,7 +923,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Around both feet or low anchor, upright."
+              "cue": "Around both feet or a low anchor, upright, to the belly, shoulder blades together."
             },
             {
               "name": "Band Hip Thrust",
@@ -930,7 +937,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Glutes 2x/week."
+              "cue": "Glutes twice a week. Tube over the hips, squeeze 2s at the top."
             },
             {
               "name": "Band Rear Delt Pull-Apart",
@@ -944,7 +951,7 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "cue": "Band in both hands, pull apart to chest."
+              "cue": "Band in both hands in front, pull apart to the chest, lead with the little fingers. A defined back."
             },
             {
               "name": "Band Biceps Curl",
@@ -958,7 +965,7 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Stand on the band, elbows fixed, slow on the way down."
             },
             {
               "name": "Dead Bug",
@@ -970,9 +977,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
             }
-          ]
+          ],
+          "durationMin": 50
         }
       },
       "shared": {
@@ -994,7 +1002,7 @@
               },
               "philippLoad": "Yellow (L1)",
               "euniceLoad": "Yellow (L1), less tension",
-              "cue": "Opposite foot on band, lead with elbow to shoulder height.",
+              "cue": "Opposite foot on the band, lead with the elbow to shoulder height.",
               "shared": true
             },
             {
@@ -1008,7 +1016,7 @@
               },
               "philippLoad": "Blue (L4) + Black (L5)",
               "euniceLoad": "Green (L2)",
-              "cue": "Anchor top, elbows down-out, squeeze lats.",
+              "cue": "Anchor the band high, pull the elbows down and out, squeeze the lats.",
               "shared": true
             },
             {
@@ -1022,7 +1030,7 @@
               },
               "philippLoad": "Blue (L4) + Black (L5)",
               "euniceLoad": "Green (L2)",
-              "cue": "Around both feet, upright, pull to belly, no momentum.",
+              "cue": "Around both feet, sit upright, pull to the belly, no swing.",
               "shared": true
             },
             {
@@ -1037,7 +1045,7 @@
               },
               "philippLoad": "Blue (L4) folded · maintenance",
               "euniceLoad": "Blue (L4) folded · primary",
-              "cue": "Tube over hips, shoulders supported, 2s squeeze at top.",
+              "cue": "Tube over the hips, shoulders supported, squeeze 2s at the top.",
               "shared": true
             },
             {
@@ -1052,7 +1060,7 @@
               },
               "philippLoad": "Green (L2)",
               "euniceLoad": "Green (L2)",
-              "cue": "Band in both hands, pull apart to chest.",
+              "cue": "Band in both hands in front, apart to the chest, lead with the little fingers.",
               "shared": true
             },
             {
@@ -1066,7 +1074,7 @@
               },
               "philippLoad": "Red (L3)",
               "euniceLoad": "Green (L2)",
-              "cue": "Stand on band, elbows fixed, slow down.",
+              "cue": "Stand on the band, elbows fixed, slow on the way down.",
               "shared": true
             },
             {
@@ -1080,10 +1088,11 @@
               },
               "philippLoad": "Hollow Hold + Flutter",
               "euniceLoad": "Dead Bug 10/side",
-              "cue": "Core finisher — each own variant, lower back flat.",
+              "cue": "Core finisher — each of you your own variant, lower back flat.",
               "shared": true
             }
-          ]
+          ],
+          "durationMin": 45
         }
       }
     },
@@ -1106,7 +1115,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "Opposite foot on tube for tension at bottom. Too heavy? Foot closer to center."
+              "cue": "Opposite foot on the tube for tension at the bottom, like the cable. Too heavy? Move the foot closer to the middle. Lead with the elbow."
             },
             {
               "name": "Band Chest Press (high-to-low)",
@@ -1120,7 +1129,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Anchor high, press forward-downward."
+              "cue": "Anchor high, away from the door, press forward and downward. The angle hits the upper chest automatically."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -1134,7 +1143,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Only vertical pull."
+              "cue": "Anchor the tube as high as possible, kneeling, wide, elbows down and out. Your only vertical pull."
             },
             {
               "name": "Band Overhead Triceps Extension",
@@ -1148,7 +1157,7 @@
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
-              "cue": "Low anchor, handles behind head, elbows high."
+              "cue": "Anchor the tube low, stand away from the door, handles behind the head, elbows high and forward, extend upward. Only the forearms move."
             },
             {
               "name": "Band Squat (light)",
@@ -1162,7 +1171,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Stand on the tube, handles at the shoulders, high reps, light."
             },
             {
               "name": "Kneeling Band Crunch",
@@ -1176,7 +1185,7 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Anchor high, kneeling."
+              "cue": "Anchor the tube high, kneeling, fold the ribs towards the hips, hands fixed at the ears."
             },
             {
               "name": "Hollow Body Hold",
@@ -1188,9 +1197,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Lower back flat, extend legs to progress."
+              "cue": "Lower back flat, arms long, legs low. Increase the reach to progress."
             }
-          ]
+          ],
+          "durationMin": 40
         },
         "pull": {
           "title": "Pull + Posture",
@@ -1209,7 +1219,7 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "cue": "2nd side-delt hit."
+              "cue": "Second side-delt hit. Opposite foot on the tube, lead with the elbow. Too heavy? Move the foot closer to the middle."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -1223,7 +1233,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Replaces pull-up."
+              "cue": "Anchor high, kneeling, wide, elbows down and out — replaces the pull-up."
             },
             {
               "name": "Seated Band Row",
@@ -1237,7 +1247,7 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Sit on floor, tube around both feet, upright, no momentum."
+              "cue": "Sit on the floor, tube around both feet, upright, pull to the belly, shoulder blades together, no swing."
             },
             {
               "name": "Band Rear Delt Pull-Apart",
@@ -1251,7 +1261,7 @@
                 "rir": "RIR 1",
                 "rest": "60s"
               },
-              "cue": "No anchor, arms straight, pull apart."
+              "cue": "No anchor: tube in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
             },
             {
               "name": "Band Face Pull",
@@ -1265,7 +1275,7 @@
                 "rir": "RIR 1",
                 "rest": "45s"
               },
-              "cue": "Maintenance, anchor at head height."
+              "cue": "Maintenance. Anchor the tube at head height, pull to the forehead, elbows high and wide, rotate externally."
             },
             {
               "name": "Band Single-Leg RDL",
@@ -1279,7 +1289,7 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. One foot on the tube, handle in the opposite hand, hinge in with a soft knee, 3s down."
             },
             {
               "name": "Band Biceps Curl",
@@ -1293,9 +1303,10 @@
                 "rir": "RIR 2",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Stand on the tube, elbows fixed, curl up, slow on the way down."
             }
-          ]
+          ],
+          "durationMin": 40
         }
       },
       "eunice": {
@@ -1316,7 +1327,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "First. Tube over feet, shoulders supported."
+              "cue": "First. Tube over the feet, shoulders supported, handles over the hips. Your bodyweight anchors it. Drive up, squeeze 2s."
             },
             {
               "name": "Band Squat (wide)",
@@ -1330,7 +1341,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Stand on tube, feet wide, 3s down."
+              "cue": "Stand on the tube, feet wide, handles at the shoulders, 3s down, knees tracking over the toes."
             },
             {
               "name": "Lateral Lunge (tempo)",
@@ -1343,7 +1354,7 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Wide step to side, sit into hip, other leg straight."
+              "cue": "Step wide to the side, sit into the hip, other leg straight, back to the middle. Slow — inner thigh plus glute."
             },
             {
               "name": "Band Single-Leg RDL",
@@ -1357,7 +1368,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "One foot on tube, soft knee, 3s down."
+              "cue": "One foot on the tube, opposite hand on the handle, soft knee, 3s down, squeeze the glute."
             },
             {
               "name": "Push-Up (knee or standard)",
@@ -1370,7 +1381,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Knee version to regress, 3s down."
             },
             {
               "name": "Band Overhead Triceps Extension",
@@ -1384,7 +1395,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Anchor the tube high, elbows high and forward, extend upward."
             },
             {
               "name": "Dead Bug",
@@ -1396,9 +1407,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
             }
-          ]
+          ],
+          "durationMin": 40
         },
         "pull": {
           "title": "Upper + Glutes",
@@ -1417,7 +1429,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Emphasized shoulder for silhouette."
+              "cue": "An emphasised shoulder for the silhouette. Opposite foot on the tube, lead with the elbow."
             },
             {
               "name": "Band Lat Pulldown (kneeling)",
@@ -1431,7 +1443,7 @@
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
-              "cue": "Anchor top."
+              "cue": "Anchor high, pull the shoulder blades down."
             },
             {
               "name": "Seated Band Row",
@@ -1445,7 +1457,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Tube around both feet."
+              "cue": "Tube around both feet, upright, to the belly, shoulder blades together."
             },
             {
               "name": "Band Hip Thrust",
@@ -1459,7 +1471,7 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "cue": "Tube over hips."
+              "cue": "Tube over the hips, squeeze 2s."
             },
             {
               "name": "Band Rear Delt Pull-Apart",
@@ -1473,7 +1485,7 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "cue": "Tube in both hands, pull apart."
+              "cue": "Tube in both hands in front, apart to the chest, lead with the little fingers."
             },
             {
               "name": "Band Biceps Curl",
@@ -1487,7 +1499,7 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Stand on the tube, elbows fixed, slow on the way down."
             },
             {
               "name": "Dead Bug",
@@ -1499,9 +1511,10 @@
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Maintenance."
+              "cue": "Maintenance. Lower back flat, opposite arm and leg."
             }
-          ]
+          ],
+          "durationMin": 40
         }
       },
       "shared": {
@@ -1523,7 +1536,7 @@
               },
               "philippLoad": "Yellow (L1)",
               "euniceLoad": "Yellow (L1)",
-              "cue": "Opposite foot on tube, lead with elbow.",
+              "cue": "Opposite foot on the tube, lead with the elbow.",
               "shared": true
             },
             {
@@ -1537,7 +1550,7 @@
               },
               "philippLoad": "Blue (L4) + Black (L5)",
               "euniceLoad": "Green (L2)",
-              "cue": "Anchor top, elbows down-out.",
+              "cue": "Anchor high, pull the elbows down and out.",
               "shared": true
             },
             {
@@ -1551,7 +1564,7 @@
               },
               "philippLoad": "Blue (L4) + Black (L5)",
               "euniceLoad": "Green (L2)",
-              "cue": "Tube around both feet, upright.",
+              "cue": "Tube around both feet, upright, to the belly.",
               "shared": true
             },
             {
@@ -1566,7 +1579,7 @@
               },
               "philippLoad": "Blue (L4) · maintenance",
               "euniceLoad": "Blue (L4) · primary",
-              "cue": "Tube over hips, 2s squeeze.",
+              "cue": "Tube over the hips, squeeze 2s.",
               "shared": true
             },
             {
@@ -1581,7 +1594,7 @@
               },
               "philippLoad": "Green (L2)",
               "euniceLoad": "Green (L2)",
-              "cue": "Tube in front, pull apart to chest.",
+              "cue": "Tube in front, apart to the chest, lead with the little fingers.",
               "shared": true
             },
             {
@@ -1595,7 +1608,7 @@
               },
               "philippLoad": "Red (L3)",
               "euniceLoad": "Green (L2)",
-              "cue": "Stand on tube, elbows fixed.",
+              "cue": "Stand on the tube, elbows fixed.",
               "shared": true
             },
             {
@@ -1612,7 +1625,8 @@
               "cue": "Core finisher, lower back flat.",
               "shared": true
             }
-          ]
+          ],
+          "durationMin": 40
         }
       }
     }
@@ -1655,7 +1669,7 @@
     }
   },
   "_gaps": [
-    "Eunice's exact current per-exercise loads for many maintenance movements are marked as ranges/placeholders in the source HTML, not all individually confirmed via MacroFactor yet",
-    "Demo video links are auto-generated YouTube search queries, not curated links"
+    "Sessions still duplicate exercise objects instead of referencing exercises.json by id",
+    "Eunice's exact per-exercise loads for some maintenance movements are ranges, not individually confirmed"
   ]
 }

@@ -113,6 +113,7 @@ html = """<!DOCTYPE html>
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
   .sess-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
   .sess-focus{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px}
+  .sess-dur{display:block;font-size:13px;font-weight:400;color:var(--muted2);margin-top:3px}
 
   .opt-banner{
     margin:14px 18px 0;padding:11px 14px;border-radius:10px;
@@ -336,7 +337,9 @@ function renderStage(){
     profileHTML() +
     noticeHTML() +
     '<div class="sess-tabs" role="tablist">' + tabs + '</div>' +
-    '<div class="sess-head"><div class="sess-title">' + esc(sess.title) + '</div>' +
+    '<div class="sess-head"><div class="sess-title">' + esc(sess.title) +
+    (sess.durationMin ? '<span class="sess-dur">' + esc(sess.exercises.length) +
+      ' exercises &middot; ~' + esc(sess.durationMin) + ' min</span>' : '') + '</div>' +
     '<div class="sess-focus">' + esc(sess.focus) + '</div></div>' +
     (sess.note ? '<div class="opt-banner">' + esc(sess.note) + '</div>' : '') +
     '<div class="tier-head"><span class="tier-dot primary"></span><span class="tier-name">Primary</span>' +
