@@ -1,3 +1,19 @@
+# =============================================================================
+# ARCHIVED 2026-08-29 — DO NOT RUN.
+#
+# This was a ONE-TIME migration: it transcribed the original
+# Workout_Hub_Philipp_and_Eunice.html into data/training.json.
+# That job is done.
+#
+# Running it now would OVERWRITE data/training.json with these frozen
+# literals and silently destroy every edit made since the migration.
+#
+# data/training.json is the canonical source of training data.
+# Edit that file directly, then run scripts/build_workout_page.py.
+#
+# Kept only as a record of where the data originally came from.
+# =============================================================================
+
 import json
 
 def ex(name, ref, focus, tier, sets, reps, extras=None, cue=""):
@@ -437,10 +453,12 @@ data = {
   ]
 }
 
-import os
-OUT = os.path.join(os.path.dirname(__file__), "..", "data", "training.json")
-with open(OUT, "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+import sys
 
-print("training.json rebuilt, exercises total:",
-      sum(len(s["exercises"]) for loc in data["sessions"].values() for person in loc.values() for s in person.values()))
+sys.exit(
+    "REFUSED: this is an archived one-time migration.\n"
+    "Running it would overwrite data/training.json with frozen 2026-08-28 literals\n"
+    "and destroy any edits made since. data/training.json is canonical — edit it\n"
+    "directly, then run scripts/build_workout_page.py.\n"
+    "If you genuinely need the original extraction, read this file; don't execute it."
+)
