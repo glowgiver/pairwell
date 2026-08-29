@@ -31,6 +31,34 @@ def lo(v):
     return float(str(v).split("-")[0])
 
 
+def measured_expenditure(key):
+    """MacroFactor's adaptive TDEE, if it has been imported.
+
+    Measured beats modelled. Katch-McArdle knows a body's size; it cannot know
+    what six months of dieting has done to what that body actually spends.
+    """
+    path = os.path.join(BASE, "..", "private", "macrofactor", key, "expenditure.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        d = json.load(f)
+    cols = d.get("columns") or []
+    if len(cols) < 2:
+        return None
+    date_c, val_c = cols[0], cols[1]
+    series = [(r[date_c], r[val_c]) for r in d.get("rows", [])
+              if isinstance(r.get(val_c), (int, float))]
+    if not series:
+        return None
+    series.sort()
+    vals = [v for _, v in series]
+    recent = vals[-14:]
+    return {"latest": vals[-1], "recent": sum(recent) / len(recent),
+            "first": vals[0], "n": len(vals),
+            "from": series[0][0], "to": series[-1][0],
+            "trend14": vals[-1] - vals[-15] if len(vals) > 15 else None}
+
+
 def energy_balance(profiles, training):
     """Is the calorie target the right distance below maintenance?
 
@@ -68,7 +96,7 @@ def energy_balance(profiles, training):
         print("    BMR %.0f kcal  ·  %d training + %d active days  ->  factor %.3f"
               % (bmr, n_train, n_move, factor))
         lo, hi = bmr * (factor - 0.075), bmr * (factor + 0.075)
-        print("    maintenance somewhere around %.0f-%.0f kcal" % (lo, hi))
+        print("    MODELLED maintenance around %.0f-%.0f kcal" % (lo, hi))
 
         for label, tdee in (("low", lo), ("high", hi)):
             deficit = tdee - target
@@ -77,20 +105,48 @@ def energy_balance(profiles, training):
             print("      vs %-4s  deficit %4.0f kcal (%4.1f%%)  ->  %.2f kg/week"
                   % (label, deficit, pct, kg))
 
+        safe_lo, safe_hi = 0.005 * w * 7700 / 7, 0.010 * w * 7700 / 7
+        meas = measured_expenditure(key)
+        if meas:
+            print("    MEASURED — MacroFactor, %d days to %s" % (meas["n"], meas["to"]))
+            print("      expenditure %.0f now, %.0f on a 14-day mean (estimate said %.0f-%.0f)"
+                  % (meas["latest"], meas["recent"], lo, hi))
+            if meas["trend14"] is not None and abs(meas["trend14"]) >= 25:
+                print("      %+.0f kcal over the last fortnight — %s"
+                      % (meas["trend14"], "falling" if meas["trend14"] < 0 else "rising"))
+            d_meas = meas["recent"] - target
+            print("      real deficit %.0f kcal (%.1f%%) -> %.2f kg/week"
+                  % (d_meas, 100.0 * d_meas / meas["recent"], d_meas * 7 / 7700.0))
+            drop = meas["first"] - meas["latest"]
+            if drop > 300:
+                print("      expenditure has fallen %.0f kcal since %s"
+                      % (drop, meas["from"]))
+                findings.append("%s's measured expenditure has fallen %.0f kcal since %s, "
+                                "to %.0f. A %d kcal intake is now only %.0f kcal below it."
+                                % (p["displayName"], drop, meas["from"], meas["latest"],
+                                   target, meas["latest"] - target))
+            if d_meas < safe_lo:
+                print("      -> smaller than the retention band, not larger. The estimate "
+                      "above is stale; believe this line.")
+            print()
+
         # Muscle retention holds at 0.5-1.0% bodyweight per week. Faster is where
         # lean mass starts going with the fat.
         safe_lo, safe_hi = 0.005 * w * 7700 / 7, 0.010 * w * 7700 / 7
         print("    retention-safe deficit for %.1f kg: %.0f-%.0f kcal/day "
               "(%.2f-%.2f kg/week)" % (w, safe_lo, safe_hi, 0.005 * w, 0.010 * w))
-        worst = hi - target
-        if worst > safe_hi:
-            print("    -> at the high estimate this is FASTER than muscle retention allows")
-            findings.append("%s's deficit reaches %.0f kcal at the high maintenance "
-                            "estimate, past the %.0f kcal retention ceiling."
-                            % (p["displayName"], worst, safe_hi))
-        elif (lo - target) < safe_lo:
-            print("    -> at the low estimate this is slower than the usual band; fine, "
-                  "but progress will be hard to see")
+        # Only judge from the model when there is nothing measured. Printing both
+        # verdicts produced a report that argued with itself.
+        if not meas:
+            worst = hi - target
+            if worst > safe_hi:
+                print("    -> at the high estimate this is FASTER than muscle retention allows")
+                findings.append("%s's deficit reaches %.0f kcal at the high maintenance "
+                                "estimate, past the %.0f kcal retention ceiling."
+                                % (p["displayName"], worst, safe_hi))
+            elif (lo - target) < safe_lo:
+                print("    -> at the low estimate this is slower than the usual band; fine, "
+                      "but progress will be hard to see")
 
         # protein against bodyweight, which is the only way to judge it
         pro = p["dailyTargets"]["proteinG"]

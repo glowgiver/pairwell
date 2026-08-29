@@ -66,6 +66,9 @@ pairwell/
 ├── inbox/                 GITIGNORED except TEMPLATE.md — recipes as found,
 │                          one dish per file, before they become data
 │
+├── private/               GITIGNORED — body composition, MacroFactor exports.
+│                          Anything describing a body rather than a plan.
+│
 ├── backups/               generated, self-contained, committed
 │
 └── hub/
@@ -239,9 +242,16 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   (410 kcal) and derived from `recipes.json` (380). The typed figures drive the
   day ledger. Generic tables versus an unknown original; the packets would settle
   it. `check_targets.py` prints the disagreement rather than picking a winner.
-- **No MacroFactor import.** Designed in the product audit, not built. No export
-  file has ever been seen, so the importer must discover the schema rather than
-  assume column names.
+- ~~No MacroFactor import.~~ Built. `scripts/import_macrofactor.py` reads an
+  .xlsx with the standard library alone and discovers the schema: sheet names
+  from the workbook, headers from row 1, and date columns from the number
+  formats in `styles.xml` rather than from what a header is called. Output goes
+  to `private/`.
+- **The repo is public, not only the site.** Stripping a field out of the built
+  pages hides nothing if the JSON it came from is committed. Body composition
+  and anything exported from MacroFactor belong in `private/`, which is
+  gitignored. `data/profiles.json` currently still carries both bodyweights,
+  and those commits are already pushed.
 - **Sessions still duplicate exercise objects** instead of referencing
   `exercises.json` by id.
 - **Demo videos are verified live, not verified good** — nobody has watched them.

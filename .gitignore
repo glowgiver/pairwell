@@ -15,3 +15,9 @@ __pycache__/
 /inbox/*
 !/inbox/TEMPLATE.md
 !/inbox/WHAT-TO-LOOK-FOR.md
+
+# private/ holds body composition and anything exported from MacroFactor.
+# The repo is public, not just the site — stripping a field out of the built
+# pages does not hide it if the JSON it came from is committed. Anything that
+# describes a body rather than a plan belongs here.
+/private/
