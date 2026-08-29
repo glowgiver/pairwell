@@ -1,0 +1,73 @@
+{
+  "_source": ["skin_protocol.html conversations", "hair_protocol.html conversation"],
+
+  "skincare": {
+    "philipp": {
+      "skinType": "combination — oily T-zone, normal-to-dry cheeks",
+      "concerns": ["under-eye dark circles", "general anti-aging optimization"],
+      "am": {
+        "durationMin": 4,
+        "goal": "protect",
+        "steps": [
+          { "step": "Reinigung", "product": "CeraVe Hydrating Cream-to-Foam", "how": "lauwarmes Wasser, 20 Sek. einmassieren, gründlich abspülen" },
+          { "step": "Vitamin C", "product": "Rohto Melano CC Premium Essence" },
+          { "step": "Augenpflege", "product": "CeraVe Eye Repair Cream" },
+          { "step": "SPF", "product": "Biore UV Aqua Rich SPF" }
+        ]
+      },
+      "pmWeeklyPlan": [
+        { "day": "Montag",     "active": "Adapalen 0,1% (Rx)", "how": "dünner Film, ganzes Gesicht" },
+        { "day": "Dienstag",   "active": "BHA — Paula's Choice 2%", "how": "T-Zone-Fokus" },
+        { "day": "Mittwoch",   "active": "Adapalen 0,1% (Rx)" },
+        { "day": "Donnerstag", "active": "Niacinamid + Hyaluron", "how": "Ruhetag, kein Aktivstoff" },
+        { "day": "Freitag",    "active": "Adapalen 0,1% (Rx)" },
+        { "day": "Samstag",    "active": "AHA — Glykol- oder Milchsäure", "how": "optional, nur wenn Haut ruhig" },
+        { "day": "Sonntag",    "active": null, "how": "Ruhetag — nur Feuchtigkeit + Barrierepflege" }
+      ],
+      "pmApplicationRule": "dünn zuerst, dicht zuletzt; 30-60 Sek. zwischen Schritten warten; Aktivstoffe auf trockene Haut",
+      "coreProducts": {
+        "adapalene": "0.1%, sourced Taiwan (pharmacist-only there; Rx in Germany)",
+        "bha": "Paula's Choice BHA 2% Liquid (Douglas)",
+        "vitaminC": "Rohto Melano CC Premium Essence",
+        "moisturizer": "Beauty of Joseon Dynasty Cream",
+        "eyeCream": "CeraVe Eye Repair Cream (AM), Rohto Melano CC Moisture Cream (PM, targeted)",
+        "spf": "Biore UV Aqua Rich SPF"
+      },
+      "timeline": "adapalene needs patience — meaningful texture/pore results from week 12+, weeks 1-8 show nothing visible by design"
+    },
+    "eunice": {
+      "_status": "DEFERRED — will be added in a later session, on purpose",
+      "skinType": null,
+      "concerns": [],
+      "am": { "steps": [] },
+      "pmWeeklyPlan": [],
+      "coreProducts": {}
+    }
+  },
+
+  "hair": {
+    "_status": "SHARED — one protocol, used by both. No per-person split needed on the dashboard.",
+    "context": {
+      "location": "Hamburg",
+      "waterHardness": "17.3 °dH — confirmed hard water, primary issue",
+      "sharedProblem": "stiff, dull hair attributed to hard water + sulfate shampoos + inadequate conditioning"
+    },
+    "protocol": {
+      "primaryShampoo": "Cantu Sulfate-Free Cleansing Cream (Rossmann or Amazon.de)",
+      "citricAcidRinse": "1/4 tsp per 500ml water",
+      "leaveIn": "Garnier Fructis Repairing 10-in-1 Leave-in",
+      "weeklyMask": "Banana Hair Mask",
+      "monthlyDeepClean": "Dikson Keratin Diamond Shampoo (contains SLES) — monthly only, not daily",
+      "dmBackup": "HASK Repair + Argan Oil"
+    },
+    "individualNotes": {
+      "philipp": "morning scalp itch traced to using a rinse-out conditioner (Balea Feuchtigkeit Spülung) as leave-in — corrected, now follows protocol above cleanly",
+      "eunice": "longer hair — higher risk of under-cleansing when following the shared amounts, worth watching"
+    }
+  },
+
+  "_gaps": [
+    "Eunice's skincare routine deferred on purpose — to be added in a later session",
+    "Hair protocol exact frequency/amount split (if any) between the two isn't fully itemized — currently treated as one shared routine with individual notes only"
+  ]
+}

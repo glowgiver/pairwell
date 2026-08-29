@@ -1,0 +1,73 @@
+{
+  "_source": "Core_Health_Logic.md",
+  "priorityHierarchy": ["protein", "fiber", "fat", "calories"],
+  "priorityNote": "Protein is non-negotiable. All other macros flex around it.",
+
+  "people": {
+    "philipp": {
+      "displayName": "Philipp",
+      "role": "biohacker",
+      "dailyTargets": {
+        "calories": 1600,
+        "proteinG": 164,
+        "fiberG": 45,
+        "fatG": 52,
+        "netCarbsG": 112
+      },
+      "fixedBreakfast": {
+        "calories": 410,
+        "proteinG": 48,
+        "fiberG": 6,
+        "fatG": 10,
+        "ingredients": [
+          { "item": "Magerquark", "amount": "150 g" },
+          { "item": "Whey Protein", "amount": "30 g" },
+          { "item": "Haferflocken", "amount": "20 g" },
+          { "item": "Geschrotete Leinsamen", "amount": "15 g" },
+          { "item": "Kreatin", "amount": "5 g" },
+          { "item": "Ceylon Zimt", "amount": "1 TL" },
+          { "item": "Wasser", "amount": "nach Bedarf" }
+        ]
+      },
+      "snackBudgetAfterMirrorMeals": {
+        "calories": 340,
+        "proteinG": 36,
+        "note": "1600 - 410 (breakfast) - 850 (lunch+dinner) = remainder"
+      },
+      "aestheticGoal": "lean athletic, K-drama V-taper, not bulky"
+    },
+
+    "eunice": {
+      "displayName": "Eunice",
+      "role": "healthy teacher",
+      "dailyTargets": {
+        "calories": 1580,
+        "proteinG": 105,
+        "fiberG": 35,
+        "fatG": 52,
+        "netCarbsG": 160
+      },
+      "fixedBreakfast": null,
+      "breakfastPlusSnackBudget": {
+        "calories": 730,
+        "proteinG": 25,
+        "note": "1580 - 850 (lunch+dinner) = remainder, breakfast not fixed yet"
+      },
+      "aestheticGoal": "curvier, defined, strong lower body already present",
+      "notes": [
+        "picky eater, strong taste preferences — recipe selection must pass her taste test",
+        "~1 year training experience, naturally strong lower body development"
+      ]
+    }
+  },
+
+  "mirrorMeals": {
+    "note": "Lunch and dinner are identical in size/macros for both people",
+    "lunch":  { "calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15" },
+    "dinner": { "calories": 425, "proteinG": 40, "fiberG": 17, "fatG": "12-15" }
+  },
+
+  "_gaps": [
+    "Eunice's breakfast is not fixed yet — only a budget envelope exists (730 kcal / 25g protein)."
+  ]
+}

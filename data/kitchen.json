@@ -1,0 +1,95 @@
+{
+  "_source": ["Asian_Carb_Base.md", "Cooking_Standards.md", "Core_Health_Logic.md"],
+
+  "hardware": {
+    "device": "Ninja Foodi OL750UK SmartLid",
+    "primaryModes": ["Pressure Cook", "Air Fry", "Steam-Air Fry", "Sauté/Sear"],
+    "philosophy": "prefer one-pot dishes to save time and cleanup"
+  },
+
+  "culinaryStandards": {
+    "flavorProfile": "anti-spartan — Mediterranean, Asian, always with an aroma base",
+    "texture": "always aim for contrast — crispy + juicy",
+    "sauceBase": "low-calorie — Magerquark, mustard, or stock",
+    "lunchboxFiber": "space-saving sources only — lentils, finely grated vegetables, spinach; no bulky salad piles"
+  },
+
+  "asianMacroBase": {
+    "purpose": "carb component with more protein/fiber than plain rice, lower volume, high satiety",
+    "batchYield": "~10 blocks",
+    "portionSize": "100-120 ml silicone mold",
+    "ingredients": [
+      { "item": "Jasminreis", "amount": "210 g" },
+      { "item": "Quinoa", "amount": "45 g" },
+      { "item": "Rote Linsen (trocken)", "amount": "30 g" },
+      { "item": "Edamame (geschält, TK)", "amount": "130 g" },
+      { "item": "Wasser", "amount": "450 ml" },
+      { "item": "Gemüsebrühepulver", "amount": "1 TL" },
+      { "item": "Sojasauce (low sodium)", "amount": "1 TL" }
+    ],
+    "steps": [
+      "Reis, Quinoa, rote Linsen waschen bis Wasser klar ist",
+      "Wasser mit Brühepulver und Sojasauce mischen, in Innentopf geben",
+      "Reis, Quinoa, Linsen zugeben — Edamame noch NICHT",
+      "SmartLid auf Pressure, Modus Pressure Cook, Stufe High, 4 Minuten",
+      "10 Minuten Natural Release, dann Restdruck manuell ablassen",
+      "Mit Gabel auflockern, Edamame unterheben, 5-10 Min offen ausdampfen lassen",
+      "In 100-120 ml Silikonformen pressen, abkühlen, einfrieren/kühlen"
+    ],
+    "macrosPerBlock": {
+      "calories": "100-120",
+      "carbsG": "17-20",
+      "proteinG": "5-5.5",
+      "fiberG": "2.5-3",
+      "fatG": "~1.5"
+    },
+    "blockRules": {
+      "saucyOrCalorieDense": 1,
+      "standardLeanDish": 1.5,
+      "extremelyLeanProtein": 2
+    },
+    "substitutions": {
+      "quinoaUnavailable": {
+        "replaceWith": "Bulgur",
+        "waterAdjustment": "reduce water from 450ml to 425ml proportionally (tested: 540ml→510ml at larger batch size)",
+        "ninjaSettings": "unchanged — Pressure Cook High, 4 min + 10 min Natural Release"
+      }
+    }
+  },
+
+  "recipeOutputFormat": {
+    "order": [
+      "Block 1 — Änderungen zum Original",
+      "Block 2 — Neue Makros (Ziel vs. Ergebnis Tabelle: Kalorien, Protein, Ballaststoffe, Fett, Asian Base Blocks)",
+      "Block 3 — Ninja OL750 Schritt-für-Schritt (nummeriert, mit Modus/Stufe/Zeit)"
+    ]
+  },
+
+  "recipeChecks": {
+    "proteinCheck": "raise protein source to 40g per portion",
+    "fatCheck": "minimize fat to 12-15g per meal",
+    "fiberCheck": "prefer space-saving sources — lentils, spinach, grated vegetables"
+  },
+
+  "macroFactorLogging": {
+    "asianBaseCustomFoodPer100gCooked": {
+      "calories": 105,
+      "proteinG": 4.8,
+      "carbsG": 18,
+      "fiberG": 2.6,
+      "fatG": 1.3
+    },
+    "note": "both partners log ~150g each in their individual MacroFactor accounts"
+  },
+
+  "eunicePreferences": {
+    "note": "hard constraint — dish selection must pass her taste test",
+    "cuisineAffinity": ["Taiwanese braised dishes", "Japanese-adjacent flavors", "Vietnamese"],
+    "avoid": ["expensive specialty imports", "flavor sacrificed purely for macro precision"]
+  },
+
+  "_gaps": [
+    "meal-history / rating log (👍/👎 per dish) not yet built",
+    "shopping list generator logic not yet formalized as data"
+  ]
+}

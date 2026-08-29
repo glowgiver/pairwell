@@ -1,0 +1,1661 @@
+{
+  "_source": "Workout_Hub_Philipp_and_Eunice.html (uploaded 2026-08-28)",
+  "_supersedes": "earlier training.json draft — this is the authoritative extraction",
+  "meta": {
+    "title": "Workout Hub · Philipp & Eunice · 2026",
+    "edition": "Lean Athletic Edition",
+    "structure": "Full-Body, Primary/Maintenance tiers, taper-focused",
+    "locations": [
+      "gym",
+      "home",
+      "travel"
+    ]
+  },
+  "profiles": {
+    "philipp": {
+      "badge": "Lean Athletic",
+      "goal": "K-Idol Taper · Fettabbau · Muskelerhalt",
+      "meta": {
+        "weight": "81.2 → 77 kg",
+        "bodyFat": "20.6 → 16%",
+        "intensity": "RIR 2"
+      }
+    },
+    "eunice": {
+      "badge": "Toned & Curvy",
+      "goal": "Hwasa-Look · Glutes · Schulter-Hüft-Relation",
+      "meta": {
+        "bodyFat": "29 → 22%",
+        "focus": "Glutes + Rücken",
+        "intensity": "RIR 2-3"
+      }
+    },
+    "shared": {
+      "badge": "Zusammen",
+      "goal": "same exercises, own load — alternating sets",
+      "meta": {
+        "when": "Sunday",
+        "mode": "alternating sets",
+        "setup": "1 station"
+      }
+    }
+  },
+  "weeklyRhythm": {
+    "philipp": [
+      {
+        "day": "Mo",
+        "what": "Pad · Zone 1",
+        "type": "move"
+      },
+      {
+        "day": "Di",
+        "what": "Gym · Push",
+        "type": "training"
+      },
+      {
+        "day": "Mi",
+        "what": "Pad · Zone 2",
+        "type": "move"
+      },
+      {
+        "day": "Do",
+        "what": "Gehen",
+        "type": "move"
+      },
+      {
+        "day": "Fr",
+        "what": "Gym · Pull",
+        "type": "training"
+      },
+      {
+        "day": "Sa",
+        "what": "Spaziergang",
+        "type": "move"
+      },
+      {
+        "day": "So",
+        "what": "Shared",
+        "type": "training"
+      }
+    ],
+    "eunice": [
+      {
+        "day": "Mo",
+        "what": "Gym solo",
+        "type": "training"
+      },
+      {
+        "day": "Di",
+        "what": "frei",
+        "type": "rest"
+      },
+      {
+        "day": "Mi",
+        "what": "Gehen",
+        "type": "move"
+      },
+      {
+        "day": "Do",
+        "what": "frei",
+        "type": "rest"
+      },
+      {
+        "day": "Fr",
+        "what": "Gym · mit Philipp",
+        "type": "training"
+      },
+      {
+        "day": "Sa",
+        "what": "frei",
+        "type": "rest"
+      },
+      {
+        "day": "So",
+        "what": "Shared",
+        "type": "training"
+      }
+    ]
+  },
+  "locationNotes": {
+    "gym": "Holmes Place · cable tower + machines. All primary exercises run on the cable tower — constant tension, exact progression.",
+    "home": "Bodylastics tubes + door anchor. Bands mimic the cable tower 1:1. More resistance = bundle another tube. Height = anchor high/mid/low. Constant tension = stand farther from the door.",
+    "travel": "Tubes only + door anchor. Everything with Bodylastics + door anchor, no dumbbells needed. Tempo 3-0-1 and standing farther from anchor substitute for more weight."
+  },
+  "equipmentByLocation": {
+    "gym": [
+      "cable tower",
+      "machines",
+      "glute drive",
+      "leg press"
+    ],
+    "home": [
+      "Bodylastics tubes",
+      "door anchor high/low",
+      "ankle strap"
+    ],
+    "travel": [
+      "3+ tubes",
+      "door anchor",
+      "tempo 3-0-1"
+    ]
+  },
+  "sessions": {
+    "gym": {
+      "philipp": {
+        "push": {
+          "title": "Push + Taper",
+          "day": "Dienstag",
+          "focus": "side delt · chest · lat · triceps",
+          "exercises": [
+            {
+              "name": "Cable Lateral Raise",
+              "ref": "taper driver #1",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "5 kg/arm",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "Fresh first — most important move for the look. Constant tension at the bottom. Lead with the elbow to shoulder height. Goal: clean 15 → then 6 kg."
+            },
+            {
+              "name": "Cable Chest Press (high-to-low)",
+              "ref": "upper chest",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "10-12",
+              "extras": {
+                "load": "20 kg",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor high, stand away from tower, press forward-downward across the chest. 4 sets — chest is second focus."
+            },
+            {
+              "name": "Wide Lat Pulldown",
+              "ref": "lat width → taper",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "45 kg",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Second most important taper muscle after side delt — trained in both sessions."
+            },
+            {
+              "name": "Triceps Pushdown (Rope)",
+              "ref": "arm definition",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "17.5 kg",
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Elbows fixed at sides, separate the rope at the bottom, brief hold."
+            },
+            {
+              "name": "Leg Press (light)",
+              "ref": "leg proportion",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "20",
+              "extras": {
+                "load": "~70 kg",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance only — hold, don't build. High reps, light weight, never progress."
+            },
+            {
+              "name": "Cable Crunch",
+              "ref": "waist",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "25 kg",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Fold ribs to hips, hands fixed at ears."
+            },
+            {
+              "name": "Hollow Hold",
+              "ref": "waist detail",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Lower back flat, arms long."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Pull + Haltung",
+          "day": "Freitag",
+          "focus": "side delt · lat · back · rear delt",
+          "exercises": [
+            {
+              "name": "Cable Lateral Raise",
+              "ref": "taper driver #1",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "5 kg/arm",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "2nd side-delt hit of the week."
+            },
+            {
+              "name": "Wide Lat Pulldown",
+              "ref": "lat width",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "45 kg",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Replaces removed pull-up — that thickened upper trap and shortened neckline."
+            },
+            {
+              "name": "Cable Row (neutral)",
+              "ref": "upper back",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "35 kg",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Sit upright, pull to belly, elbows close, moderate — don't overload."
+            },
+            {
+              "name": "Rear Delt Fly (Cable)",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "9 kg",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "Arms nearly straight, lead with pinkies."
+            },
+            {
+              "name": "Cable Face Pull",
+              "ref": "shoulder health",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "10 kg",
+                "rir": "RIR 1",
+                "rest": "45s"
+              },
+              "cue": "Maintenance — antagonist to all pressing."
+            },
+            {
+              "name": "Seated Hamstring Curl",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "50 kg",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance, controlled, no momentum."
+            },
+            {
+              "name": "Cable Biceps Curl",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "15 kg",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        }
+      },
+      "eunice": {
+        "solo": {
+          "title": "Lower + Push",
+          "day": "Montag · solo",
+          "focus": "fixed machines only — no setup, no cable",
+          "note": "Monday alone in the gym. Deliberately machines only: fixed path, nothing can go wrong, no spotting needed. Cable exercises happen Friday with Philipp.",
+          "exercises": [
+            {
+              "name": "Glute Drive Machine",
+              "ref": "priority #1",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Fresh first — top exercise. Full hip extension, 1s hold at top, squeeze. 4 sets — glutes are the goal."
+            },
+            {
+              "name": "Leg Press (wide + high)",
+              "ref": "quads + glutes + inner thigh",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Feet wide and high, knees out."
+            },
+            {
+              "name": "Adductor Machine",
+              "ref": "inner thigh",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15-20",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Slow squeeze (3s in), controlled release."
+            },
+            {
+              "name": "Seated Leg Curl",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Antagonist to leg press."
+            },
+            {
+              "name": "Chest Press Machine",
+              "ref": "chest",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10-12",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Maintenance — fixed path, nothing to set up."
+            },
+            {
+              "name": "Triceps Machine",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Maintenance, machine instead of cable rope for solo simplicity."
+            },
+            {
+              "name": "Ab Machine",
+              "ref": "core",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Maintenance, weighted fixed path."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Upper + Glutes",
+          "day": "Freitag · mit Philipp",
+          "focus": "cable tower — alternating sets with Philipp",
+          "note": "Friday with Philipp at the cable tower. She's out at 13:00, he arrives ~15:30. Same station: her set, his set. Her rest is his work time.",
+          "exercises": [
+            {
+              "name": "Cable Lateral Raise",
+              "ref": "shoulder-hip relation",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "2.5 kg/arm",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "New for her. Emphasized shoulder makes the waist look narrower — the Hwasa effect."
+            },
+            {
+              "name": "Wide Lat Pulldown",
+              "ref": "back width",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "25 kg",
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Back width makes the waist look smaller."
+            },
+            {
+              "name": "Cable Row (neutral)",
+              "ref": "upper back",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "20 kg",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Posture + defined back look."
+            },
+            {
+              "name": "Glute Drive Machine",
+              "ref": "glutes 2x/week",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Glutes again — 2x/week drives growth. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
+            },
+            {
+              "name": "Rear Delt + Face Pull",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "shared station",
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "New — was completely missing. Rear delt fly into face pull."
+            },
+            {
+              "name": "Cable Biceps Curl",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "7.5 kg",
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Cable Crunch",
+              "ref": "core",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Maintenance, kneeling."
+            }
+          ]
+        }
+      }
+    },
+    "home": {
+      "philipp": {
+        "push": {
+          "title": "Push + Taper",
+          "day": "Home · Push",
+          "focus": "Bodylastics — cable feel at home",
+          "exercises": [
+            {
+              "name": "Band Lateral Raise (cross-body)",
+              "ref": "gym: Cable Lat Raise",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "Stand on the band with the opposite foot so it crosses the body — keeps tension at the bottom like the cable."
+            },
+            {
+              "name": "Band Chest Press",
+              "ref": "gym: Cable Chest Press",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "10-12",
+              "extras": {
+                "load": "Rot (L3) + Grün (L2)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Low anchor behind, stand away from door, press forward-upward."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "gym: Lat Pulldown",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor at top of door, kneeling, wide grip, elbows down-out to ribs."
+            },
+            {
+              "name": "Band Triceps Pushdown",
+              "ref": "gym: Triceps Pushdown",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Rot (L3)",
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "High anchor, elbows fixed at sides."
+            },
+            {
+              "name": "Band Squat (light)",
+              "ref": "gym: Leg Press",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "20",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance — hold only."
+            },
+            {
+              "name": "Band Kneeling Crunch",
+              "ref": "gym: Cable Crunch",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Anchor high, kneeling."
+            },
+            {
+              "name": "Hollow Hold",
+              "ref": "gym: Hollow Hold",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Lower back flat, build to 40s."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Pull + Haltung",
+          "day": "Home · Pull",
+          "focus": "Bodylastics — pulling + posture",
+          "exercises": [
+            {
+              "name": "Band Lateral Raise (cross-body)",
+              "ref": "gym: Cable Lat Raise",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "2nd side-delt hit."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "gym: Lat Pulldown",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor top, kneeling — replaces pull-up, no bar needed."
+            },
+            {
+              "name": "Band Seated Row (low anchor)",
+              "ref": "gym: Cable Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Low anchor or looped around both feet, sit upright, pull to belly."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "gym: Rear Delt Fly",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "No anchor: band in both hands, arms straight, pull apart to chest."
+            },
+            {
+              "name": "Band Face Pull (mid anchor)",
+              "ref": "gym: Face Pull",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1",
+                "rest": "45s"
+              },
+              "cue": "Maintenance — anchor at head height."
+            },
+            {
+              "name": "Band RDL (bilateral)",
+              "ref": "gym: Hamstring Curl",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance. Carabiners folded into one handle, stand on loop."
+            },
+            {
+              "name": "Band Biceps Curl",
+              "ref": "gym: Cable Curl",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        }
+      },
+      "eunice": {
+        "solo": {
+          "title": "Lower + Push",
+          "day": "Home · Lower",
+          "focus": "Bodylastics — glute focus",
+          "exercises": [
+            {
+              "name": "Band Hip Thrust",
+              "ref": "gym: Glute Drive",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "First — glutes are priority. Tube over feet, shoulders on couch, handles over hips."
+            },
+            {
+              "name": "Band Squat (wide + high)",
+              "ref": "gym: Leg Press",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Stand on tube, feet wider, handles at shoulders, 3s down."
+            },
+            {
+              "name": "Band Adductor Squeeze (lying)",
+              "ref": "gym: Adductor",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15-20",
+              "extras": {
+                "load": "light band",
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "cue": "Band around ankles, on back, legs apart, 3s squeeze together."
+            },
+            {
+              "name": "Band RDL (bilateral)",
+              "ref": "gym: Leg Curl",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Hamstrings."
+            },
+            {
+              "name": "Push-Up (knee or standard)",
+              "ref": "gym: Chest Press",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance. Knee version to regress, 3s down."
+            },
+            {
+              "name": "Band Triceps Pushdown",
+              "ref": "gym: Triceps Machine",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Dead Bug",
+              "ref": "gym: Ab Machine",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10/side",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Maintenance, lower back flat."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Upper + Glutes",
+          "day": "Home · Upper",
+          "focus": "Bodylastics — back + glutes",
+          "exercises": [
+            {
+              "name": "Band Lateral Raise (cross-body)",
+              "ref": "gym: Cable Lat Raise",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Emphasized shoulder for Hwasa silhouette."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "gym: Lat Pulldown",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Anchor top, shoulder blades down."
+            },
+            {
+              "name": "Band Seated Row",
+              "ref": "gym: Cable Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Around both feet or low anchor, upright."
+            },
+            {
+              "name": "Band Hip Thrust",
+              "ref": "gym: Glute Drive",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Glutes 2x/week."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "gym: Rear Delt + Face Pull",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15-20",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "cue": "Band in both hands, pull apart to chest."
+            },
+            {
+              "name": "Band Biceps Curl",
+              "ref": "gym: Cable Curl",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Dead Bug",
+              "ref": "gym: Cable Crunch",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "10/side",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        }
+      },
+      "shared": {
+        "sun": {
+          "title": "Shared Session",
+          "day": "Sonntag · gemeinsam",
+          "focus": "same exercises · own tubes · alternating",
+          "note": "Sunday together at home. Both do the same exercises simultaneously — Philipp the stronger tubes, Eunice the lighter. If at the gym instead: same plan, cable tower instead of bands.",
+          "exercises": [
+            {
+              "name": "Band Lateral Raise (cross-body)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "philippLoad": "Gelb (L1)",
+              "euniceLoad": "Gelb (L1), less tension",
+              "cue": "Opposite foot on band, lead with elbow to shoulder height.",
+              "shared": true
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rest": "90s"
+              },
+              "philippLoad": "Blau (L4) + Schwarz (L5)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Anchor top, elbows down-out, squeeze lats.",
+              "shared": true
+            },
+            {
+              "name": "Band Seated Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "rest": "75s"
+              },
+              "philippLoad": "Blau (L4) + Schwarz (L5)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Around both feet, upright, pull to belly, no momentum.",
+              "shared": true
+            },
+            {
+              "name": "Band Hip Thrust",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "philippLoad": "Blau (L4) gefaltet · maintenance",
+              "euniceLoad": "Blau (L4) gefaltet · primary",
+              "cue": "Tube over hips, shoulders supported, 2s squeeze at top.",
+              "shared": true
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "philippLoad": "Grün (L2)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Band in both hands, pull apart to chest.",
+              "shared": true
+            },
+            {
+              "name": "Band Biceps Curl",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rest": "45s"
+              },
+              "philippLoad": "Rot (L3)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Stand on band, elbows fixed, slow down.",
+              "shared": true
+            },
+            {
+              "name": "Hollow Hold / Dead Bug",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "philippLoad": "Hollow Hold + Flutter",
+              "euniceLoad": "Dead Bug 10/side",
+              "cue": "Core finisher — each own variant, lower back flat.",
+              "shared": true
+            }
+          ]
+        }
+      }
+    },
+    "travel": {
+      "philipp": {
+        "push": {
+          "title": "Push + Taper",
+          "day": "Travel · Push",
+          "focus": "tubes + door anchor only",
+          "exercises": [
+            {
+              "name": "Cross-Body Band Lateral Raise",
+              "ref": "taper #1",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "Opposite foot on tube for tension at bottom. Too heavy? Foot closer to center."
+            },
+            {
+              "name": "Band Chest Press (high-to-low)",
+              "ref": "upper chest",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "10-12",
+              "extras": {
+                "load": "Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor high, press forward-downward."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "lat width",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Only vertical pull."
+            },
+            {
+              "name": "Band Overhead Triceps Extension",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Rot (L3)",
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Low anchor, handles behind head, elbows high."
+            },
+            {
+              "name": "Band Squat (light)",
+              "ref": "leg proportion",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "20",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Kneeling Band Crunch",
+              "ref": "waist",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Anchor high, kneeling."
+            },
+            {
+              "name": "Hollow Body Hold",
+              "ref": "waist detail",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Lower back flat, extend legs to progress."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Pull + Haltung",
+          "day": "Travel · Pull",
+          "focus": "tubes + door anchor only",
+          "exercises": [
+            {
+              "name": "Cross-Body Band Lateral Raise",
+              "ref": "taper #1",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "2nd side-delt hit."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "lat width",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Replaces pull-up."
+            },
+            {
+              "name": "Seated Band Row",
+              "ref": "upper back",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Blau (L4) + Schwarz (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Sit on floor, tube around both feet, upright, no momentum."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "No anchor, arms straight, pull apart."
+            },
+            {
+              "name": "Band Face Pull",
+              "ref": "shoulder health",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1",
+                "rest": "45s"
+              },
+              "cue": "Maintenance, anchor at head height."
+            },
+            {
+              "name": "Band Single-Leg RDL",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12/side",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Band Biceps Curl",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        }
+      },
+      "eunice": {
+        "solo": {
+          "title": "Lower + Push",
+          "day": "Travel · Lower",
+          "focus": "tubes + door anchor only",
+          "exercises": [
+            {
+              "name": "Band Hip Thrust",
+              "ref": "glutes #1",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 4,
+              "reps": "15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "First. Tube over feet, shoulders supported."
+            },
+            {
+              "name": "Band Squat (wide)",
+              "ref": "quads + inner thigh",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Stand on tube, feet wide, 3s down."
+            },
+            {
+              "name": "Lateral Lunge (tempo)",
+              "ref": "inner thigh",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Wide step to side, sit into hip, other leg straight."
+            },
+            {
+              "name": "Band Single-Leg RDL",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12/side",
+              "extras": {
+                "load": "Blau (L4)",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "One foot on tube, soft knee, 3s down."
+            },
+            {
+              "name": "Push-Up (knee or standard)",
+              "ref": "chest",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Band Overhead Triceps Extension",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Dead Bug",
+              "ref": "core",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10/side",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        },
+        "pull": {
+          "title": "Upper + Glutes",
+          "day": "Travel · Upper",
+          "focus": "tubes + door anchor only",
+          "exercises": [
+            {
+              "name": "Cross-Body Band Lateral Raise",
+              "ref": "shoulder",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Gelb (L1)",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Emphasized shoulder for silhouette."
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "ref": "back width",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Anchor top."
+            },
+            {
+              "name": "Seated Band Row",
+              "ref": "upper back",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Tube around both feet."
+            },
+            {
+              "name": "Band Hip Thrust",
+              "ref": "glutes 2x",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "load": "Blau (L4) gefaltet",
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Tube over hips."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15-20",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "cue": "Tube in both hands, pull apart."
+            },
+            {
+              "name": "Band Biceps Curl",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Grün (L2)",
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            },
+            {
+              "name": "Dead Bug",
+              "ref": "core",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "10/side",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Maintenance."
+            }
+          ]
+        }
+      },
+      "shared": {
+        "sun": {
+          "title": "Shared Session",
+          "day": "Travel · gemeinsam",
+          "focus": "same exercises · own tubes",
+          "note": "Together while traveling. Both do the same exercises, Philipp the stronger tubes. Each grabs their own — no conflict.",
+          "exercises": [
+            {
+              "name": "Cross-Body Band Lateral Raise",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "philippLoad": "Gelb (L1)",
+              "euniceLoad": "Gelb (L1)",
+              "cue": "Opposite foot on tube, lead with elbow.",
+              "shared": true
+            },
+            {
+              "name": "Band Lat Pulldown (kneeling)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rest": "90s"
+              },
+              "philippLoad": "Blau (L4) + Schwarz (L5)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Anchor top, elbows down-out.",
+              "shared": true
+            },
+            {
+              "name": "Seated Band Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "rest": "75s"
+              },
+              "philippLoad": "Blau (L4) + Schwarz (L5)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Tube around both feet, upright.",
+              "shared": true
+            },
+            {
+              "name": "Band Hip Thrust",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "philippLoad": "Blau (L4) · maintenance",
+              "euniceLoad": "Blau (L4) · primary",
+              "cue": "Tube over hips, 2s squeeze.",
+              "shared": true
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "philippLoad": "Grün (L2)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Tube in front, pull apart to chest.",
+              "shared": true
+            },
+            {
+              "name": "Band Biceps Curl",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rest": "45s"
+              },
+              "philippLoad": "Rot (L3)",
+              "euniceLoad": "Grün (L2)",
+              "cue": "Stand on tube, elbows fixed.",
+              "shared": true
+            },
+            {
+              "name": "Hollow Hold / Dead Bug",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "philippLoad": "Hollow + Flutter",
+              "euniceLoad": "Dead Bug",
+              "cue": "Core finisher, lower back flat.",
+              "shared": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "cardioProtocol": {
+    "context": "Philipp's weight dropped most in July while traveling (~8,000+ steps/day). Back in Hamburg: 3,000-4,000 steps, plateaued. Structural gap, not a training problem.",
+    "zone2": {
+      "heartRateRange": "106-124 bpm (age 43)",
+      "padSettings": "5-5.5 km/h at 6% incline",
+      "note": "at 4 km/h lands around ~100 bpm — Zone 1, too low",
+      "appleWatchSetup": "Workout → Indoor Walk → ... → Heart Rate → Range 106-124 bpm, vibrates on drift",
+      "duration": "20-30 min",
+      "schedule": "Tue/Thu/Sat",
+      "eveningRule": "after 20:00 Zone 1 only (under 100 bpm) — Zone 2 late disrupts sleep",
+      "adhdBonus": "even 100 bpm rhythmic walking regulates dopamine/noradrenaline — never wasted"
+    },
+    "stepTarget": {
+      "current": "3000-4000/day",
+      "goal": 7000,
+      "parkingHack": "park on the residential street before the destination rather than the lot — about a 5 min walk each way, same spot every time, no detour. ~1800 steps round trip, ~9000/week",
+      "badWeather": "park in the lot — no penalty rule",
+      "evening": "pad during show/podcast, Zone 1, effortless NEAT",
+      "why": "+3000 steps/day ≈ 200-250 kcal without compensation — bigger lever than the weight gap alone"
+    }
+  },
+  "progression": {
+    "philipp": {
+      "method": "double progression",
+      "primaryRule": "start low in rep range (e.g. 12), climb over weeks to 15 across all sets, then raise load and drop back to 12. Side delt target: clean 15 → 6kg. Pulldown/row/chest: +2.5kg when all sets hit top of range. RIR 2 non-negotiable in a deficit.",
+      "maintenanceRule": "2 sets, same weight as last time, RIR 3, never progress — one number, no decision",
+      "missedSessionRule": "never two in a row. One missed session is life, two is a pattern. Sunday shared session is the safety net — minimum 1x/week structurally guaranteed.",
+      "deload": "every 6-8 weeks, 1 light week at ~60%. In a deficit, err earlier — cortisol is the enemy of muscle retention."
+    },
+    "eunice": {
+      "method": "double progression, tuned for growth",
+      "primaryRule": "form before load; on glutes she can push closer to failure (RIR 1-2)",
+      "mindMuscle": "squeeze and hold at the top of every rep — feeling the muscle matters more than the number",
+      "formFirst": "a clean rep beats a heavy one you don't feel in the target muscle",
+      "deload": "every 8 weeks, 1 light week — needed less often than Philipp since she's building, not cutting"
+    }
+  },
+  "_gaps": [
+    "Eunice's exact current per-exercise loads for many maintenance movements are marked as ranges/placeholders in the source HTML, not all individually confirmed via MacroFactor yet",
+    "Demo video links are auto-generated YouTube search queries, not curated links"
+  ]
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hub</title>
+
+<meta name="theme-color" content="#0B1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hub">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<style>
+  :root{
+    --bg:#0B1220;
+    --surface:#131C2E;
+    --surface-2:#1A2540;
+    --line:#25324F;
+    --text:#EEF2F9;
+    --muted:#8B9AB8;
+
+    --skin:#7FD1C1;
+    --hair:#C9A6F2;
+    --train:#5A8DEE;
+    --food:#F2A65A;
+
+    --r:18px;
+  }
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+  html,body{margin:0;padding:0}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100dvh;
+    padding:
+      calc(env(safe-area-inset-top) + 28px)
+      calc(env(safe-area-inset-right) + 20px)
+      calc(env(safe-area-inset-bottom) + 32px)
+      calc(env(safe-area-inset-left) + 20px);
+    max-width:560px;
+    margin:0 auto;
+  }
+
+  header{margin-bottom:28px}
+
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 6px;
+  }
+
+  h1{
+    font-size:32px;
+    line-height:1.15;
+    font-weight:700;
+    letter-spacing:-.02em;
+    margin:0;
+  }
+
+  .grid{display:flex;flex-direction:column;gap:14px}
+
+  .card{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    min-height:88px;
+    padding:18px 18px 18px 0;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--r);
+    text-decoration:none;
+    color:inherit;
+    overflow:hidden;
+    position:relative;
+    transition:background .18s ease, transform .18s ease;
+  }
+
+  .card::before{
+    content:"";
+    width:5px;
+    align-self:stretch;
+    background:var(--accent);
+    flex:none;
+  }
+
+  .card:active{background:var(--surface-2);transform:scale(.985)}
+
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .icon{
+    width:44px;height:44px;flex:none;
+    display:grid;place-items:center;
+    border-radius:13px;
+    background:color-mix(in srgb, var(--accent) 16%, transparent);
+    margin-left:13px;
+  }
+
+  .icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  .label{flex:1;min-width:0}
+
+  .label b{display:block;font-size:19px;font-weight:600;letter-spacing:-.01em}
+
+  .label span{display:block;font-size:14px;color:var(--muted);margin-top:3px}
+
+  .chev{width:18px;height:18px;flex:none;margin-right:2px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  footer{
+    margin-top:34px;
+    font-size:12px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  #status{color:var(--muted)}
+  #status.offline{color:var(--food)}
+
+  @media (prefers-reduced-motion:reduce){
+    .card{transition:none}
+    .card:active{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow" id="today">Hub</p>
+  <h1 id="greeting">Guten Tag</h1>
+</header>
+
+<main class="grid">
+
+  <a class="card" href="skincare/" style="--accent:var(--skin)">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3c-3.5 3.2-5.5 6-5.5 9a5.5 5.5 0 0 0 11 0c0-3-2-5.8-5.5-9Z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg>
+    </div>
+    <div class="label"><b>Skincare</b><span>Morgens &amp; abends</span></div>
+    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </a>
+
+  <a class="card" href="hair/" style="--accent:var(--hair)">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 20c0-8 3-14 7-14s7 6 7 14"/><path d="M8.5 20c0-6 1.5-10 3.5-10s3.5 4 3.5 10"/></svg>
+    </div>
+    <div class="label"><b>Haare</b><span>Wasch-Protokoll &amp; Rinse</span></div>
+    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </a>
+
+  <a class="card" href="workout/" style="--accent:var(--train)">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/></svg>
+    </div>
+    <div class="label"><b>Workout</b><span>Gym, Home &amp; Travel</span></div>
+    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </a>
+
+  <a class="card" href="kitchen/" style="--accent:var(--food)">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 4v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V4"/><path d="M7 13v7"/><path d="M17 20V4c-1.7.8-2.5 2.7-2.5 5s.8 3.8 2.5 4"/></svg>
+    </div>
+    <div class="label"><b>Küche</b><span>Rezepte &amp; Blocks</span></div>
+    <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+  </a>
+
+</main>
+
+<footer>
+  <span id="status">Offline verfügbar</span>
+  <span>v1</span>
+</footer>
+
+<script>
+  // Datum + Tageszeit in der Kopfzeile
+  (function(){
+    var d = new Date();
+    var days = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+    var months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+    document.getElementById("today").textContent =
+      days[d.getDay()] + ", " + d.getDate() + ". " + months[d.getMonth()];
+
+    var h = d.getHours();
+    var greet = h < 5 ? "Gute Nacht" : h < 11 ? "Guten Morgen" : h < 18 ? "Guten Tag" : "Guten Abend";
+    document.getElementById("greeting").textContent = greet;
+  })();
+
+  // Offline-Hinweis
+  (function(){
+    var el = document.getElementById("status");
+    function paint(){
+      if (navigator.onLine) {
+        el.textContent = "Offline verfügbar";
+        el.classList.remove("offline");
+      } else {
+        el.textContent = "Offline – zeigt gespeicherte Version";
+        el.classList.add("offline");
+      }
+    }
+    window.addEventListener("online", paint);
+    window.addEventListener("offline", paint);
+    paint();
+  })();
+
+  // Service Worker
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js");
+    });
+  }
+</script>
+
+</body>
+</html>
