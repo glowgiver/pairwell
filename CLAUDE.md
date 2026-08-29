@@ -1,111 +1,147 @@
-# Pairwell — Engine Ordner
+# Pairwell — architecture notes
 
-Private PWA für Philipp & Eunice. Vier Tools: Skincare, Haare, Workout, Küche.
-Gehostet später auf GitHub Pages (Repo-Name/URL noch nicht final entschieden).
+A private PWA for Philipp & Eunice. Four tools: Skincare, Hair, Workout, Kitchen.
 
-## Architektur — bitte lesen, bevor du was änderst
+**Live:** https://glowgiver.github.io/pairwell/ · repo `glowgiver/pairwell` (public)
 
-**Zwei-Schichten-Prinzip, bewusst so entschieden (nicht zur Diskussion, außer der User bringt es explizit auf):**
+Product language is **English** throughout — interface, data, commit messages.
+Exercise vocabulary stays as it is ("RIR", "Hip Thrust"); that is the language
+spoken in the gym. Ingredient names stay German; that is what is on the packet.
 
-1. **`data/*.json`** — die Wahrheit. Rohdaten: Tagesprofile, Rezepte, Trainingspläne,
-   Skincare/Haar-Routinen. Kein HTML, kein Styling, keine UI-Logik.
+## Architecture — read before changing anything
 
-2. **`hub/*/index.html`** — die Anzeige. Fertige, eigenständige HTML-Dateien.
-   Kein Runtime-Fetch von JSON, kein Framework. Jede Seite ist eine einzelne Datei,
-   die offline funktioniert, sobald der Service Worker sie gecacht hat.
+**Two layers, decided deliberately** (not up for revisiting unless you raise it):
 
-**Warum kein Runtime-Fetch:** Offline-Zuverlässigkeit im Gym/Alltag ist wichtiger
-als "eine Quelle live nachladen". Fertige HTML-Dateien sind robuster, weil sie nicht
-von Netzwerk- oder Cache-Zuständen abhängen. Das wurde mit dem User im Chat explizit
-so festgelegt (Option B von zwei durchgesprochenen Architekturen).
+1. **`data/*.json`** — the truth. Routines, recipes, training plans, targets.
+   No HTML, no styling, no UI logic.
 
-**Der Verbindungsweg zwischen den beiden Schichten sind die `scripts/build_*.py`
-Skripte.** Sie lesen `data/*.json` und schreiben die passende `hub/*/index.html`.
-Das ist ein manueller Build-Schritt, kein Watch-Prozess — nach jeder Datenänderung
-das passende Skript neu laufen lassen.
+2. **`hub/**/index.html`** — the display. Self-contained pages that work offline
+   once the service worker has cached them. No runtime fetch of JSON.
 
-```
-data/*.json  --[scripts/build_*.py]-->  hub/*/index.html
-```
+**Why no runtime fetch:** offline reliability in a gym or a bathroom matters more
+than loading one source live. Note the honest detail: the build scripts *inline*
+the JSON as `const T = {…}` and render in the browser, so these are small
+single-page apps with embedded data, not pre-rendered HTML. They are blank
+without JavaScript.
 
-## Ordnerstruktur
+**The bridge is `scripts/build_*.py`.** A manual step, no watcher.
 
 ```
-pairwell-engine/
+data/*.json  --[scripts/build_*.py]-->  hub/**/index.html
+```
+
+## Layout
+
+```
+pairwell/
 ├── data/
-│   ├── profiles.json      Tagesprofile beider Personen (kcal/Protein/Fett/Ballaststoffe)
-│   ├── kitchen.json        Mirror-Meal-System, Asian Base Blocks, Ninja-Standards
-│   ├── training.json       Vollständige Trainingsdatenbank (98 Übungen, alle Locations)
-│   └── routines.json       Skincare + Haare — siehe Lücken unten
+│   ├── profiles.json      daily targets, mirror-meal logic
+│   ├── training.json      14 sessions; still holds full exercise objects
+│   ├── exercises.json     canonical library — 43 movements, one cue, one demo video
+│   ├── routines.json      skincare (both people, two different shapes) + hair
+│   └── kitchen.json       standards + Asian Base Block; no recipes yet
 │
 ├── scripts/
-│   ├── build_training_data.py   Baut training.json neu (aktuell aus HTML-Quelle
-│   │                             hartcodiert — siehe TODO unten)
-│   └── build_workout_page.py    Liest training.json → schreibt hub/workout/index.html
+│   ├── build_workout_page.py    training.json + exercises.json → workout page
+│   ├── build_routines_page.py   routines.json → skincare + hair pages
+│   ├── recompute_macros.py      derives kitchen macros; holds no data itself
+│   ├── check_routine_rules.py   checks the seasonal plan against its own rules
+│   ├── verify_videos.py         re-checks all 43 demo links for rot
+│   └── _archive/                one-time migration; refuses to run
 │
 └── hub/
-    ├── index.html          Dashboard, 4 Kacheln, Personenwahl (P/E), localStorage
-    ├── manifest.json        PWA-Manifest
-    ├── sw.js                 Service Worker, Cache-Version aktuell "hub-v1"
-    ├── icons/                App-Icons (192, 512, maskable-512)
-    ├── workout/index.html    FERTIG — generiert aus training.json
-    ├── skincare/index.html   PLATZHALTER — noch nicht gebaut
-    ├── hair/index.html       PLATZHALTER — noch nicht gebaut
-    └── kitchen/index.html    PLATZHALTER — noch nicht gebaut
+    ├── index.html         dashboard
+    ├── app.css            the one palette — pages must not redefine tokens
+    ├── app.js             the one person model (PW.get / PW.set / mountSwitcher)
+    ├── manifest.json · sw.js · icons/
+    ├── skincare/ · hair/ · workout/     built
+    └── kitchen/                          placeholder — needs a recipe model first
 ```
 
-## Personalisierung — wichtiges Detail
+## Person handling
 
-Das Dashboard (`hub/index.html`) fragt beim allerersten Öffnen "Wer bist du?"
-und speichert die Antwort in `localStorage["hub.person"]` als `"P"` oder `"E"`.
+`hub/app.js` owns it. A two-pill switcher on every page writes
+`localStorage["hub.person"]` as `"P"` or `"E"`, and pages re-render on the
+`pw:person` event. There is no first-run prompt — it defaults to Philipp and one
+tap changes it.
 
-Jede Unterseite sollte das beim Laden auslesen und sich automatisch auf die
-richtige Person einstellen — `hub/workout/index.html` macht das bereits
-(siehe `loadPerson()` im Script). Neue Seiten (Skincare, Haare, Küche) sollten
-dasselbe Muster übernehmen, damit man beim Reinklicken nicht erneut wählen muss.
+The application is **not** built twice. One page per module; the person is a
+parameter of the display, like location is in the workout module. Hair and
+Kitchen are shared and say so rather than duplicating.
 
-Küche ist bewusst NICHT personenabhängig (Mirror-System — beide identisch).
+Note on storage: Safari's 7-day eviction of script-written data hits
+`localStorage` and IndexedDB equally, so switching API does not help. Installed
+home-screen web apps are exempt, which is how Pairwell is used. If logging is
+ever added, IndexedDB plus an export button is the plan — the export is the
+real safeguard.
 
-## Bekannte Lücken (siehe `_gaps`-Felder in den JSONs)
+## Two routine shapes
 
-- **Eunices Skincare-Routine fehlt komplett** — bewusst zurückgestellt, kommt später
-- **Eunices exakte Maintenance-Trainingslasten** teils nicht MacroFactor-verifiziert,
-  nur aus der ursprünglichen Workout-Hub-HTML übernommen
-- `build_training_data.py` baut die Daten aktuell aus fest eincodierten Python-Literalen
-  (Abschrift der ursprünglichen Workout-Hub-HTML). Das ist okay für jetzt, aber kein
-  eleganter Dauerzustand — bei größeren Trainingsänderungen eher direkt in
-  `data/training.json` editieren und `build_workout_page.py` neu laufen lassen,
-  statt das Build-Skript anzufassen.
+`routines.json` carries a `_model` field per person because they differ:
 
-## Style-Konventionen für neue Seiten
+- **philipp** `weekly` — one AM routine, one active per weekday. His PM *step
+  sequence* is still not recorded, only the active; the page says so rather than
+  inventing steps.
+- **eunice** `seasonal-weekly` — four seasons, each with its own AM routine and a
+  different PM protocol for all seven days. The page resolves today's season
+  first and shows only that.
 
-Dark Theme, gleiche CSS-Variablen wie im Dashboard:
+Safety rules are data, with an `appliesTo` field so they surface on the day they
+govern. A scoped rule shows only on its days; an unscoped critical rule shows
+daily; advisory ones live in the disclosure.
 
-```css
---bg:#0B1220; --surface:#131C2E; --surface-2:#1A2540; --line:#25324F;
---text:#EEF2F9; --muted:#8B9AB8;
---skin:#7FD1C1;   /* Skincare-Akzent */
---hair:#C9A6F2;   /* Haare-Akzent */
---train:#5A8DEE;  /* Workout-Akzent */
---food:#F2A65A;   /* Küche-Akzent */
+## Style
+
+Dark theme, tokens in `hub/app.css`. Accents: `--skin` teal, `--hair` violet,
+`--train` blue, `--food` orange; `--philipp` blue, `--eunice` violet.
+
+Rules learned the hard way:
+
+- **Type floor.** 13px for secondary, 15px+ for anything actionable. The workout
+  page still violates this (8.5–10.5px) and is due a typography pass.
+- **44px minimum touch targets** (`var(--tap)`).
+- **Real `<button>`s** with `aria-pressed` / `aria-selected`, never click-handling
+  `<div>`s.
+- **Escape everything** interpolated into `innerHTML` via `esc()`.
+- Every page: `← Hub` link top left, the person switcher top right.
+
+## Privacy
+
+Zero external requests. No analytics, no CDN, no web fonts. Demo videos are
+plain links with `rel="noopener"`, never iframes — an embed would contact
+YouTube for every exercise on the page.
+
+**The site is public.** Nothing identifying belongs in `data/`: no addresses,
+postcodes, workplaces, or route descriptions. Personal routines and targets are
+fine; anything that could locate a person is not. This was cleaned up once
+already — see the "Generalise locating detail" commit.
+
+## Deploying
+
+`main` holds the project. The site is served from the **`gh-pages` branch**,
+which contains the contents of `hub/` at its root.
+
+```bash
+python3 scripts/build_workout_page.py
+python3 scripts/build_routines_page.py
+# bump `const CACHE = "hub-vX"` in hub/sw.js
+git add -A && git commit -m "..."
+git push
+git subtree push --prefix hub origin gh-pages
 ```
 
-Jede Unterseite: Link "← Hub" oben links zurück zu `../`, kein zusätzliches
-Framework, kein `localStorage`-Zugriff außerhalb von `hub.person` (siehe
-Persistent-Storage-Regeln, falls später Logging/Historie gebraucht wird — das
-läuft über eine andere API, nicht `localStorage`, wegen iOS-Limits).
+Bumping the cache version is what makes both phones pick up the change. The
+fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
+*next* open — but bump it anyway.
 
-## Nächste sinnvolle Schritte
+## Known gaps
 
-1. Skincare-Seite bauen (Philipp-Daten in `routines.json` sind vollständig,
-   Eunice fehlt noch — Seite kann trotzdem schon für Philipp gebaut werden)
-2. Haare-Seite bauen (komplett dokumentiert, ein gemeinsames Protokoll)
-3. Küche-Seite bauen (aus `kitchen.json` — Rezeptlogik, Block-Rechner)
-4. Sobald alles steht: Repo-Name final festlegen, GitHub Pages aktivieren,
-   `sw.js`-Cache-Version auf `hub-v2` hochzählen beim ersten echten Deploy
-
-## Deploy-Hinweis (für später)
-
-`sw.js` cached alle Seiten beim ersten Laden. Bei jeder inhaltlichen Änderung
-an einer `hub/*/index.html` muss `const CACHE = "hub-vX"` in `sw.js` hochgezählt
-werden — sonst sehen die Handys weiter die alte, gecachte Version.
+- **Kitchen has no recipes.** `cookedWeightG` for the Asian Base Block is an
+  estimate; weigh a batch and re-run `recompute_macros.py`. The custom food in
+  MacroFactor may still hold the old 105 kcal/100 g — it should be 140.
+- **No Today screen.** `weeklyRhythm`, the seasonal plans and `am.steps` are all
+  present and unused. This is the highest-value next build.
+- **Sessions still duplicate exercise objects** instead of referencing
+  `exercises.json` by id.
+- **Philipp's PM steps** are unrecorded.
+- **Demo videos are verified live, not verified good** — nobody has watched them.
