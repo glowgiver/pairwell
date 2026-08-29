@@ -89,9 +89,11 @@ real safeguard.
 
 `routines.json` carries a `_model` field per person because they differ:
 
-- **philipp** `weekly` — one AM routine, one active per weekday. His PM *step
-  sequence* is still not recorded, only the active; the page says so rather than
-  inventing steps.
+- **philipp** `weekly-phased` — one 5-step AM routine, and a fixed 6-step PM
+  base where only step 03 rotates. The weekday schedule itself changes across
+  three phases (adapalene 2×/week in weeks 1–4, 3× from week 5), so the page
+  resolves the phase before it resolves the day. Phase is per-person state in
+  `localStorage`, not a fact about the protocol.
 - **eunice** `seasonal-weekly` — four seasons, each with its own AM routine and a
   different PM protocol for all seven days. The page resolves today's season
   first and shows only that.
@@ -161,9 +163,11 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   MacroFactor may still hold the old 105 kcal/100 g — it should be 140.
 - **Kitchen has one recipe, not a library.** The Base Block and the splitter
   work; actual dishes are still to be written.
+- **No MacroFactor import.** Designed in the product audit, not built. No export
+  file has ever been seen, so the importer must discover the schema rather than
+  assume column names.
 - **Sessions still duplicate exercise objects** instead of referencing
   `exercises.json` by id.
-- **Philipp's PM steps** are unrecorded.
 - **Demo videos are verified live, not verified good** — nobody has watched them.
   `verify_videos.py` confirms each link resolves and that the title and channel
   still match what was recorded; it cannot confirm the video shows good form.
