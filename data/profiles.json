@@ -11,15 +11,6 @@
     "philipp": {
       "displayName": "Philipp",
       "role": "biohacker",
-      "body": {
-        "weightKg": 81.2,
-        "targetWeightKg": 77.0,
-        "bodyFatPct": 20.6,
-        "targetBodyFatPct": 16.0,
-        "age": 43,
-        "stepsPerDay": 3500,
-        "_stepsNote": "3000-4000 in Hamburg. Was 8000+ while travelling in July, which is when the weight actually moved. training.json calls this a structural gap, not a training problem, and that is right."
-      },
       "dailyTargets": {
         "calories": 1600,
         "proteinG": 164,
@@ -73,14 +64,6 @@
     "eunice": {
       "displayName": "Eunice",
       "role": "healthy teacher",
-      "body": {
-        "weightKg": 63.3,
-        "targetWeightKg": null,
-        "bodyFatPct": 29.0,
-        "targetBodyFatPct": 22.0,
-        "age": null,
-        "stepsPerDay": null
-      },
       "dailyTargets": {
         "calories": 1580,
         "proteinG": 105,
@@ -121,5 +104,5 @@
     "Eunice's breakfast is not fixed yet — only a budget envelope exists.",
     "The four daily targets do not close: Philipp's imply 1662 kcal against a 1600 budget, Eunice's 1598 against 1580. scripts/check_targets.py reports both. Fat is the target crowded out in every arrangement — 164 g protein plus 45 g fibre leaves it landing near 35 g, not 52."
   ],
-  "_bodyNote": "The numeric truth for bodyweight lives here, because this is the file energy balance is computed from. training.json carries '81.2 -> 77 kg' as a display badge; scripts/check_targets.py compares the two so they cannot drift apart silently."
+  "_bodyNote": "Body composition is NOT in this file and must never be. It lives in private/body.json, which is gitignored, because this repo is public and a bodyweight describes a person rather than a plan. scripts/check_targets.py reads it from there and degrades to a warning when it is absent."
 }

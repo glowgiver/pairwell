@@ -66,8 +66,10 @@ pairwell/
 ├── inbox/                 GITIGNORED except TEMPLATE.md — recipes as found,
 │                          one dish per file, before they become data
 │
-├── private/               GITIGNORED — body composition, MacroFactor exports.
-│                          Anything describing a body rather than a plan.
+├── private/               GITIGNORED — body.json (weight, body fat, age,
+│                          steps) and MacroFactor exports. Anything describing
+│                          a body rather than a plan. check_targets.py is the
+│                          only reader; no build script may inline it.
 │
 ├── backups/               generated, self-contained, committed
 │
@@ -249,9 +251,18 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   to `private/`.
 - **The repo is public, not only the site.** Stripping a field out of the built
   pages hides nothing if the JSON it came from is committed. Body composition
-  and anything exported from MacroFactor belong in `private/`, which is
-  gitignored. `data/profiles.json` currently still carries both bodyweights,
-  and those commits are already pushed.
+  now lives in `private/body.json`; `data/profiles.json` and `data/training.json`
+  carry none, and `check_targets.py` reads the private file directly.
+  **The history still does.** Bodyweight was in `data/training.json` from the
+  first commit and body fat from `44468a7`, both pushed. Removing it from `main`
+  does not remove it from the 27 commits behind `main`, and on GitHub a rewrite
+  does not fully help: unreachable commits stay reachable by SHA until GitHub
+  garbage-collects, which needs a support request. The complete fix is a fresh
+  repository; the partial one is a rewrite plus that request. Undecided.
+- **Locating detail is back in `routines.json`.** `9bf4883` generalised it once,
+  but the skincare protocol names the city and one district, because the water
+  hardness rules are genuinely about that water. It is committed and served.
+  Generalising it costs real meaning, so it is a judgement call, not a cleanup.
 - **Sessions still duplicate exercise objects** instead of referencing
   `exercises.json` by id.
 - **Demo videos are verified live, not verified good** — nobody has watched them.

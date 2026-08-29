@@ -31,6 +31,20 @@ def lo(v):
     return float(str(v).split("-")[0])
 
 
+def bodies():
+    """Body composition, from private/body.json.
+
+    Not in data/, and not optional-by-accident: this repo is public, so the
+    one file describing bodies rather than plans is gitignored. Absent, the
+    energy-balance section says so and checks nothing.
+    """
+    path = os.path.join(BASE, "..", "private", "body.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return json.load(f).get("people", {})
+
+
 def measured_expenditure(key):
     """MacroFactor's adaptive TDEE, if it has been imported.
 
@@ -71,16 +85,18 @@ def energy_balance(profiles, training):
     """
     print("\nENERGY BALANCE — how far below maintenance is the calorie target?\n")
     rhythm = (training or {}).get("weeklyRhythm", {})
+    bodyData = bodies()
     findings = []
 
     for key, p in profiles["people"].items():
-        body = p.get("body") or {}
+        body = bodyData.get(key) or {}
         w, bf = body.get("weightKg"), body.get("bodyFatPct")
         if not w or bf is None:
-            print("  %s — no bodyweight recorded, nothing can be checked."
-                  % p["displayName"])
-            findings.append("%s has no bodyweight in profiles.json, so none of "
-                            "their targets can be sanity-checked." % p["displayName"])
+            print("  %s — no body composition in private/body.json, "
+                  "nothing can be checked." % p["displayName"])
+            findings.append("%s has no body composition in private/body.json, "
+                            "so none of their targets can be sanity-checked."
+                            % p["displayName"])
             continue
 
         lbm = w * (1 - bf / 100.0)
