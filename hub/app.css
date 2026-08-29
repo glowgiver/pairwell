@@ -9,7 +9,7 @@
   --line:#25324F;
   --text:#EEF2F9;
   --muted:#8B9AB8;
-  --muted2:#5f7492;
+  --muted2:#8093AF;   /* 4.85:1 on --surface-2, the worst case. Was #5f7492 = 3.18. */
 
   --skin:#7FD1C1;
   --hair:#C9A6F2;

@@ -61,7 +61,7 @@ html = """<!DOCTYPE html>
   }
 
   h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 4px;color:var(--train)}
-  .sub{font-size:13px;color:var(--muted);margin:0 0 20px}
+  .sub{font-size:14px;color:var(--muted);margin:0 0 20px}
 
   /* location pills */
   .pills{display:flex;gap:8px;margin-bottom:16px}
@@ -71,11 +71,11 @@ html = """<!DOCTYPE html>
     text-align:center;cursor:pointer;font-family:inherit;
     color:var(--muted);transition:background .15s;
   }
-  .pill b{display:block;font-size:13px;font-weight:700;color:var(--text)}
-  .pill span{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
+  .pill b{display:block;font-size:15px;font-weight:700;color:var(--text)}
+  .pill span{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
   .pill[aria-pressed="true"]{background:var(--train);border-color:var(--train)}
-  .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:#fff}
-  .pill[aria-pressed="true"] span{color:rgba(255,255,255,.75)}
+  .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:var(--bg)}
+  .pill[aria-pressed="true"] span{color:rgba(11,18,32,.72)}
   .pill:focus-visible{outline:2px solid var(--train);outline-offset:2px}
 
   .stage{
@@ -87,38 +87,38 @@ html = """<!DOCTYPE html>
   .profile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
   .pname{font-size:19px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .pbadge{
-    font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
-    padding:2px 8px;border-radius:20px;background:var(--accent);color:#fff;
+    font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;background:var(--accent);color:var(--bg);
   }
-  .pgoal{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic}
+  .pgoal{font-size:13.5px;color:var(--muted);margin-top:3px;font-style:italic}
   .pmeta{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
-  .pmeta div{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2)}
+  .pmeta div{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2)}
   .pmeta strong{display:block;font-size:13px;color:var(--text);text-transform:none;letter-spacing:0;margin-top:2px;font-weight:700}
 
-  .notice{padding:11px 18px;font-size:12px;line-height:1.55;color:var(--muted);border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .notice{padding:12px 18px;font-size:14px;line-height:1.55;color:var(--muted);border-bottom:1px solid var(--line);background:var(--surface-2)}
   .notice strong{color:var(--text)}
 
   .sess-tabs{display:flex;border-bottom:1px solid var(--line)}
   .sess-tab{
     flex:1;min-height:var(--tap);padding:9px 6px;text-align:center;cursor:pointer;
-    font-size:12px;font-weight:700;color:var(--muted);
+    font-size:14px;font-weight:700;color:var(--muted);
     background:none;border:0;border-bottom:2px solid transparent;
     font-family:inherit;
   }
-  .sess-tab span{display:block;font-size:9px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+  .sess-tab span{display:block;font-size:13px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
   .sess-tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
   .sess-tab.together[aria-selected="true"]{border-bottom-color:var(--eunice)}
   .sess-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
   .sess-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
-  .sess-focus{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px}
+  .sess-focus{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:3px}
   .sess-dur{display:block;font-size:13px;font-weight:400;color:var(--muted2);margin-top:3px}
 
   .opt-banner{
     margin:14px 18px 0;padding:11px 14px;border-radius:10px;
     border:1px dashed var(--line);background:var(--surface-2);
-    font-size:12px;color:var(--muted);line-height:1.55;
+    font-size:14px;color:var(--muted);line-height:1.6;
   }
   .opt-banner strong{color:var(--text)}
 
@@ -126,60 +126,61 @@ html = """<!DOCTYPE html>
   .tier-dot{width:9px;height:9px;border-radius:50%}
   .tier-dot.primary{background:var(--accent)}
   .tier-dot.maint{background:var(--muted2)}
-  .tier-name{font-size:13px;font-weight:700}
-  .tier-desc{font-size:9.5px;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-left:auto}
+  .tier-name{font-size:15px;font-weight:700}
+  .tier-desc{font-size:13px;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-left:auto}
 
   .ex{border-bottom:1px solid var(--line);padding:12px 18px}
   .ex:last-child{border-bottom:none}
   .ex.maint{background:rgba(255,255,255,.015)}
   .ex-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .ex-name{font-size:14.5px;font-weight:700;margin-bottom:2px}
-  .ex-ref{font-size:10.5px;color:var(--muted2);margin-bottom:6px}
+  .ex-name{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+  .ex-ref{font-size:13px;color:var(--muted2);margin-bottom:6px}
 
   /* Demo link. A plain link, not an embed: an iframe would load YouTube for
      every exercise on the page, including the ones nobody opens. */
   .demo{
-    flex:none;display:inline-flex;align-items:center;gap:6px;
-    min-height:36px;padding:0 12px;border-radius:10px;
+    flex:none;display:inline-flex;align-items:center;gap:7px;
+    min-height:var(--tap);padding:0 14px;border-radius:11px;
     border:1px solid var(--line);background:var(--surface-2);
     color:var(--accent);text-decoration:none;
-    font-size:12px;font-weight:600;
+    font-size:14px;font-weight:600;
   }
-  .demo svg{width:13px;height:13px;fill:currentColor}
-  .demo:active{background:var(--accent);color:#fff}
+  .demo svg{width:15px;height:15px;fill:currentColor}
+  .demo:active{background:var(--accent);color:var(--bg)}
   .demo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .tag-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
-  .tag{font-size:10px;padding:2.5px 8px;border-radius:5px;border:1px solid var(--line);color:var(--muted)}
-  .tag.sr{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+  .tag{font-size:13px;padding:4px 10px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+  .tag.sr{background:var(--accent);color:var(--bg);border-color:var(--accent);
+    font-weight:700;font-size:15px;padding:4px 11px;letter-spacing:.01em}
   .tag.load{background:var(--surface-2);color:var(--text);border-color:var(--line)}
-  .ex-cue{font-size:12px;color:var(--muted);line-height:1.55}
+  .ex-cue{font-size:14.5px;color:var(--muted);line-height:1.55}
   .ex-cue strong{color:var(--text)}
 
   .duo{display:flex;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .duo-half{flex:1;padding:8px 10px;font-size:11.5px;line-height:1.4}
+  .duo-half{flex:1;padding:10px 12px;font-size:14px;line-height:1.45}
   .duo-half.p{background:rgba(90,141,238,.08);border-right:1px solid var(--line)}
   .duo-half.e{background:rgba(201,166,242,.08)}
-  .duo-half .who{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);display:block;margin-bottom:3px}
+  .duo-half .who{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);display:block;margin-bottom:3px}
   .duo-half strong{color:var(--text)}
 
   /* guide */
   .guide{padding:4px 0}
   .ref-card{margin:14px 18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
   .ref-head{padding:13px 15px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-  .ref-title{font-size:16.5px;font-weight:700}
-  .ref-intro{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:5px}
+  .ref-title{font-size:18px;font-weight:700}
+  .ref-intro{font-size:14px;color:var(--muted);line-height:1.55;margin-top:5px}
   .ref-intro strong{color:var(--text)}
   .ref-body{padding:4px 15px}
   .ref-item{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
   .ref-item:last-child{border-bottom:none}
-  .ref-item-k{font-size:11px;font-weight:700;color:var(--accent)}
-  .ref-item-v{font-size:11.5px;color:var(--muted);line-height:1.55}
+  .ref-item-k{font-size:13px;font-weight:700;color:var(--accent)}
+  .ref-item-v{font-size:14.5px;color:var(--muted);line-height:1.55}
   .ref-item-v strong{color:var(--text)}
   .hr-zone{display:flex;gap:6px;margin:10px 0}
   .hrz{flex:1;text-align:center;padding:9px 6px;border-radius:8px;border:1px solid var(--line)}
   .hrz.z2{background:rgba(90,141,238,.1);border-color:var(--accent)}
-  .hrz-n{font-size:14px;font-weight:700}
-  .hrz-l{font-size:8.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);margin-top:2px}
+  .hrz-n{font-size:18px;font-weight:700}
+  .hrz-l{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);margin-top:2px}
 
   @media (prefers-reduced-motion:reduce){ * { transition:none !important } }
 </style>
@@ -208,16 +209,38 @@ function esc(s){
     .replace(/"/g,"&quot;");
 }
 
-var state = { loc: "gym", sess: null };
+/* A phone locks constantly during a workout. Without this, reopening drops you
+   back on gym/push while the browser restores the old scroll offset — so you
+   land deep inside a session you are not doing, and it looks like it
+   remembered. Keyed per person: they train different splits. */
+function stashKey(){ return "hub.workout." + PW.get(); }
+
+function loadState(){
+  try{
+    var raw = localStorage.getItem(stashKey());
+    if(raw){
+      var v = JSON.parse(raw);
+      if(v && LOC_LABEL[v.loc]) return { loc: v.loc, sess: v.sess || null };
+    }
+  }catch(e){}
+  return { loc: "gym", sess: null };
+}
+
+function saveState(){
+  try{ localStorage.setItem(stashKey(), JSON.stringify({loc: state.loc, sess: state.sess})); }
+  catch(e){}
+}
 
 function person(){ return PW.get(); }
 
 var LOC_LABEL = {
-  gym: ["Gym","Cable + machines"],
-  home: ["Home","Bodylastics"],
-  travel: ["Travel","Tubes only"],
-  guide: ["Guide","Week + cardio"]
+  gym: ["Gym","Cables"],
+  home: ["Home","Bands"],
+  travel: ["Travel","Tubes"],
+  guide: ["Guide","Week"]
 };
+
+var state = loadState();
 
 function el(tag, cls, html){
   var e = document.createElement(tag || "div");
@@ -245,9 +268,9 @@ function sessionsFor(loc, who){
 
 function setLoc(loc){
   state.loc = loc; state.sess = null;
-  renderPills(); renderStage();
+  saveState(); renderPills(); renderStage();
 }
-function setSess(s){ state.sess = s; renderStage(); }
+function setSess(s){ state.sess = s; saveState(); renderStage(); }
 
 function renderPills(){
   var wrap = document.getElementById("pills");
@@ -333,9 +356,9 @@ function renderStage(){
   var primary = sess.exercises.filter(function(e){ return e.tier === "primary"; });
   var maint = sess.exercises.filter(function(e){ return e.tier === "maint"; });
 
+  /* The exercises come first. The profile header is planning information —
+     body-fat targets are not what you need on the third set. */
   stage.innerHTML =
-    profileHTML() +
-    noticeHTML() +
     '<div class="sess-tabs" role="tablist">' + tabs + '</div>' +
     '<div class="sess-head"><div class="sess-title">' + esc(sess.title) +
     (sess.durationMin ? '<span class="sess-dur">' + esc(sess.exercises.length) +
@@ -347,7 +370,9 @@ function renderStage(){
     primary.map(exHTML).join("") +
     (maint.length ? '<div class="tier-head"><span class="tier-dot maint"></span><span class="tier-name">Maintenance</span>' +
     '<span class="tier-desc">2 sets · RIR 3 · never progress</span></div>' +
-    maint.map(exHTML).join("") : "");
+    maint.map(exHTML).join("") : "") +
+    noticeHTML() +
+    profileHTML();
 
   stage.querySelectorAll("[data-sess]").forEach(function(t){
     t.addEventListener("click", function(){ setSess(t.getAttribute("data-sess")); });
@@ -423,12 +448,14 @@ PW.mountSwitcher(document.getElementById("switcher"));
 // Switching person keeps the location but resets the session, since the
 // two people don't train the same split.
 window.addEventListener("pw:person", function(){
-  state.sess = null;
-  renderStage();
+  var restored = loadState();
+  state.loc = restored.loc; state.sess = restored.sess;
+  renderPills(); renderStage();
 });
 
 renderPills();
 renderStage();
+saveState();
 </script>
 
 </body>
