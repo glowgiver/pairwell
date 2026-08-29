@@ -227,9 +227,14 @@ html,body{margin:0;padding:0}
   position:fixed;left:0;right:0;bottom:0;z-index:20;
   display:flex;
   padding-bottom:env(safe-area-inset-bottom);
-  background:color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter:saturate(1.6) blur(14px);
-  -webkit-backdrop-filter:saturate(1.6) blur(14px);
+  /* Opaque, not frosted. At 92% the content scrolling underneath bleeds into
+     the composite: over dark ink the inactive labels fall to 4.19:1 and an
+     active Skincare tab to 4.33, both under AA, and which one you get depends
+     on where the page happens to be scrolled. Same lesson as the filled pills
+     — transparency fails somewhere. The border-top carries the separation the
+     blur used to imply, and the reduced-motion branch already shipped exactly
+     this, so it is a promotion rather than a new look. */
+  background:var(--bg);
   border-top:1px solid var(--line);
 }
 
@@ -258,6 +263,3 @@ html,body{margin:0;padding:0}
 /* every page reserves room so the bar never covers the last card */
 body{padding-bottom:calc(var(--bar) + 22px)}
 
-@media (prefers-reduced-motion:reduce){
-  .pw-tabs{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
-}

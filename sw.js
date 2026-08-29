@@ -1,14 +1,14 @@
 /* Pairwell service worker.
    Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v19";
+const CACHE = "hub-v20";
 
 const SHELL = [
   "./",
   "./index.html",
   /* Stamped by the build with a content hash; the pages request these exact
      URLs, so the cache key matches. Bare "./app.css" would never be hit. */
-  "./app.css?v=86fee2d7",
+  "./app.css?v=9fc8e3ff",
   "./app.js?v=06505c69",
   "./manifest.json",
   "./icons/icon-192.png",
