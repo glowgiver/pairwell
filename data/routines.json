@@ -1,28 +1,72 @@
 {
-  "_source": ["skin_protocol.html conversations", "hair_protocol.html conversation"],
-
+  "_source": [
+    "skin_protocol.html conversations",
+    "hair_protocol.html conversation"
+  ],
   "skincare": {
     "philipp": {
       "skinType": "combination — oily T-zone, normal-to-dry cheeks",
-      "concerns": ["under-eye dark circles", "general anti-aging optimization"],
+      "concerns": [
+        "under-eye dark circles",
+        "general anti-aging optimization"
+      ],
       "am": {
         "durationMin": 4,
         "goal": "protect",
         "steps": [
-          { "step": "Reinigung", "product": "CeraVe Hydrating Cream-to-Foam", "how": "lauwarmes Wasser, 20 Sek. einmassieren, gründlich abspülen" },
-          { "step": "Vitamin C", "product": "Rohto Melano CC Premium Essence" },
-          { "step": "Augenpflege", "product": "CeraVe Eye Repair Cream" },
-          { "step": "SPF", "product": "Biore UV Aqua Rich SPF" }
+          {
+            "step": "Reinigung",
+            "product": "CeraVe Hydrating Cream-to-Foam",
+            "how": "lauwarmes Wasser, 20 Sek. einmassieren, gründlich abspülen"
+          },
+          {
+            "step": "Vitamin C",
+            "product": "Rohto Melano CC Premium Essence"
+          },
+          {
+            "step": "Augenpflege",
+            "product": "CeraVe Eye Repair Cream"
+          },
+          {
+            "step": "SPF",
+            "product": "Biore UV Aqua Rich SPF"
+          }
         ]
       },
       "pmWeeklyPlan": [
-        { "day": "Montag",     "active": "Adapalen 0,1% (Rx)", "how": "dünner Film, ganzes Gesicht" },
-        { "day": "Dienstag",   "active": "BHA — Paula's Choice 2%", "how": "T-Zone-Fokus" },
-        { "day": "Mittwoch",   "active": "Adapalen 0,1% (Rx)" },
-        { "day": "Donnerstag", "active": "Niacinamid + Hyaluron", "how": "Ruhetag, kein Aktivstoff" },
-        { "day": "Freitag",    "active": "Adapalen 0,1% (Rx)" },
-        { "day": "Samstag",    "active": "AHA — Glykol- oder Milchsäure", "how": "optional, nur wenn Haut ruhig" },
-        { "day": "Sonntag",    "active": null, "how": "Ruhetag — nur Feuchtigkeit + Barrierepflege" }
+        {
+          "day": "Montag",
+          "active": "Adapalen 0,1% (Rx)",
+          "how": "dünner Film, ganzes Gesicht"
+        },
+        {
+          "day": "Dienstag",
+          "active": "BHA — Paula's Choice 2%",
+          "how": "T-Zone-Fokus"
+        },
+        {
+          "day": "Mittwoch",
+          "active": "Adapalen 0,1% (Rx)"
+        },
+        {
+          "day": "Donnerstag",
+          "active": "Niacinamid + Hyaluron",
+          "how": "Ruhetag, kein Aktivstoff"
+        },
+        {
+          "day": "Freitag",
+          "active": "Adapalen 0,1% (Rx)"
+        },
+        {
+          "day": "Samstag",
+          "active": "AHA — Glykol- oder Milchsäure",
+          "how": "optional, nur wenn Haut ruhig"
+        },
+        {
+          "day": "Sonntag",
+          "active": null,
+          "how": "Ruhetag — nur Feuchtigkeit + Barrierepflege"
+        }
       ],
       "pmApplicationRule": "dünn zuerst, dicht zuletzt; 30-60 Sek. zwischen Schritten warten; Aktivstoffe auf trockene Haut",
       "coreProducts": {
@@ -33,18 +77,419 @@
         "eyeCream": "CeraVe Eye Repair Cream (AM), Rohto Melano CC Moisture Cream (PM, targeted)",
         "spf": "Biore UV Aqua Rich SPF"
       },
-      "timeline": "adapalene needs patience — meaningful texture/pore results from week 12+, weeks 1-8 show nothing visible by design"
+      "timeline": "adapalene needs patience — meaningful texture/pore results from week 12+, weeks 1-8 show nothing visible by design",
+      "_model": "weekly — one AM routine, one active per weekday"
     },
     "eunice": {
-      "_status": "DEFERRED — will be added in a later session, on purpose",
-      "skinType": null,
-      "concerns": [],
-      "am": { "steps": [] },
-      "pmWeeklyPlan": [],
-      "coreProducts": {}
+      "_source": "Hamburg Seasonal Skincare Masterplan (.docx), added 2026-08-29",
+      "_model": "seasonal-weekly — four season plans, each with its own AM routine and a different PM protocol per weekday. Philipp uses the simpler 'weekly' model (one AM, one active per weekday), so a renderer has to handle both shapes.",
+      "skinType": "mixed / Asian, age 37",
+      "concerns": [
+        "pores (nose area)",
+        "horizontal neck rings",
+        "structural jawline lifting"
+      ],
+      "context": {
+        "location": "Hamburg",
+        "waterHardness": "hard — high calcium/magnesium; see the shared hair section for the measured 17.3 °dH"
+      },
+      "safetyRules": [
+        {
+          "id": "mfu-boundaries",
+          "title": "High Focus Shot (MFU) boundaries",
+          "rule": "Maximum once per week. Completely avoid the eyeballs, eyelids, jawbone edge, lips and the centre of the neck (thyroid area). Target only the jowls, lower face sag and the sides of the neck.",
+          "appliesTo": [
+            "sat"
+          ],
+          "critical": true
+        },
+        {
+          "id": "no-mix-actives",
+          "title": "The no-mix actives rule",
+          "rule": "Never use the Exosome Shot or the Booster Pro Air Shot on the same night as 0.2% Retinol, and never on a High Focus Shot night.",
+          "critical": true
+        },
+        {
+          "id": "conductivity",
+          "title": "The conductivity rule",
+          "rule": "Use a thick layer of PDRN Booster Gel for the High Focus Shot, or PDRN Pink Peptide Serum for the Booster Pro. Oils (Freiöl, Rose Hip Oil) insulate — always apply them after device use, never before.",
+          "critical": false
+        },
+        {
+          "id": "hard-water-shield",
+          "title": "The 'Kalk' hard-water shield",
+          "rule": "Hamburg tap water dulls skin and stretches pores. Use the Foreo in the evening to strip mineral buildup mechanically, and always apply The Ordinary HA 2% + B5 while the skin is still damp.",
+          "critical": false
+        }
+      ],
+      "seasons": {
+        "winter": {
+          "months": "November – March",
+          "monthNumbers": [
+            11,
+            12,
+            1,
+            2,
+            3
+          ],
+          "goal": "High-lipid shield against dry radiator heat and freezing winds, to stop neck rings cracking and deepening.",
+          "am": {
+            "durationMin": 3,
+            "steps": [
+              "No water wash",
+              "HA 2% + B5 on damp skin",
+              "Nivea Day Cream",
+              "SPF"
+            ]
+          },
+          "pmWeekly": [
+            {
+              "day": "Mon",
+              "focus": "Pores & active prep",
+              "steps": [
+                "Foreo Cleanse",
+                "Exosome Shot",
+                "PDRN Serum",
+                "Booster Pro (Booster Mode)"
+              ]
+            },
+            {
+              "day": "Tue",
+              "focus": "Cellular turnover",
+              "steps": [
+                "Foreo Cleanse",
+                "PDRN Serum",
+                "0.2% Retinol",
+                "Nivea Night Cream + 2 drops Rose Hip Oil"
+              ]
+            },
+            {
+              "day": "Wed",
+              "focus": "Midweek detox",
+              "steps": [
+                "Foreo Cleanse",
+                "Freiöl",
+                "Gua Sha (warm the oil in your hands first)"
+              ]
+            },
+            {
+              "day": "Thu",
+              "focus": "Deep volumizing",
+              "steps": [
+                "Gentle Cleanse",
+                "Exosome Shot",
+                "PDRN Serum",
+                "Booster Pro (Booster Mode – Level 1)"
+              ]
+            },
+            {
+              "day": "Fri",
+              "focus": "Targeted neck rings",
+              "steps": [
+                "Foreo Cleanse",
+                "Collagen Glow Pen",
+                "Booster Pro (MC Mode) glide horizontally along neck rings",
+                "Nivea Night"
+              ]
+            },
+            {
+              "day": "Sat",
+              "focus": "Structural MFU lift",
+              "steps": [
+                "Foreo Cleanse",
+                "High Focus Shot (600–1200 shots with PDRN Booster Gel on jowls / sides of neck)",
+                "Pat in excess gel",
+                "Nivea Night"
+              ]
+            },
+            {
+              "day": "Sun",
+              "focus": "Barrier recovery reset",
+              "steps": [
+                "Gentle Cleanse",
+                "Sheet Mask (no devices)",
+                "Seal with Rose Hip Oil"
+              ]
+            }
+          ]
+        },
+        "spring": {
+          "months": "April – June",
+          "monthNumbers": [
+            4,
+            5,
+            6
+          ],
+          "goal": "Deep pore de-gunking, to clear pollen and dust sticking to hard-water residue.",
+          "am": {
+            "durationMin": 3,
+            "steps": [
+              "Lukewarm water wash",
+              "HA 2% + B5",
+              "Nivea Day Cream",
+              "SPF"
+            ],
+            "weeklyExtra": "Friday morning: swipe Nivea Toner on the nose only."
+          },
+          "pmWeekly": [
+            {
+              "day": "Mon",
+              "focus": "Resurfacing & pores",
+              "steps": [
+                "Foreo Cleanse",
+                "Booster Pro (Air Shot Mode) on nose pores",
+                "Exosome Shot",
+                "PDRN Serum"
+              ]
+            },
+            {
+              "day": "Tue",
+              "focus": "Retinol night",
+              "steps": [
+                "Foreo Cleanse",
+                "PDRN Serum",
+                "0.2% Retinol",
+                "Nivea Night Cream"
+              ]
+            },
+            {
+              "day": "Wed",
+              "focus": "Lymphatic drainage",
+              "steps": [
+                "Foreo Cleanse",
+                "Freiöl",
+                "Gua Sha, stroking downwards on the sides of the neck"
+              ]
+            },
+            {
+              "day": "Thu",
+              "focus": "Cellular power",
+              "steps": [
+                "Foreo Cleanse",
+                "Exosome Shot",
+                "PDRN Serum",
+                "Booster Pro (Booster Mode)"
+              ]
+            },
+            {
+              "day": "Fri",
+              "focus": "Pore & neck target",
+              "steps": [
+                "Foreo Cleanse",
+                "Collagen Glow Pen",
+                "Booster Pro (MC Mode) on neck lines"
+              ]
+            },
+            {
+              "day": "Sat",
+              "focus": "Structural MFU lift",
+              "steps": [
+                "Foreo Cleanse",
+                "High Focus Shot (with PDRN Booster Gel, focused on a sharp jawline contour)"
+              ]
+            },
+            {
+              "day": "Sun",
+              "focus": "Moisture surge",
+              "steps": [
+                "Foreo Cleanse",
+                "Sheet Mask",
+                "Booster Pro (Booster Mode) directly over the sheet mask"
+              ]
+            }
+          ]
+        },
+        "summer": {
+          "months": "July – August",
+          "monthNumbers": [
+            7,
+            8
+          ],
+          "goal": "Heat calming, pore tightening and high-level pigment defence against strong summer sun.",
+          "am": {
+            "durationMin": 3,
+            "steps": [
+              "Lukewarm water wash",
+              "HA 2% + B5",
+              "Nivea Day Cream",
+              "SPF 50 — strict"
+            ],
+            "weeklyExtra": "Friday morning: swipe Nivea Toner on the nose."
+          },
+          "pmWeekly": [
+            {
+              "day": "Mon",
+              "focus": "Pore shrinking",
+              "steps": [
+                "Foreo Cleanse",
+                "Booster Pro (Air Shot Mode) on nose pores",
+                "PDRN Serum"
+              ]
+            },
+            {
+              "day": "Tue",
+              "focus": "Soothing night",
+              "steps": [
+                "Foreo Cleanse",
+                "PDRN Serum",
+                "Nivea Night Cream — skip retinol entirely if the weekend was spent outdoors or at the beach"
+              ]
+            },
+            {
+              "day": "Wed",
+              "focus": "Cryo-calming",
+              "steps": [
+                "Foreo Cleanse",
+                "Sheet Mask (chilled in the fridge first)",
+                "Booster Pro (Booster Mode) over the cold mask"
+              ]
+            },
+            {
+              "day": "Thu",
+              "focus": "Lightweight regeneration",
+              "steps": [
+                "Foreo Cleanse",
+                "Exosome Shot",
+                "PDRN Serum",
+                "Booster Pro (Booster Mode)"
+              ]
+            },
+            {
+              "day": "Fri",
+              "focus": "Neck firming",
+              "steps": [
+                "Foreo Cleanse",
+                "Collagen Glow Pen",
+                "Booster Pro (MC Mode) on neck"
+              ]
+            },
+            {
+              "day": "Sat",
+              "focus": "Structural MFU lift",
+              "steps": [
+                "Foreo Cleanse",
+                "High Focus Shot (keep the PDRN Booster Gel in the fridge for a cooling treatment)"
+              ]
+            },
+            {
+              "day": "Sun",
+              "focus": "UV recovery",
+              "steps": [
+                "Foreo Cleanse",
+                "Rose Hip Oil + Gua Sha, to calm the sun-exposed barrier"
+              ]
+            }
+          ]
+        },
+        "autumn": {
+          "months": "September – October",
+          "monthNumbers": [
+            9,
+            10
+          ],
+          "goal": "The deep reconstruction phase: repair summer UV damage and build skin thickness before winter.",
+          "am": {
+            "durationMin": 3,
+            "steps": [
+              "No water wash",
+              "HA 2% + B5 on damp skin",
+              "Nivea Day Cream",
+              "SPF"
+            ],
+            "weeklyExtra": "Friday morning: swipe Nivea Toner on the nose."
+          },
+          "pmWeekly": [
+            {
+              "day": "Mon",
+              "focus": "Advanced resurfacing",
+              "steps": [
+                "Foreo Cleanse",
+                "Booster Pro (Air Shot Mode)",
+                "Exosome Shot",
+                "PDRN Serum"
+              ]
+            },
+            {
+              "day": "Tue",
+              "focus": "Active cell turnover",
+              "steps": [
+                "Foreo Cleanse",
+                "PDRN Serum",
+                "0.2% Retinol",
+                "Nivea Night Cream"
+              ]
+            },
+            {
+              "day": "Wed",
+              "focus": "Sculpt & drain",
+              "steps": [
+                "Foreo Cleanse",
+                "Freiöl",
+                "Gua Sha"
+              ]
+            },
+            {
+              "day": "Thu",
+              "focus": "Deep cellular regeneration",
+              "steps": [
+                "Foreo Cleanse",
+                "Exosome Shot",
+                "PDRN Serum",
+                "Booster Pro (Booster Mode)"
+              ]
+            },
+            {
+              "day": "Fri",
+              "focus": "Neck ring focus",
+              "steps": [
+                "Foreo Cleanse",
+                "Collagen Glow Pen",
+                "Booster Pro (MC Mode) focused on horizontal creases"
+              ]
+            },
+            {
+              "day": "Sat",
+              "focus": "Structural MFU lift",
+              "steps": [
+                "Foreo Cleanse",
+                "High Focus Shot (with PDRN Booster Gel, focused on pulling up lower cheeks / jowls)"
+              ]
+            },
+            {
+              "day": "Sun",
+              "focus": "Deep nutrient infusion",
+              "steps": [
+                "Foreo Cleanse",
+                "Sheet Mask",
+                "Booster Pro (Booster Mode)",
+                "Finish with Rose Hip Oil"
+              ]
+            }
+          ]
+        }
+      },
+      "devices": {
+        "mfu": "High Focus Shot Plus — 1x/week, Saturdays, see safetyRules.mfu-boundaries",
+        "boosterPro": "Booster Pro — Booster Mode, Air Shot Mode, MC Mode",
+        "foreo": "Foreo — evening cleanse, mechanical removal of hard-water minerals",
+        "guaSha": "Gua Sha — manual, always over oil",
+        "collagenGlowPen": "Collagen Glow Pen — Fridays, neck"
+      },
+      "coreProducts": {
+        "hydrator": "The Ordinary Hyaluronic Acid 2% + B5 — apply to damp skin",
+        "dayCream": "Nivea Day Cream",
+        "nightCream": "Nivea Night Cream",
+        "spf": "SPF daily; SPF 50 strictly in summer",
+        "retinol": "0.2% Retinol — Tuesdays",
+        "pdrnSerum": "PDRN Pink Peptide Serum — conductive medium for the Booster Pro",
+        "pdrnBoosterGel": "PDRN Booster Gel — conductive medium for the High Focus Shot",
+        "exosome": "Exosome Shot",
+        "oils": "Freiöl (Gua Sha), Rose Hip Oil (sealing)",
+        "toner": "Nivea Toner — Friday mornings, nose only, spring/summer/autumn",
+        "sheetMask": "Sheet Mask"
+      }
     }
   },
-
   "hair": {
     "_status": "SHARED — one protocol, used by both. No per-person split needed on the dashboard.",
     "context": {
@@ -65,9 +510,9 @@
       "eunice": "longer hair — higher risk of under-cleansing when following the shared amounts, worth watching"
     }
   },
-
   "_gaps": [
-    "Eunice's skincare routine deferred on purpose — to be added in a later session",
-    "Hair protocol exact frequency/amount split (if any) between the two isn't fully itemized — currently treated as one shared routine with individual notes only"
+    "Philipp's PM routine is still only an active-per-weekday plus a prose application rule — there is no step sequence, so his 'tonight' screen cannot be rendered the way Eunice's can",
+    "Hair protocol frequency/amount split between the two is not itemised — treated as one shared routine with individual notes",
+    "Eunice's plan is device-heavy and season-dependent; the app must show the season's plan for today, not all four"
   ]
 }
