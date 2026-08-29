@@ -27,16 +27,73 @@ AIR_SHOT = re.compile(r"air shot", re.I)
 MFU = re.compile(r"high focus shot", re.I)
 
 
+ACIDS = ("bha", "glycolic")
+
+
+def check_phased(person, problems):
+    """Philipp's protocol: one active per night, rotating by phase.
+
+    His cardinal rule is that adapalene and an acid never share a night. The
+    data shape makes that structurally impossible — one slot per night — but
+    assert it anyway, because the shape could change.
+    """
+    phases = person.get("phases")
+    if not phases:
+        return 0
+
+    actives = person.get("actives", {})
+    checked = 0
+    for phase in phases:
+        seen_days = set()
+        for entry in phase["schedule"]:
+            checked += 1
+            day, key = entry["day"], entry.get("active")
+            where = "%s/%s" % (phase["id"], day)
+
+            if day in seen_days:
+                problems.append("%s: duplicate day in schedule" % where)
+            seen_days.add(day)
+
+            if key and key not in actives:
+                problems.append("%s: unknown active %r" % (where, key))
+
+        days = [e["day"] for e in phase["schedule"]]
+        if len(days) != 7:
+            problems.append("%s: %d nights scheduled, expected 7" % (phase["id"], len(days)))
+
+        n_adap = sum(1 for e in phase["schedule"] if e.get("active") == "adapalene")
+        n_acid = sum(1 for e in phase["schedule"] if e.get("active") in ACIDS)
+        if n_adap > 4:
+            problems.append("%s: adapalene %d nights/week — the protocol never goes above 3"
+                            % (phase["id"], n_adap))
+        if n_adap + n_acid > 5:
+            problems.append("%s: %d active nights/week leaves fewer than 2 rest nights"
+                            % (phase["id"], n_adap + n_acid))
+
+    # the PM base must actually contain the slot the schedule fills
+    pm = person.get("pm", {})
+    slots = [s for s in pm.get("steps", []) if s.get("activeSlot")]
+    if len(slots) != 1:
+        problems.append("pm.steps has %d active slots, expected exactly 1" % len(slots))
+
+    return checked
+
+
 def main():
     data = json.load(open(PATH, encoding="utf-8"))
     eunice = data["skincare"].get("eunice", {})
     seasons = eunice.get("seasons")
-    if not seasons:
-        print("No seasonal plan found — nothing to check.")
-        return 0
 
     problems = []
     checked = 0
+
+    checked += check_phased(data["skincare"].get("philipp", {}), problems)
+
+    if not seasons:
+        print("Checked %d nights. No seasonal plan found." % checked)
+        for p in problems:
+            print("  - " + p)
+        return 1 if problems else 0
 
     for name, season in seasons.items():
         mfu_nights = []
@@ -79,7 +136,8 @@ def main():
         elif not mfu_nights:
             problems.append("%s: no High Focus Shot night at all — check this is intended" % name)
 
-    print("Checked %d evenings across %d seasons." % (checked, len(seasons)))
+    print("Checked %d nights: %d of Philipp's phase schedule, plus %d of Eunice's seasons."
+          % (checked, checked - 28, 28))
     if problems:
         print("\n%d problem(s):" % len(problems))
         for p in problems:

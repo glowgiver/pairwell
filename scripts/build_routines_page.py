@@ -96,6 +96,26 @@ SHARED_CSS = """
   }
   .season b{color:var(--text);font-weight:600}
 
+  /* phase strip — which stage of the protocol he is on */
+  .phases{display:flex;gap:5px;margin-bottom:10px}
+  .phase{
+    flex:1;min-height:var(--tap);border-radius:11px;
+    border:1px solid var(--line);background:var(--surface);
+    color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;
+    cursor:pointer;padding:6px 4px;
+  }
+  .phase small{display:block;font-size:10.5px;font-weight:400;color:var(--muted2);margin-top:2px}
+  .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .phase[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+  .phase:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .phase-note{
+    font-size:13.5px;color:var(--muted);line-height:1.5;
+    margin-bottom:14px;padding-left:2px;
+  }
+
+  /* the one step that changes night to night */
+  ol.steps .t.active-step{color:var(--accent)}
+
   /* safety */
   .rule{
     border:1px solid var(--line);border-left:3px solid var(--muted2);
@@ -231,6 +251,50 @@ function renderDays(){
   });
 }
 
+/* Philipp's PM is a fixed base where step 03 is a slot. Fill the slot with
+   whichever active the current phase puts on this weekday. A rest night drops
+   the slot entirely rather than leaving a hole. */
+function currentPhase(r){
+  var want = phaseOverride(r) || r.currentPhase;
+  var found = r.phases.filter(function(p){ return p.id === want; })[0];
+  return found || r.phases[r.phases.length - 1];
+}
+
+function phaseOverride(r){
+  try { return localStorage.getItem("hub.phase." + person()); } catch(e){ return null; }
+}
+
+function buildPhasedPM(r){
+  if(!r.pm || !r.phases) return null;
+  var phase = currentPhase(r);
+  var entry = phase.schedule.filter(function(e){ return e.day === state.day; })[0];
+  var key = entry && entry.active;
+  var active = key && r.actives[key];
+
+  var out = [];
+  r.pm.steps.forEach(function(s){
+    if(!s.activeSlot){ out.push(s); return; }
+    if(!active) return;                       // rest night: no step 03 at all
+    out.push({
+      step: active.name + (active.optional ? " · optional" : ""),
+      how: active.how,
+      isActive: true
+    });
+  });
+  return out;
+}
+
+function phaseHTML(r){
+  var cur = currentPhase(r);
+  return '<div class="phases" id="phases" role="group" aria-label="Protocol phase">' +
+    r.phases.map(function(p){
+      return '<button type="button" class="phase" data-phase="' + esc(p.id) + '"' +
+        ' aria-pressed="' + (p.id === cur.id) + '">' + esc(p.label) +
+        '<small>' + esc(p.subtitle) + '</small></button>';
+    }).join("") + '</div>' +
+    '<div class="phase-note">' + esc(cur.note) + '</div>';
+}
+
 function ruleHTML(rule){
   return '<div class="rule' + (rule.critical ? ' critical' : '') + '">' +
     '<div class="rt">' + (rule.critical ? '&#9888; ' : '') + esc(rule.title) + '</div>' +
@@ -256,7 +320,7 @@ function renderStage(){
   }
 
   var season = seasonFor(r);
-  var am, pmSteps = null, pmFocus = null, pmActive = null, pmHow = null;
+  var am, pmSteps = null, pmFocus = null;
 
   if(season){
     seasonEl.innerHTML = '<div class="season">' + esc(season.data.months) +
@@ -266,11 +330,10 @@ function renderStage(){
     var ev = season.data.pmWeekly.filter(function(e){ return e.day === state.day; })[0];
     if(ev){ pmSteps = ev.steps; pmFocus = ev.focus; }
   } else {
-    seasonEl.innerHTML = "";
     sub.textContent = r.skinType || "";
     am = r.am;
-    var d = (r.pmWeeklyPlan || []).filter(function(e){ return e.day === state.day; })[0];
-    if(d){ pmActive = d.active; pmHow = d.how; }
+    seasonEl.innerHTML = r.phases ? phaseHTML(r) : "";
+    pmSteps = buildPhasedPM(r);
   }
 
   /* Morning */
@@ -294,31 +357,30 @@ function renderStage(){
     (am && am.durationMin ? '<span class="meta">' + esc(am.durationMin) + ' min</span>' : '') +
     '</div>' + amBody + '</div>' + amExtra;
 
-  /* Evening */
+  /* Evening — both models render as numbered steps. */
   var evening;
-  if(pmSteps){
+  if(pmSteps && pmSteps.length){
+    var restNight = r.phases && !pmSteps.some(function(s){ return s.isActive; });
     evening = '<div class="card"><div class="card-head">' +
       '<span class="k">' + (isToday ? 'Tonight' : esc(DAY_LONG[state.day]) + ' evening') + '</span>' +
-      '<span class="focus">' + esc(pmFocus) + '</span></div>' +
-      stepList(pmSteps, function(s){ return '<div class="t">' + esc(s) + '</div>'; }) +
-      '</div>';
+      (r.pm && r.pm.durationMin ? '<span class="meta">' + esc(r.pm.durationMin) + ' min</span>' : '') +
+      (pmFocus ? '<span class="focus">' + esc(pmFocus) + '</span>' : '') +
+      (restNight ? '<span class="focus">Rest night — no active</span>' : '') +
+      '</div>' +
+      stepList(pmSteps, function(s){
+        if(typeof s === "string") return '<div class="t">' + esc(s) + '</div>';
+        return '<div class="t' + (s.isActive ? ' active-step' : '') + '">' + esc(s.step) + '</div>' +
+               (s.product ? '<div class="p">' + esc(s.product) + '</div>' : '') +
+               (s.how ? '<div class="h">' + esc(s.how) + '</div>' : '');
+      }) + '</div>';
   } else {
-    var activeLine = pmActive
-      ? '<div class="t">' + esc(pmActive) + '</div>'
-      : '<div class="t">Rest day</div>';
-    evening = '<div class="card"><div class="card-head">' +
-      '<span class="k">' + (isToday ? 'Tonight' : esc(DAY_LONG[state.day]) + ' evening') + '</span>' +
-      '</div><ol class="steps"><li><span class="n">&bull;</span><div>' + activeLine +
-      (pmHow ? '<div class="h">' + esc(pmHow) + '</div>' : '') +
-      '</div></li></ol></div>';
-    if(r.pmApplicationRule){
-      evening += '<div class="rule"><div class="rt">How to apply</div><p>' +
-        esc(r.pmApplicationRule) + '</p></div>';
-    }
-    if(r._pmStepsMissing){
-      evening += '<div class="rule"><div class="rt">Not recorded yet</div><p>' +
-        esc(r._pmStepsMissing) + '</p></div>';
-    }
+    evening = '<div class="card"><div class="card-head"><span class="k">' +
+      (isToday ? 'Tonight' : esc(DAY_LONG[state.day]) + ' evening') +
+      '</span></div><div class="empty">No evening routine recorded.</div></div>';
+  }
+  if(r.applicationRule){
+    evening += '<div class="rule"><div class="rt">How to apply</div><p>' +
+      esc(r.applicationRule) + '</p></div>';
   }
 
   /* Inline only what you need to see before touching anything: rules tied to
@@ -367,6 +429,17 @@ function renderStage(){
   /* After 18:00 the evening is what you need first. */
   var eveningFirst = new Date().getHours() >= 18 && isToday;
   stage.innerHTML = (eveningFirst ? evening + morning : morning + evening) + dayRules + details;
+
+  /* Phase strip lives above the stage, so wire it after each render. */
+  var ph = document.getElementById("phases");
+  if(ph){
+    ph.querySelectorAll("[data-phase]").forEach(function(b){
+      b.addEventListener("click", function(){
+        try { localStorage.setItem("hub.phase." + person(), b.getAttribute("data-phase")); }catch(e){}
+        renderStage();
+      });
+    });
+  }
 }
 
 PW.mountRail();

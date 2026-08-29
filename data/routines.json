@@ -5,81 +5,278 @@
   ],
   "skincare": {
     "philipp": {
+      "_source": "skin_protocol.html · Issue 2026-07",
+      "_model": "weekly-phased — one AM routine; PM is a fixed 6-step base where only step 03 rotates by weekday, and the weekday schedule itself changes across three phases",
       "skinType": "combination — oily T-zone, normal-to-dry cheeks",
+      "fitzpatrick": "III–IV",
+      "focus": "prevention over correction",
       "concerns": [
-        "under-eye dark circles",
-        "general anti-aging optimization"
+        "under-eye dark circles (mostly pigment)",
+        "texture and pores",
+        "general photoaging prevention"
       ],
+      "applicationRule": "Thin before thick, wet before oil. Wait 30–60 seconds between steps for absorption. Apply to damp skin — except actives (adapalene, acids), which go on dry skin to reduce irritation.",
       "am": {
         "durationMin": 4,
-        "goal": "protect",
+        "_note": "Identical Mon → Sun. No thinking needed.",
         "steps": [
           {
             "step": "Cleanse",
             "product": "CeraVe Hydrating Cream-to-Foam",
-            "how": "lukewarm water, massage 20 sec, rinse thoroughly"
+            "how": "Lukewarm water, 20 seconds of gentle massage, rinse fully."
           },
           {
             "step": "Vitamin C",
-            "product": "Rohto Melano CC Premium Essence"
+            "product": "Rohto Melano CC Premium Essence",
+            "how": "3–4 drops · targeted on cheekbones and existing spots."
           },
           {
-            "step": "Eye care",
-            "product": "CeraVe Eye Repair Cream"
+            "step": "Eye area",
+            "product": "CeraVe Eye Repair Cream",
+            "how": "Ring finger · small dab per eye · tap along the orbital bone · never rub."
           },
           {
-            "step": "SPF",
-            "product": "Biore UV Aqua Rich SPF"
+            "step": "Moisturizer",
+            "product": "Beauty of Joseon Dynasty Cream",
+            "how": "Pea-sized amount, thin layer. Optional: skip on days the T-zone feels oily and go straight to sunscreen."
+          },
+          {
+            "step": "Sunscreen",
+            "product": "Biore UV Aqua Rich (or BoJ Relief Sun)",
+            "how": "Two full finger-lengths · face + neck + ears. Every day, indoor or outdoor."
           }
         ]
       },
-      "pmWeeklyPlan": [
+      "pm": {
+        "durationMin": 6,
+        "_note": "Same steps every night. Only step 03 changes — the weekday tells you which bottle.",
+        "steps": [
+          {
+            "step": "Cleanse",
+            "product": "CeraVe Hydrating Cream-to-Foam",
+            "how": "Heavy sunscreen day? Double cleanse — first pass with cleansing oil or micellar, then CeraVe."
+          },
+          {
+            "step": "Dry fully",
+            "product": null,
+            "how": "Wait 60–90 seconds until the skin is completely dry. Applying actives to damp skin sharply increases irritation.",
+            "isWait": true
+          },
+          {
+            "step": "Active of the night",
+            "product": null,
+            "activeSlot": true
+          },
+          {
+            "step": "Hyaluronic acid",
+            "product": "The Ordinary Hyaluronic Acid 2% + B5",
+            "how": "On slightly damp skin, then press in gently. Buffers active nights, restores hydration on rest nights."
+          },
+          {
+            "step": "Eye area",
+            "product": "Rohto Melano CC Moisture Cream",
+            "how": "Rice-grain per eye · 3 dots along the orbital bone · ring finger · stay 5 mm below the lash line."
+          },
+          {
+            "step": "Moisturizer",
+            "product": "Beauty of Joseon Dynasty Cream",
+            "how": "Lock everything in."
+          }
+        ]
+      },
+      "actives": {
+        "adapalene": {
+          "name": "Differin Adapalene 0.1% (℞)",
+          "how": "Pea-sized amount. Dot on forehead, both cheeks and chin, spread thin over the whole face. Stay 5 mm from the lash line and mouth corners. Weeks 1–4: wait 20 min before moisturizer, then directly."
+        },
+        "bha": {
+          "name": "Paula's Choice BHA 2% Liquid",
+          "how": "Soak a cotton pad, swipe over the T-zone (forehead, nose, chin). One pass, no rubbing. Let absorb 30 seconds."
+        },
+        "glycolic": {
+          "name": "The Ordinary Glycolic Acid 7% Toner",
+          "how": "Soak a cotton pad, sweep over the full face. Avoid the eye area. One pass. Optional — skip if the skin feels tight."
+        },
+        "niacinamide": {
+          "name": "The Ordinary Niacinamide 10%",
+          "optional": true,
+          "how": "Fingertip amount over the whole face. Gentle, no irritation risk. Optional — skipping step 03 entirely on a rest night is always fine."
+        }
+      },
+      "phases": [
         {
-          "day": "Mon",
-          "active": "Adapalene 0.1% (Rx)",
-          "how": "thin film, whole face"
+          "id": "weeks-1-4",
+          "label": "Weeks 1–4",
+          "subtitle": "Start here",
+          "note": "Differin only 2× this phase. Wide spacing (Mon → Thu) gives skin time to adapt. Mild tightness is normal. Flaking around nose/mouth in week 3–4 — cover with balm, don't pick. Move on when skin has been calm for a full week.",
+          "schedule": [
+            {
+              "day": "Mon",
+              "active": "adapalene"
+            },
+            {
+              "day": "Tue",
+              "active": "bha"
+            },
+            {
+              "day": "Wed",
+              "active": "niacinamide"
+            },
+            {
+              "day": "Thu",
+              "active": "adapalene"
+            },
+            {
+              "day": "Fri",
+              "active": "niacinamide"
+            },
+            {
+              "day": "Sat",
+              "active": "glycolic"
+            },
+            {
+              "day": "Sun",
+              "active": "niacinamide"
+            }
+          ]
         },
         {
-          "day": "Tue",
-          "active": "BHA — Paula's Choice 2%",
-          "how": "T-zone focus"
+          "id": "weeks-5-8",
+          "label": "Weeks 5–8",
+          "subtitle": "Then this",
+          "note": "Differin now 3×, glycolic paused. Skin may briefly look worse in weeks 5–6 (purging) — do not stop. By week 7–8 texture smooths. Move on when calm for a full week.",
+          "schedule": [
+            {
+              "day": "Mon",
+              "active": "adapalene"
+            },
+            {
+              "day": "Tue",
+              "active": "bha"
+            },
+            {
+              "day": "Wed",
+              "active": "adapalene"
+            },
+            {
+              "day": "Thu",
+              "active": "niacinamide"
+            },
+            {
+              "day": "Fri",
+              "active": "adapalene"
+            },
+            {
+              "day": "Sat",
+              "active": "niacinamide"
+            },
+            {
+              "day": "Sun",
+              "active": "niacinamide"
+            }
+          ]
         },
         {
-          "day": "Wed",
-          "active": "Adapalene 0.1% (Rx)"
-        },
-        {
-          "day": "Thu",
-          "active": "Niacinamide + hyaluronic acid",
-          "how": "Rest day, no active"
-        },
-        {
-          "day": "Fri",
-          "active": "Adapalene 0.1% (Rx)"
-        },
-        {
-          "day": "Sat",
-          "active": "AHA — glycolic or lactic acid",
-          "how": "optional, only if the skin is calm"
-        },
-        {
-          "day": "Sun",
-          "active": null,
-          "how": "Rest day — moisture and barrier care only"
+          "id": "week-9-plus",
+          "label": "Week 9+",
+          "subtitle": "Final",
+          "note": "The permanent schedule. Full rotation with all products. Stay here. Pea-size Differin, cotton pad for acids, eye area always spared.",
+          "schedule": [
+            {
+              "day": "Mon",
+              "active": "adapalene"
+            },
+            {
+              "day": "Tue",
+              "active": "bha"
+            },
+            {
+              "day": "Wed",
+              "active": "adapalene"
+            },
+            {
+              "day": "Thu",
+              "active": "niacinamide"
+            },
+            {
+              "day": "Fri",
+              "active": "adapalene"
+            },
+            {
+              "day": "Sat",
+              "active": "glycolic"
+            },
+            {
+              "day": "Sun",
+              "active": "niacinamide"
+            }
+          ]
         }
       ],
-      "pmApplicationRule": "Thinnest first, richest last; wait 30–60 sec between steps; apply actives to dry skin.",
-      "coreProducts": {
-        "adapalene": "0.1%, sourced Taiwan (pharmacist-only there; Rx in Germany)",
-        "bha": "Paula's Choice BHA 2% Liquid (Douglas)",
-        "vitaminC": "Rohto Melano CC Premium Essence",
-        "moisturizer": "Beauty of Joseon Dynasty Cream",
-        "eyeCream": "CeraVe Eye Repair Cream (AM), Rohto Melano CC Moisture Cream (PM, targeted)",
-        "spf": "Biore UV Aqua Rich SPF"
+      "currentPhase": "week-9-plus",
+      "_currentPhaseNote": "Defaults to the permanent schedule because that is what the app already held. The protocol is dated 2026-07, so weeks-5-8 is also plausible — switch it on the page if that is wrong. Getting this wrong means too much adapalene.",
+      "safetyRules": [
+        {
+          "id": "no-adapalene-with-acids",
+          "title": "Never combine adapalene and acids",
+          "rule": "Adapalene together with AHA or BHA in one application massively irritates the skin without boosting results. Always separate nights. To exfoliate the same day: BHA in the morning, adapalene at night — and only when skin is calm.",
+          "critical": true
+        },
+        {
+          "id": "retinoid-needs-spf",
+          "title": "Retinoid without SPF is net-negative",
+          "rule": "Retinoids temporarily increase UV sensitivity. Without daily sunscreen, new pigmentation forms faster than the retinoid clears old damage. If you are not committed to SPF every day, do not start adapalene.",
+          "critical": true
+        },
+        {
+          "id": "spf-amount",
+          "title": "Two finger-lengths of SPF, or it is useless",
+          "rule": "SPF ratings are tested at 2 mg/cm² — roughly two strips along the index and middle finger for face and neck. Most people apply a quarter of that and get an effective SPF of ~15."
+        },
+        {
+          "id": "eye-never-rub",
+          "title": "Never rub the eye area — always tap",
+          "rule": "Under-eye skin is 4× thinner than the rest of the face. Repeated rubbing causes chronic micro-inflammation, which drives the very pigmentation you are treating. Ring finger only — it applies the least pressure by reflex."
+        },
+        {
+          "id": "patience",
+          "title": "Judge at week 12, not week 3",
+          "rule": "Vitamin C, adapalene and niacinamide need 8–12 weeks to show visible change. Photos every 4 weeks in the same lighting beat the daily mirror check."
+        }
+      ],
+      "eyeArea": {
+        "type": "Mixed — mostly pigment. Brown-grey tone, melanin-dominant.",
+        "structural": "Minor tear-trough shadow. Topicals cannot remove this part.",
+        "target": "30–50% lighter in 3–6 months. Consistency beats intensity; full erasure is not possible with products alone.",
+        "timeline": [
+          {
+            "when": "1–2 weeks",
+            "what": "Puffiness down — eye cream plus sleep and lower salt/alcohol."
+          },
+          {
+            "when": "8–12 weeks",
+            "what": "Pigment lightens — Moisture Cream + SPF + Essence. Judge with 4-week photos."
+          },
+          {
+            "when": "3–6 months",
+            "what": "Substantial change. Ceiling: 30–50% lighter than baseline."
+          }
+        ]
       },
-      "timeline": "adapalene needs patience — meaningful texture/pore results from week 12+, weeks 1-8 show nothing visible by design",
-      "_model": "weekly — one AM routine, one active per weekday",
-      "_pmStepsMissing": "Only the active per weekday is recorded, not the full sequence (cleanse → active → moisturiser). Not inferred here on purpose — confirm the real steps and add them as an am-style steps array."
+      "coreProducts": {
+        "cleanser": "CeraVe Hydrating Cream-to-Foam — AM 01 + PM 01",
+        "vitaminC": "Rohto Melano CC Premium Essence — AM 02",
+        "eyeCreamAM": "CeraVe Eye Repair Cream — AM 03",
+        "eyeCreamPM": "Rohto Melano CC Moisture Cream — PM 05, under-eye pigment",
+        "moisturizer": "Beauty of Joseon Dynasty Cream — AM 04 + PM 06",
+        "spf": "Biore UV Aqua Rich SPF 50+ PA++++ — AM 05, daily",
+        "hyaluronic": "The Ordinary Hyaluronic Acid 2% + B5 — PM 04",
+        "adapalene": "Differin Adapalene 0.1% — prescription in Germany; pharmacist-guided (指示藥品) in Taiwan, no Rx",
+        "bha": "Paula's Choice Skin Perfecting 2% BHA Liquid",
+        "glycolic": "The Ordinary Glycolic Acid 7% Toning Solution",
+        "niacinamide": "The Ordinary Niacinamide 10% + Zinc 1%"
+      },
+      "timeline": "Adapalene needs patience — meaningful texture and pore results from week 12+. Weeks 1–8 show little by design."
     },
     "eunice": {
       "_source": "Hamburg Seasonal Skincare Masterplan (.docx), added 2026-08-29",
@@ -536,7 +733,7 @@
     }
   },
   "_gaps": [
-    "Philipp's PM routine still records only the active per weekday, not the step sequence — his 'tonight' card shows the active plus the application rule, Eunice's shows real steps",
+    "Philipp's current phase is assumed to be week-9-plus; confirm on the page, since the phases differ in how often adapalene runs",
     "Hair wash-day step order was inferred from what each product does, not stated in the source",
     "Hair frequency/amount split between the two is not itemised — one shared routine with individual notes",
     "Eunice's plan is device-heavy and season-dependent; the app shows only today's season"
