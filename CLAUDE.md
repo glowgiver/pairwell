@@ -134,6 +134,11 @@ Two traps this exposed, both worth remembering:
 - **Transparency on a filled pill fails somewhere.** At `.75` the light/teal
   combination hits 3.60 and the dark/blue one 4.00. Full opacity passes all
   eight combinations.
+- **The same applies to the shell, and worse.** The bottom bar was a frosted
+  92% panel; what scrolls under it decides the composite, so the inactive
+  labels measured 4.91 over the page ground and 4.19 over dark ink. A ratio
+  that depends on scroll position is not a ratio. The bar is opaque now and
+  there is no `color-mix` left in `hub/`.
 
 Rules learned the hard way:
 
