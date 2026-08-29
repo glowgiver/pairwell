@@ -79,6 +79,24 @@
     font-family:var(--f-read);font-size:14.5px;line-height:1.6;color:var(--muted);
   }
   .rnote b{color:var(--text);font-weight:600}
+  .brief{padding:4px 18px 16px}
+  .brief .env{
+    font-family:var(--f-data);font-size:15px;font-weight:600;color:var(--accent);
+    font-variant-numeric:tabular-nums;padding:10px 0 4px;line-height:1.5;
+  }
+  .brief h4{
+    font-family:var(--f-data);font-size:13px;font-weight:600;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted2);margin:14px 0 6px;
+  }
+  .brief ul{margin:0;padding:0;list-style:none}
+  .brief li{
+    font-family:var(--f-read);font-size:15px;line-height:1.55;color:var(--muted);
+    padding:4px 0 4px 16px;position:relative;
+  }
+  .brief li::before{content:"";position:absolute;left:0;top:11px;
+    width:5px;height:5px;border-radius:50%;background:var(--muted2)}
+  .brief p{margin:8px 0 0;font-family:var(--f-read);font-size:14.5px;
+    line-height:1.6;color:var(--muted2)}
   .rnote .path{
     display:block;margin-top:7px;font-family:var(--f-data);font-size:13px;
     color:var(--accent);letter-spacing:.01em;
@@ -401,13 +419,63 @@ function addNote(){
     '<span class="path">Files › iCloud Drive › Pairwell › inbox</span></div>';
 }
 
+/* What to hunt for. The envelope is derived from the same two files the rest of
+   the page uses, so it cannot quietly disagree with the target it describes. */
+function lookForHTML(){
+  var r = mealRemainder();
+  var fat = String(D.profiles.mirrorMeals.lunch.fatG).split("-");
+  var fatLo = parseFloat(fat[0]) - comp.perBlock.fatG * r.blocks;
+  var fatHi = parseFloat(fat[fat.length - 1]) - comp.perBlock.fatG * r.blocks;
+
+  function list(items){
+    return '<ul>' + items.map(function(t){ return '<li>' + t + '</li>'; }).join("") + '</ul>';
+  }
+
+  return '<details><summary>What to look for</summary><div class="brief">' +
+    '<div class="env">' + n0(r.need.kcal) + ' kcal · ' + n0(r.need.p) + ' g protein · ' +
+      n0(r.need.fib) + ' g fibre · ' + n0(fatLo) + '–' + n0(fatHi) + ' g fat</div>' +
+    '<p>Per serving, the dish on its own — ' + n1(r.blocks) + ' Base block is already ' +
+      'going on the plate beside it, so the recipe should bring no rice, noodles or potato ' +
+      'of its own.</p>' +
+
+    '<h4>The shape that fits</h4>' +
+    list(['~100–150 g lean protein',
+          '~100 g cooked legume — fibre that fits in a box',
+          '~200 g quick greens or mushrooms — volume, cheap in calories',
+          'an aromatic sauce with almost no fat']) +
+    '<p>Never one fibre source alone: ' + n0(r.need.fib) + ' g of it from lentils costs about ' +
+      '180 kcal, half the budget, and the same from spinach is over half a kilo of spinach. ' +
+      'The legume and the greens also carry around 15 g of protein between them, which is ' +
+      'why the meat portion is smaller than it looks.</p>' +
+
+    '<h4>Works</h4>' +
+    list(['Cod, prawns, turkey, chicken breast, pork fillet',
+          'Braises and one-pot stews — Taiwanese, Vietnamese, Japanese',
+          'Stir-fries heavy on vegetables, with a weighable protein portion',
+          'Sauce on stock, soy, vinegar, mustard, tomato or quark']) +
+
+    '<h4>Too rich to fit</h4>' +
+    list(['Coconut milk, cream, cheese sauce, peanut or satay',
+          'Deep-fried, battered, breaded',
+          'Salmon or tofu as the only protein — both leave no room for the fibre',
+          'Salads that reach their fibre through sheer volume',
+          'Protein minced into a mixture, so no portion can be weighed']) +
+
+    '<h4>What to write down</h4>' +
+    '<p>The ingredients in grams, and the method. Skip the nutrition panel — every ' +
+      'figure here is worked out from the ingredients, so a number copied off a website ' +
+      'is at best ignored and at worst believed by mistake.</p>' +
+    '</div></details>';
+}
+
 function recipesHTML(who){
   var list = recipesFor(who);
   var head = '<div class="card"><div class="ch"><span class="k">Recipes</span>' +
     '<span class="meta">' + list.length + ' for ' + esc(PW.PEOPLE[who].name) + '</span></div>';
 
   if(!list.length){
-    return head + '<div class="empty">Nothing here yet.</div>' + addNote() + '</div>';
+    return head + '<div class="empty">Nothing here yet.</div>' +
+      lookForHTML() + addNote() + '</div>';
   }
 
   return head + list.map(function(r){
@@ -430,7 +498,7 @@ function recipesHTML(who){
         '<ul class="ing">' + ing + '</ul>' +
         (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
       '</details>';
-  }).join("") + addNote() + '</div>';
+  }).join("") + lookForHTML() + addNote() + '</div>';
 }
 
 function render(){
