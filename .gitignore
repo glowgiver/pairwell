@@ -14,3 +14,4 @@ __pycache__/
 # link and the amounts are what we keep; the page itself stays on the laptop.
 /inbox/*
 !/inbox/TEMPLATE.md
+!/inbox/WHAT-TO-LOOK-FOR.md
