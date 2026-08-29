@@ -320,6 +320,7 @@ function render(){
 }
 
 PW.mountRail();
+PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("kitchen", "../");
 render();

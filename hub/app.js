@@ -123,6 +123,85 @@
     document.body.appendChild(nav);
   }
 
+
+  /* ---- theme ---------------------------------------------------------
+     Three states: "auto" follows the phone, "light" and "dark" pin it.
+     Stored per device, like the person. */
+
+  var THEME_KEY = "hub.theme";
+  var THEMES = ["auto", "light", "dark"];
+
+  var ICONS = {
+    auto:  '<path d="M12 3v18"/><path d="M12 8a4 4 0 0 1 0 8"/><circle cx="12" cy="12" r="9"/>',
+    light: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>',
+    dark:  '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>'
+  };
+
+  function getTheme() {
+    try {
+      var v = localStorage.getItem(THEME_KEY);
+      if (THEMES.indexOf(v) !== -1) return v;
+    } catch (e) {}
+    return "auto";
+  }
+
+  /* What the theme actually resolves to right now — "auto" defers to the OS. */
+  function resolvedTheme() {
+    var t = getTheme();
+    if (t !== "auto") return t;
+    try {
+      return global.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    } catch (e) { return "dark"; }
+  }
+
+  function applyTheme() {
+    var t = getTheme();
+    var root = document.documentElement;
+    if (t === "auto") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", t);
+
+    /* Keep the iOS status bar in step, or it stays dark over a light page. */
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", resolvedTheme() === "light" ? "#F2F5FB" : "#0B1220");
+  }
+
+  function setTheme(t) {
+    if (THEMES.indexOf(t) === -1) return;
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+    applyTheme();
+    global.dispatchEvent(new CustomEvent("pw:theme", { detail: { theme: t } }));
+  }
+
+  function mountThemeToggle(el) {
+    if (!el) return;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "pw-theme";
+    el.parentNode.insertBefore(b, el);
+
+    function paint() {
+      var t = getTheme();
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONS[t] + '</svg>' +
+                    '<span class="lbl">Theme: ' + t + '</span>';
+      b.setAttribute("aria-label", "Theme: " + t + ". Tap to change.");
+      b.title = "Theme: " + t;
+    }
+    b.addEventListener("click", function () {
+      setTheme(THEMES[(THEMES.indexOf(getTheme()) + 1) % THEMES.length]);
+      paint();
+    });
+    paint();
+  }
+
+  /* Repaint when the OS flips and we are on auto. */
+  try {
+    global.matchMedia("(prefers-color-scheme: light)").addEventListener("change", function () {
+      if (getTheme() === "auto") applyTheme();
+    });
+  } catch (e) {}
+
+  applyTheme();
+
   function registerServiceWorker(path) {
     if (!("serviceWorker" in navigator)) return;
     global.addEventListener("load", function () {
@@ -142,6 +221,10 @@
     mountSwitcher: mountSwitcher,
     mountRail: mountRail,
     mountTabs: mountTabs,
+    mountThemeToggle: mountThemeToggle,
+    getTheme: getTheme,
+    setTheme: setTheme,
+    resolvedTheme: resolvedTheme,
     TABS: TABS,
     registerServiceWorker: registerServiceWorker
   };

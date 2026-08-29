@@ -95,7 +95,7 @@ SHARED_CSS = """
   }
   .day small{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);margin-top:2px}
   .day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-  .day[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
+  .day[aria-pressed="true"] small{color:inherit;font-weight:400}
   .day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   .season{
@@ -134,7 +134,7 @@ SHARED_CSS = """
   }
   .phase small{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);margin-top:2px}
   .phase[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-  .phase[aria-pressed="true"] small{color:rgba(11,18,32,.75)}
+  .phase[aria-pressed="true"] small{color:inherit;font-weight:400}
   .phase:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .phase-note{
     font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.5;
@@ -150,12 +150,12 @@ SHARED_CSS = """
     background:var(--surface-2);border-radius:0 12px 12px 0;
     padding:13px 16px;margin-bottom:12px;
   }
-  .rule.critical{border-left-color:#F4666F;background:rgba(244,102,111,.10)}
+  .rule.critical{border-left-color:var(--warn);background:var(--warn-fill)}
   .rule .rt{
     font-family:var(--f-data);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
     color:var(--muted2);margin-bottom:6px;display:flex;align-items:center;gap:7px;
   }
-  .rule.critical .rt{color:#F4666F}
+  .rule.critical .rt{color:var(--warn)}
   .rule p{margin:0;font-family:var(--f-read);font-size:15px;line-height:1.6;color:var(--muted)}
   .rule.critical p{color:var(--text)}
 
@@ -492,6 +492,7 @@ function renderStage(){
 }
 
 PW.mountRail();
+PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("skincare", "../");
 window.addEventListener("pw:person", renderStage);
@@ -633,6 +634,7 @@ function renderStage(){
 }
 
 PW.mountRail();
+PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 window.addEventListener("pw:person", renderStage);
 

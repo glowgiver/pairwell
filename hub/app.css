@@ -20,6 +20,11 @@
   --philipp:#5A8DEE;
   --eunice:#C9A6F2;
 
+  /* Critical-rule red. Pale on the dark ground, deep on the light one —
+     white/pale reds drop to 2.5:1 over a light fill. */
+  --warn:#F4666F;
+  --warn-fill:rgba(244,102,111,.14);
+
   --r:18px;
 
   /* smallest comfortable touch target */
@@ -122,6 +127,81 @@ html,body{margin:0;padding:0}
 
 @media (prefers-reduced-motion:reduce){
   .pw-switch button{transition:none}
+}
+
+
+/* ---------- light theme -----------------------------------------------------
+   Three states, not two. An explicit choice stamps data-theme on <html>; the
+   default "auto" stamps nothing, so only prefers-color-scheme separates them.
+
+   The accents invert rather than merely darken: dark mode uses pale accents
+   carrying dark ink, light mode uses deep accents carrying near-white ink.
+   Because filled chips take their ink from var(--bg), that flip needs no
+   per-theme special-casing anywhere in the pages. */
+
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#F2F5FB;
+    --surface:#FFFFFF;
+    --surface-2:#E8EEF8;
+    --line:#D2DBEB;
+    --text:#0F1A2E;
+    --muted:#415372;
+    --muted2:#5A6B8C;
+
+    --skin:#1C7566;
+    --hair:#663BB0;
+    --train:#2750B4;
+    --food:#8A5209;
+
+    --philipp:#2750B4;
+    --eunice:#663BB0;
+
+    --warn:#B81622;
+    --warn-fill:rgba(184,22,34,.10);
+  }
+}
+
+:root[data-theme="light"]{
+  --bg:#F2F5FB;
+  --surface:#FFFFFF;
+  --surface-2:#E8EEF8;
+  --line:#D2DBEB;
+  --text:#0F1A2E;
+  --muted:#415372;
+  --muted2:#5A6B8C;
+
+  --skin:#1C7566;
+  --hair:#663BB0;
+  --train:#2750B4;
+  --food:#8A5209;
+
+  --philipp:#2750B4;
+  --eunice:#663BB0;
+
+    --warn:#B81622;
+    --warn-fill:rgba(184,22,34,.10);
+}
+
+/* ---------- theme toggle ---------------------------------------------------
+   Cycles auto → light → dark. "Auto" is the honest default for a bathroom at
+   07:00 and 22:00, but the override exists because a phone pinned to dark
+   should not force the app dark in daylight. */
+
+.pw-theme{
+  min-width:var(--tap);min-height:var(--tap);
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);border-radius:13px;
+  background:var(--surface);color:var(--muted);
+  cursor:pointer;font-family:inherit;
+  margin-left:auto;margin-right:8px;
+}
+.pw-theme svg{width:19px;height:19px;stroke:currentColor;fill:none;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pw-theme:focus-visible{outline:2px solid var(--accent,var(--train));outline-offset:2px}
+.pw-theme .lbl{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;
 }
 
 

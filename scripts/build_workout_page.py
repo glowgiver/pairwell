@@ -85,7 +85,7 @@ html = """<!DOCTYPE html>
   .pill span{display:block;font-family:var(--f-data);font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
   .pill[aria-pressed="true"]{background:var(--train);border-color:var(--train)}
   .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:var(--bg)}
-  .pill[aria-pressed="true"] span{color:rgba(11,18,32,.72)}
+  .pill[aria-pressed="true"] span{color:inherit;font-weight:400}
   .pill:focus-visible{outline:2px solid var(--train);outline-offset:2px}
 
   .stage{
@@ -453,6 +453,7 @@ function guideHTML(){
 }
 
 PW.mountRail();
+PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("workout", "../");
 

@@ -101,12 +101,12 @@ HTML = """<!DOCTYPE html>
   .warn{
     display:flex;gap:9px;align-items:flex-start;
     margin:10px 18px 14px;padding:11px 13px;
-    border-radius:0 10px 10px 0;border-left:3px solid #F4666F;
-    background:rgba(244,102,111,.10);
+    border-radius:0 10px 10px 0;border-left:3px solid var(--warn);
+    background:var(--warn-fill);
   }
   .warn .wt{
     font-family:var(--f-data);font-size:12.5px;font-weight:600;letter-spacing:.08em;
-    text-transform:uppercase;color:#F4666F;
+    text-transform:uppercase;color:var(--warn);
   }
   .warn p{margin:4px 0 0;font-family:var(--f-read);font-size:14.5px;line-height:1.5;color:var(--text)}
 
@@ -334,6 +334,7 @@ function render(){
 })();
 
 PW.mountRail();
+PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs(null, "");
 window.addEventListener("pw:person", render);

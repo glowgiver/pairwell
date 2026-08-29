@@ -104,8 +104,23 @@ daily; advisory ones live in the disclosure.
 
 ## Style
 
-Dark theme, tokens in `hub/app.css`. Accents: `--skin` teal, `--hair` violet,
-`--train` blue, `--food` orange; `--philipp` blue, `--eunice` violet.
+Tokens in `hub/app.css`, **two themes**. Accents: `--skin` teal, `--hair`
+violet, `--train` blue, `--food` orange; `--philipp` blue, `--eunice` violet.
+
+The themes invert rather than merely darken: dark mode uses pale accents
+carrying dark ink, light mode uses deep accents carrying near-white ink.
+Because filled chips take their ink from `var(--bg)`, that flip needs no
+per-theme special-casing in any page. Three states — `auto` (stamps nothing,
+follows the OS), `light` and `dark` stamp `data-theme` on `<html>`. The toggle
+sits beside the person switcher and cycles them.
+
+Two traps this exposed, both worth remembering:
+
+- **Never hardcode ink on a filled accent.** `rgba(11,18,32,.75)` looked right
+  in dark mode and became dark-on-dark in light mode. Inherit and vary weight.
+- **Transparency on a filled pill fails somewhere.** At `.75` the light/teal
+  combination hits 3.60 and the dark/blue one 4.00. Full opacity passes all
+  eight combinations.
 
 Rules learned the hard way:
 
