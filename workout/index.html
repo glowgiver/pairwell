@@ -335,9 +335,13 @@ function exHTML(e, mate, mateName){
       (e.tier === "maint" ? "maintenance" : "primary") + '</span>'
     : '';
 
-  var mateLoad = (mate && mate.extras && mate.extras.load)
+  /* The line says "you are both at this station", so it does not wait for a
+     load. Two of you own the hip thrust and neither has a weight written down;
+     hiding the line there made the one genuinely shared station look solo. */
+  var mateLoad = mate
     ? '<div class="ex-mate" style="--mate:var(--' + esc(String(mateName).toLowerCase()) + ')">' +
-      '<span class="who">' + esc(mateName) + '</span><b>' + esc(mate.extras.load) + '</b>' +
+      '<span class="who">' + esc(mateName) + '</span>' +
+      (mate.extras && mate.extras.load ? '<b>' + esc(mate.extras.load) + '</b>' : '') +
       '<span>' + esc(mate.sets) + ' × ' + esc(mate.reps) + '</span></div>'
     : '';
 
