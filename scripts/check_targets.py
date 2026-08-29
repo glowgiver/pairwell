@@ -122,6 +122,11 @@ def energy_balance(profiles, training):
                   % (label, deficit, pct, kg))
 
         safe_lo, safe_hi = 0.005 * w * 7700 / 7, 0.010 * w * 7700 / 7
+        phase = p.get("_phase") or {}
+        if phase:
+            print("    PHASE — %s, since %s, review %s (was %s kcal)"
+                  % (phase.get("name"), phase.get("startedOn"),
+                     phase.get("reviewOn"), phase.get("was")))
         meas = measured_expenditure(key)
         if meas:
             print("    MEASURED — MacroFactor, %d days to %s" % (meas["n"], meas["to"]))
@@ -134,14 +139,25 @@ def energy_balance(profiles, training):
             print("      real deficit %.0f kcal (%.1f%%) -> %.2f kg/week"
                   % (d_meas, 100.0 * d_meas / meas["recent"], d_meas * 7 / 7700.0))
             drop = meas["first"] - meas["latest"]
+            # A near-zero deficit is a failure when you meant to cut and the
+            # plan is what a maintenance phase is for. Which one it is is not
+            # something arithmetic can tell; the phase declaration can.
+            on_purpose = bool(phase) and abs(d_meas) < 250
             if drop > 300:
                 print("      expenditure has fallen %.0f kcal since %s"
                       % (drop, meas["from"]))
-                findings.append("%s's measured expenditure has fallen %.0f kcal since %s, "
-                                "to %.0f. A %d kcal intake is now only %.0f kcal below it."
-                                % (p["displayName"], drop, meas["from"], meas["latest"],
-                                   target, meas["latest"] - target))
-            if d_meas < safe_lo:
+                if not on_purpose:
+                    findings.append(
+                        "%s's measured expenditure has fallen %.0f kcal since %s, "
+                        "to %.0f. A %d kcal intake is now only %.0f kcal below it."
+                        % (p["displayName"], drop, meas["from"], meas["latest"],
+                           target, meas["latest"] - target))
+            if on_purpose:
+                print("      -> intake sits at measured expenditure. That is the "
+                      "declared phase, not a stalled cut.")
+                print("      -> judge it on the expenditure line climbing, not on "
+                      "the scale. Review %s." % phase.get("reviewOn"))
+            elif d_meas < safe_lo:
                 print("      -> smaller than the retention band, not larger. The estimate "
                       "above is stale; believe this line.")
             print()

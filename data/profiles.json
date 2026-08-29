@@ -12,11 +12,11 @@
       "displayName": "Philipp",
       "role": "biohacker",
       "dailyTargets": {
-        "calories": 1600,
+        "calories": 1900,
         "proteinG": 164,
         "fiberG": 45,
-        "fatG": 52,
-        "netCarbsG": 112
+        "fatG": 55,
+        "netCarbsG": 165
       },
       "fixedBreakfast": {
         "calories": 410,
@@ -55,11 +55,21 @@
         ]
       },
       "snackBudgetAfterMirrorMeals": {
-        "calories": 250,
+        "calories": 550,
         "proteinG": 36,
-        "note": "1600 - 410 (breakfast) - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
+        "note": "1900 - 410 (breakfast) - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
       },
-      "aestheticGoal": "lean athletic, K-drama V-taper, not bulky"
+      "aestheticGoal": "lean athletic, K-drama V-taper, not bulky",
+      "_phase": {
+        "name": "Maintenance — recovering expenditure",
+        "startedOn": "2026-08-29",
+        "reviewOn": "2026-09-26",
+        "was": 1600,
+        "why": "Not a deficit. MacroFactor measured expenditure falling from 2462 in March to 1801 now — 767 kcal, of which only ~270 is explained by lost mass and fewer steps. At 1600 the deficit had shrunk to ~200 kcal and was still closing; cutting further would have pushed expenditure down again. Eating at measured expenditure is what lets it climb back, and a deficit from a recovered 2100 loses fat faster than one from 1800.",
+        "expect": "1-1.5 kg on the scale in week one. That is water and glycogen refilling, not fat — 300 kcal a day cannot become a kilo of fat in a week. Do not react to it. Judge this phase on the MacroFactor expenditure line, not on bodyweight.",
+        "alsoRequired": "Steps back to 8000/day. That is ~200 kcal of real expenditure and it is what actually moved the weight in July. The calorie change alone does half the job.",
+        "thenWhat": "Re-import MacroFactor on 2026-09-26 and run check_targets.py. If expenditure has climbed above ~2000, drop to expenditure minus 400 for the next cut. If it has not moved at all, the logging is the suspect, not the metabolism."
+      }
     },
     "eunice": {
       "displayName": "Eunice",
@@ -102,7 +112,7 @@
   },
   "_gaps": [
     "Eunice's breakfast is not fixed yet — only a budget envelope exists.",
-    "The four daily targets do not close: Philipp's imply 1662 kcal against a 1600 budget, Eunice's 1598 against 1580. scripts/check_targets.py reports both. Fat is the target crowded out in every arrangement — 164 g protein plus 45 g fibre leaves it landing near 35 g, not 52."
+    "Eunice's four targets imply 1598 kcal against a 1580 budget — an 18 kcal rounding gap, left alone. Her numbers have no MacroFactor data behind them, so the model is all there is, and the model was 600 kcal wrong for Philipp. Believe her scale over this arithmetic."
   ],
   "_bodyNote": "Body composition is NOT in this file and must never be. It lives in private/body.json, which is gitignored, because this repo is public and a bodyweight describes a person rather than a plan. scripts/check_targets.py reads it from there and degrades to a warning when it is absent."
 }

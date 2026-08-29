@@ -124,6 +124,20 @@ HTML = """<!DOCTYPE html>
   }
   .warn p{margin:4px 0 0;font-family:var(--f-read);font-size:14.5px;line-height:1.5;color:var(--text)}
 
+  /* A declared phase, not a warning: same shape as .warn, the module accent
+     instead of the alarm colour, because nothing here is wrong. */
+  .phase{
+    margin:10px 18px 14px;padding:11px 13px;
+    border-radius:0 10px 10px 0;border-left:3px solid var(--food);
+    background:var(--surface-2);
+  }
+  .phase .pt{
+    font-family:var(--f-data);font-size:12.5px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--food);
+  }
+  .phase p{margin:4px 0 0;font-family:var(--f-read);font-size:14.5px;
+    line-height:1.5;color:var(--text)}
+  .phase .pm{margin-top:6px;font-family:var(--f-data);font-size:13px;color:var(--muted2)}
   .targets{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
   .targets div{font-family:var(--f-data);font-size:13px;color:var(--muted2);
     font-variant-numeric:tabular-nums}
@@ -301,6 +315,17 @@ function render(){
       '<div>Fibre<b>' + t.fiberG + ' g</b></div>' +
       '<div>Fat<b>' + t.fatG + ' g</b></div>' +
     '</div>');
+
+  /* Why the number changed. Without this the target just moves one day and
+     the scale goes up a kilo two days later, which reads as failure. */
+  var ph = prof._phase;
+  if(ph){
+    food = food.replace("</a>",
+      '</a><div class="phase"><div class="pt">' + esc(ph.name) + '</div>' +
+      '<p>' + esc(ph.expect) + '</p>' +
+      '<div class="pm">was ' + esc(String(ph.was)) + ' kcal <span class="sep">·</span> ' +
+      'review ' + esc(ph.reviewOn) + '</div></div>');
+  }
 
   /* Tonight */
   var tonight = "";
