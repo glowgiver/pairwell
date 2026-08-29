@@ -37,9 +37,14 @@ Then bump `const CACHE` in `hub/sw.js` so both phones pick up the new version.
 | `recompute_macros.py` | derives every macro in kitchen.json from ingredients + one measured cooked weight |
 | `check_routine_rules.py` | checks the seasonal skincare plan against its own safety rules |
 | `verify_videos.py` | re-checks all 43 exercise demo links for rot |
+| `make_backup_doc.py` | regenerates the standalone protocol backup in `backups/` |
 
 `scripts/_archive/` holds a one-time migration that must not be run again; it
 refuses to execute.
+
+`sources/` is gitignored — it holds the original documents the data was
+transcribed from. `backups/` holds generated, self-contained copies that are
+committed.
 
 ## Privacy
 

@@ -45,9 +45,18 @@ pairwell/
 │   ├── build_workout_page.py    training.json + exercises.json → workout page
 │   ├── build_routines_page.py   routines.json → skincare + hair pages
 │   ├── recompute_macros.py      derives kitchen macros; holds no data itself
-│   ├── check_routine_rules.py   checks the seasonal plan against its own rules
+│   ├── check_routine_rules.py   checks both protocols against their own rules
 │   ├── verify_videos.py         re-checks all 43 demo links for rot
+│   ├── make_backup_doc.py       routines.json → backups/ standalone HTML
 │   └── _archive/                one-time migration; refuses to run
+│
+├── sources/               GITIGNORED — the original documents the data came
+│                          from. Two still contain the locating detail that was
+│                          scrubbed in 9bf4883, so they must never be committed.
+│                          Kept because three transcriptions lost content and
+│                          only the originals revealed it.
+│
+├── backups/               generated, self-contained, committed
 │
 └── hub/
     ├── index.html         dashboard
@@ -145,3 +154,5 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   `exercises.json` by id.
 - **Philipp's PM steps** are unrecorded.
 - **Demo videos are verified live, not verified good** — nobody has watched them.
+  `verify_videos.py` confirms each link resolves and that the title and channel
+  still match what was recorded; it cannot confirm the video shows good form.

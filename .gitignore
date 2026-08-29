@@ -2,9 +2,9 @@
 *.icloud
 __pycache__/
 
-# Source documents — kept locally, never committed raw.
-# They contain the locating detail that was scrubbed from the repo.
-/skin_protocol.html
-/hair_protocol.html
-/workout_hub.html
-/*.docx
+# sources/ holds the original documents the data was transcribed from.
+# Never committed: workout_hub.html and hair_protocol.html still contain the
+# locating detail scrubbed from this repo in 9bf4883. Kept locally because
+# three separate transcriptions turned out to have lost content, and only the
+# originals revealed it.
+/sources/

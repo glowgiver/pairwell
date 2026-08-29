@@ -14,7 +14,7 @@ import os
 
 BASE = os.path.dirname(__file__)
 DATA = os.path.join(BASE, "..", "data", "routines.json")
-OUT_DIR = os.path.join(BASE, "..", "sources")
+OUT_DIR = os.path.join(BASE, "..", "backups")
 OUT = os.path.join(OUT_DIR, "eunice-skincare-protocol.html")
 
 GENERATED_ON = "29 August 2026"
