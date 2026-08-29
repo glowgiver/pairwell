@@ -1,12 +1,13 @@
-/* Hub Service Worker
-   Update-Regel: CACHE hochzählen, sobald sich Dateien geändert haben.
-   Beim nächsten Öffnen der App wird dann neu geladen. */
+/* Pairwell service worker.
+   Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v1";
+const CACHE = "hub-v2";
 
 const SHELL = [
   "./",
   "./index.html",
+  "./app.css",
+  "./app.js",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -16,16 +17,24 @@ const SHELL = [
   "./kitchen/"
 ];
 
-// Installieren: Grundgerüst in den Cache legen
+// Install: cache each shell file individually.
+// cache.addAll() is all-or-nothing — one failing URL used to drop the entire
+// shell silently, which meant no styling and no pages offline.
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE)
-      .then((cache) => cache.addAll(SHELL).catch(() => {}))
+      .then((cache) => Promise.all(
+        SHELL.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn("[sw] could not cache", url, err);
+          })
+        )
+      ))
       .then(() => self.skipWaiting())
   );
 });
 
-// Aktivieren: alte Cache-Versionen aufräumen
+// Activate: drop old cache versions
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
@@ -36,7 +45,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Abrufen: sofort aus dem Cache antworten, im Hintergrund aktualisieren
+// Fetch: answer from cache immediately, refresh in the background
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 

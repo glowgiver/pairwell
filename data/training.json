@@ -14,7 +14,7 @@
   "profiles": {
     "philipp": {
       "badge": "Lean Athletic",
-      "goal": "K-Idol Taper · Fettabbau · Muskelerhalt",
+      "goal": "K-idol taper · fat loss · muscle retention",
       "meta": {
         "weight": "81.2 → 77 kg",
         "bodyFat": "20.6 → 16%",
@@ -23,10 +23,10 @@
     },
     "eunice": {
       "badge": "Toned & Curvy",
-      "goal": "Hwasa-Look · Glutes · Schulter-Hüft-Relation",
+      "goal": "Hwasa look · glutes · shoulder-to-hip ratio",
       "meta": {
         "bodyFat": "29 → 22%",
-        "focus": "Glutes + Rücken",
+        "focus": "Glutes + back",
         "intensity": "RIR 2-3"
       }
     },
@@ -43,74 +43,74 @@
   "weeklyRhythm": {
     "philipp": [
       {
-        "day": "Mo",
+        "day": "Mon",
         "what": "Pad · Zone 1",
         "type": "move"
       },
       {
-        "day": "Di",
+        "day": "Tue",
         "what": "Gym · Push",
         "type": "training"
       },
       {
-        "day": "Mi",
+        "day": "Wed",
         "what": "Pad · Zone 2",
         "type": "move"
       },
       {
-        "day": "Do",
-        "what": "Gehen",
+        "day": "Thu",
+        "what": "Walk",
         "type": "move"
       },
       {
-        "day": "Fr",
+        "day": "Fri",
         "what": "Gym · Pull",
         "type": "training"
       },
       {
-        "day": "Sa",
+        "day": "Sat",
         "what": "Spaziergang",
         "type": "move"
       },
       {
-        "day": "So",
+        "day": "Sun",
         "what": "Shared",
         "type": "training"
       }
     ],
     "eunice": [
       {
-        "day": "Mo",
+        "day": "Mon",
         "what": "Gym solo",
         "type": "training"
       },
       {
-        "day": "Di",
-        "what": "frei",
+        "day": "Tue",
+        "what": "Rest",
         "type": "rest"
       },
       {
-        "day": "Mi",
-        "what": "Gehen",
+        "day": "Wed",
+        "what": "Walk",
         "type": "move"
       },
       {
-        "day": "Do",
-        "what": "frei",
+        "day": "Thu",
+        "what": "Rest",
         "type": "rest"
       },
       {
-        "day": "Fr",
-        "what": "Gym · mit Philipp",
+        "day": "Fri",
+        "what": "Gym · with Philipp",
         "type": "training"
       },
       {
-        "day": "Sa",
-        "what": "frei",
+        "day": "Sat",
+        "what": "Rest",
         "type": "rest"
       },
       {
-        "day": "So",
+        "day": "Sun",
         "what": "Shared",
         "type": "training"
       }
@@ -144,7 +144,7 @@
       "philipp": {
         "push": {
           "title": "Push + Taper",
-          "day": "Dienstag",
+          "day": "Tuesday",
           "focus": "side delt · chest · lat · triceps",
           "exercises": [
             {
@@ -246,8 +246,8 @@
           ]
         },
         "pull": {
-          "title": "Pull + Haltung",
-          "day": "Freitag",
+          "title": "Pull + Posture",
+          "day": "Friday",
           "focus": "side delt · lat · back · rear delt",
           "exercises": [
             {
@@ -354,7 +354,7 @@
       "eunice": {
         "solo": {
           "title": "Lower + Push",
-          "day": "Montag · solo",
+          "day": "Monday · solo",
           "focus": "fixed machines only — no setup, no cable",
           "note": "Monday alone in the gym. Deliberately machines only: fixed path, nothing can go wrong, no spotting needed. Cable exercises happen Friday with Philipp.",
           "exercises": [
@@ -453,7 +453,7 @@
         },
         "pull": {
           "title": "Upper + Glutes",
-          "day": "Freitag · mit Philipp",
+          "day": "Friday · with Philipp",
           "focus": "cable tower — alternating sets with Philipp",
           "note": "Friday with Philipp at the cable tower. She's out at 13:00, he arrives ~15:30. Same station: her set, his set. Her rest is his work time.",
           "exercises": [
@@ -572,7 +572,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2",
                 "rest": "60s"
               },
@@ -586,7 +586,7 @@
               "sets": 4,
               "reps": "10-12",
               "extras": {
-                "load": "Rot (L3) + Grün (L2)",
+                "load": "Red (L3) + Green (L2)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -600,7 +600,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -614,7 +614,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Rot (L3)",
+                "load": "Red (L3)",
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
@@ -628,7 +628,7 @@
               "sets": 2,
               "reps": "20",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 3",
                 "rest": "60s"
               },
@@ -642,7 +642,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 2",
                 "rest": "45s"
               },
@@ -663,7 +663,7 @@
           ]
         },
         "pull": {
-          "title": "Pull + Haltung",
+          "title": "Pull + Posture",
           "day": "Home · Pull",
           "focus": "Bodylastics — pulling + posture",
           "exercises": [
@@ -675,7 +675,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2",
                 "rest": "60s"
               },
@@ -689,7 +689,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -703,7 +703,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -717,7 +717,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1",
                 "rest": "60s"
               },
@@ -731,7 +731,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1",
                 "rest": "45s"
               },
@@ -745,7 +745,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 3",
                 "rest": "60s"
               },
@@ -759,7 +759,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2",
                 "rest": "45s"
               },
@@ -782,7 +782,7 @@
               "sets": 4,
               "reps": "15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -796,7 +796,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -824,7 +824,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -851,7 +851,7 @@
               "sets": 2,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -884,7 +884,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -898,7 +898,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
@@ -912,7 +912,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -926,7 +926,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -940,7 +940,7 @@
               "sets": 3,
               "reps": "15-20",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
@@ -954,7 +954,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
@@ -978,7 +978,7 @@
       "shared": {
         "sun": {
           "title": "Shared Session",
-          "day": "Sonntag · gemeinsam",
+          "day": "Sunday · together",
           "focus": "same exercises · own tubes · alternating",
           "note": "Sunday together at home. Both do the same exercises simultaneously — Philipp the stronger tubes, Eunice the lighter. If at the gym instead: same plan, cable tower instead of bands.",
           "exercises": [
@@ -992,8 +992,8 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Gelb (L1)",
-              "euniceLoad": "Gelb (L1), less tension",
+              "philippLoad": "Yellow (L1)",
+              "euniceLoad": "Yellow (L1), less tension",
               "cue": "Opposite foot on band, lead with elbow to shoulder height.",
               "shared": true
             },
@@ -1006,8 +1006,8 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Blau (L4) + Schwarz (L5)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Blue (L4) + Black (L5)",
+              "euniceLoad": "Green (L2)",
               "cue": "Anchor top, elbows down-out, squeeze lats.",
               "shared": true
             },
@@ -1020,8 +1020,8 @@
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Blau (L4) + Schwarz (L5)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Blue (L4) + Black (L5)",
+              "euniceLoad": "Green (L2)",
               "cue": "Around both feet, upright, pull to belly, no momentum.",
               "shared": true
             },
@@ -1035,8 +1035,8 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Blau (L4) gefaltet · maintenance",
-              "euniceLoad": "Blau (L4) gefaltet · primary",
+              "philippLoad": "Blue (L4) folded · maintenance",
+              "euniceLoad": "Blue (L4) folded · primary",
               "cue": "Tube over hips, shoulders supported, 2s squeeze at top.",
               "shared": true
             },
@@ -1050,8 +1050,8 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Grün (L2)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Green (L2)",
+              "euniceLoad": "Green (L2)",
               "cue": "Band in both hands, pull apart to chest.",
               "shared": true
             },
@@ -1064,8 +1064,8 @@
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Rot (L3)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Red (L3)",
+              "euniceLoad": "Green (L2)",
               "cue": "Stand on band, elbows fixed, slow down.",
               "shared": true
             },
@@ -1102,7 +1102,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2",
                 "rest": "60s"
               },
@@ -1116,7 +1116,7 @@
               "sets": 4,
               "reps": "10-12",
               "extras": {
-                "load": "Schwarz (L5)",
+                "load": "Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -1130,7 +1130,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -1144,7 +1144,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "Rot (L3)",
+                "load": "Red (L3)",
                 "rir": "RIR 1-2",
                 "rest": "60s"
               },
@@ -1158,7 +1158,7 @@
               "sets": 2,
               "reps": "20",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 3",
                 "rest": "60s"
               },
@@ -1172,7 +1172,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 2",
                 "rest": "45s"
               },
@@ -1193,7 +1193,7 @@
           ]
         },
         "pull": {
-          "title": "Pull + Haltung",
+          "title": "Pull + Posture",
           "day": "Travel · Pull",
           "focus": "tubes + door anchor only",
           "exercises": [
@@ -1205,7 +1205,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2",
                 "rest": "60s"
               },
@@ -1219,7 +1219,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -1233,7 +1233,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "Blau (L4) + Schwarz (L5)",
+                "load": "Blue (L4) + Black (L5)",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -1247,7 +1247,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1",
                 "rest": "60s"
               },
@@ -1261,7 +1261,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1",
                 "rest": "45s"
               },
@@ -1275,7 +1275,7 @@
               "sets": 2,
               "reps": "12/side",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 3",
                 "rest": "60s"
               },
@@ -1289,7 +1289,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2",
                 "rest": "45s"
               },
@@ -1312,7 +1312,7 @@
               "sets": 4,
               "reps": "15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -1326,7 +1326,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -1353,7 +1353,7 @@
               "sets": 3,
               "reps": "12/side",
               "extras": {
-                "load": "Blau (L4)",
+                "load": "Blue (L4)",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -1380,7 +1380,7 @@
               "sets": 2,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -1413,7 +1413,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Gelb (L1)",
+                "load": "Yellow (L1)",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -1427,7 +1427,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "90s"
               },
@@ -1441,7 +1441,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
@@ -1455,7 +1455,7 @@
               "sets": 3,
               "reps": "15",
               "extras": {
-                "load": "Blau (L4) gefaltet",
+                "load": "Blue (L4) folded",
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
@@ -1469,7 +1469,7 @@
               "sets": 3,
               "reps": "15-20",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
@@ -1483,7 +1483,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "Grün (L2)",
+                "load": "Green (L2)",
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
@@ -1507,7 +1507,7 @@
       "shared": {
         "sun": {
           "title": "Shared Session",
-          "day": "Travel · gemeinsam",
+          "day": "Travel · together",
           "focus": "same exercises · own tubes",
           "note": "Together while traveling. Both do the same exercises, Philipp the stronger tubes. Each grabs their own — no conflict.",
           "exercises": [
@@ -1521,8 +1521,8 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Gelb (L1)",
-              "euniceLoad": "Gelb (L1)",
+              "philippLoad": "Yellow (L1)",
+              "euniceLoad": "Yellow (L1)",
               "cue": "Opposite foot on tube, lead with elbow.",
               "shared": true
             },
@@ -1535,8 +1535,8 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Blau (L4) + Schwarz (L5)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Blue (L4) + Black (L5)",
+              "euniceLoad": "Green (L2)",
               "cue": "Anchor top, elbows down-out.",
               "shared": true
             },
@@ -1549,8 +1549,8 @@
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Blau (L4) + Schwarz (L5)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Blue (L4) + Black (L5)",
+              "euniceLoad": "Green (L2)",
               "cue": "Tube around both feet, upright.",
               "shared": true
             },
@@ -1564,8 +1564,8 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Blau (L4) · maintenance",
-              "euniceLoad": "Blau (L4) · primary",
+              "philippLoad": "Blue (L4) · maintenance",
+              "euniceLoad": "Blue (L4) · primary",
               "cue": "Tube over hips, 2s squeeze.",
               "shared": true
             },
@@ -1579,8 +1579,8 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Grün (L2)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Green (L2)",
+              "euniceLoad": "Green (L2)",
               "cue": "Tube in front, pull apart to chest.",
               "shared": true
             },
@@ -1593,8 +1593,8 @@
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Rot (L3)",
-              "euniceLoad": "Grün (L2)",
+              "philippLoad": "Red (L3)",
+              "euniceLoad": "Green (L2)",
               "cue": "Stand on tube, elbows fixed.",
               "shared": true
             },

@@ -14,24 +14,10 @@ html = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Workout · Pairwell</title>
 <meta name="theme-color" content="#0B1220">
+<link rel="stylesheet" href="../app.css">
 <style>
-  :root{
-    --bg:#0B1220;
-    --surface:#131C2E;
-    --surface-2:#1A2540;
-    --line:#25324F;
-    --text:#EEF2F9;
-    --muted:#8B9AB8;
-    --muted2:#5f7492;
-    --skin:#7FD1C1;
-    --hair:#C9A6F2;
-    --train:#5A8DEE;
-    --food:#F2A65A;
-    --accent:var(--train);
-  }
-
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;padding:0}
+  /* Palette lives in ../app.css — only the accent choice is page-local. */
+  :root{ --accent:var(--train); }
 
   body{
     background:var(--bg);
@@ -48,48 +34,26 @@ html = """<!DOCTYPE html>
     margin:0 auto;
   }
 
-  .back{
-    display:inline-flex;align-items:center;gap:7px;
-    background:none;border:0;padding:0;cursor:pointer;
-    color:var(--muted);font-size:15px;font-family:inherit;margin-bottom:18px;
-    text-decoration:none;
-  }
-  .back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
   h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 4px;color:var(--train)}
   .sub{font-size:13px;color:var(--muted);margin:0 0 20px}
 
   /* location pills */
   .pills{display:flex;gap:8px;margin-bottom:16px}
   .pill{
-    flex:1;padding:11px 6px;border-radius:12px;
+    flex:1;min-height:var(--tap);padding:9px 6px;border-radius:12px;
     border:1px solid var(--line);background:var(--surface);
     text-align:center;cursor:pointer;font-family:inherit;
     color:var(--muted);transition:background .15s;
   }
   .pill b{display:block;font-size:13px;font-weight:700;color:var(--text)}
   .pill span{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
-  .pill.active{background:var(--train);border-color:var(--train)}
-  .pill.active b, .pill.active span{color:#fff}
-  .pill.active span{color:rgba(255,255,255,.75)}
-
-  /* person row */
-  .persons{display:flex;gap:6px;margin-bottom:2px}
-  .pbtn{
-    padding:9px 16px;border-radius:10px 10px 0 0;
-    border:1px solid var(--line);border-bottom:none;
-    background:var(--surface);cursor:pointer;font-family:inherit;
-    font-size:13px;font-weight:600;color:var(--muted);
-    display:flex;align-items:center;gap:6px;
-  }
-  .pbtn .dot{width:7px;height:7px;border-radius:50%}
-  .pbtn[data-person="philipp"] .dot{background:var(--train)}
-  .pbtn[data-person="eunice"] .dot{background:var(--hair)}
-  .pbtn[data-person="shared"] .dot{background:linear-gradient(90deg,var(--train),var(--hair))}
-  .pbtn.active{background:var(--surface-2);color:var(--text)}
+  .pill[aria-pressed="true"]{background:var(--train);border-color:var(--train)}
+  .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:#fff}
+  .pill[aria-pressed="true"] span{color:rgba(255,255,255,.75)}
+  .pill:focus-visible{outline:2px solid var(--train);outline-offset:2px}
 
   .stage{
-    border:1px solid var(--line);border-radius:0 14px 14px 14px;
+    border:1px solid var(--line);border-radius:14px;
     background:var(--surface);overflow:hidden;
   }
 
@@ -110,12 +74,15 @@ html = """<!DOCTYPE html>
 
   .sess-tabs{display:flex;border-bottom:1px solid var(--line)}
   .sess-tab{
-    flex:1;padding:10px 6px;text-align:center;cursor:pointer;
+    flex:1;min-height:var(--tap);padding:9px 6px;text-align:center;cursor:pointer;
     font-size:12px;font-weight:700;color:var(--muted);
-    border-bottom:2px solid transparent;
+    background:none;border:0;border-bottom:2px solid transparent;
+    font-family:inherit;
   }
   .sess-tab span{display:block;font-size:9px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
-  .sess-tab.active{color:var(--text);border-bottom-color:var(--accent)}
+  .sess-tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
+  .sess-tab.together[aria-selected="true"]{border-bottom-color:var(--eunice)}
+  .sess-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
   .sess-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
@@ -178,34 +145,30 @@ html = """<!DOCTYPE html>
 </head>
 <body>
 
-<a class="back" href="../"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg> Hub</a>
+<div class="pw-bar">
+  <a class="pw-back" href="../"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg> Hub</a>
+  <div id="switcher"></div>
+</div>
+
 <h1>Workout</h1>
-<p class="sub">Gym, home, travel — auto-set to whoever's using this phone.</p>
+<p class="sub">Gym, home, travel — set to whoever this phone belongs to.</p>
 
 <div class="pills" id="pills"></div>
-<div class="persons" id="persons"></div>
 <div class="stage" id="stage"></div>
 
+<script src="../app.js"></script>
 <script>
 const T = __DATA__;
 
-function loadPerson(){
-  try{
-    var v = localStorage.getItem("hub.person");
-    if(v === "P") return "philipp";
-    if(v === "E") return "eunice";
-  }catch(e){}
-  return "philipp";
+function esc(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
 }
 
-var state = { loc: "gym", person: loadPerson(), sess: null };
+var state = { loc: "gym", sess: null };
 
-var PEOPLE_BY_LOC = {
-  gym:    [["philipp","Philipp"],["eunice","Eunice"]],
-  home:   [["philipp","Philipp"],["eunice","Eunice"],["shared","Shared"]],
-  travel: [["philipp","Philipp"],["eunice","Eunice"],["shared","Shared"]],
-  guide:  [["philipp","Philipp"],["eunice","Eunice"]]
-};
+function person(){ return PW.get(); }
 
 var LOC_LABEL = {
   gym: ["Gym","Cable + machines"],
@@ -215,56 +178,53 @@ var LOC_LABEL = {
 };
 
 function el(tag, cls, html){
-  var e = document.createElement("div");
+  var e = document.createElement(tag || "div");
   if(cls) e.className = cls;
   if(html !== undefined) e.innerHTML = html;
   return e;
 }
 
+/* Sessions available to the current person at the current location:
+   their own, plus the Sunday session they train together. "Together" is a
+   session, not a third person — it belongs in both their weeks. */
+function sessionsFor(loc, who){
+  var atLoc = T.sessions[loc] || {};
+  var out = [];
+  var own = atLoc[who] || {};
+  Object.keys(own).forEach(function(k){
+    out.push({ key: who + ":" + k, data: own[k], together: false });
+  });
+  var shared = atLoc.shared || {};
+  Object.keys(shared).forEach(function(k){
+    out.push({ key: "shared:" + k, data: shared[k], together: true });
+  });
+  return out;
+}
+
 function setLoc(loc){
-  state.loc = loc;
-  var valid = PEOPLE_BY_LOC[loc].map(function(p){return p[0]});
-  if(valid.indexOf(state.person) === -1) state.person = "philipp";
-  state.sess = null;
-  renderPills(); renderPersons(); renderStage();
+  state.loc = loc; state.sess = null;
+  renderPills(); renderStage();
 }
-function setPerson(p){
-  state.person = p; state.sess = null;
-  renderPersons(); renderStage();
-}
-function setSess(s){
-  state.sess = s; renderStage();
-}
+function setSess(s){ state.sess = s; renderStage(); }
 
 function renderPills(){
   var wrap = document.getElementById("pills");
   wrap.innerHTML = "";
   ["gym","home","travel","guide"].forEach(function(loc){
     var lbl = LOC_LABEL[loc];
-    var p = el("div", "pill" + (state.loc === loc ? " active" : ""),
-      "<b>" + lbl[0] + "</b><span>" + lbl[1] + "</span>");
+    var p = el("button", "pill",
+      "<b>" + esc(lbl[0]) + "</b><span>" + esc(lbl[1]) + "</span>");
+    p.type = "button";
+    p.setAttribute("aria-pressed", String(state.loc === loc));
     p.addEventListener("click", function(){ setLoc(loc); });
     wrap.appendChild(p);
-  });
-}
-
-function renderPersons(){
-  var wrap = document.getElementById("persons");
-  wrap.innerHTML = "";
-  PEOPLE_BY_LOC[state.loc].forEach(function(pair){
-    var id = pair[0], label = pair[1];
-    var b = el("div", "pbtn" + (state.person === id ? " active" : "") , "");
-    b.setAttribute("data-person", id);
-    b.innerHTML = '<span class="dot"></span>' + label;
-    b.addEventListener("click", function(){ setPerson(id); });
-    wrap.appendChild(b);
   });
 }
 
 function tagHTML(extras){
   var out = "";
   for(var k in extras){
-    out += '<span class="tag' + (k==="load" ? " load" : "") + '">' + extras[k] + '</span>';
+    out += '<span class="tag' + (k==="load" ? " load" : "") + '">' + esc(extras[k]) + '</span>';
   }
   return out;
 }
@@ -275,49 +235,50 @@ function exHTML(e){
   var duoBlock = "";
   if(e.shared){
     duoBlock = '<div class="duo">' +
-      '<div class="duo-half p"><span class="who">Philipp</span><strong>' + e.philippLoad + '</strong></div>' +
-      '<div class="duo-half e"><span class="who">Eunice</span><strong>' + e.euniceLoad + '</strong></div>' +
+      '<div class="duo-half p"><span class="who">Philipp</span><strong>' + esc(e.philippLoad) + '</strong></div>' +
+      '<div class="duo-half e"><span class="who">Eunice</span><strong>' + esc(e.euniceLoad) + '</strong></div>' +
       '</div>';
   }
   return '<div class="ex' + (e.tier === "maint" ? " maint" : "") + '">' +
-    '<div class="ex-name">' + e.name + '</div>' +
-    (e.ref ? '<div class="ex-ref">' + e.ref + '</div>' : '') +
+    '<div class="ex-name">' + esc(e.name) + '</div>' +
+    (e.ref ? '<div class="ex-ref">' + esc(e.ref) + '</div>' : '') +
     '<div class="tag-row">' +
-      '<span class="tag sr">' + e.sets + ' × ' + e.reps + '</span>' +
-      '<span class="tag">' + FOCUS_LABEL[e.focus] + '</span>' +
+      '<span class="tag sr">' + esc(e.sets) + ' × ' + esc(e.reps) + '</span>' +
+      '<span class="tag">' + esc(FOCUS_LABEL[e.focus]) + '</span>' +
       tagHTML(e.extras) +
     '</div>' +
-    (e.cue ? '<div class="ex-cue">' + e.cue + '</div>' : '') +
+    (e.cue ? '<div class="ex-cue">' + esc(e.cue) + '</div>' : '') +
     duoBlock +
     '</div>';
 }
 
 function renderStage(){
   var stage = document.getElementById("stage");
+  var who = person();
 
   if(state.loc === "guide"){
     stage.innerHTML = profileHTML() + guideHTML();
     return;
   }
 
-  var locSessions = T.sessions[state.loc];
-  var pd = locSessions ? locSessions[state.person] : null;
+  var list = sessionsFor(state.loc, who);
 
-  if(!pd){
+  if(!list.length){
     stage.innerHTML = profileHTML() + noticeHTML() +
       '<div style="padding:36px 18px;text-align:center;color:var(--muted);font-size:13px">' +
       'No plan for this combination yet.</div>';
     return;
   }
 
-  var keys = Object.keys(pd);
+  var keys = list.map(function(s){ return s.key; });
   if(!state.sess || keys.indexOf(state.sess) === -1) state.sess = keys[0];
-  var sess = pd[state.sess];
+  var current = list.filter(function(s){ return s.key === state.sess; })[0];
+  var sess = current.data;
 
-  var tabs = keys.map(function(k){
-    var sd = pd[k];
-    return '<div class="sess-tab' + (state.sess === k ? " active" : "") + '" data-sess="' + k + '">' +
-      sd.title + '<span>' + sd.day + '</span></div>';
+  var tabs = list.map(function(s){
+    return '<button type="button" role="tab" class="sess-tab' + (s.together ? " together" : "") +
+      '" aria-selected="' + (state.sess === s.key) + '" data-sess="' + esc(s.key) + '">' +
+      esc(s.data.title) + '<span>' + esc(s.data.day) + '</span></button>';
   }).join("");
 
   var primary = sess.exercises.filter(function(e){ return e.tier === "primary"; });
@@ -326,10 +287,10 @@ function renderStage(){
   stage.innerHTML =
     profileHTML() +
     noticeHTML() +
-    '<div class="sess-tabs">' + tabs + '</div>' +
-    '<div class="sess-head"><div class="sess-title">' + sess.title + '</div>' +
-    '<div class="sess-focus">' + sess.focus + '</div></div>' +
-    (sess.note ? '<div class="opt-banner">' + sess.note + '</div>' : '') +
+    '<div class="sess-tabs" role="tablist">' + tabs + '</div>' +
+    '<div class="sess-head"><div class="sess-title">' + esc(sess.title) + '</div>' +
+    '<div class="sess-focus">' + esc(sess.focus) + '</div></div>' +
+    (sess.note ? '<div class="opt-banner">' + esc(sess.note) + '</div>' : '') +
     '<div class="tier-head"><span class="tier-dot primary"></span><span class="tier-name">Primary</span>' +
     '<span class="tier-desc">Progressive · RIR 2</span></div>' +
     primary.map(exHTML).join("") +
@@ -343,29 +304,29 @@ function renderStage(){
 }
 
 function profileHTML(){
-  var prof = T.profiles[state.person];
+  var who = person();
+  var prof = T.profiles[who];
   var meta = "";
   for(var k in prof.meta){
-    meta += '<div>' + k + '<strong>' + prof.meta[k] + '</strong></div>';
+    meta += '<div>' + esc(k) + '<strong>' + esc(prof.meta[k]) + '</strong></div>';
   }
-  return '<div class="profile">' +
-    '<div class="pname">' + capitalize(state.person) + '<span class="pbadge">' + prof.badge + '</span></div>' +
-    '<div class="pgoal">' + prof.goal + '</div>' +
+  return '<div class="profile" style="--accent:' + (who === "eunice" ? "var(--eunice)" : "var(--philipp)") + '">' +
+    '<div class="pname">' + esc(PW.PEOPLE[who].name) + '<span class="pbadge">' + esc(prof.badge) + '</span></div>' +
+    '<div class="pgoal">' + esc(prof.goal) + '</div>' +
     '<div class="pmeta">' + meta + '</div>' +
     '</div>';
 }
-function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function noticeHTML(){
   var note = T.locationNotes[state.loc];
-  return note ? '<div class="notice">' + note + '</div>' : "";
+  return note ? '<div class="notice">' + esc(note) + '</div>' : "";
 }
 
 function guideHTML(){
-  var wk = T.weeklyRhythm[state.person] || [];
+  var wk = T.weeklyRhythm[person()] || [];
   var wkRows = wk.map(function(d){
-    return '<div class="ref-item"><div class="ref-item-k">' + d.day + '</div>' +
-      '<div class="ref-item-v">' + d.what + '</div></div>';
+    return '<div class="ref-item"><div class="ref-item-k">' + esc(d.day) + '</div>' +
+      '<div class="ref-item-v">' + esc(d.what) + '</div></div>';
   }).join("");
   var weekCard = '<div class="ref-card"><div class="ref-head"><div class="ref-title">Your week</div></div>' +
     '<div class="ref-body">' + wkRows + '</div></div>';
@@ -393,7 +354,7 @@ function guideHTML(){
     '<div class="ref-item"><div class="ref-item-k">Why</div><div class="ref-item-v">' + s.why + '</div></div>' +
     '</div></div>';
 
-  var p = T.progression[state.person];
+  var p = T.progression[person()];
   var progCard = p ? '<div class="ref-card"><div class="ref-head"><div class="ref-title">Progression</div>' +
     '<div class="ref-intro">' + p.method + '</div></div><div class="ref-body">' +
     '<div class="ref-item"><div class="ref-item-k">Primary</div><div class="ref-item-v">' + p.primaryRule + '</div></div>' +
@@ -405,8 +366,17 @@ function guideHTML(){
   return '<div class="guide">' + weekCard + stepsCard + cardioCard + progCard + '</div>';
 }
 
+PW.mountRail();
+PW.mountSwitcher(document.getElementById("switcher"));
+
+// Switching person keeps the location but resets the session, since the
+// two people don't train the same split.
+window.addEventListener("pw:person", function(){
+  state.sess = null;
+  renderStage();
+});
+
 renderPills();
-renderPersons();
 renderStage();
 </script>
 
