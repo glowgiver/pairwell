@@ -1,0 +1,113 @@
+/* Pairwell — shared tokens and shared components.
+   The single definition of the palette. Pages must not redefine these.
+   Cached by the service worker like any other file, so offline is unaffected. */
+
+:root{
+  --bg:#0B1220;
+  --surface:#131C2E;
+  --surface-2:#1A2540;
+  --line:#25324F;
+  --text:#EEF2F9;
+  --muted:#8B9AB8;
+  --muted2:#5f7492;
+
+  --skin:#7FD1C1;
+  --hair:#C9A6F2;
+  --train:#5A8DEE;
+  --food:#F2A65A;
+
+  /* person colours — same hues as the workout module already used */
+  --philipp:#5A8DEE;
+  --eunice:#C9A6F2;
+
+  --r:18px;
+
+  /* smallest comfortable touch target */
+  --tap:44px;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+
+/* ---------- person switcher ---------------------------------------------
+   Present on every page. One tap, persisted immediately, applies app-wide. */
+
+.pw-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.pw-back{
+  display:inline-flex;align-items:center;gap:7px;
+  min-height:var(--tap);
+  color:var(--muted);
+  text-decoration:none;
+  font-size:15px;
+  background:none;border:0;padding:0;
+  font-family:inherit;
+  cursor:pointer;
+}
+.pw-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pw-back:active{color:var(--text)}
+
+.pw-switch{
+  display:flex;
+  gap:4px;
+  padding:3px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:13px;
+  flex:none;
+}
+
+.pw-switch button{
+  min-width:var(--tap);
+  min-height:var(--tap);
+  padding:0 14px;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  color:var(--muted);
+  font-family:inherit;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.02em;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:background .15s ease, color .15s ease;
+}
+.pw-switch button .pw-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--who);
+  flex:none;
+  opacity:.55;
+}
+.pw-switch button[aria-pressed="true"]{
+  background:var(--surface-2);
+  color:var(--text);
+  box-shadow:inset 0 0 0 1px var(--who);
+}
+.pw-switch button[aria-pressed="true"] .pw-dot{opacity:1}
+.pw-switch button:focus-visible{outline:2px solid var(--who);outline-offset:2px}
+
+/* the active person tints the page edge, so who you're looking at is
+   obvious without reading anything */
+.pw-person-rail{
+  position:fixed;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--who-active,var(--philipp));
+  opacity:.55;
+  pointer-events:none;
+  z-index:5;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pw-switch button{transition:none}
+}
