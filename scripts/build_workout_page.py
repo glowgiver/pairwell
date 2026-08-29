@@ -85,7 +85,11 @@ html = """<!DOCTYPE html>
   .pill span{display:block;font-family:var(--f-data);font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-top:2px}
   .pill[aria-pressed="true"]{background:var(--train);border-color:var(--train)}
   .pill[aria-pressed="true"] b, .pill[aria-pressed="true"] span{color:var(--bg)}
-  .pill[aria-pressed="true"] span{color:inherit;font-weight:400}
+  /* Weight only. This used to say color:inherit, which inherited --muted from
+     the button and put grey on the filled accent at 1.14:1 — the sub-label was
+     invisible on whichever location was selected. Vary the weight, never the
+     ink, on a filled accent. */
+  .pill[aria-pressed="true"] span{font-weight:400}
   .pill:focus-visible{outline:2px solid var(--train);outline-offset:2px}
 
   .stage{
@@ -118,6 +122,9 @@ html = """<!DOCTYPE html>
   .sess-tab span{display:block;font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
   .sess-tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
   .sess-tab.together[aria-selected="true"]{border-bottom-color:var(--eunice)}
+  /* A day trained with the other person is underlined in *their* colour, so it
+     reads the same from both sides. --partner is set inline per tab. */
+  .sess-tab.duo[aria-selected="true"]{border-bottom-color:var(--partner)}
   .sess-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
@@ -163,6 +170,19 @@ html = """<!DOCTYPE html>
   .tag.sr{background:var(--accent);color:var(--bg);border-color:var(--accent);
     font-weight:700;font-size:15px;padding:4px 11px;letter-spacing:.01em}
   .tag.load{background:var(--surface-2);color:var(--text);border-color:var(--line)}
+  /* On a shared day every exercise is the same station unless it says here
+     that it is not. Marking only the exceptions keeps five badges off the
+     screen; the session banner states the rule. */
+  .ex-solo{
+    display:flex;align-items:flex-start;gap:8px;
+    margin:9px 0 2px;padding:7px 11px;border-radius:9px;line-height:1.5;
+    background:var(--surface-2);border:1px solid var(--line);
+    font-family:var(--f-data);font-size:13px;color:var(--muted);
+  }
+  .ex-solo svg{width:15px;height:15px;flex:none;margin-top:2px;stroke:currentColor;fill:none;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .ex-solo b{color:var(--text);font-weight:700}
+
   .ex-cue{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.6}
   .ex-cue strong{color:var(--text)}
 
@@ -329,6 +349,13 @@ function exHTML(e){
       '<span class="tag">' + esc(FOCUS_LABEL[e.focus]) + '</span>' +
       tagHTML(e.extras) +
     '</div>' +
+    (e.solo
+      ? '<div class="ex-solo">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+        '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>' +
+        '<circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>' +
+        '<span><b>On your own.</b> ' + esc(e.solo) + '.</span></div>'
+      : '') +
     (e.cue ? '<div class="ex-cue">' + esc(e.cue) + '</div>' : '') +
     duoBlock +
     '</div>';
@@ -358,8 +385,11 @@ function renderStage(){
   var sess = current.data;
 
   var tabs = list.map(function(s){
+    var partner = s.data.partner;
     return '<button type="button" role="tab" class="sess-tab' + (s.together ? " together" : "") +
-      '" aria-selected="' + (state.sess === s.key) + '" data-sess="' + esc(s.key) + '">' +
+      (partner ? " duo" : "") + '"' +
+      (partner ? ' style="--partner:var(--' + esc(partner.toLowerCase()) + ')"' : '') +
+      ' aria-selected="' + (state.sess === s.key) + '" data-sess="' + esc(s.key) + '">' +
       esc(s.data.title) + '<span>' + esc(s.data.day) + '</span></button>';
   }).join("");
 

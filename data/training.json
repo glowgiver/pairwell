@@ -62,7 +62,7 @@
       },
       {
         "day": "Fri",
-        "what": "Gym · Pull",
+        "what": "Gym · with Eunice",
         "type": "training"
       },
       {
@@ -246,7 +246,7 @@
         },
         "pull": {
           "title": "Pull + Posture",
-          "day": "Friday",
+          "day": "Friday · with Eunice",
           "focus": "side delt · lat · back · rear delt",
           "exercises": [
             {
@@ -303,7 +303,8 @@
                 "rir": "RIR 1",
                 "rest": "60s"
               },
-              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together."
+              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together.",
+              "solo": "Eunice is on her hip thrust — she joins you at this station for the face pull"
             },
             {
               "name": "Cable Face Pull",
@@ -320,20 +321,6 @@
               "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands finish beside the ears."
             },
             {
-              "name": "Seated Hamstring Curl",
-              "ref": "hamstrings",
-              "focus": "g",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "50 kg",
-                "rir": "RIR 3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. Holds the back of the leg — important for posture and for how trousers sit. Controlled, no swing."
-            },
-            {
               "name": "Cable Biceps Curl",
               "ref": "arm detail",
               "focus": "a",
@@ -346,9 +333,26 @@
                 "rest": "45s"
               },
               "cue": "Maintenance. Elbows fixed, constant tension, brief squeeze at the top. Covers what the pulldown and row don't fully reach."
+            },
+            {
+              "name": "Seated Hamstring Curl",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "50 kg",
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance. Holds the back of the leg — important for posture and for how trousers sit. Controlled, no swing.",
+              "solo": "Eunice is on the cable crunch"
             }
           ],
-          "durationMin": 50
+          "durationMin": 50,
+          "partner": "Eunice",
+          "note": "Friday with Eunice at the cable tower. Same station, alternating sets: his set, her set — her rest is his work time. Two exercises here are not shared and say so; everything else is."
         }
       },
       "eunice": {
@@ -456,7 +460,7 @@
           "title": "Upper + Glutes",
           "day": "Friday · with Philipp",
           "focus": "cable tower — alternating sets with Philipp",
-          "note": "Friday with Philipp at the cable tower. She's out at 13:00, he arrives ~15:30. Same station: her set, his set. Her rest is his work time.",
+          "note": "Friday with Philipp at the cable tower. Same station, alternating sets: her set, his set — her rest is his work time. Two exercises here are not shared and say so; everything else is.",
           "exercises": [
             {
               "name": "Cable Lateral Raise",
@@ -511,7 +515,8 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Glutes again — twice a week is what drives growth. Same setup as Monday: bench under the shoulders, weight across the hips. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)"
+              "cue": "Glutes again — twice a week is what drives growth. Same setup as Monday: bench under the shoulders, weight across the hips. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)",
+              "solo": "Philipp is at the rear-delt cable — you join him there next"
             },
             {
               "name": "Rear Delt + Face Pull",
@@ -552,10 +557,12 @@
                 "rir": "RIR 2-3",
                 "rest": "45s"
               },
-              "cue": "Maintenance. Kneeling, fold the ribs towards the hips, hands fixed at the ears, slow on the way back."
+              "cue": "Maintenance. Kneeling, fold the ribs towards the hips, hands fixed at the ears, slow on the way back.",
+              "solo": "Philipp is on the leg curl"
             }
           ],
-          "durationMin": 55
+          "durationMin": 55,
+          "partner": "Philipp"
         }
       }
     },
