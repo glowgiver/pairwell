@@ -186,6 +186,26 @@ html = """<!DOCTYPE html>
   .ex-cue{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.6}
   .ex-cue strong{color:var(--text)}
 
+  /* On a shared station the other person's setting belongs on the card —
+     whoever has their phone out sets both pins. */
+  .ex-mate{
+    display:flex;align-items:baseline;gap:8px;margin-top:8px;
+    font-family:var(--f-data);font-size:13px;color:var(--muted);
+  }
+  .ex-mate .who{
+    font-size:13px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--bg);background:var(--mate);padding:2px 8px;border-radius:6px;
+    font-weight:600;flex:none;
+  }
+  .ex-mate b{color:var(--text);font-variant-numeric:tabular-nums}
+
+  /* In list order the tier has no heading to sit under, so it rides along
+     as the first tag on the card. */
+  .tag.tier{display:inline-flex;align-items:center;gap:6px}
+  .tag.tier::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .tag.tier.maint{color:var(--muted2)}
+  .tag.tier.maint::before{background:var(--muted2)}
+
   .duo{display:flex;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
   .duo-half{flex:1;padding:10px 12px;font-size:14px;line-height:1.45}
   .duo-half.p{background:rgba(90,141,238,.08);border-right:1px solid var(--line)}
@@ -316,6 +336,20 @@ function renderPills(){
   });
 }
 
+/* The partner's version of the same movement, by name. Only exact matches
+   count, which is exactly right: those are the cards where the two of you
+   stand at one station and swap the pin. Where the names differ (his fly and
+   face pull against her superset of both) there is nothing to line up. */
+function partnerExercises(sess){
+  var map = {};
+  if(!sess.partner) return map;
+  var key = String(state.sess).split(":")[1];
+  var theirs = ((T.sessions[state.loc] || {})[sess.partner.toLowerCase()] || {})[key];
+  if(!theirs) return map;
+  theirs.exercises.forEach(function(e){ map[e.name] = e; });
+  return map;
+}
+
 function tagHTML(extras){
   var out = "";
   for(var k in extras){
@@ -326,7 +360,7 @@ function tagHTML(extras){
 
 var FOCUS_LABEL = { a: "upper body", g: "legs / glutes", p: "inner thigh", c: "core" };
 
-function exHTML(e){
+function exHTML(e, mate, mateName){
   var duoBlock = "";
   if(e.shared){
     duoBlock = '<div class="duo">' +
@@ -340,11 +374,24 @@ function exHTML(e){
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Demo</a>'
     : '';
 
+  /* Shown only in list order, where there is no tier heading above the card. */
+  var tierTag = mateName
+    ? '<span class="tag tier' + (e.tier === "maint" ? " maint" : "") + '">' +
+      (e.tier === "maint" ? "maintenance" : "primary") + '</span>'
+    : '';
+
+  var mateLoad = (mate && mate.extras && mate.extras.load)
+    ? '<div class="ex-mate" style="--mate:var(--' + esc(String(mateName).toLowerCase()) + ')">' +
+      '<span class="who">' + esc(mateName) + '</span><b>' + esc(mate.extras.load) + '</b>' +
+      '<span>' + esc(mate.sets) + ' × ' + esc(mate.reps) + '</span></div>'
+    : '';
+
   return '<div class="ex' + (e.tier === "maint" ? " maint" : "") + '">' +
     '<div class="ex-head"><div><div class="ex-name">' + esc(e.name) + '</div>' +
     (e.ref ? '<div class="ex-ref">' + esc(e.ref) + '</div>' : '') + '</div>' +
     demo + '</div>' +
     '<div class="tag-row">' +
+      tierTag +
       '<span class="tag sr">' + esc(e.sets) + ' × ' + esc(e.reps) + '</span>' +
       '<span class="tag">' + esc(FOCUS_LABEL[e.focus]) + '</span>' +
       tagHTML(e.extras) +
@@ -356,6 +403,7 @@ function exHTML(e){
         '<circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>' +
         '<span><b>On your own.</b> ' + esc(e.solo) + '.</span></div>'
       : '') +
+    mateLoad +
     (e.cue ? '<div class="ex-cue">' + esc(e.cue) + '</div>' : '') +
     duoBlock +
     '</div>';
@@ -396,6 +444,27 @@ function renderStage(){
   var primary = sess.exercises.filter(function(e){ return e.tier === "primary"; });
   var maint = sess.exercises.filter(function(e){ return e.tier === "maint"; });
 
+  /* A session trained with the other person is rendered in list order, not
+     grouped by tier. On your own the two tiers are the useful split — what to
+     push, what to hold. Standing next to someone, the order you walk the gym
+     in beats the label, and grouping by tier tore the two people's lists apart
+     at different points. The tier still shows, as a dot on each card. */
+  var body;
+  if(sess.partner){
+    var partnerSess = partnerExercises(sess);
+    body = sess.exercises.map(function(e){
+      return exHTML(e, partnerSess[e.name], sess.partner);
+    }).join("");
+  } else {
+    body =
+      '<div class="tier-head"><span class="tier-dot primary"></span><span class="tier-name">Primary</span>' +
+      '<span class="tier-desc">Progressive · RIR 2</span></div>' +
+      primary.map(function(e){ return exHTML(e); }).join("") +
+      (maint.length ? '<div class="tier-head"><span class="tier-dot maint"></span><span class="tier-name">Maintenance</span>' +
+      '<span class="tier-desc">2 sets · RIR 3 · never progress</span></div>' +
+      maint.map(function(e){ return exHTML(e); }).join("") : "");
+  }
+
   /* The exercises come first. The profile header is planning information —
      body-fat targets are not what you need on the third set. */
   stage.innerHTML =
@@ -405,12 +474,7 @@ function renderStage(){
       ' exercises &middot; ~' + esc(sess.durationMin) + ' min</span>' : '') + '</div>' +
     '<div class="sess-focus">' + esc(sess.focus) + '</div></div>' +
     (sess.note ? '<div class="opt-banner">' + esc(sess.note) + '</div>' : '') +
-    '<div class="tier-head"><span class="tier-dot primary"></span><span class="tier-name">Primary</span>' +
-    '<span class="tier-desc">Progressive · RIR 2</span></div>' +
-    primary.map(exHTML).join("") +
-    (maint.length ? '<div class="tier-head"><span class="tier-dot maint"></span><span class="tier-name">Maintenance</span>' +
-    '<span class="tier-desc">2 sets · RIR 3 · never progress</span></div>' +
-    maint.map(exHTML).join("") : "") +
+    body +
     noticeHTML() +
     profileHTML();
 

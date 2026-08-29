@@ -1,7 +1,7 @@
 {
   "_source": "workout_hub.html — full re-translation of all cues, 2026-08-29",
   "_supersedes": "earlier training.json draft — this is the authoritative extraction",
-  "_measured": "Gym loads dated 2026-08-29 were read off the machines, not estimated: cable row 42.5 kg P / 27 kg E, face pull 12.5 kg P / 5 kg E, rear delt fly 6.8 kg P, biceps curl 5 kg P / 2.5 kg E. Everything else in this file is still the number the plan was written with. The glute drive machine turned out not to exist at this gym on the same day.",
+  "_measured": "Gym loads dated 2026-08-29 were read off the machines, not estimated: cable row 42.5 kg P / 27 kg E, face pull 12.5 kg P / 5 kg E, rear delt fly 6.8 kg P, biceps curl 5 kg P / 2.5 kg E. Everything else in this file is still the number the plan was written with. The glute drive machine turned out not to exist at this gym on the same day. Confirmed in the gym the same evening: Eunice did the hip thrusts with a sandbag or a dumbbell across the hips, which is why the sessions name that setup rather than the machine.",
   "meta": {
     "title": "Workout Hub · Philipp & Eunice · 2026",
     "edition": "Lean Athletic Edition",
@@ -292,6 +292,19 @@
               "cue": "Sit upright, handle to the belly, elbows close to the body, shoulder blades together. Builds posture without thickening the neck — stay moderate, don't heave."
             },
             {
+              "name": "Hip Thrust (Dumbbell or Sandbag)",
+              "ref": "posterior chain",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance — hold, don't build. Her station, her setup: shoulders against the bench, the weight across the hips. Two sets while she does her three. Hip extension is what the seated curl at the end does not cover, and it is what keeps the back of the leg working as a unit."
+            },
+            {
               "name": "Rear Delt Fly (Cable)",
               "ref": "rear delt",
               "focus": "a",
@@ -303,8 +316,7 @@
                 "rir": "RIR 1",
                 "rest": "60s"
               },
-              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together.",
-              "solo": "Eunice is on her hip thrust — she joins you at this station for the face pull"
+              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together."
             },
             {
               "name": "Cable Face Pull",
@@ -318,7 +330,7 @@
                 "rir": "RIR 1",
                 "rest": "45s"
               },
-              "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands finish beside the ears."
+              "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands past the ears. Pair it with the fly the way Eunice does: rounds 1 and 2 fly straight into face pull, round 3 fly only. Same station, same three rounds, so you both leave together."
             },
             {
               "name": "Cable Biceps Curl",
@@ -350,9 +362,9 @@
               "solo": "Eunice is on the cable crunch"
             }
           ],
-          "durationMin": 50,
+          "durationMin": 55,
           "partner": "Eunice",
-          "note": "Friday with Eunice at the cable tower. Same station, alternating sets: his set, her set — her rest is his work time. Two exercises here are not shared and say so; everything else is."
+          "note": "Friday with Eunice, one station at a time: his set, her set. Her set is his rest — about a minute, whatever the card says. The pulldown and the row want 90s, so let one extra turn go by on those two. Shared all the way to the last exercise."
         }
       },
       "eunice": {
@@ -460,7 +472,7 @@
           "title": "Upper + Glutes",
           "day": "Friday · with Philipp",
           "focus": "cable tower — alternating sets with Philipp",
-          "note": "Friday with Philipp at the cable tower. Same station, alternating sets: her set, his set — her rest is his work time. Two exercises here are not shared and say so; everything else is.",
+          "note": "Friday with Philipp, one station at a time: her set, his set. His set is her rest — about a minute, whatever the card says. The pulldown and the row want 90s, so let one extra turn go by on those two. Shared all the way to the last exercise.",
           "exercises": [
             {
               "name": "Cable Lateral Raise",
@@ -515,8 +527,7 @@
                 "rir": "RIR 2-3",
                 "rest": "75s"
               },
-              "cue": "Glutes again — twice a week is what drives growth. Same setup as Monday: bench under the shoulders, weight across the hips. 3 sets here so Monday's 4-set block isn't overloaded. (Philipp does 2 maintenance sets here.)",
-              "solo": "Philipp is at the rear-delt cable — you join him there next"
+              "cue": "Glutes again — twice a week is what drives growth. Bench under the shoulders, the dumbbell or sandbag across the hips, and a folded towel under it, or the hip bones take the load instead of the glutes. Philipp does 2 maintenance sets at this station. A dumbbell runs out of weight long before your glutes do, so progress in this order: reps up to 15, then a 2-second squeeze at the top, then feet elevated, then one leg at a time. Reach for something heavier last, not first."
             },
             {
               "name": "Rear Delt + Face Pull",
@@ -1676,6 +1687,8 @@
   "_gaps": [
     "Sessions still duplicate exercise objects instead of referencing exercises.json by id",
     "Eunice's loads are confirmed for the row, face pull and biceps curl only. Her hip thrust, leg press, adductor, leg curl, chest press, triceps and ab machine still carry no load at all — only RIR.",
-    "Hip Thrust (Dumbbell or Sandbag) has no demo video; it replaced the glute drive machine on 2026-08-29."
+    "Hip Thrust (Dumbbell or Sandbag) has no demo video; it replaced the glute drive machine on 2026-08-29.",
+    "No warm-up anywhere in this file — zero sessions describe one. Friday opens on a lateral raise and reaches a 45 kg pulldown by the second exercise, which wants a ramp set. Adding one is a training decision, not a data fix.",
+    "Eunice's hip thrust carries no load at all, which mattered less against a machine stack and matters now that it is a dumbbell or sandbag: without the number there is nothing to progress from, and the partner line on Philipp's card stays blank."
   ]
 }
