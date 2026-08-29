@@ -12,6 +12,23 @@ already going on the plate beside it:
 
 That is the whole brief. Everything below is just what it implies.
 
+## A second envelope, new since 2026-08-29
+
+The maintenance phase moved Philipp's snack budget from 250 to **550 kcal**,
+which is no longer a snack — it is a third small meal, and worth hunting for
+separately:
+
+    Philipp, outside the three meals:  550 kcal · 36 g protein · 11 g fibre
+    Eunice, breakfast + snacks:        640 kcal · 25 g protein
+
+His is the awkward one: 36 g of protein in 550 kcal is dense, so it wants
+quark, skyr, cottage cheese, egg white, or a second small portion of lean
+meat — not nuts, not granola, not a bar. Hers is roomy by comparison and the
+constraint is really just "has some protein in it".
+
+Two of these would cover a lot of ground. They do not need the block rule or
+the fibre split below; that section is about lunch and dinner only.
+
 ## The shape that fits
 
 No single fibre source works. Lentils are dense enough for a lunchbox but
