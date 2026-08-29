@@ -21,8 +21,22 @@ OUT = os.path.join(BASE, "..", "hub", "index.html")
 def load(name):
     return json.load(open(os.path.join(BASE, "..", "data", name), encoding="utf-8"))
 
+def strip_body(profiles):
+    """Body composition is for the scripts, not for the pages.
+
+    The site is public. No page needs a bodyweight to render, so none of them
+    gets one — this keeps profiles.json usable by check_targets.py without
+    putting anyone's weight and body fat on a URL anybody can open.
+    """
+    import copy
+    out = copy.deepcopy(profiles)
+    for person in out.get("people", {}).values():
+        person.pop("body", None)
+    out.pop("_bodyNote", None)
+    return out
+
 data = {
-    "profiles": load("profiles.json"),
+    "profiles": strip_body(load("profiles.json")),
     "training": load("training.json"),
     "routines": load("routines.json"),
     "kitchen": load("kitchen.json"),

@@ -31,10 +31,106 @@ def lo(v):
     return float(str(v).split("-")[0])
 
 
+def energy_balance(profiles, training):
+    """Is the calorie target the right distance below maintenance?
+
+    Katch-McArdle, because lean mass is the one input the recorded body-fat
+    figure gives us directly. The activity factor is the soft part, so this
+    prints a band rather than a number, and the band is wide on purpose.
+
+    None of it outranks the scale. If the weight trend disagrees with this
+    arithmetic, the weight trend is right and the arithmetic is wrong.
+    """
+    print("\nENERGY BALANCE — how far below maintenance is the calorie target?\n")
+    rhythm = (training or {}).get("weeklyRhythm", {})
+    findings = []
+
+    for key, p in profiles["people"].items():
+        body = p.get("body") or {}
+        w, bf = body.get("weightKg"), body.get("bodyFatPct")
+        if not w or bf is None:
+            print("  %s — no bodyweight recorded, nothing can be checked."
+                  % p["displayName"])
+            findings.append("%s has no bodyweight in profiles.json, so none of "
+                            "their targets can be sanity-checked." % p["displayName"])
+            continue
+
+        lbm = w * (1 - bf / 100.0)
+        bmr = 370 + 21.6 * lbm
+        days = rhythm.get(key, [])
+        n_train = sum(1 for x in days if x.get("type") == "training")
+        n_move = sum(1 for x in days if x.get("type") == "move")
+        # a sedentary base, plus what the week actually contains
+        factor = 1.2 + 0.05 * n_train + 0.025 * n_move
+        target = p["dailyTargets"]["calories"]
+
+        print("  %s — %.1f kg at %.1f%% body fat, %.1f kg lean" % (p["displayName"], w, bf, lbm))
+        print("    BMR %.0f kcal  ·  %d training + %d active days  ->  factor %.3f"
+              % (bmr, n_train, n_move, factor))
+        lo, hi = bmr * (factor - 0.075), bmr * (factor + 0.075)
+        print("    maintenance somewhere around %.0f-%.0f kcal" % (lo, hi))
+
+        for label, tdee in (("low", lo), ("high", hi)):
+            deficit = tdee - target
+            pct = 100.0 * deficit / tdee
+            kg = deficit * 7 / 7700.0
+            print("      vs %-4s  deficit %4.0f kcal (%4.1f%%)  ->  %.2f kg/week"
+                  % (label, deficit, pct, kg))
+
+        # Muscle retention holds at 0.5-1.0% bodyweight per week. Faster is where
+        # lean mass starts going with the fat.
+        safe_lo, safe_hi = 0.005 * w * 7700 / 7, 0.010 * w * 7700 / 7
+        print("    retention-safe deficit for %.1f kg: %.0f-%.0f kcal/day "
+              "(%.2f-%.2f kg/week)" % (w, safe_lo, safe_hi, 0.005 * w, 0.010 * w))
+        worst = hi - target
+        if worst > safe_hi:
+            print("    -> at the high estimate this is FASTER than muscle retention allows")
+            findings.append("%s's deficit reaches %.0f kcal at the high maintenance "
+                            "estimate, past the %.0f kcal retention ceiling."
+                            % (p["displayName"], worst, safe_hi))
+        elif (lo - target) < safe_lo:
+            print("    -> at the low estimate this is slower than the usual band; fine, "
+                  "but progress will be hard to see")
+
+        # protein against bodyweight, which is the only way to judge it
+        pro = p["dailyTargets"]["proteinG"]
+        gkg = pro / w
+        verdict = ("low end" if gkg < 1.7 else
+                   "mid range" if gkg < 2.0 else "high end")
+        print("    protein %d g = %.2f g/kg bodyweight (%.2f g/kg lean) — %s of 1.6-2.2"
+              % (pro, gkg, pro / lbm, verdict))
+        if gkg < 1.7:
+            findings.append("%s's protein is %.2f g/kg, the bottom of the useful range "
+                            "for someone lifting in a deficit." % (p["displayName"], gkg))
+
+        fib = p["dailyTargets"]["fiberG"]
+        dens = fib / target * 1000
+        print("    fibre %d g = %.1f g per 1000 kcal (guideline is about 14)" % (fib, dens))
+        if dens > 25:
+            findings.append("%s's fibre is %.1f g per 1000 kcal, nearly double the "
+                            "guideline density." % (p["displayName"], dens))
+
+        tw = body.get("targetWeightKg")
+        if tw:
+            print("    goal %.1f -> %.1f kg" % (w, tw))
+        print()
+
+    print("  The activity factor is a guess with about +-300 kcal in it. MacroFactor's\n"
+          "  adaptive TDEE is measured rather than assumed — where the two disagree,\n"
+          "  believe MacroFactor.\n")
+    return findings
+
+
 def main():
     profiles, kitchen = load("profiles.json"), load("kitchen.json")
+    try:
+        training = load("training.json")
+    except (IOError, OSError):
+        training = None
     ef = kitchen["energyFactors"]
     fails = []
+
+    fails.extend(energy_balance(profiles, training))
 
     print("DAILY TARGETS — do the four numbers agree with the calorie budget?\n")
     for key, p in profiles["people"].items():
