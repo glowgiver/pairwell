@@ -40,7 +40,10 @@
 
   function person() { return PEOPLE[get()]; }
 
+  /* Set on :root as well as the rail, so any page can tint a heading or a
+     border with var(--who-active) without knowing who is selected. */
   function paintRail(id) {
+    document.documentElement.style.setProperty("--who-active", PEOPLE[id].color);
     var rail = document.querySelector(".pw-person-rail");
     if (rail) rail.style.setProperty("--who-active", PEOPLE[id].color);
   }
@@ -126,6 +129,9 @@
       navigator.serviceWorker.register(path || "sw.js");
     });
   }
+
+  /* Paint once as soon as the script runs, so the first render is correct. */
+  if (document.documentElement) paintRail(get());
 
   global.PW = {
     PEOPLE: PEOPLE,
