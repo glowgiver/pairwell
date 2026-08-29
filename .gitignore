@@ -8,3 +8,9 @@ __pycache__/
 # three separate transcriptions turned out to have lost content, and only the
 # originals revealed it.
 /sources/
+
+# inbox/ is where recipes land before they become data. Not committed: a saved
+# recipe page is someone else's copyrighted text, and this repo is public. The
+# link and the amounts are what we keep; the page itself stays on the laptop.
+/inbox/*
+!/inbox/TEMPLATE.md

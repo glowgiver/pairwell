@@ -49,6 +49,7 @@ pairwell/
 │   ├── build_routines_page.py   routines.json → skincare + hair pages
 │   ├── build_kitchen_page.py    kitchen.json → splitter + method
 │   ├── recompute_macros.py      derives kitchen macros; holds no data itself
+│   ├── read_inbox.py            inbox/*.md → recipes.json, blocking on unknowns
 │   ├── adapt_recipe.py          fits a found recipe to the mirror-meal target
 │   ├── check_targets.py         are the targets themselves arithmetically possible?
 │   ├── check_routine_rules.py   checks both protocols against their own rules
@@ -61,6 +62,9 @@ pairwell/
 │                          scrubbed in 9bf4883, so they must never be committed.
 │                          Kept because three transcriptions lost content and
 │                          only the originals revealed it.
+│
+├── inbox/                 GITIGNORED except TEMPLATE.md — recipes as found,
+│                          one dish per file, before they become data
 │
 ├── backups/               generated, self-contained, committed
 │
@@ -162,8 +166,21 @@ learned the hard way, and it is the reason a recipe cannot be added by pasting a
 nutrition panel — the ingredients go in, the numbers come out.
 
 ```
-data/recipes.json + data/foods.json --[adapt_recipe.py]--> grams + a fit report
+inbox/*.md --[read_inbox.py]--> data/recipes.json --[adapt_recipe.py]--> grams + a fit report
+                                      + data/foods.json
 ```
+
+**`inbox/` is where recipes land before they are data**, and it is gitignored for
+the same reason `sources/` is: a saved recipe page is someone else's copyrighted
+text and this repo is public. The link and the amounts are what we keep. Only
+`inbox/TEMPLATE.md` is committed.
+
+`read_inbox.py` reads the whole folder at once and answers the two questions
+only this repo can answer — is every ingredient known, and is every amount a
+weight. Spoon measures are converted and **flagged as approximate**; unknown
+ingredients and vague amounts block that file. A blocked recipe is never
+written: a half-resolved recipe in the library is worse than none, because its
+macros would be quietly wrong rather than obviously missing.
 
 `check_targets.py` is the other half: it asks whether a target can be hit at all
 before anyone cooks against it. Today it says no — see Known gaps.
