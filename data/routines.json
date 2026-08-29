@@ -689,53 +689,207 @@
     }
   },
   "hair": {
-    "_status": "SHARED — one protocol, used by both. No per-person split needed on the dashboard.",
+    "_source": "hair_protocol.html",
+    "_status": "SHARED — one protocol, both people. Amounts and two treatments differ per person.",
     "context": {
       "location": "Hamburg",
-      "waterHardness": "17.3 °dH — measured hard water. Treated here as the main suspect for stiff, dull hair; that link is plausible but not proven.",
-      "sharedProblem": "stiff, dull hair attributed to hard water + sulfate shampoos + inadequate conditioning"
+      "waterHardness": "17.3 °dH — hard. Scale: 0 soft · 8.4 · 14 · 25+ very hard.",
+      "why": "Sulfates strip natural oils from dense Asian hair, so the cuticle stays open and the texture turns rough and stiff. Conditioning seals it. On top of that, hard water leaves a calcium/magnesium film on every strand — that is what the weekly rinse removes.",
+      "verify": "Test your own shower tap with strips on day 1 and again at week 8. The district average is a guess; your tap is the real number."
     },
-    "individualNotes": {
-      "philipp": "morning scalp itch traced to using a rinse-out conditioner (Balea Feuchtigkeit Spülung) as leave-in — corrected, now follows protocol above cleanly",
-      "eunice": "longer hair — higher risk of under-cleansing when following the shared amounts, worth watching"
-    },
-    "washDay": {
-      "_orderNote": "Order follows from what each product is for; it was not stated explicitly in the source. Confirm if it matters.",
+    "everyShower": {
+      "_note": "Four steps, every wash, both of you. The citric rinse is NOT part of this — it is weekly.",
       "steps": [
         {
-          "step": "Shampoo",
-          "product": "Cantu Sulfate-Free Cleansing Cream (Rossmann or Amazon.de)",
-          "how": "Sulfate-free — the everyday cleanser."
+          "step": "Sulfate-free shampoo",
+          "how": "Warm water. Work in from the roots, massage the scalp for ~60 sec. Check the INCI label — no SLS or SLES."
         },
         {
-          "step": "Citric acid rinse",
-          "product": "Citric acid in water",
-          "how": "1/4 tsp per 500ml water — removes the mineral film Hamburg water leaves behind."
+          "step": "Rinse thoroughly",
+          "how": "Warm water. A cold 10-second finish is fine if you like it, but the cold itself does not seal the cuticle — the weekly citric rinse does that."
         },
         {
-          "step": "Leave-in",
-          "product": "Garnier Fructis Repairing 10-in-1 Leave-in",
-          "how": "On damp hair. A rinse-out conditioner is not a substitute — see Philipp's note."
+          "step": "Towel — pat, don't rub",
+          "how": "Microfiber only. Press and squeeze sections. Rubbing roughens the cuticle and causes frizz."
+        },
+        {
+          "step": "Leave-in conditioner",
+          "how": "Apply to damp hair. Do not rinse out.",
+          "perPerson": {
+            "philipp": "Pea-sized amount. Start at the ends and work up slightly — short hair needs less.",
+            "eunice": "2–3× more product. Work from the ends up through the full length before touching the roots."
+          }
         }
       ]
     },
-    "weekly": {
-      "treatment": "Banana Hair Mask",
-      "note": "Banana Hair Mask"
+    "scheduled": [
+      {
+        "id": "citric-rinse",
+        "title": "Citric acid rinse",
+        "cadence": "Weekly",
+        "who": "both",
+        "recipe": "¼ tsp citric acid per 500 ml warm water — target pH 4–5. Not ½ tsp; that is too acidic.",
+        "order": "Shampoo → rinse → pour the citric solution over all hair → wait 1–2 min → rinse out → leave-in as normal.",
+        "why": "At 17.3 °dH weekly is the right frequency. The acid dissolves the calcium/magnesium film that makes hair feel coated and stiff.",
+        "caution": "Straw-like texture, brittleness, more tangles or scalp itch mean you are overdoing it. Do not go to 2× weekly, and stay at ¼ tsp."
+      },
+      {
+        "id": "chelating",
+        "title": "Chelating shampoo",
+        "cadence": "Every 2–3 weeks",
+        "who": "both",
+        "recipe": "Malibu C Hard Water Wellness — use in place of your regular shampoo.",
+        "order": "Lather, leave on 3–5 min, rinse fully. Follow immediately with a deep conditioner or your leave-in — do not skip that.",
+        "why": "EDTA binds calcium and magnesium ions inside the hair shaft and pulls them out when you rinse. Regular shampoo — even sulfate-free — physically cannot do this.",
+        "caution": "Strips moisture and protein if used too often. Every 2–3 weeks is enough; the weekly citric rinse handles maintenance in between."
+      },
+      {
+        "id": "deep-mask",
+        "title": "Deep conditioning mask",
+        "cadence": "Weekly",
+        "who": "eunice",
+        "recipe": "Any mask with glycerin, panthenol or argan oil — Cantu, OGX or Garnier.",
+        "order": "After shampooing, before the citric rinse. Leave on 5–10 min in the shower steam, then rinse, run the citric rinse, apply leave-in.",
+        "why": "Longer hair needs deeper conditioning to prevent split ends and manage tangling. Philipp's length does not need this layer."
+      }
+    ],
+    "products": {
+      "shampoo": {
+        "_note": "Priority order — grab whichever you find first.",
+        "options": [
+          {
+            "name": "Cantu Sulfate-Free Cleansing Cream",
+            "rank": "1st choice",
+            "price": "~€7–8",
+            "where": "Rossmann · Amazon.de",
+            "note": "Built for dense, coarse hair — the right match for both of you. Good lather despite being sulfate-free. Strong enough for 17.3 °dH."
+          },
+          {
+            "name": "HASK Repair + Argan Oil",
+            "rank": "2nd choice",
+            "price": "~€9",
+            "where": "dm",
+            "note": "473 ml, no SLS/SLES. Uses Sodium C14-16 Olefin Sulfonate — stronger than ideal, but better than classic sulfates."
+          },
+          {
+            "name": "Alverde Ultra Sensitiv",
+            "rank": "Emergency only",
+            "price": "~€3",
+            "where": "dm",
+            "note": "Cleanest INCI of all, but likely too gentle for dense hair at this hardness. Higher risk for Eunice — more mineral surface area. Switch back to Cantu if the scalp feels unclean after 48h."
+          }
+        ]
+      },
+      "leaveIn": {
+        "name": "Garnier Fructis Hair Drink Leave-in",
+        "price": "~€5",
+        "where": "dm · Rossmann · Budni",
+        "inci": "Look for panthenol or glycerin near the top."
+      },
+      "towel": {
+        "name": "Microfiber hair towel",
+        "price": "€6–10",
+        "where": "dm · Amazon.de",
+        "note": "Any brand. Get two, one each."
+      },
+      "citricAcid": {
+        "name": "Heitmann Citronensäure Pulver",
+        "price": "~€2",
+        "where": "dm · Rossmann · Budni · supermarket",
+        "note": "Food-grade. One pack lasts months. Optional: pH strips (~€3–5) to confirm pH 4–5."
+      },
+      "chelator": {
+        "name": "Malibu C Hard Water Wellness",
+        "price": "€10–15",
+        "where": "Amazon.de only",
+        "inci": "Disodium or Tetrasodium EDTA high on the list. EDTA near the bottom is only a preservative and will not chelate."
+      },
+      "mask": {
+        "name": "Deep conditioning mask",
+        "price": "€8–15",
+        "where": "dm · Rossmann · Budni",
+        "note": "Eunice only."
+      },
+      "testStrips": {
+        "name": "Wasserhärte test strips",
+        "price": "~€5",
+        "where": "Amazon.de · Baumarkt"
+      }
     },
-    "monthly": {
-      "treatment": "Dikson Keratin Diamond Shampoo",
-      "note": "Contains SLES. Monthly deep clean only — not for daily use."
+    "rollout": {
+      "goldenRule": "Change one thing at a time. Starting shampoo, leave-in and the citric rinse together means you will never know what worked. Stagger each change by about a week.",
+      "packages": [
+        {
+          "id": "A",
+          "title": "Sofort-Reset",
+          "cost": "~€15 total",
+          "when": "Start now",
+          "status": "now",
+          "items": [
+            "Shampoo: Cantu → HASK → Alverde only in emergencies",
+            "Leave-in: Garnier Hair Drink, no rinse",
+            "Citric acid: ¼ tsp / 500 ml, once weekly",
+            "Microfiber towel — pat only",
+            "Malibu C chelating shampoo every 2–3 weeks",
+            "Eunice: weekly deep conditioning mask"
+          ],
+          "note": "Run for 6 full weeks before evaluating. Hair adjusts slowly."
+        },
+        {
+          "id": "B",
+          "title": "Chlorine filter",
+          "cost": "+€35 · Philips AWP1775",
+          "when": "Week 6 evaluation",
+          "status": "conditional",
+          "items": [
+            "First check hamburgwasser.de → Meine Wasserqualität. Most of Hamburg-Nord is not chlorinated.",
+            "If chlorinated: add the inline filter between hose and hand shower.",
+            "If not: skip permanently."
+          ],
+          "note": "Chlorine is probably not the problem — Kalk is. Do not spend €35 on a contaminant you likely do not have."
+        },
+        {
+          "id": "C",
+          "title": "Ion exchanger",
+          "cost": "~€250 · e.g. ShowerSoft",
+          "when": "Week 8–12 evaluation",
+          "status": "last resort",
+          "items": [
+            "At 17.3 °dH this is legitimately on the table.",
+            "Only after 8–12 weeks of package A with no improvement.",
+            "Only if stiffness clearly persists despite regular chelating.",
+            "Confirm tap hardness with strips first."
+          ],
+          "note": "Most people at 17 °dH get enough relief from the chemical approach alone."
+        }
+      ]
     },
-    "backup": {
-      "product": "HASK Repair + Argan Oil",
-      "note": "dm backup option."
+    "tracking": [
+      {
+        "what": "Weekly photo",
+        "how": "Same lighting, same angle, dry hair, the morning after a wash. Drift is hard to feel and easy to see over 6 weeks."
+      },
+      {
+        "what": "Comb-through time",
+        "how": "How long to fully comb wet hair without snagging. Log a benchmark before week 1. Track per person."
+      },
+      {
+        "what": "Shedding count",
+        "how": "Hair in the drain catch per session. Very variable day to day — read the trend over 4+ sessions."
+      },
+      {
+        "what": "Hardness strip reading",
+        "how": "Test the shower tap on day 1, retest at week 8."
+      }
+    ],
+    "individualNotes": {
+      "philipp": "Morning scalp itch was traced to using a rinse-out conditioner as a leave-in — corrected. If it returns, check the citric rinse is not being overdone.",
+      "eunice": "Longer hair means more mineral surface area, so under-cleansing is the bigger risk. The weekly mask and the larger leave-in amount are hers alone."
     }
   },
   "_gaps": [
-    "Philipp's current phase is assumed to be week-9-plus; confirm on the page, since the phases differ in how often adapalene runs",
-    "Hair wash-day step order was inferred from what each product does, not stated in the source",
-    "Hair frequency/amount split between the two is not itemised — one shared routine with individual notes",
-    "Eunice's plan is device-heavy and season-dependent; the app shows only today's season"
+    "Philipp's current skincare phase is assumed to be week-9-plus; confirm on the page",
+    "Eunice's plan is device-heavy and season-dependent; the app shows only today's season",
+    "Hair: no start date recorded, so the app cannot show where you are in the 6-week rollout"
   ]
 }

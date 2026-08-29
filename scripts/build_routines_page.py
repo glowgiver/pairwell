@@ -473,6 +473,11 @@ __CSS__
     border-radius:9px;padding:7px 12px;margin-bottom:14px;
   }
   .both b{color:var(--text);font-weight:600}
+  .card.other{opacity:.5}
+  .inline-caution{
+    padding:11px 18px 14px;font-size:14px;line-height:1.5;
+    color:var(--muted2);border-top:1px solid var(--line);
+  }
 </style>
 </head>
 <body>
@@ -496,44 +501,85 @@ function person(){ return PW.get(); }
 
 function renderStage(){
   var h = R.hair;
+  var who = person();
   var stage = document.getElementById("stage");
-  document.getElementById("sub").textContent = h.context.sharedProblem;
+  document.getElementById("sub").textContent = h.context.why;
 
+  /* Every shower — four steps, with the amount that differs per person
+     shown only for whoever is currently selected. */
   var wash = '<div class="card"><div class="card-head">' +
-    '<span class="k">Every wash</span></div>' +
-    stepList(h.washDay.steps, function(s){
+    '<span class="k">Every shower</span></div>' +
+    stepList(h.everyShower.steps, function(s){
+      var extra = s.perPerson && s.perPerson[who];
       return '<div class="t">' + esc(s.step) + '</div>' +
-             '<div class="p">' + esc(s.product) + '</div>' +
-             (s.how ? '<div class="h">' + esc(s.how) + '</div>' : '');
+             (s.how ? '<div class="h">' + esc(s.how) + '</div>' : '') +
+             (extra ? '<div class="p"><strong>' + esc(PW.PEOPLE[who].name) + '</strong> &middot; ' +
+                      esc(extra) + '</div>' : '');
     }) + '</div>';
 
-  var cadence = '<div class="card"><div class="card-head">' +
-    '<span class="k">Less often</span></div>' +
-    '<ol class="steps">' +
-      '<li><span class="n">7d</span><div><div class="t">' + esc(h.weekly.treatment) + '</div>' +
-        '<div class="h">Weekly.</div></div></li>' +
-      '<li><span class="n">30d</span><div><div class="t">' + esc(h.monthly.treatment) + '</div>' +
-        '<div class="h">' + esc(h.monthly.note) + '</div></div></li>' +
-    '</ol></div>';
+  /* Scheduled treatments. Ones that belong to the other person are shown
+     greyed rather than hidden, so nobody wonders where they went. */
+  var sched = h.scheduled.map(function(t){
+    var mine = t.who === "both" || t.who === who;
+    return '<div class="card' + (mine ? '' : ' other') + '"><div class="card-head">' +
+      '<span class="k">' + esc(t.cadence) + '</span>' +
+      '<span class="meta">' + (t.who === "both" ? "both" : esc(PW.PEOPLE[t.who].name) + " only") + '</span>' +
+      '<span class="focus">' + esc(t.title) + '</span></div>' +
+      '<ol class="steps">' +
+        '<li><span class="n">&bull;</span><div><div class="p">' + esc(t.recipe) + '</div></div></li>' +
+        '<li><span class="n">&rarr;</span><div><div class="h">' + esc(t.order) + '</div></div></li>' +
+      '</ol>' +
+      (t.caution ? '<div class="inline-caution">' + esc(t.caution) + '</div>' : '') +
+      '</div>';
+  }).join("");
 
-  var who = person();
   var note = h.individualNotes[who];
   var personal = note
     ? '<div class="rule"><div class="rt">Note for ' + esc(PW.PEOPLE[who].name) + '</div><p>' +
-      esc(note) + '</p></div>'
-    : "";
+      esc(note) + '</p></div>' : "";
+
+  /* Detail behind a tap */
+  var shampoo = h.products.shampoo.options.map(function(o){
+    return '<div><div class="dk">' + esc(o.rank) + ' &middot; ' + esc(o.price) + '</div>' +
+      '<div class="dv"><strong>' + esc(o.name) + '</strong> &middot; ' + esc(o.where) + '<br>' +
+      esc(o.note) + '</div></div>';
+  }).join("");
+
+  var others = "";
+  ["leaveIn","towel","citricAcid","chelator","mask","testStrips"].forEach(function(k){
+    var p = h.products[k];
+    if(!p) return;
+    others += '<div><div class="dk">' + esc(p.name) + '</div><div class="dv">' +
+      esc([p.price, p.where].filter(Boolean).join(" &middot; ")) +
+      (p.note ? '<br>' + esc(p.note) : '') +
+      (p.inci ? '<br>' + esc(p.inci) : '') + '</div></div>';
+  });
+
+  var packages = h.rollout.packages.map(function(p){
+    return '<div><div class="dk">' + esc(p.id) + ' &middot; ' + esc(p.title) + ' &middot; ' + esc(p.cost) + '</div>' +
+      '<div class="dv"><strong>' + esc(p.when) + '</strong><br>' +
+      p.items.map(function(i){ return '&bull; ' + esc(i); }).join('<br>') +
+      '<br><em>' + esc(p.note) + '</em></div></div>';
+  }).join("");
+
+  var tracking = h.tracking.map(function(t){
+    return '<div><div class="dk">' + esc(t.what) + '</div><div class="dv">' + esc(t.how) + '</div></div>';
+  }).join("");
 
   var details =
+    '<details><summary>Products &amp; where to buy</summary><div class="dl">' +
+      '<div><div class="dk">Shampoo — priority order</div><div class="dv">' +
+      esc(h.products.shampoo._note) + '</div></div>' + shampoo + others + '</div></details>' +
+    '<details><summary>Rollout plan</summary><div class="dl">' +
+      '<div><div class="dk">Golden rule</div><div class="dv">' + esc(h.rollout.goldenRule) + '</div></div>' +
+      packages + '</div></details>' +
+    '<details><summary>What to track</summary><div class="dl">' + tracking + '</div></details>' +
     '<details><summary>Why this protocol</summary><div class="dl">' +
       '<div><div class="dk">Water</div><div class="dv">' + esc(h.context.waterHardness) + '</div></div>' +
-      '<div><div class="dk">Location</div><div class="dv">' + esc(h.context.location) + '</div></div>' +
-      '<div><div class="dk">Wash order</div><div class="dv">' + esc(h.washDay._orderNote) + '</div></div>' +
-    '</div></details>' +
-    '<details><summary>Backup product</summary><div class="dl">' +
-      '<div><div class="dk">' + esc(h.backup.product) + '</div><div class="dv">' + esc(h.backup.note) + '</div></div>' +
+      '<div><div class="dk">Verify</div><div class="dv">' + esc(h.context.verify) + '</div></div>' +
     '</div></details>';
 
-  stage.innerHTML = wash + cadence + personal + details;
+  stage.innerHTML = wash + sched + personal + details;
 }
 
 PW.mountRail();

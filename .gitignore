@@ -1,3 +1,10 @@
 .DS_Store
 *.icloud
 __pycache__/
+
+# Source documents — kept locally, never committed raw.
+# They contain the locating detail that was scrubbed from the repo.
+/skin_protocol.html
+/hair_protocol.html
+/workout_hub.html
+/*.docx
