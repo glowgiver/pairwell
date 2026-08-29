@@ -74,6 +74,15 @@
     border-radius:0;margin:0;
   }
   .card details summary{font-size:15px;font-weight:500;color:var(--muted)}
+  .rnote{
+    border-top:1px solid var(--line);padding:14px 18px;
+    font-family:var(--f-read);font-size:14.5px;line-height:1.6;color:var(--muted);
+  }
+  .rnote b{color:var(--text);font-weight:600}
+  .rnote .path{
+    display:block;margin-top:7px;font-family:var(--f-data);font-size:13px;
+    color:var(--accent);letter-spacing:.01em;
+  }
   .card details[open] summary{color:var(--text);border-bottom:1px solid var(--line)}
 
   /* ---- the splitter: the reason this page exists ---- */
@@ -382,15 +391,23 @@ function recipesFor(who){
   });
 }
 
+/* The library grows by dropping files in a folder, and the folder is in iCloud,
+   so it is reachable from the phone you are holding. Say so on the page — this
+   is the one thing about the kitchen module that is not self-evident. */
+function addNote(){
+  return '<div class="rnote">More dishes go in the <b>inbox</b> folder — one per ' +
+    'file. The ingredients and amounts as you found them, or just a photo of them; ' +
+    'they get fitted to the target from there.' +
+    '<span class="path">Files › iCloud Drive › Pairwell › inbox</span></div>';
+}
+
 function recipesHTML(who){
   var list = recipesFor(who);
   var head = '<div class="card"><div class="ch"><span class="k">Recipes</span>' +
     '<span class="meta">' + list.length + ' for ' + esc(PW.PEOPLE[who].name) + '</span></div>';
 
   if(!list.length){
-    return head + '<div class="empty">Nothing here yet. Find a dish you like ' +
-      'anywhere — it gets fitted to the mirror-meal target, and its macros are ' +
-      'worked out from the amounts rather than taken on trust.</div></div>';
+    return head + '<div class="empty">Nothing here yet.</div>' + addNote() + '</div>';
   }
 
   return head + list.map(function(r){
@@ -413,7 +430,7 @@ function recipesHTML(who){
         '<ul class="ing">' + ing + '</ul>' +
         (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
       '</details>';
-  }).join("") + '</div>';
+  }).join("") + addNote() + '</div>';
 }
 
 function render(){

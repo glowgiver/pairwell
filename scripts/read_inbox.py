@@ -149,8 +149,21 @@ def main():
 
     files = sorted(f for f in glob.glob(os.path.join(INBOX, "*.md"))
                    if os.path.basename(f) != "TEMPLATE.md")
+
+    # Anything that is not markdown is something a human dropped for Claude to
+    # read — a photo of a cookbook page, a saved article. Name them rather than
+    # skipping them silently, so nothing sits in the folder forgotten.
+    others = sorted(f for f in glob.glob(os.path.join(INBOX, "*"))
+                    if not f.endswith(".md") and os.path.isfile(f))
+    if others:
+        print("Waiting to be transcribed (this script only reads .md):")
+        for f in others:
+            print("  - " + os.path.basename(f))
+        print("  Ask Claude to turn these into .md files, then run this again.\n")
+
     if not files:
-        print("inbox/ is empty. Copy inbox/TEMPLATE.md and fill it in.")
+        if not others:
+            print("inbox/ is empty. Copy inbox/TEMPLATE.md and fill it in.")
         return 0
 
     clean, blocked = [], 0

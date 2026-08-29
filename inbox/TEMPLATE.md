@@ -31,5 +31,15 @@ blocks: 1             # Asian Base blocks per serving, 0 if the dish carries its
 # reported rather than guessed. If an amount is vague ("a handful"), write your
 # best gram estimate — a wrong number you can see beats a missing one.
 #
+# WHAT TO DROP IN HERE, best first:
+#   1. This template, filled in. Readable by the script, no transcription needed.
+#   2. A raw paste — the ingredient list copied straight off the page, plus the
+#      link. Messy is fine; ask Claude to tidy it into the format above.
+#   3. A photo or screenshot. Cookbook page, a reel, a handwritten card. Claude
+#      reads images; the script will list the file as waiting.
+#
+# NOT worth your time: printing a web page to PDF. It is mostly cookie banner
+# and advertising, and the amounts end up harder to find, not easier.
+#
 # Then: python3 scripts/read_inbox.py
 # ---------------------------------------------------------------------------
