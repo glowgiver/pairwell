@@ -278,30 +278,53 @@ HTML = """<!DOCTYPE html>
   .dl .dv strong{color:var(--text)}
 
   /* ---- the planner: pick a dish, get the other one and the shopping list ---- */
+  /* min-width:0 matters here: a grid item defaults to min-width:auto, so a
+     long unbroken dish title (or a wrapped meta line) can hold the whole
+     track open past the viewport instead of wrapping inside it — that is
+     what was cutting text off on a phone. Stacking to one column below
+     480px sidesteps it entirely once titles get long, columns get narrow. */
   .planrow{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
-  .planslot{background:var(--surface);padding:14px 16px}
+  .planslot{background:var(--surface);padding:14px 16px;min-width:0}
   .planslot-snack{border-top:1px solid var(--line);padding:14px 16px}
   .planslot-snack .ps-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  @media (max-width:420px){ .planslot-snack .ps-list{grid-template-columns:1fr} }
+  @media (max-width:480px){
+    .planrow{grid-template-columns:1fr}
+    .planslot-snack .ps-list{grid-template-columns:1fr}
+  }
   .ps-label{
     font-family:var(--f-data);font-size:13px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--muted2);margin-bottom:10px;
   }
   .ps-hint{text-transform:none;letter-spacing:0;font-family:var(--f-read);color:var(--muted2)}
-  .ps-list{display:flex;flex-direction:column;gap:8px}
+  .ps-note{
+    margin:0 0 12px;font-family:var(--f-read);font-size:14px;line-height:1.55;
+    color:var(--muted2);
+  }
+  .ps-list{display:flex;flex-direction:column;gap:8px;min-width:0}
   .dishpick{
-    display:block;width:100%;text-align:left;min-height:var(--tap);
+    display:block;width:100%;text-align:left;min-height:var(--tap);min-width:0;
     background:var(--surface-2);border:1px solid var(--line-2,var(--line));
     border-radius:12px;padding:9px 12px;cursor:pointer;position:relative;
   }
   .dishpick:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   .dishpick.picked{border-color:var(--accent);background:var(--accent);color:var(--bg)}
-  .dp-title{display:block;font-size:15px;font-weight:600;line-height:1.35}
+  .dp-title{
+    display:block;font-size:15px;font-weight:600;line-height:1.35;
+    overflow-wrap:break-word;word-break:break-word;
+  }
   .dp-meta{
     display:block;margin-top:3px;font-family:var(--f-data);font-size:12.5px;
     color:var(--muted2);font-variant-numeric:tabular-nums;line-height:1.5;
+    overflow-wrap:break-word;
   }
   .dishpick.picked .dp-meta{color:var(--bg);opacity:.82}
+  .dp-pair{
+    display:block;margin-top:6px;padding-top:6px;border-top:1px solid var(--line);
+    font-family:var(--f-data);font-size:12.5px;line-height:1.5;
+    font-variant-numeric:tabular-nums;color:var(--muted2);overflow-wrap:break-word;
+  }
+  .dp-pair.ok{color:var(--accent)}
+  .dp-pair.warn{color:var(--warn)}
   .dp-badge{
     display:inline-block;margin-top:6px;font-family:var(--f-data);font-size:11.5px;
     font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);
@@ -629,8 +652,13 @@ var PLAN = loadPlan();
 function mirrorRecipes(){
   return (D.recipes || []).filter(function(r){ return r.slot === "mirror" && r.computed; });
 }
-function snackRecipes(){
-  return (D.recipes || []).filter(function(r){ return r.slot === "snack" && r.computed; });
+function snackRecipes(who){
+  /* Snacks may be person-specific in a way mirror meals never are: the two
+     Vorratsdosen are mixed in one session but with different dairy, because
+     one of us does not eat Magerquark. A null person still means "both". */
+  return (D.recipes || []).filter(function(r){
+    return r.slot === "snack" && r.computed && (!r.person || r.person === who);
+  });
 }
 function recipeById(id){
   var found = null;
@@ -656,6 +684,22 @@ function pairFit(a, b){
   return { score: dKcal*0.5 + dP*1.5 + dFib*2 + dFat*2,
            kcal:sKcal, p:sP, fib:sFib, fat:sFat, tKcal:tKcal, tP:tP, tFib:tFib, tFatHi:tFatHi };
 }
+function pairCloses(fit){
+  return fit.fib >= fit.tFib - 0.5 && fit.fat <= fit.tFatHi + 0.5 && fit.p >= fit.tP - 0.5;
+}
+
+/* Only decorates a candidate when picking it would actually CLOSE the day —
+   a found-recipe library is fibre-poor by nature, so on most picks every
+   single candidate falls short, and repeating a red warning nine times over
+   is noise, not information. Silence is the honest default; a green line is
+   the exception worth calling out. */
+function pairCompareLine(otherR, r){
+  var fit = pairFit(otherR, r);
+  if(!pairCloses(fit)) return "";
+  return '<span class="dp-pair ok">✓ closes the day — together ' +
+    n0(fit.kcal) + ' kcal &middot; ' + n1(fit.p) + ' g P &middot; ' + n1(fit.fib) +
+    ' g Fib &middot; ' + n1(fit.fat) + ' g F</span>';
+}
 
 function dishChip(r, opts){
   opts = opts || {};
@@ -674,6 +718,7 @@ function dishChip(r, opts){
     '<span class="dp-title">' + esc(r.title) + '</span>' +
     '<span class="dp-meta">' + n0(c.calories) + ' kcal &middot; ' + n1(c.proteinG) + ' g P &middot; ' +
       n1(c.fiberG) + ' g Fib &middot; ' + n1(c.fatG) + ' g F &middot; ' + tail + '</span>' +
+    (opts.compareLine || '') +
     (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
     '</button>';
 }
@@ -695,17 +740,31 @@ function slotHTML(slot){
   var otherId = PLAN[otherSlot];
   var otherR = otherId ? recipeById(otherId) : null;
   var scored = list.map(function(r){
-    return { r:r, s: otherR ? pairFit(otherR, r).score : null };
+    return { r:r, fit: otherR ? pairFit(otherR, r) : null };
   });
-  if(otherR) scored.sort(function(a,b){ return a.s - b.s; });
+  if(otherR) scored.sort(function(a,b){ return a.fit.score - b.fit.score; });
+  var anyCloses = otherR ? scored.some(function(x){ return pairCloses(x.fit); }) : false;
 
   var body = scored.map(function(x, i){
-    return dishChip(x.r, {slot:slot, badge: (otherR && i === 0) ? "closest fit" : ""});
+    return dishChip(x.r, {
+      slot:slot,
+      badge: (otherR && i === 0) ? "closest fit" : "",
+      compareLine: otherR ? pairCompareLine(otherR, x.r) : ""
+    });
   }).join("");
+
+  /* One honest line instead of nine repeated warnings — this is the common
+     case with a fibre-poor library, and it should read as information, not
+     as the app scolding every choice. */
+  var noneClose = (otherR && !anyCloses)
+    ? '<p class="ps-note">None of these close the day with ' + esc(otherR.title) +
+      ' on their own — the closest still leaves a real gap. Pick freely; ' +
+      'close it with a snack, or look for dishes with more built-in fibre.</p>'
+    : '';
 
   return '<div class="planslot"><div class="ps-label">' + label +
     (otherR ? ' <span class="ps-hint">&middot; ranked to fit ' + esc(otherR.title) + '</span>' : '') +
-    '</div><div class="ps-list">' + body + '</div></div>';
+    '</div>' + noneClose + '<div class="ps-list">' + body + '</div></div>';
 }
 
 /* What is actually left for a snack once breakfast (if fixed) and the
@@ -742,6 +801,21 @@ function snackFit(remaining, snack){
          fibShort / Math.max(remaining.fib, 1) * 1.5;
 }
 
+/* A single snack rarely closes what a whole meal left open — that is normal,
+   not a problem, so it stays silent by default. The one thing worth flagging
+   is a snack that overshoots the calories actually left. */
+function snackOvershoots(remaining, snack){
+  return (remaining.kcal - snack.computed.calories) < -100;
+}
+function snackCompareLine(remaining, snack){
+  var c = snack.computed;
+  var kcalLeft = remaining.kcal - c.calories, pLeft = remaining.p - c.proteinG,
+      fibLeft = remaining.fib - c.fiberG;
+  if(!snackOvershoots(remaining, snack)) return "";
+  return '<span class="dp-pair warn">⚠ over budget — leaves ' + n0(kcalLeft) +
+    ' kcal &middot; ' + n1(pLeft) + ' g P &middot; ' + n1(fibLeft) + ' g Fib</span>';
+}
+
 function snackSlotHTML(){
   var who = PW.get();
   var pickedId = PLAN.snack;
@@ -755,10 +829,14 @@ function snackSlotHTML(){
   }
 
   var remaining = remainingBeforeSnack(who);
-  var scored = snackRecipes().map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
+  var scored = snackRecipes(who).map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
   scored.sort(function(a,b){ return a.s - b.s; });
   var body = scored.map(function(x, i){
-    return dishChip(x.r, {slot:"snack", badge: i === 0 ? "closest fit" : ""});
+    return dishChip(x.r, {
+      slot:"snack",
+      badge: i === 0 ? "closest fit" : "",
+      compareLine: snackCompareLine(remaining, x.r)
+    });
   }).join("");
 
   if(!scored.length){
@@ -803,7 +881,7 @@ function shoppingListHTML(){
       'Cook the shorter one again partway through, or scale the batch by hand.</p></div>'
     : '';
 
-  var closes = fit.fib >= fit.tFib - 0.5 && fit.fat <= fit.tFatHi + 0.5 && fit.p >= fit.tP - 0.5;
+  var closes = pairCloses(fit);
   var fitFlag = '<div class="flag' + (closes ? '' : ' warn') + '"><div class="ft">' +
     (closes ? 'This pair closes the day' : 'This pair does not close the day') + '</div><p>' +
     'Together: ' + n0(fit.kcal) + ' kcal, ' + n1(fit.p) + ' g protein (target ' + n0(fit.tP) +

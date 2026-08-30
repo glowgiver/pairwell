@@ -31,6 +31,7 @@
     "haehnchen_ganz":    { "name": "Hähnchen, ganz (mit Haut)", "role": "protein", "basis": "raw",    "per100g": { "calories": 215, "proteinG": 18.6, "carbsG": 0.0, "fiberG": 0.0, "fatG": 15.1 } },
     "rinderbrust":       { "name": "Rinderbrust, gekocht",      "role": "protein", "basis": "cooked", "per100g": { "calories": 270, "proteinG": 26.0, "carbsG": 0.0, "fiberG": 0.0, "fatG": 18.0 } },
     "rinderfilet":       { "name": "Rinderfilet, roh",          "role": "protein", "basis": "raw",    "per100g": { "calories": 143, "proteinG": 21.6, "carbsG": 0.0, "fiberG": 0.0, "fatG": 5.7 } },
+    "ehrmann_pudding":   { "name": "Ehrmann High Protein Pudding", "role": "protein", "basis": "raw", "per100g": { "calories": 87,  "proteinG": 10.0, "carbsG": 5.5, "fiberG": 0.3, "fatG": 2.3 } },
 
     "rote_linsen_gekocht":  { "name": "Rote Linsen, gekocht",     "role": "fiber", "basis": "cooked", "per100g": { "calories": 116, "proteinG": 9.0,  "carbsG": 20.0, "fiberG": 8.0,  "fatG": 0.4 } },
     "belugalinsen_gekocht": { "name": "Belugalinsen, gekocht",    "role": "fiber", "basis": "cooked", "per100g": { "calories": 120, "proteinG": 9.5,  "carbsG": 20.0, "fiberG": 8.5,  "fatG": 0.5 } },
@@ -72,6 +73,7 @@
     "speisestaerke":   { "name": "Speisestärke",               "role": "carb", "basis": "raw",    "per100g": { "calories": 381, "proteinG": 0.3,  "carbsG": 91.3, "fiberG": 0.9,  "fatG": 0.1 } },
     "medjool_datteln": { "name": "Medjool-Datteln, entsteint", "role": "carb", "basis": "raw",    "per100g": { "calories": 277, "proteinG": 1.8,  "carbsG": 75.0, "fiberG": 6.7,  "fatG": 0.2 } },
     "banane":          { "name": "Banane",                     "role": "carb", "basis": "raw",    "per100g": { "calories": 89,  "proteinG": 1.1,  "carbsG": 22.8, "fiberG": 2.6,  "fatG": 0.3 } },
+    "apfel":           { "name": "Apfel",                      "role": "carb", "basis": "raw",    "per100g": { "calories": 52,  "proteinG": 0.3,  "carbsG": 13.8, "fiberG": 2.4,  "fatG": 0.2 } },
 
     "sesamoel":      { "name": "Sesamöl",                 "role": "fat", "basis": "raw", "per100g": { "calories": 884, "proteinG": 0.0,  "carbsG": 0.0,  "fiberG": 0.0, "fatG": 100.0 } },
     "olivenoel":     { "name": "Olivenöl",                "role": "fat", "basis": "raw", "per100g": { "calories": 884, "proteinG": 0.0,  "carbsG": 0.0,  "fiberG": 0.0, "fatG": 100.0 } },
@@ -81,6 +83,7 @@
     "sahne":         { "name": "Sahne (Schlagsahne 30%)", "role": "fat", "basis": "raw", "per100g": { "calories": 292, "proteinG": 2.1,  "carbsG": 3.2,  "fiberG": 0.0, "fatG": 30.0 } },
     "butter":        { "name": "Butter",                  "role": "fat", "basis": "raw", "per100g": { "calories": 717, "proteinG": 0.9,  "carbsG": 0.1,  "fiberG": 0.0, "fatG": 81.1 } },
     "nussmus":       { "name": "Nussmus, neutral",        "role": "fat", "basis": "raw", "per100g": { "calories": 588, "proteinG": 25.0, "carbsG": 20.0, "fiberG": 6.0, "fatG": 50.0 } },
+    "walnuss":       { "name": "Walnüsse",                "role": "fat", "basis": "raw", "per100g": { "calories": 654, "proteinG": 15.2, "carbsG": 13.7, "fiberG": 6.7, "fatG": 65.2 } },
     "erdnussbutter": { "name": "Erdnussbutter",           "role": "fat", "basis": "raw", "per100g": { "calories": 588, "proteinG": 25.0, "carbsG": 20.0, "fiberG": 6.0, "fatG": 50.0 } },
 
     "knoblauch":           { "name": "Knoblauch",               "role": "aroma", "basis": "raw", "per100g": { "calories": 149, "proteinG": 6.4,  "carbsG": 30.0,  "fiberG": 2.1,  "fatG": 0.5 } },
@@ -111,6 +114,7 @@
     "vanilleextrakt":      { "name": "Vanilleextrakt",          "role": "aroma", "basis": "raw", "per100g": { "calories": 288, "proteinG": 0.1,  "carbsG": 12.7,  "fiberG": 0.0,  "fatG": 0.1 } },
     "mandelmilch":         { "name": "Mandelmilch, ungesüßt",   "role": "aroma", "basis": "raw", "per100g": { "calories": 15,  "proteinG": 0.6,  "carbsG": 0.3,   "fiberG": 0.4,  "fatG": 1.2 } },
     "natron":              { "name": "Natron",                  "role": "aroma", "basis": "raw", "per100g": { "calories": 0,   "proteinG": 0.0,  "carbsG": 0.0,   "fiberG": 0.0,  "fatG": 0.0 } },
+    "salz":                { "name": "Salz",                    "role": "aroma", "basis": "raw", "per100g": { "calories": 0,   "proteinG": 0.0,  "carbsG": 0.0,   "fiberG": 0.0,  "fatG": 0.0 } },
     "suess_chili_sauce":   { "name": "Süß-Chili-Sauce",         "role": "aroma", "basis": "raw", "per100g": { "calories": 185, "proteinG": 0.5,  "carbsG": 45.0,  "fiberG": 0.5,  "fatG": 0.2 } }
   }
 }

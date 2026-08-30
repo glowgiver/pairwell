@@ -433,7 +433,15 @@ def main():
             fb = p.get("fixedBreakfast")
             if not fb:
                 continue
-            match = [r for r in recipes if r.get("person") == key and r["slot"] == "breakfast"]
+            # A person may have more than one breakfast recipe on file — the bowl Philipp
+            # still eats at home, and the shaker he actually takes to work. Matching on
+            # person alone picked whichever came first and then reported a disagreement
+            # between two different meals. fixedBreakfast names the one that counts.
+            rid = fb.get("recipeId")
+            if rid:
+                match = [r for r in recipes if r["id"] == rid]
+            else:
+                match = [r for r in recipes if r.get("person") == key and r["slot"] == "breakfast"]
             if not match or not match[0].get("computed"):
                 continue
             c = match[0]["computed"]

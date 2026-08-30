@@ -778,6 +778,146 @@
         "target": "mirrorMeals",
         "notes": []
       }
+    },
+    {
+      "id": "eunice-ehrmann-pudding-breakfast",
+      "title": "Ehrmann High Protein Pudding (Frühstück)",
+      "slot": "breakfast",
+      "person": "eunice",
+      "servings": 1,
+      "blocks": 0.0,
+      "source": "Eunices eigene Routine — fertig gekauft, meist gegen 9-10 Uhr",
+      "fixed": true,
+      "_fixedNote": "slot breakfast + fixed:true means the adapter reports its macros but never rescales it. It is not a target to be hit; it is a thing she eats.",
+      "ingredients": [
+        {
+          "food": "ehrmann_pudding",
+          "g": 200.0,
+          "note": "1 Becher, angenommen — Größe/Anzahl ggf. anpassen"
+        }
+      ],
+      "steps": [
+        "Direkt aus dem Kühlschrank essen"
+      ],
+      "computed": {
+        "calories": 174.0,
+        "proteinG": 20.0,
+        "carbsG": 11.0,
+        "fiberG": 0.6,
+        "fatG": 4.6,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    },
+    {
+      "id": "philipp-whey-shaker",
+      "title": "Whey-Shaker (Frühstück)",
+      "slot": "breakfast",
+      "person": "philipp",
+      "servings": 1,
+      "blocks": 0.0,
+      "cuisine": null,
+      "source": "Philipps Morgen — trocken abgefüllt, Wasser in der Schule",
+      "ingredients": [
+        {
+          "food": "whey",
+          "g": 40.0
+        }
+      ],
+      "steps": [
+        "Whey trocken in den Shaker, so mitnehmen",
+        "Vor Ort mit ca. 300 ml Wasser auffüllen und schütteln, gegen 10 Uhr trinken"
+      ],
+      "computed": {
+        "calories": 156.0,
+        "proteinG": 32.0,
+        "carbsG": 2.4,
+        "fiberG": 0.0,
+        "fatG": 2.0,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      },
+      "fixed": true,
+      "_fixedNote": "slot breakfast + fixed:true: der Adapter misst es, skaliert es nie. Das ist keine Zielvorgabe, sondern was er tatsaechlich trinkt."
+    },
+    {
+      "id": "die-vorratsdose-skyr-schoko-banane",
+      "title": "Die Vorratsdose — Skyr, Schoko & Banane",
+      "slot": "snack",
+      "person": null,
+      "servings": 9,
+      "blocks": 0.0,
+      "cuisine": "none",
+      "source": "der geteilte Nachmittags-Baustein — eine Schale, drei Tage, beide",
+      "ingredients": [
+        {
+          "food": "skyr",
+          "g": 900.0
+        },
+        {
+          "food": "whey",
+          "g": 135.0
+        },
+        {
+          "food": "haferkleie",
+          "g": 171.0
+        },
+        {
+          "food": "leinsamen",
+          "g": 56.0
+        },
+        {
+          "food": "kakaopulver",
+          "g": 54.0
+        },
+        {
+          "food": "mandelmilch",
+          "g": 180.0
+        },
+        {
+          "food": "zimt",
+          "g": 6.0
+        },
+        {
+          "food": "vanilleextrakt",
+          "g": 4.5
+        },
+        {
+          "food": "salz",
+          "g": 2.2
+        },
+        {
+          "food": "banane",
+          "g": 540.0
+        }
+      ],
+      "steps": [
+        "Trockenes zuerst: Whey, Haferkleie, Leinsamen, Kakao, Zimt und Salz gründlich mischen — trocken, sonst klumpt es",
+        "Unter den Skyr rühren, Mandelmilch und Vanilleextrakt dazu",
+        "20-30 Min. quellen lassen, dann NOCHMAL durchrühren. Danach ist die Konsistenz fertig",
+        "In EINE Schale (~1.5 kg), kalt stellen. Sie hält 3 Tage und enthält 9 Portionen: Philipp nimmt 2 am Tag, Eunice 1",
+        "Eine Portion sind ca. 165 g. Einmal abwiegen, damit ihr wisst, wie das in eurer Schale aussieht — danach schaufeln",
+        "Banane erst beim Essen in Scheiben unterheben, ca. 60 g pro Portion. Nicht vorher: sie wird in drei Tagen braun und matschig",
+        "Wer mehr Ballaststoffe will, nimmt statt der Banane 112 g gefrorene Beeren — bringt 3 g Fibre mehr und kühlt die Schale"
+      ],
+      "computed": {
+        "calories": 274.6,
+        "proteinG": 29.4,
+        "carbsG": 32.1,
+        "fiberG": 8.6,
+        "fatG": 6.2,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
     }
   ]
 }
