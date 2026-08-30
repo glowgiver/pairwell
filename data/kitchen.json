@@ -229,7 +229,7 @@
   "topUps": {
     "_purpose": "What adapt_recipe.py may PROPOSE adding when scaling the dish's own ingredients cannot reach the target. Proposals only — the script prints them with exact grams and never edits a recipe. Adding something to a dish changes the dish, and that is a cooking decision.",
     "_whyCurated": "foods.json has cheaper options than these on paper. Flohsamenschalen is 2.5 kcal per gram of fibre and would win every time, but nobody wants psyllium husk stirred into a braise. This list is what actually belongs in a dish, ranked afterwards by cost.",
-    "_cuisines": "A candidate is offered when the recipe declares no cuisine, or declares one this candidate lists. 'any' fits everything.",
+    "_cuisines": "A candidate is offered when the recipe declares no cuisine, or declares one this candidate lists. 'any' fits everything. NOTE: 'asian' is a continent, not a cuisine, and treating it as one is how edamame — a Japanese ingredient — got proposed for a Vietnamese phở and a Korean stew on 2026-08-30. Both were reverted. Where a candidate genuinely only belongs to part of the bucket, list the specific cuisines instead.",
     "fiber": [
       {
         "food": "rote_linsen_gekocht",
@@ -252,9 +252,11 @@
       {
         "food": "edamame",
         "goesWith": [
-          "asian"
+          "japanese",
+          "chinese",
+          "asian-fusion"
         ],
-        "note": "carries protein too, so it closes both gaps at once",
+        "note": "carries protein too, so it closes both gaps at once — but it is a JAPANESE bean. Do not put it in a phở or a Korean stew just because both are filed under 'asian'.",
         "maxG": 150,
         "kind": "dense"
       },

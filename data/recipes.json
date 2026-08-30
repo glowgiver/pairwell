@@ -356,7 +356,9 @@
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "fibreLight": true,
+      "_fibreLightNote": "Ballaststoffarm mit Absicht. Die Light-Fassung ist geloescht: Edamame gehoert nicht in Dakbokkeumtang, und die Baby-Kartoffeln, die dafuer weichen mussten, sind dort strukturell — sie zerfallen und binden die Bruehe. Die koreanische Antwort auf Ballaststoffe ist Banchan neben dem Eintopf, nicht Bohnen darin. Laeuft neben einem starken Partner."
     },
     {
       "id": "lemon-herb-roasted-butterflied-chicken",
@@ -557,32 +559,44 @@
         },
         {
           "food": "rinderbrust",
-          "g": 515.0
+          "g": 425.0
         },
         {
           "food": "rinderfilet",
-          "g": 275.0
+          "g": 230.0
         },
         {
           "food": "mungobohnensprossen",
-          "g": 40.0
+          "g": 1000.0
+        },
+        {
+          "food": "kraeuter_frisch",
+          "g": 150.0,
+          "note": "Thai-Basilikum, Koriander, Minze — der Teller daneben"
+        },
+        {
+          "food": "zitronensaft",
+          "g": 75.0,
+          "note": "Limette"
         }
       ],
       "steps": [
-        "Nudeln nach Packungsangabe kochen oder in warmem Wasser einweichen, kurz aufkochen",
-        "Gekochte Rinderbrust dünn aufschneiden, rohes Filet hauchdünn (Tipp: 20 Min. anfrieren erleichtert das Schneiden)",
-        "Nudeln in die Schüssel, Fleisch obenauf anrichten",
-        "Kochend heiße Brühe darübergießen — die Hitze gart das rohe Filet in Sekunden",
-        "Mit Sprossen, Kräutern, Limette servieren"
+        "Brühe separat aufsetzen und heiß halten",
+        "Reisbandnudeln nach Packung garen, kalt abschrecken",
+        "Rindfleisch hauchdünn schneiden — es gart in der heißen Brühe in der Schüssel",
+        "Nudeln und Fleisch in die Schüssel, Brühe erst am Tisch angießen",
+        "DAZU der Kräuterteller: 200 g Sprossen, Thai-Basilikum, Koriander, Minze und Limette pro Person, roh daneben. Jeder reißt hinein und drückt aus, so viel er will — das ist kein Beiwerk, das ist die halbe Schüssel"
       ],
       "computed": {
-        "calories": 417.4,
-        "proteinG": 39.9,
-        "carbsG": 13.8,
-        "fiberG": 0.4,
-        "fatG": 21.8,
+        "calories": 425.8,
+        "proteinG": 40.0,
+        "carbsG": 26.7,
+        "fiberG": 4.8,
+        "fatG": 18.6,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
+      "fibreLight": true,
+      "_fibreLightNote": "Es gab kurz eine Light-Fassung mit Edamame. Geloescht: Edamame ist japanisch, Phở ist vietnamesisch, und die Rinderbrust, die dafuer weichen musste, IST das Gericht bei phở bò chín. Der eigentliche Fehler lag aber in der Transkription, nicht im Fit: 40 g Sprossen und keine Kraeuter. So wird Phở nicht serviert. Der rau sống-Teller — Sprossen, Thai-Basilikum, Koriander, Minze, Limette — ist kanonisch und traegt 4.5 g Fibre pro Portion. Das ist kein Makro-Patch, das ist die fehlende Haelfte des Gerichts. Bleibt trotzdem ballaststoffarm und braucht einen starken Partner plus einen Loeffel Flohsamen.",
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
@@ -1119,7 +1133,8 @@
       "steps": [
         "Ofen auf 200°C. Kichererbsen, Kirschtomaten und Zucchini mit Olivenöl, Knoblauch und Zitronensaft auf dem Blech mischen",
         "Feta in Stücken dazwischen verteilen, 15 Min. vorrösten",
-        "Lachs und Garnelen auflegen, weitere 10-12 Min. — der Lachs soll innen noch glasig sein",
+        "Lachs auflegen, 8 Min. backen",
+        "ERST DANN die Garnelen dazu, weitere 4-5 Min. — sie brauchen ein Drittel der Zeit vom Lachs und werden sonst gummiartig",
         "Kräuter nach dem Ofen darüber"
       ],
       "computed": {
@@ -1133,7 +1148,8 @@
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "_note": "Garnelen kommen 8 Minuten nach dem Lachs aufs Blech. Die erste Fassung liess beide gleichzeitig 10-12 Min. backen — das waren gummiartige Garnelen, ein Fehler in der Methode, nicht im Makro-Fit."
     },
     {
       "id": "crispy-sweet-chili-chicken-light",
@@ -1215,105 +1231,6 @@
       }
     },
     {
-      "id": "korean-spicy-chicken-stew-light",
-      "title": "Korean Spicy Chicken Stew, Light",
-      "slot": "mirror",
-      "person": null,
-      "servings": 6,
-      "blocks": 0.0,
-      "cuisine": "asian",
-      "source": "Umbau von korean-spicy-chicken-stew-dakbokkeumtang auf das Mirror-Meal-Ziel",
-      "ingredients": [
-        {
-          "food": "huehnerbrust",
-          "g": 330.0
-        },
-        {
-          "food": "haehnchenschenkel",
-          "g": 140.0
-        },
-        {
-          "food": "edamame",
-          "g": 1070.0
-        },
-        {
-          "food": "karotte",
-          "g": 200.0
-        },
-        {
-          "food": "zwiebel",
-          "g": 150.0
-        },
-        {
-          "food": "zucchini",
-          "g": 150.0
-        },
-        {
-          "food": "fruehlingszwiebel",
-          "g": 15.0
-        },
-        {
-          "food": "gochugaru",
-          "g": 60.0
-        },
-        {
-          "food": "gochujang",
-          "g": 30.0
-        },
-        {
-          "food": "doenjang",
-          "g": 15.0
-        },
-        {
-          "food": "austernsauce",
-          "g": 60.0
-        },
-        {
-          "food": "mirin",
-          "g": 30.0
-        },
-        {
-          "food": "zucker",
-          "g": 15.0
-        },
-        {
-          "food": "knoblauch",
-          "g": 22.0
-        },
-        {
-          "food": "ingwer",
-          "g": 5.0
-        },
-        {
-          "food": "huehnerbruehe",
-          "g": 80.0
-        },
-        {
-          "food": "sesamoel",
-          "g": 5.0
-        }
-      ],
-      "steps": [
-        "Gochugaru, Gochujang, Doenjang, Austernsauce, Mirin, Zucker, Knoblauch und Ingwer zur Paste rühren",
-        "Hähnchen mit der Paste vermengen, 20 Min. ziehen lassen",
-        "Mit Brühe aufsetzen, Karotte und Zwiebel dazu, 20 Min. köcheln",
-        "Zucchini und Edamame in den letzten 5 Min. dazu — länger und sie zerfallen",
-        "Sesamöl und Frühlingszwiebel erst vom Herd genommen darüber"
-      ],
-      "computed": {
-        "calories": 426.0,
-        "proteinG": 40.0,
-        "carbsG": 36.9,
-        "fiberG": 14.0,
-        "fatG": 14.2,
-        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
-      },
-      "adapted": {
-        "target": "mirrorMeals",
-        "notes": []
-      }
-    },
-    {
       "id": "lemon-herb-chicken-light",
       "title": "Lemon Herb Chicken, Light",
       "slot": "mirror",
@@ -1372,73 +1289,6 @@
         "carbsG": 47.1,
         "fiberG": 14.0,
         "fatG": 9.9,
-        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
-      },
-      "adapted": {
-        "target": "mirrorMeals",
-        "notes": []
-      }
-    },
-    {
-      "id": "pho-bo-light",
-      "title": "Pho Bo, Light",
-      "slot": "mirror",
-      "person": null,
-      "servings": 5,
-      "blocks": 0.0,
-      "cuisine": "asian",
-      "source": "Umbau von pho-bo-die-sch-ssel-br-he-separat auf das Mirror-Meal-Ziel",
-      "ingredients": [
-        {
-          "food": "reisbandnudeln",
-          "g": 80.0
-        },
-        {
-          "food": "rinderfilet",
-          "g": 230.0
-        },
-        {
-          "food": "edamame",
-          "g": 1195.0
-        },
-        {
-          "food": "mungobohnensprossen",
-          "g": 250.0
-        },
-        {
-          "food": "pak_choi",
-          "g": 300.0
-        },
-        {
-          "food": "fruehlingszwiebel",
-          "g": 40.0
-        },
-        {
-          "food": "ingwer",
-          "g": 15.0
-        },
-        {
-          "food": "fischsauce",
-          "g": 25.0
-        },
-        {
-          "food": "zitronensaft",
-          "g": 20.0
-        }
-      ],
-      "steps": [
-        "Brühe wie gehabt separat aufsetzen und heiß halten",
-        "Reisbandnudeln nach Packung garen, kalt abschrecken",
-        "Rinderfilet hauchdünn schneiden — es gart in der heißen Brühe in der Schüssel",
-        "Edamame 5 Min. kochen, Pak Choi kurz blanchieren",
-        "Alles in die Schüssel schichten, Sprossen und Frühlingszwiebel roh obendrauf, Brühe erst am Tisch angießen"
-      ],
-      "computed": {
-        "calories": 441.2,
-        "proteinG": 40.0,
-        "carbsG": 39.8,
-        "fiberG": 14.0,
-        "fatG": 14.9,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
