@@ -147,8 +147,10 @@ def main():
     lib = json.load(open(os.path.join(DATA, "recipes.json"), encoding="utf-8"))
     known = set(r["id"] for r in lib["recipes"])
 
+    # TEMPLATE.md and WHAT-TO-LOOK-FOR.md are committed reference docs, not
+    # recipes — both live in inbox/ but neither should ever be parsed as one.
     files = sorted(f for f in glob.glob(os.path.join(INBOX, "*.md"))
-                   if os.path.basename(f) != "TEMPLATE.md")
+                   if os.path.basename(f) not in ("TEMPLATE.md", "WHAT-TO-LOOK-FOR.md"))
 
     # Anything that is not markdown is something a human dropped for Claude to
     # read — a photo of a cookbook page, a saved article. Name them rather than
