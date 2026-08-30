@@ -209,11 +209,44 @@ html,body{margin:0;padding:0}
 .pw-theme svg{width:19px;height:19px;stroke:currentColor;fill:none;
   stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .pw-theme:focus-visible{outline:2px solid var(--accent,var(--train));outline-offset:2px}
+
 .pw-theme .lbl{
   position:absolute;width:1px;height:1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;
 }
+/* In the hub footer it is a labelled control rather than a bare icon —
+   there is room there, and a lone icon in a footer reads as decoration. */
+.pw-theme-foot{
+  margin:0;padding:0 12px;gap:8px;
+  font-family:var(--f-data);font-size:13px;
+}
+.pw-theme-foot .lbl{
+  position:static;width:auto;height:auto;overflow:visible;
+  clip:auto;white-space:nowrap;
+}
 
+
+/* ---------- numbered lists -------------------------------------------------
+   Skincare, Hair and Kitchen all render the same object: a numbered row with a
+   marker column and a stack of text beside it. The scaffolding lived twice, in
+   build_routines_page.py and build_kitchen_page.py, drifting apart by a
+   half-pixel at a time; it lives here once now.
+
+   Only the scaffolding. The type inside (.n .t .p .h) stays with each page,
+   because those sizes differ on purpose — a bathroom step you follow with wet
+   hands is not a shopping row you scan.
+
+   The workout page is deliberately NOT folded in here. An exercise card
+   carries sets, reps, RIR, rest and two people's loads; it looks similar and
+   is a different object, and forcing them together is exactly the complexity
+   the audit warned about. */
+
+ol.steps, ul.ing{list-style:none;margin:0;padding:6px 0}
+ol.steps li, ul.ing li{
+  display:grid;grid-template-columns:26px 1fr;gap:12px;
+  padding:11px 18px;align-items:baseline;
+}
+ol.steps li + li, ul.ing li + li{border-top:1px solid var(--line)}
 
 /* ---------- shared type roles ---------------------------------------------
    Applied by the pages; defined here so all four stay in step. */

@@ -202,12 +202,17 @@
     global.dispatchEvent(new CustomEvent("pw:theme", { detail: { theme: t } }));
   }
 
-  function mountThemeToggle(el) {
+  /* `where` is "before" (the old top-bar behaviour) or "in" (append, used by
+     the hub footer). The toggle is a setting used about twice a year, so it
+     no longer sits in the top bar of all five pages competing with the person
+     switcher for the best real estate on the screen. */
+  function mountThemeToggle(el, where) {
     if (!el) return;
     var b = document.createElement("button");
     b.type = "button";
-    b.className = "pw-theme";
-    el.parentNode.insertBefore(b, el);
+    b.className = "pw-theme" + (where === "in" ? " pw-theme-foot" : "");
+    if (where === "in") el.appendChild(b);
+    else el.parentNode.insertBefore(b, el);
 
     function paint() {
       var t = getTheme();
