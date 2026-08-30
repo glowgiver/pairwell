@@ -69,12 +69,6 @@ SHARED_CSS = """
   .card-head .meta{font-family:var(--f-data);font-size:13px;color:var(--muted2);margin-left:auto}
   .card-head .focus{font-size:15px;color:var(--text);font-weight:600;width:100%;margin-top:2px}
 
-  ol.steps{list-style:none;margin:0;padding:6px 0}
-  ol.steps li{
-    display:grid;grid-template-columns:26px 1fr;gap:12px;
-    padding:11px 18px;align-items:baseline;
-  }
-  ol.steps li + li{border-top:1px solid var(--line)}
   ol.steps .n{
     font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--muted2);
     font-variant-numeric:tabular-nums;
@@ -318,8 +312,14 @@ function buildPhasedPM(r){
   r.pm.steps.forEach(function(s){
     if(!s.activeSlot){ out.push(s); return; }
     if(!active) return;                       // rest night: no step 03 at all
+    /* Every other row reads function / product / how. This one used to put
+       the product name where the function belongs, so step 03 was the only
+       step in the routine you had to read differently. The data already
+       carries the right title — "Active of the night" — it was being
+       discarded. */
     out.push({
-      step: active.name + (active.optional ? " · optional" : ""),
+      step: s.step,
+      product: active.name + (active.optional ? " · optional" : ""),
       how: active.how,
       isActive: true
     });
@@ -526,7 +526,6 @@ function renderStage(){
 }
 
 PW.mountRail();
-PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("skincare", "../");
 window.addEventListener("pw:person", renderStage);
@@ -787,7 +786,6 @@ function wireDoneButtons(){
 }
 
 PW.mountRail();
-PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 /* This page shipped without a tab bar, so the only way off it was the back
    link at the top — which scrolls away. */

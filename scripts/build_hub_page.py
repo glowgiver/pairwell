@@ -212,7 +212,7 @@ HTML = """<!DOCTYPE html>
 
 <footer>
   <span id="status">Available offline</span>
-  <span>v3</span>
+  <span id="themeslot"></span>
 </footer>
 
 <script src="app.js?v=__JSV__"></script>
@@ -515,7 +515,7 @@ function render(){
 })();
 
 PW.mountRail();
-PW.mountThemeToggle(document.getElementById("switcher"));
+PW.mountThemeToggle(document.getElementById("themeslot"), "in");
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("hub", "");
 window.addEventListener("pw:person", render);

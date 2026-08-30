@@ -808,7 +808,6 @@ function guideHTML(){
 }
 
 PW.mountRail();
-PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("workout", "../");
 

@@ -76,11 +76,48 @@ def _fine_tune_fiber():
     }
 
 
+# What a dish is mostly made of, so the picker can be scanned by eye instead of
+# read. Derived from the heaviest ingredient tagged role:protein — nothing new
+# is typed, and a recipe that gains a different protein reclassifies itself.
+#
+# This is the honest version of the audit's "dish thumbnails", not the good one.
+# The good one is a photograph, and there is none to use: the recipes came from
+# other people's pages and this repo is public, so their photos cannot be
+# committed. A bundled photo of a dish actually cooked here would be a drop-in
+# improvement over these glyphs, and would still make zero external requests.
+_KIND_BY_FOOD = {
+    "huehnerbrust": "poultry", "haehnchenschenkel": "poultry",
+    "haehnchen_ganz": "poultry", "putenbrust": "poultry",
+    "lachs": "fish", "garnelen": "fish",
+    "rinderbrust": "beef", "rinderfilet": "beef", "hackfleisch": "beef",
+    "magerquark": "dairy", "skyr": "dairy", "huettenkaese": "dairy",
+    "ehrmann_pudding": "dairy",
+    "whey": "shake",
+    "eier": "egg", "ei": "egg",
+}
+
+
+def _dish_kinds():
+    out = {}
+    for r in _recipes:
+        best, kind = 0, "plant"
+        for i in r.get("ingredients", []):
+            f = _foods.get(i["food"]) or {}
+            if f.get("role") != "protein":
+                continue
+            if i.get("g", 0) > best:
+                best = i["g"]
+                kind = _KIND_BY_FOOD.get(i["food"], "plant")
+        out[r["id"]] = kind
+    return out
+
+
 data = {
     "kitchen": strip_buildonly(json.load(open(KITCHEN, encoding="utf-8"))),
     "profiles": strip_body(json.load(open(PROFILES, encoding="utf-8"))),
     "recipes": _recipes,
     "foodNames": dict((k, v["name"]) for k, v in _foods.items()),
+    "dishKinds": _dish_kinds(),
     # Resolved here rather than in the page for the same reason foodNames exists:
     # the page gets the one number it needs, not the nutrition table it came from.
     "fineTuneFiber": _fine_tune_fiber(),
@@ -260,12 +297,6 @@ HTML = """<!DOCTYPE html>
   }
   .macros b{color:var(--text);font-weight:600}
 
-  ol.steps,ul.ing{list-style:none;margin:0;padding:6px 0}
-  ol.steps li,ul.ing li{
-    display:grid;grid-template-columns:26px 1fr;gap:12px;
-    padding:11px 18px;align-items:baseline;
-  }
-  ol.steps li+li,ul.ing li+li{border-top:1px solid var(--line)}
   .n{font-family:var(--f-data);font-size:13px;font-weight:600;color:var(--muted2);
     font-variant-numeric:tabular-nums}
   .t{font-size:16px;font-weight:600;line-height:1.4}
@@ -462,6 +493,28 @@ HTML = """<!DOCTYPE html>
   .perserve .ps-m span{font-family:var(--f-data);font-size:13.5px;color:var(--muted)}
   .perserve .ps-m b{color:var(--text);font-weight:700}
 
+  .dp-top{display:flex;align-items:flex-start;gap:9px}
+  .dp-icon{
+    width:22px;height:22px;flex:none;margin-top:1px;
+    stroke:currentColor;fill:none;stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round;opacity:.75;
+  }
+  .dishpick.picked .dp-icon{opacity:.9}
+  .dp-cuisine{
+    display:inline-block;margin-right:8px;
+    font-family:var(--f-data);font-size:12px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--accent);font-weight:600;
+  }
+  .dishpick.picked .dp-cuisine{color:inherit;opacity:.85}
+
+  /* Inside the reference card the rows are already contained, so they drop
+     their own borders and radii and read as one list. */
+  .refcard > details{
+    background:none;border:0;border-top:1px solid var(--line);
+    border-radius:0;margin:0;
+  }
+  .refcard > details:first-of-type{border-top:0}
+
   /* The library, kept reachable but no longer three thousand pixels tall. */
   details.library > summary{font-weight:600}
 
@@ -471,10 +524,11 @@ HTML = """<!DOCTYPE html>
      wrapping onto a third row once the title runs long. */
   .cookcard > details > summary{
     display:grid;
-    grid-template-columns:auto 1fr auto;
-    grid-template-areas:"k title chev" "k meta chev";
+    grid-template-columns:auto auto 1fr auto;
+    grid-template-areas:"k icon title chev" "k icon meta chev";
     align-items:center;gap:1px 10px;padding:14px 18px;
   }
+  .cookcard > details > summary .dp-icon{grid-area:icon;margin:0;align-self:center}
   .cookcard > details > summary .k{
     grid-area:k;align-self:center;
     font-family:var(--f-data);font-size:12px;letter-spacing:.09em;
@@ -1002,6 +1056,37 @@ function pairTier(fit){
   return 2;
 }
 
+/* A shape and a cuisine, so the picker can be scanned rather than read. Both
+   are derived — the shape from the heaviest protein, the cuisine from the
+   recipe's own field — so nothing here is typed twice.
+
+   Ten of twenty-two dishes are poultry, so the shape alone would not separate
+   the ones you actually choose between. The cuisine does that work; the shape
+   catches the salmon and the pho at a glance. */
+var DISH_GLYPH = {
+  poultry: '<circle cx="9" cy="14.5" r="4.5"/><path d="M12.2 11.3 17 6.5a3 3 0 1 1 2.2 2.2l-4.8 4.8"/>',
+  fish:    '<path d="M3 12c3-4 8-5 12-3 1.6.8 3 2 4 3-1 1-2.4 2.2-4 3-4 2-9 1-12-3Z"/><path d="M19 9l2-2.5v11L19 15"/><circle cx="8" cy="11" r=".9"/>',
+  beef:    '<path d="M4 9.5C4 7.3 7.6 5.5 12 5.5s8 1.8 8 4v5c0 2.2-3.6 4-8 4s-8-1.8-8-4Z"/><path d="M9 10.5c1.6-1 4.4-1 6 0"/>',
+  dairy:   '<path d="M6.5 8.5h11l-1 10.6A2 2 0 0 1 14.5 21h-5a2 2 0 0 1-2-1.9Z"/><path d="M4.8 8.5h14.4"/><path d="M9.5 5.5h5"/>',
+  shake:   '<path d="M8.6 3.5h6.8l-.6 4H9.2Z"/><path d="M9.2 7.5h5.6l.8 11a2 2 0 0 1-2 2.1h-3.2a2 2 0 0 1-2-2.1Z"/>',
+  egg:     '<path d="M12 3.2c3.3 0 6 4.4 6 8.6S15.3 20.8 12 20.8 6 15.9 6 11.8 8.7 3.2 12 3.2Z"/>',
+  plant:   '<path d="M20 4C10 4 5 9 5 15c0 2 .6 3.7 1.6 5C13.2 20 20 14 20 4Z"/><path d="M6.6 20C9.2 15 13 11.2 18 8.4"/>'
+};
+
+function dishIcon(r){
+  var kind = (D.dishKinds && D.dishKinds[r.id]) || "plant";
+  return '<svg class="dp-icon" viewBox="0 0 24 24" aria-hidden="true">' +
+    (DISH_GLYPH[kind] || DISH_GLYPH.plant) + '</svg>';
+}
+
+/* "asian" is a continent rather than a cuisine, which kitchen.json already
+   says about itself. Shown as recorded rather than guessed at. */
+function cuisineTag(r){
+  return r.cuisine
+    ? '<span class="dp-cuisine">' + esc(r.cuisine.replace(/-/g, " ")) + '</span>'
+    : '';
+}
+
 function dishChip(r, opts){
   opts = opts || {};
   var c = r.computed || {};
@@ -1025,8 +1110,9 @@ function dishChip(r, opts){
 
   return '<button class="dishpick' + (opts.picked ? ' picked' : '') + '" data-slot="' +
     esc(opts.slot) + '" data-id="' + esc(r.id) + '">' +
-    '<span class="dp-title">' + esc(r.title) + '</span>' +
-    '<span class="dp-meta">' + (opts.picked ? full : brief) + '</span>' +
+    '<span class="dp-top">' + dishIcon(r) +
+      '<span class="dp-title">' + esc(r.title) + '</span></span>' +
+    '<span class="dp-meta">' + cuisineTag(r) + (opts.picked ? full : brief) + '</span>' +
     (opts.compareLine || '') +
     (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
     '</button>';
@@ -1372,7 +1458,7 @@ function pickedDetailHTML(open){
     /* Open on the Cook tab — this is now the page you are standing in front of
        with the pan, so the dish should not need a tap to appear. */
     return '<div class="card cookcard"><details' + (open ? ' open' : '') + '><summary>' +
-      '<span class="k">' + esc(x.slot) + '</span>' +
+      '<span class="k">' + esc(x.slot) + '</span>' + dishIcon(r) +
       '<span class="title">' + esc(r.title) + '</span>' +
       '<span class="meta">' + n0(r.servings) + ' serving' + (r.servings === 1 ? '' : 's') + '</span>' +
       '</summary>' +
@@ -1445,7 +1531,11 @@ function render(){
       (base.blockRules[k] === 1 ? '' : 's') + '</strong></div></div>';
   }
 
+  /* Four top-level accordions for four pieces of reference became one card
+     with four rows inside it. Same content, one thing in the scroll. */
   var extras =
+    '<div class="card refcard"><div class="ch"><span class="k">Reference</span>' +
+    '<span class="meta">standards, logging, substitutions</span></div>' +
     '<details><summary>Log it in MacroFactor</summary><div class="dl">' + rows +
       '<div><div class="dk">Note</div><div class="dv">' + esc(D.kitchen.macroFactorLogging._actionRequired) + '</div></div>' +
     '</div></details>' +
@@ -1459,7 +1549,8 @@ function render(){
       Object.keys(D.kitchen.culinaryStandards).map(function(k){
         return '<div><div class="dk">' + esc(k.replace(/([A-Z])/g," $1").toLowerCase()) +
           '</div><div class="dv">' + esc(D.kitchen.culinaryStandards[k]) + '</div></div>';
-      }).join("") + '</div></details>';
+      }).join("") + '</div></details>' +
+    '</div>';
 
   /* Three jobs, three tabs. Cooking, shopping and accounting happen at
      different moments, in different rooms, in different states of mess —
@@ -1573,7 +1664,6 @@ document.getElementById("stage").addEventListener("click", function(ev){
 });
 
 PW.mountRail();
-PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("kitchen", "../");
 render();
