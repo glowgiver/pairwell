@@ -251,14 +251,21 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
 
 ## Known gaps
 
-- **The mirror-meal target cannot be cooked.** 425 kcal / 40 g protein / 17 g
-  fibre / 12 g fat, minus the 1.5 mandated Base blocks, leaves 246 kcal to carry
-  33.5 g protein, 14.6 g fibre and 10.3 g fat — macros whose own energy content
-  is 257 kcal, before any digestible carbohydrate. It is unreachable by ~11 kcal
-  at the theoretical floor and by far more in real food. The kitchen page now
-  shows this check live (`energyFactors` in `kitchen.json`). Until fibre per meal
-  drops or the meal grows, **no recipe can satisfy the spec** — which is why a
-  recipe recommender would be building on sand.
+- ~~The mirror-meal target cannot be cooked.~~ Fixed. The old spec — 425 kcal /
+  40 g protein / 17 g fibre / 12–15 g fat on 1.5 Base blocks — was unreachable
+  by ~11 kcal at the Atwater floor and by ~108 kcal in real food. It is now
+  **470 kcal / 40 g protein / 14 g fibre / 8–12 g fat on 1 block**, and
+  `check_targets.py` proves it twice: the arithmetic floor leaves 121 kcal
+  spare, and a search over `foods.json` builds **4962 real plates** that satisfy
+  it, aroma base included. Run against the old numbers the same search returns
+  zero, at 1, 1.5 and 2 blocks — so the check would have caught it.
+
+  What still binds is **fat, not fibre**. The 12 g ceiling puts salmon, eggs
+  and tempeh out of reach of a mirror meal and leaves tofu just outside; they
+  are breakfast and snack foods here for that reason alone. Raising the ceiling
+  to 14 g costs the day nothing (Philipp keeps 17 g for the snack, Eunice 24 g)
+  and returns tofu at every block level plus salmon on the saucy tier. Not
+  changed — that is a plan decision, and the plan is theirs.
 - **`cookedWeightG` is estimated, not weighed.** Weigh a batch, type it into the
   splitter, re-run `recompute_macros.py`. The custom food in MacroFactor may
   still hold the old 105 kcal/100 g — it should be 140.

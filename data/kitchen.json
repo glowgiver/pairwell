@@ -7,7 +7,8 @@
   "_changelog": [
     "2026-08-29 — Asian Base Block macros corrected. The file previously carried three independently hand-maintained figures (per-block macros, per-100g-cooked macros, batch yield) that contradicted each other by ~34%. The per-100g-cooked value of 105 kcal implied a cooked weight of ~1126 g, which is more than goes into the pot. Since MacroFactor logging uses grams, the wrong one of the two was in daily use. Ingredients now carry their own nutrition, cooked weight is a single declared field, and every macro below is DERIVED by scripts/recompute_macros.py. Do not edit the 'computed' blocks by hand.",
     "2026-08-29 — energyFactors added so the kitchen page can check a meal target against its own arithmetic. First result: the mirror-meal spec overshoots its calorie budget by ~10 kcal at the theoretical floor, i.e. it is unreachable, not merely difficult. No recipe can satisfy it.",
-    "2026-08-29 — mirror meal raised to 470 kcal on 1 block with 14 g fibre, after a search over the kitchen's own staples showed the old 425/17/1.5 spec had a floor of 533 kcal. Block ladder halved to 0.5 / 1 / 1.5."
+    "2026-08-29 — mirror meal raised to 470 kcal on 1 block with 14 g fibre, after a search over the kitchen's own staples showed the old 425/17/1.5 spec had a floor of 533 kcal. Block ladder halved to 0.5 / 1 / 1.5.",
+    "2026-08-30 — check_targets.py gained a REAL FOOD section. The block ladder prices macros at the Atwater floor, so its verdict was necessary and not sufficient; the new search constructs actual plates from foods.json and reports how many fit and which protein sources cannot. Result: the current spec is comfortable, the old one returns zero plates at 1, 1.5 and 2 blocks, and the binding constraint is the 12 g fat ceiling rather than the fibre."
   ],
   "hardware": {
     "device": "Ninja Foodi OL750UK SmartLid",
@@ -212,7 +213,7 @@
     ]
   },
   "_gaps": [
-    "the revised mirror-meal target (470 kcal / 40 P / 14 fibre on 1 block) is reachable but untested against a real cooked dish — the first recipe will say whether 14 g of fibre fits in the box alongside everything else.",
+    "the revised mirror-meal target (470 kcal / 40 P / 14 fibre on 1 block) is reachable AND cookable — check_targets.py now builds real plates out of foods.json and finds 4962 of them on 1 block, aroma base included. Still untested in a pan: the search costs ingredients, not shrinkage, seasoning to taste, or whether Eunice will eat it.",
     "cookedWeightG is estimated, not weighed — the single highest-value measurement to take on the next batch",
     "no actual recipes yet: this file holds standards and one carb base, but zero dishes. 'What do we commonly meal-prep?' is still unanswerable.",
     "per-ingredient nutrition comes from generic tables, not the actual packaging",

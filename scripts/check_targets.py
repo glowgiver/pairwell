@@ -10,6 +10,14 @@ Two questions, both answerable without any recipe existing:
   2. Is one mirror meal reachable? Same idea, one level down, with the
      Asian Base blocks already on the plate.
 
+  3. Can it actually be cooked? Question 2 prices macros at their Atwater
+     minimum and assumes no digestible carbohydrate rides along, so its
+     "reachable" is necessary and not sufficient. This one builds real
+     plates out of foods.json instead — block, aroma base, vegetable, fat,
+     a protein and a fibre source — and reports which of them land inside
+     the spec. A spec no plate satisfies is not a hard recipe; it is a
+     wrong number.
+
 Read-only. Prints a report and exits non-zero if anything is impossible.
 """
 
@@ -29,6 +37,105 @@ def load(name):
 def lo(v):
     """mirrorMeals.fatG is the range "12-15". Take the charitable end."""
     return float(str(v).split("-")[0])
+
+
+def hi(v):
+    """The other end of the same range; a plain number is its own ceiling."""
+    return float(str(v).split("-")[-1])
+
+
+MACROS = ("calories", "proteinG", "fatG", "fiberG")
+
+# Every dish in this kitchen gets an aroma base — Cooking_Standards calls the
+# alternative spartan and bans it. Costing it here keeps the search honest:
+# a spec that only fits with naked chicken does not fit.
+AROMA_BASE = {"knoblauch": 8, "ingwer": 8, "sojasauce": 10,
+              "chili": 3, "fruehlingszwiebel": 15}
+
+# Powders and seeds are excluded on purpose. foods.json knows psyllium husk is
+# 80 g of fibre per 100 g and would satisfy any spec with a spoonful of it,
+# which proves nothing about dinner. Same reason topUps is curated.
+NOT_A_MEAL = ("flohsamenschalen", "leinsamen", "chiasamen", "haferkleie",
+              "whey", "magerquark", "skyr", "huettenkaese", "eiklar")
+
+
+def nutr(foods, key, grams):
+    per = foods[key].get("per100g", foods[key])
+    return dict((m, per.get(m, 0) * grams / 100.0) for m in MACROS)
+
+
+def plus(*parts):
+    out = dict((m, 0.0) for m in MACROS)
+    for part in parts:
+        for m in out:
+            out[m] += part.get(m, 0)
+    return out
+
+
+def plates(foods, block, blocks, spec):
+    """Every real plate that satisfies the mirror-meal spec.
+
+    Protein and fibre are the two targets; the protein source and the fibre
+    source are the two unknowns. Solving them together rather than in turn is
+    the same rule adapt_recipe.py follows, and for the same reason — legumes
+    carry protein, so fixing fibre afterwards overshoots.
+
+    Returns (list of (kcal, macros, amounts), set of protein sources that work).
+    """
+    roles = {}
+    for key, food in foods.items():
+        roles.setdefault(food.get("role"), []).append(key)
+    proteins = [k for k in roles.get("protein", []) if k not in NOT_A_MEAL]
+    fibers = [k for k in roles.get("fiber", []) if k not in NOT_A_MEAL]
+    vegs = roles.get("veg", []) + [k for k in roles.get("carb", []) if k == "konjaknudeln"]
+    fats = [k for k in roles.get("fat", [])] + ["kokosmilch_light"]
+
+    aroma = plus(*[nutr(foods, k, g) for k, g in AROMA_BASE.items() if k in foods])
+    carb = dict((m, block[m] * blocks) for m in MACROS)
+    want_p, want_fib = spec["proteinG"], spec["fiberG"]
+    fat_lo, fat_hi = lo(spec["fatG"]), hi(spec["fatG"])
+
+    found, sources = [], set()
+    for pk in proteins:
+        pn = foods[pk].get("per100g", foods[pk])
+        for fk in fibers:
+            fn = foods[fk].get("per100g", foods[fk])
+            det = (pn["proteinG"] * fn.get("fiberG", 0)
+                   - pn.get("fiberG", 0) * fn["proteinG"]) / 10000.0
+            if abs(det) < 1e-9:
+                continue                      # the two move together; no solution
+            for vk in vegs:
+                for vg in (100, 150, 200):
+                    for fatk in fats:
+                        for fg in ((0, 40, 60, 80) if fatk == "kokosmilch_light"
+                                   else (0, 4, 6, 8, 10)):
+                            rest = plus(carb, aroma, nutr(foods, vk, vg),
+                                        nutr(foods, fatk, fg))
+                            need_p = want_p - rest["proteinG"]
+                            need_f = want_fib - rest["fiberG"]
+                            a = (need_p * fn.get("fiberG", 0) / 100.0
+                                 - need_f * fn["proteinG"] / 100.0) / det
+                            b = (pn["proteinG"] / 100.0 * need_f
+                                 - pn.get("fiberG", 0) / 100.0 * need_p) / det
+                            if not (40 <= a <= 260 and 20 <= b <= 260):
+                                continue      # not a portion anyone would serve
+                            # Round to what a scale shows, then re-derive, so the
+                            # numbers describe the food that would be cooked.
+                            a, b = round(a / 5) * 5, round(b / 5) * 5
+                            tot = plus(rest, nutr(foods, pk, a), nutr(foods, fk, b))
+                            if abs(tot["proteinG"] - want_p) > 2:
+                                continue
+                            if tot["fiberG"] < want_fib - 0.5:
+                                continue
+                            if not fat_lo <= tot["fatG"] <= fat_hi:
+                                continue
+                            if tot["calories"] > spec["calories"] + 10:
+                                continue
+                            sources.add(pk)
+                            found.append((tot["calories"], tot,
+                                          {pk: a, fk: b, vk: vg, fatk: fg}))
+    found.sort(key=lambda r: abs(r[0] - spec["calories"]))
+    return found, sources
 
 
 def bodies():
@@ -258,7 +365,46 @@ def main():
 
     print("\n  Note: the floor prices fibre at %g kcal/g and assumes zero digestible\n"
           "  carbohydrate comes with it. Real food is dearer, so a 'reachable'\n"
-          "  verdict here is necessary, not sufficient." % ef["fiberG"])
+          "  verdict here is necessary, not sufficient. The next section is the\n"
+          "  sufficient one." % ef["fiberG"])
+
+    # The question above asks whether the arithmetic permits the meal. This one
+    # asks whether the pantry does, which is the question that decides whether
+    # anyone can cook dinner.
+    try:
+        foods = load("foods.json")["foods"]
+    except (IOError, OSError):
+        foods = None
+    if foods:
+        print("\nREAL FOOD — does any actual plate satisfy the spec?\n")
+        print("  spec  %d kcal · %g g protein · %g g fibre · fat %s g"
+              % (m["calories"], m["proteinG"], m["fiberG"], m["fatG"]))
+        print("  every plate below also carries the full aroma base "
+              "(garlic, ginger, soy, chilli, spring onion)\n")
+        all_proteins = set(k for k, f in foods.items()
+                           if f.get("role") == "protein" and k not in NOT_A_MEAL)
+        for label, blocks in sorted(base["blockRules"].items(), key=lambda kv: kv[1]):
+            found, sources = plates(foods, pb, blocks, m)
+            if not found:
+                print("  %-22s %.1f blocks   NO PLATE FITS" % (label, blocks))
+                fails.append("No combination in foods.json satisfies the mirror meal "
+                             "on %.1f blocks. The spec is a wrong number, not a hard "
+                             "recipe." % blocks)
+                continue
+            kcal, tot, amounts = found[0]
+            print("  %-22s %.1f blocks   %4d plates fit   %d of %d protein sources"
+                  % (label, blocks, len(found), len(sources), len(all_proteins)))
+            print("      closest: %.0f kcal · %.1f P · %.1f fibre · %.1f fat"
+                  % (kcal, tot["proteinG"], tot["fiberG"], tot["fatG"]))
+            print("      %.1f block + %s" % (blocks, ", ".join(
+                "%s %d g" % (k, g) for k, g in sorted(amounts.items(),
+                                                      key=lambda kv: -kv[1]) if g)))
+            missing = sorted(all_proteins - sources)
+            if missing:
+                print("      out of reach here: %s" % ", ".join(missing))
+        print("\n  A protein source listed as out of reach is not banned — it cannot\n"
+              "  carry 40 g of protein inside this fat ceiling. Salmon and eggs are\n"
+              "  breakfast and snack foods in this plan for that reason alone.")
 
     # A fixed breakfast written into profiles.json AND stored as a recipe is two
     # sources for one fact. Compare them rather than trusting whichever is read first.
