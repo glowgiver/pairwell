@@ -55,9 +55,9 @@
         ]
       },
       "snackBudgetAfterMirrorMeals": {
-        "calories": 550,
+        "calories": 450,
         "proteinG": 36,
-        "note": "1900 - 410 (breakfast) - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
+        "note": "1900 - 410 (breakfast) - 1040 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this. At 450 kcal this is 32% protein — his snack, not hers, is what limits how large the shared meal may grow."
       },
       "aestheticGoal": "lean athletic, K-drama V-taper, not bulky",
       "_phase": {
@@ -76,16 +76,27 @@
       "role": "healthy teacher",
       "dailyTargets": {
         "calories": 1580,
-        "proteinG": 105,
+        "proteinG": 125,
         "fiberG": 35,
-        "fatG": 52,
-        "netCarbsG": 160
+        "fatG": 45,
+        "netCarbsG": 151
       },
       "fixedBreakfast": null,
       "breakfastPlusSnackBudget": {
-        "calories": 640,
-        "proteinG": 25,
-        "note": "1580 - 940 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this."
+        "calories": 540,
+        "proteinG": 45,
+        "fiberG": 7,
+        "split": {
+          "breakfast": {
+            "calories": 330,
+            "proteinG": 28
+          },
+          "snack": {
+            "calories": 210,
+            "proteinG": 17
+          }
+        },
+        "note": "1580 - 1040 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this. The split is guidance, not a fixed meal — she has no fixedBreakfast yet. 45 g of protein in 540 kcal is 33% of the envelope, which sounds strict and is not: 250 g of skyr with 30 g of whey is 275 kcal and 51 g."
       },
       "aestheticGoal": "curvier, defined, strong lower body already present",
       "notes": [
@@ -97,19 +108,20 @@
   "mirrorMeals": {
     "note": "Lunch and dinner are identical in size and macros for both people. Fat is a CEILING, not a range: protein and fibre are hit first and fat lands where it lands underneath it. A floor of 8 g was doing nothing — a leaner dish simply leaves the snack more room — while the 12 g ceiling put salmon, eggs, tempeh and tofu out of reach of a 40 g protein meal. Written as \"0-14\" so every reader that splits the range keeps working; read it as \"up to 14\".",
     "lunch": {
-      "calories": 470,
+      "calories": 520,
       "proteinG": 40,
       "fiberG": 14,
       "fatG": "0-14"
     },
     "dinner": {
-      "calories": 470,
+      "calories": 520,
       "proteinG": 40,
       "fiberG": 14,
       "fatG": "0-14"
     },
     "_revised": "2026-08-29 — was 425 kcal / 17 g fibre / 12-15 g fat on 1.5 Asian Base blocks. That target could not be cooked: the cheapest combination of these staples reaching it came to 533 kcal, 108 kcal over, at every meal. Raised to 470 kcal on 1 block with 14 g fibre, which the same search reaches at 432 kcal — leaving real slack for sauce and aromatics instead of sitting on the theoretical floor. Run scripts/check_targets.py after touching any of these numbers.",
-    "_revised2": "2026-08-30 — fat band 8-12 -> ceiling of 14, no floor. The day pays for it out of slack it already had: Philipp keeps 17 g of fat for the snack, Eunice 24 g for breakfast plus snack. check_targets.py's REAL FOOD search goes from 4962 to 5697 plates on one block and returns tofu at every block level, salmon on the saucy tier."
+    "_revised2": "2026-08-30 — fat band 8-12 -> ceiling of 14, no floor. The day pays for it out of slack it already had: Philipp keeps 17 g of fat for the snack, Eunice 24 g for breakfast plus snack. check_targets.py's REAL FOOD search goes from 4962 to 5697 plates on one block and returns tofu at every block level, salmon on the saucy tier.",
+    "_revised3": "2026-08-30 — mirror meal 470 -> 520 kcal, and Eunice's protein 105 -> 125 g with fat 52 -> 45 and net carbs 160 -> 151 paying for it. Her breakfast-plus-snack envelope was 640 kcal asking for 25 g of protein: 40% of her day, 16% of it accounted for. Because lunch and dinner are identical for both people, growing the meal shrinks both envelopes at once — hers to 540, his to 450. Protein per meal stays 40: raising it would have relieved his snack and emptied hers, which is backwards. The ceiling on how far this can go is HIS snack, which reaches 32% protein at 520 and 37% at 550. Cooking gets easier, not harder — check_targets.py finds 18260 plates at 520 against 11992 at 470."
   },
   "_gaps": [
     "Eunice's breakfast is not fixed yet — only a budget envelope exists.",

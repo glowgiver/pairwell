@@ -254,11 +254,11 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
 - ~~The mirror-meal target cannot be cooked.~~ Fixed. The old spec — 425 kcal /
   40 g protein / 17 g fibre / 12–15 g fat on 1.5 Base blocks — was unreachable
   by ~11 kcal at the Atwater floor and by ~108 kcal in real food. It is now
-  **470 kcal / 40 g protein / 14 g fibre / 8–12 g fat on 1 block**, and
-  `check_targets.py` proves it twice: the arithmetic floor leaves 121 kcal
-  spare, and a search over `foods.json` builds **4962 real plates** that satisfy
-  it, aroma base included. Run against the old numbers the same search returns
-  zero, at 1, 1.5 and 2 blocks — so the check would have caught it.
+  **520 kcal / 40 g protein / 14 g fibre / ≤14 g fat on 1 block**, and
+  `check_targets.py` proves it twice: the arithmetic floor leaves room, and a
+  search over `foods.json` builds **18260 real plates** that satisfy it, aroma
+  base included. Run against the old numbers the same search returns zero, at
+  1, 1.5 and 2 blocks — so the check would have caught it.
 
   What bound after that was **fat, not fibre**, and it has since been loosened:
   the band `8-12` became the ceiling `0-14` on 2026-08-30. The floor was doing
@@ -266,6 +266,19 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   12 g ceiling put salmon, eggs, tempeh and tofu out of reach of a 40 g protein
   meal. The day paid for it out of slack it already had. Plates on one block
   went 4962 → 11992, and tofu is back at every block level.
+
+  The meal then grew again, **470 → 520 kcal**, for a reason that has nothing
+  to do with cooking: Eunice's breakfast-plus-snack envelope was 640 kcal
+  asking for 25 g of protein — 40% of her day, 16% of it accounted for. Lunch
+  and dinner are identical for both people, so growing the meal shrinks both
+  envelopes at once; hers went to 540 and his to 450. Her protein went
+  105 → 125 g (1.97 g/kg) with fat 52 → 45 and net carbs 160 → 151 paying for
+  it, which also cleared the 18 kcal her own four targets used to overshoot by.
+
+  **Protein per meal deliberately stayed at 40.** Raising it would have
+  relieved his snack and emptied hers, which is backwards. And the ceiling on
+  how far the meal may grow is **his** snack, not hers: it is 32% protein at a
+  520 kcal meal and 37% at 550, which is a shake and quark with no alternative.
 
   `fatG` stays a **range string** so every reader that splits on `-` keeps
   working; a leading `0` is the signal to render it as `≤14` rather than as a
@@ -279,9 +292,11 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
 - **Kitchen has one recipe, not a library.** The Base Block, the splitter, the
   day ledger and the adapter all work; the library holds a single real dish
   (Philipp's breakfast). Dishes come from them, never invented here.
-- **The daily targets are over-specified too.** Philipp's four targets imply
-  1662 kcal against a 1600 budget, Eunice's 1598 against 1580. `check_targets.py`
-  reports both. Philipp's 62 kcal gap is the one worth resolving.
+- **The daily targets are over-specified too** — barely, now. Philipp's four
+  targets imply 1901 kcal against 1900, Eunice's 1579 against 1580.
+  `check_targets.py` reports both. Hers was 18 kcal out until the 2026-08-30
+  protein change absorbed it; his 1 kcal is rounding and is left alone, because
+  silencing it would mean editing a target to please a printout.
 - **Philipp's breakfast is written down twice** — typed in `profiles.json`
   (410 kcal) and derived from `recipes.json` (380). The typed figures drive the
   day ledger. Generic tables versus an unknown original; the packets would settle

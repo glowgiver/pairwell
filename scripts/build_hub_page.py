@@ -320,7 +320,7 @@ function render(){
   var t = prof.dailyTargets;
   var blocks = D.kitchen.asianMacroBase.blockRules.standardLeanDish;
   var food = card("kitchen/", "var(--food)", "Food",
-    blocks + " blocks / meal",
+    blocks + (blocks === 1 ? " block / meal" : " blocks / meal"),
     esc(t.calories + " kcal"),
     '<div class="targets">' +
       '<div>Protein<b>' + t.proteinG + ' g</b></div>' +

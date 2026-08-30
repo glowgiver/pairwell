@@ -539,7 +539,8 @@ function lookForHTML(){
           '~200 g quick greens or mushrooms — volume, cheap in calories',
           'an aromatic sauce with almost no fat']) +
     '<p>Never one fibre source alone: ' + n0(r.need.fib) + ' g of it from lentils costs about ' +
-      '180 kcal, half the budget, and the same from spinach is over half a kilo of spinach. ' +
+      '180 kcal, close to half the budget, and the same from spinach is over half a kilo of ' +
+      'spinach. ' +
       'The legume and the greens also carry around 15 g of protein between them, which is ' +
       'why the meat portion is smaller than it looks.</p>' +
 
@@ -552,7 +553,7 @@ function lookForHTML(){
     '<h4>Too rich to fit</h4>' +
     list(['Coconut milk at full fat, cream, cheese sauce, peanut or satay — the light tin is fine, 40–80 g of it fits',
           'Deep-fried, battered, breaded',
-          'Salmon as the only protein — 40 g of it brings 20 g of fat on its own',
+          'Eggs or tempeh as the only protein — neither reaches 40 g inside the fat ceiling',
           'Salads that reach their fibre through sheer volume',
           'Protein minced into a mixture, so no portion can be weighed']) +
 
