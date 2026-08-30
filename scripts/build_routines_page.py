@@ -177,6 +177,20 @@ SHARED_CSS = """
   }
   details[open] summary::after{transform:rotate(-135deg)}
   details summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  /* The routine you are not doing right now: present, one tap away, and not
+     costing a screen of scroll. Its own card keeps its styling inside. */
+  details.other-routine{background:none;border:0;margin-top:14px}
+  details.other-routine > summary{
+    color:var(--muted);font-weight:600;
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  }
+  details.other-routine > summary .n{
+    font-family:var(--f-data);font-size:13px;font-weight:400;color:var(--muted2);
+  }
+  details.other-routine[open] > summary{
+    border-bottom-left-radius:0;border-bottom-right-radius:0;
+  }
   .dl{padding:2px 18px 16px}
   .dl div{padding:9px 0;border-top:1px solid var(--line)}
   .dl .dk{font-family:var(--f-data);font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
@@ -467,9 +481,29 @@ function renderStage(){
     details += '<details><summary>The four seasons</summary><div class="dl">' + seasonRows + '</div></details>';
   }
 
-  /* After 18:00 the evening is what you need first. */
+  /* After 18:00 the evening is what you need first — and the other routine
+     folds away rather than merely moving below. Standing at the sink at 22:00
+     you should not scroll 700 px of this morning to reach tonight's step one.
+     Browsing another day is planning rather than doing, so both stay open. */
+  function folded(label, count, html){
+    return '<details class="other-routine"><summary>' + esc(label) +
+      (count ? '<span class="n">' + count + ' steps</span>' : '') +
+      '</summary>' + html + '</details>';
+  }
+
+  var amCount = (am && am.steps) ? am.steps.length : 0;
+  var pmCount = pmSteps ? pmSteps.length : 0;
   var eveningFirst = new Date().getHours() >= 18 && isToday;
-  stage.innerHTML = (eveningFirst ? evening + morning : morning + evening) + dayRules + details;
+
+  var body;
+  if(!isToday){
+    body = morning + evening;
+  }else if(eveningFirst){
+    body = evening + folded("Morning", amCount, morning);
+  }else{
+    body = morning + folded("Tonight", pmCount, evening);
+  }
+  stage.innerHTML = body + dayRules + details;
 
   /* Phase strip lives above the stage, so wire it after each render. */
   var toggle = document.getElementById("phaseToggle");
@@ -525,6 +559,33 @@ __CSS__
   }
   .both b{color:var(--text);font-weight:600}
   .card.other{opacity:.5}
+
+  .card.today{border-color:var(--hair)}
+  .todaybody{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+  .tline{font-size:15.5px;line-height:1.45;color:var(--muted)}
+  .tline b{color:var(--text);font-weight:600}
+  .tline.due b{color:var(--hair)}
+  .tline.ok{color:var(--muted2)}
+
+  .duebar{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:11px 18px;border-bottom:1px solid var(--line);background:var(--surface-2);
+  }
+  .duepill{
+    font-family:var(--f-data);font-size:13px;font-weight:600;
+    letter-spacing:.04em;color:var(--muted);
+  }
+  /* Accent as ink on the page ground — the pairing that holds in both themes. */
+  .duepill.due,.duepill.late{color:var(--hair)}
+  .duepill.late{font-weight:700}
+  .duepill.done{color:var(--ok,var(--muted))}
+  .dobtn,.undone{
+    margin-left:auto;min-height:var(--tap);padding:0 16px;border-radius:11px;
+    font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .dobtn{background:var(--hair);border:1px solid var(--hair);color:var(--bg)}
+  .undone{background:none;border:1px solid var(--line);color:var(--muted)}
+  .dobtn:focus-visible,.undone:focus-visible{outline:2px solid var(--hair);outline-offset:2px}
   .inline-caution{
     padding:11px 18px 14px;font-family:var(--f-read);font-size:15px;line-height:1.55;
     color:var(--muted2);border-top:1px solid var(--line);
@@ -550,11 +611,64 @@ __JSHEAD__
 
 function person(){ return PW.get(); }
 
+/* ---- when was it last done -------------------------------------------
+   Not a log: exactly one date per treatment per person. That is the whole
+   difference between a page that states "weekly" and a page that can tell
+   you whether today is the day. Per person, because they shower separately
+   even where the protocol is shared. */
+
+function doneKey(id){ return "hub.hair.done." + id + "." + PW.person().code; }
+
+function today0(){ var d = new Date(); d.setHours(0,0,0,0); return d; }
+
+function lastDone(id){
+  try{
+    var v = localStorage.getItem(doneKey(id));
+    if(!v) return null;
+    var d = new Date(v + "T00:00:00");
+    return isNaN(d) ? null : d;
+  }catch(e){ return null; }
+}
+
+function markDone(id){
+  var d = today0();
+  var iso = d.getFullYear() + "-" +
+            String(d.getMonth()+1).padStart(2,"0") + "-" +
+            String(d.getDate()).padStart(2,"0");
+  try{ localStorage.setItem(doneKey(id), iso); }catch(e){}
+}
+function clearDone(id){ try{ localStorage.removeItem(doneKey(id)); }catch(e){} }
+
+/* Returns {state, days, label} where state is one of
+   unknown | done | soon | due | late. */
+function dueState(t){
+  var last = lastDone(t.id);
+  if(!last) return { state:"unknown", days:null, label:"Never logged" };
+  var days = Math.round((today0() - last) / 86400000);
+  if(days === 0) return { state:"done", days:0, label:"Done today" };
+
+  var due = t.everyDays || 7;
+  var late = t.everyDaysMax || due;
+  if(days >= late && late > due) return { state:"late", days:days, label:days + " days ago — overdue" };
+  if(days > due && late === due) return { state:"late", days:days, label:days + " days ago — overdue" };
+  if(days >= due) return { state:"due", days:days, label:"Due — " + days + " days ago" };
+  var left = due - days;
+  return { state:"soon", days:days, label:"In " + left + " day" + (left === 1 ? "" : "s") };
+}
+
+function isDue(t){
+  var st = dueState(t).state;
+  return st === "due" || st === "late" || st === "unknown";
+}
+
 function renderStage(){
   var h = R.hair;
   var who = person();
   var stage = document.getElementById("stage");
-  document.getElementById("sub").textContent = h.context.why;
+  /* The reasoning is real but it is not what you came for; it now opens under
+     "Why this protocol" instead of above the first step. */
+  document.getElementById("sub").textContent =
+    "Sulfate-free, conditioned, and rinsed clear of hard water.";
 
   /* Every shower — four steps, with the amount that differs per person
      shown only for whoever is currently selected. */
@@ -572,10 +686,17 @@ function renderStage(){
      greyed rather than hidden, so nobody wonders where they went. */
   var sched = h.scheduled.map(function(t){
     var mine = t.who === "both" || t.who === who;
+    var d = mine ? dueState(t) : null;
     return '<div class="card' + (mine ? '' : ' other') + '"><div class="card-head">' +
       '<span class="k">' + esc(t.cadence) + '</span>' +
       '<span class="meta">' + (t.who === "both" ? "both" : esc(PW.PEOPLE[t.who].name) + " only") + '</span>' +
       '<span class="focus">' + esc(t.title) + '</span></div>' +
+      (mine ? '<div class="duebar">' +
+        '<span class="duepill ' + d.state + '">' + esc(d.label) + '</span>' +
+        (d.state === "done"
+          ? '<button type="button" class="undone" data-undone="' + esc(t.id) + '">Undo</button>'
+          : '<button type="button" class="dobtn" data-done="' + esc(t.id) + '">Done today</button>') +
+       '</div>' : '') +
       '<ol class="steps">' +
         '<li><span class="n">&bull;</span><div><div class="p">' + esc(t.recipe) + '</div></div></li>' +
         '<li><span class="n">&rarr;</span><div><div class="h">' + esc(t.order) + '</div></div></li>' +
@@ -583,6 +704,25 @@ function renderStage(){
       (t.caution ? '<div class="inline-caution">' + esc(t.caution) + '</div>' : '') +
       '</div>';
   }).join("");
+
+  /* Lead with the answer to the question the page exists to answer. Before
+     this it opened on frequencies and left the date arithmetic to the reader. */
+  var mineT = h.scheduled.filter(function(t){ return t.who === "both" || t.who === who; });
+  var dueNow = mineT.filter(isDue);
+  var todayCard =
+    '<div class="card today"><div class="card-head">' +
+      '<span class="k">Today</span>' +
+      '<span class="meta">' + esc(PW.PEOPLE[who].name) + '</span></div>' +
+    '<div class="todaybody">' +
+      '<div class="tline"><b>Wash as normal</b> — ' + h.everyShower.steps.length + ' steps below</div>' +
+      (dueNow.length
+        ? dueNow.map(function(t){
+            var d = dueState(t);
+            return '<div class="tline due"><b>' + esc(t.title) + '</b> — ' +
+              esc(d.state === "unknown" ? "never logged" : d.label.toLowerCase()) + '</div>';
+          }).join("")
+        : '<div class="tline ok">Nothing extra due today.</div>') +
+    '</div></div>';
 
   var note = h.individualNotes[who];
   var personal = note
@@ -626,16 +766,32 @@ function renderStage(){
       packages + '</div></details>' +
     '<details><summary>What to track</summary><div class="dl">' + tracking + '</div></details>' +
     '<details><summary>Why this protocol</summary><div class="dl">' +
+      /* Moved down from the top of the page, where forty-four words on
+         sulfates stood between arriving and the first instruction. */
+      '<div><div class="dk">The problem</div><div class="dv">' + esc(h.context.why) + '</div></div>' +
       '<div><div class="dk">Water</div><div class="dv">' + esc(h.context.waterHardness) + '</div></div>' +
       '<div><div class="dk">Verify</div><div class="dv">' + esc(h.context.verify) + '</div></div>' +
     '</div></details>';
 
-  stage.innerHTML = wash + sched + personal + details;
+  stage.innerHTML = todayCard + wash + sched + personal + details;
+  wireDoneButtons();
+}
+
+function wireDoneButtons(){
+  document.querySelectorAll("[data-done]").forEach(function(b){
+    b.addEventListener("click", function(){ markDone(b.dataset.done); renderStage(); });
+  });
+  document.querySelectorAll("[data-undone]").forEach(function(b){
+    b.addEventListener("click", function(){ clearDone(b.dataset.undone); renderStage(); });
+  });
 }
 
 PW.mountRail();
 PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
+/* This page shipped without a tab bar, so the only way off it was the back
+   link at the top — which scrolls away. */
+PW.mountTabs("hair", "../");
 window.addEventListener("pw:person", renderStage);
 
 renderStage();

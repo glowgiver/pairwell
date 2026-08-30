@@ -81,7 +81,7 @@
       },
       {
         "item": "Gemüsebrühepulver",
-        "amount": "1 TL",
+        "amount": "1 tsp",
         "g": 4,
         "per100gRaw": {
           "calories": 200,
@@ -93,7 +93,7 @@
       },
       {
         "item": "Sojasauce (low sodium)",
-        "amount": "1 TL",
+        "amount": "1 tsp",
         "g": 6,
         "per100gRaw": {
           "calories": 53,
@@ -118,14 +118,14 @@
       }
     ],
     "steps": [
-      "Reis, Quinoa, rote Linsen waschen bis Wasser klar ist",
-      "Wasser mit Brühepulver und Sojasauce mischen, in Innentopf geben",
-      "Reis, Quinoa, Linsen zugeben — Edamame noch NICHT",
-      "SmartLid auf Pressure, Modus Pressure Cook, Stufe High, 4 Minuten",
-      "10 Minuten Natural Release, dann Restdruck manuell ablassen",
-      "Mit Gabel auflockern, Edamame unterheben, 5-10 Min offen ausdampfen lassen",
-      "GARGEWICHT WIEGEN und in yield.cookedWeightG eintragen, dann scripts/recompute_macros.py laufen lassen",
-      "In 100-120 ml Silikonformen pressen, abkühlen, einfrieren/kühlen"
+      "Rinse the rice, quinoa and red lentils until the water runs clear",
+      "Mix the water with the stock powder and soy sauce and pour it into the inner pot",
+      "Add the rice, quinoa and lentils — NOT the edamame yet",
+      "SmartLid to Pressure, mode Pressure Cook, level High, 4 minutes",
+      "10 minutes natural release, then vent the remaining pressure by hand",
+      "Fluff with a fork, fold in the edamame, leave uncovered 5–10 min to steam off",
+      "WEIGH THE COOKED BATCH and enter it in yield.cookedWeightG, then run scripts/recompute_macros.py",
+      "Press into 100–120 ml silicone moulds, cool, then freeze or chill"
     ],
     "yield": {
       "cookedWeightG": 850,
@@ -378,7 +378,7 @@
       {
         "food": "flohsamenschalen",
         "maxG": 10,
-        "note": "in ein großes Glas Wasser, sofort trinken (sie gelieren in Sekunden)",
+        "note": "into a large glass of water, drink straight away (it gels within seconds)",
         "coversFiberG": 8.0,
         "_ifBigger": "A gap larger than this is not a powder problem. It means one of the two dishes is short, and the dish has to be rebuilt the way tuscan-chicken-light and orange-ginger-chicken-light were: add a legume and let solve() re-fit the plate around it."
       }

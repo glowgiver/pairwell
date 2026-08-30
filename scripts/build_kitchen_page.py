@@ -375,9 +375,119 @@ HTML = """<!DOCTYPE html>
     font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);
   }
   .ps-change{
-    margin-top:10px;min-height:36px;background:none;border:1px solid var(--line);
-    border-radius:10px;padding:0 14px;font-size:13px;color:var(--muted);cursor:pointer;
+    margin-top:10px;min-height:var(--tap);background:none;border:1px solid var(--line);
+    border-radius:10px;padding:0 16px;font-size:13px;color:var(--muted);cursor:pointer;
   }
+
+  /* ---- shopping list ticks ------------------------------------------
+     The whole row is the button. In a shop the phone is held one-handed
+     and the other hand is full. */
+  ul.ing li.shop{padding:0;display:block}
+  .shoptick{
+    width:100%;min-height:var(--tap);
+    display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:12px;
+    padding:8px 18px;background:none;border:0;cursor:pointer;
+    font-family:inherit;font-size:15px;color:var(--text);text-align:left;
+  }
+  .shoptick .box{
+    position:relative;
+    width:20px;height:20px;border:1.5px solid var(--muted2);border-radius:5px;
+  }
+  .shoptick .amt{
+    font-family:var(--f-data);font-size:14px;color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+  .shoptick[aria-pressed="true"] .box{
+    background:var(--accent);border-color:var(--accent);
+  }
+  /* The tick is drawn in the page ground — the one ink a filled accent is
+     built to carry, in either theme. */
+  .shoptick[aria-pressed="true"] .box::after{
+    content:"";position:absolute;left:6px;top:2.5px;
+    width:4px;height:9px;
+    border:solid var(--bg);border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  li.shop.got .shoptick .t{text-decoration:line-through;color:var(--muted2)}
+  li.shop.got .shoptick .amt{color:var(--muted2)}
+  .shoptick:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  /* ---- the three jobs ------------------------------------------------ */
+  .ktabs{display:flex;gap:6px;margin-bottom:14px}
+  .ktab{
+    flex:1;min-height:var(--tap);padding:8px 4px;border-radius:12px;
+    border:1px solid var(--line);background:var(--surface);
+    font-family:inherit;font-size:15px;font-weight:600;color:var(--muted);
+    cursor:pointer;
+  }
+  .ktab span{
+    display:block;font-family:var(--f-data);font-size:12.5px;font-weight:400;
+    color:var(--muted2);margin-top:2px;
+  }
+  .ktab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  /* Vary the weight on a filled accent, never the ink. */
+  .ktab[aria-selected="true"] span{color:inherit;font-weight:400;opacity:.85}
+  .ktab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---- a dish's own scale reading ------------------------------------- */
+  .dishsplit{padding:14px 18px;border-top:1px solid var(--line);background:var(--surface-2)}
+  .dishsplit label{
+    display:block;font-family:var(--f-data);font-size:12.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted2);margin-bottom:8px;
+  }
+  .dishsplit .weigh-row{display:flex;align-items:center;gap:10px}
+  .dishsplit input{
+    flex:1;min-width:0;min-height:var(--tap);padding:0 14px;
+    border:1px solid var(--line);border-radius:11px;background:var(--surface);
+    color:var(--text);font-family:var(--f-data);font-size:19px;font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .dishsplit input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .dishsplit .unit{font-family:var(--f-data);font-size:14px;color:var(--muted2)}
+  .serveout{margin-top:11px;font-size:16px;color:var(--text)}
+  .serveout b{font-family:var(--f-data);font-size:20px;font-weight:700}
+  .serveout.muted{
+    font-family:var(--f-read);font-size:14.5px;color:var(--muted);line-height:1.55;
+  }
+  .perserve{
+    margin-top:12px;padding-top:11px;border-top:1px solid var(--line);
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .perserve .ps-k{
+    font-family:var(--f-data);font-size:12.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted2);
+  }
+  .perserve .ps-v{font-family:var(--f-data);font-size:17px;font-weight:700;color:var(--text)}
+  .perserve .ps-m{display:flex;gap:12px;margin-left:auto}
+  .perserve .ps-m span{font-family:var(--f-data);font-size:13.5px;color:var(--muted)}
+  .perserve .ps-m b{color:var(--text);font-weight:700}
+
+  /* The library, kept reachable but no longer three thousand pixels tall. */
+  details.library > summary{font-weight:600}
+
+  /* A picked dish, or the base block: slot, name, size — enough to know what
+     it is without opening it. */
+  /* Named areas so the disclosure chevron keeps its own column instead of
+     wrapping onto a third row once the title runs long. */
+  .cookcard > details > summary{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-template-areas:"k title chev" "k meta chev";
+    align-items:center;gap:1px 10px;padding:14px 18px;
+  }
+  .cookcard > details > summary .k{
+    grid-area:k;align-self:center;
+    font-family:var(--f-data);font-size:12px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--accent);font-weight:600;
+  }
+  .cookcard > details > summary .title{
+    grid-area:title;font-size:16px;font-weight:600;color:var(--text);
+  }
+  .cookcard > details > summary .meta{
+    grid-area:meta;justify-self:start;
+    font-family:var(--f-data);font-size:13px;color:var(--muted2);
+  }
+  .cookcard > details > summary::after{grid-area:chev;margin-left:0;align-self:center}
 
   @media (prefers-reduced-motion:reduce){ details summary::after{transition:none} }
 </style>
@@ -729,10 +839,95 @@ function pickedSnacks(who){
   return PLAN.snacks.slice(0, snackSlots(who))
     .filter(function(id){ return id && recipeById(id); });
 }
+/* ---- the cooked weight of a dish's batch --------------------------------
+   The base block has one of these; every dish now gets its own. Macros per
+   serving never needed the weight — they come from the ingredients divided by
+   the servings. What the weight buys is the only thing you cannot derive:
+   how many grams of THIS pan make one serving. */
+function dishWeightKey(id){ return "hub.kitchen.weight." + id; }
+function loadDishWeight(id){
+  try{ var v = parseFloat(localStorage.getItem(dishWeightKey(id))); if(v > 0) return v; }
+  catch(e){}
+  return null;
+}
+function saveDishWeight(id, v){
+  try{ localStorage.setItem(dishWeightKey(id), String(v)); }catch(e){}
+}
+
+function dishSplitHTML(r){
+  var w = loadDishWeight(r.id);
+  var c = r.computed || {};
+  var per = w ? w / r.servings : null;
+
+  var macros =
+    '<div class="perserve">' +
+      '<div class="ps-k">Per serving</div>' +
+      '<div class="ps-v">' + n0(c.calories || 0) + ' kcal</div>' +
+      '<div class="ps-m">' +
+        '<span>P <b>' + n1(c.proteinG || 0) + '</b></span>' +
+        '<span>Fib <b>' + n1(c.fiberG || 0) + '</b></span>' +
+        '<span>F <b>' + n1(c.fatG || 0) + '</b></span>' +
+      '</div>' +
+    '</div>';
+
+  return '<div class="dishsplit">' +
+    '<label for="w-' + esc(r.id) + '">Weigh the pan, minus the pan</label>' +
+    '<div class="weigh-row">' +
+      '<input id="w-' + esc(r.id) + '" class="dishweight" data-dish="' + esc(r.id) + '" ' +
+        'type="number" inputmode="decimal" min="1" step="1" ' +
+        'value="' + (w ? n0(w) : "") + '" placeholder="cooked batch">' +
+      '<span class="unit">grams</span>' +
+    '</div>' +
+    (per
+      ? '<div class="serveout"><b>' + n0(per) + ' g</b> per serving &middot; ' +
+        n0(r.servings) + ' servings</div>'
+      : '<div class="serveout muted">Weigh the batch once and this becomes grams ' +
+        'per serving. The macros below hold either way — they come from the ' +
+        'ingredients, not from the scale.</div>') +
+    macros +
+  '</div>';
+}
+
 function savePlan(p){
   try{ localStorage.setItem("hub.kitchen.plan", JSON.stringify(p)); }catch(e){}
 }
 var PLAN = loadPlan();
+
+/* Which tab, remembered per device. Plan is the default because that is the
+   question you open the Kitchen with most often. */
+var TAB = (function(){
+  try{
+    var v = localStorage.getItem("hub.kitchen.tab");
+    if(v === "plan" || v === "shop" || v === "cook") return v;
+  }catch(e){}
+  return "plan";
+})();
+function setTab(t){
+  TAB = t;
+  try{ localStorage.setItem("hub.kitchen.tab", t); }catch(e){}
+  render();
+  window.scrollTo(0, 0);
+}
+
+/* Which shopping-list lines are already in the basket. Cleared whenever the
+   plan changes, because a tick against the old list means nothing once the
+   dishes — and therefore the amounts — have moved. */
+function loadGot(){
+  try{
+    var v = JSON.parse(localStorage.getItem("hub.kitchen.got") || "[]");
+    return Array.isArray(v) ? v : [];
+  }catch(e){ return []; }
+}
+function saveGot(list){
+  try{ localStorage.setItem("hub.kitchen.got", JSON.stringify(list)); }catch(e){}
+}
+function toggleGot(fid){
+  var list = loadGot();
+  var i = list.indexOf(fid);
+  if(i === -1) list.push(fid); else list.splice(i, 1);
+  saveGot(list);
+}
+function clearGot(){ saveGot([]); }
 
 function mirrorRecipes(){
   return (D.recipes || []).filter(function(r){ return r.slot === "mirror" && r.computed; });
@@ -819,11 +1014,19 @@ function dishChip(r, opts){
         return (Math.round(days*10)/10) + (days === 1 ? ' day' : ' days') + ' for two';
       })()
     : r.servings + (r.servings === 1 ? ' serving' : ' servings');
+  /* Choosing dinner should be recognition, not a spreadsheet read. While you
+     are still deciding, a dish shows its name, its size and — once there is
+     something to pair it against — the verdict. The five macro figures are the
+     inputs to that verdict rather than the verdict itself, so they come back
+     the moment the dish is actually picked. */
+  var full = n0(c.calories) + ' kcal &middot; ' + n1(c.proteinG) + ' g P &middot; ' +
+             n1(c.fiberG) + ' g Fib &middot; ' + n1(c.fatG) + ' g F &middot; ' + tail;
+  var brief = n0(c.calories) + ' kcal &middot; ' + tail;
+
   return '<button class="dishpick' + (opts.picked ? ' picked' : '') + '" data-slot="' +
     esc(opts.slot) + '" data-id="' + esc(r.id) + '">' +
     '<span class="dp-title">' + esc(r.title) + '</span>' +
-    '<span class="dp-meta">' + n0(c.calories) + ' kcal &middot; ' + n1(c.proteinG) + ' g P &middot; ' +
-      n1(c.fiberG) + ' g Fib &middot; ' + n1(c.fatG) + ' g F &middot; ' + tail + '</span>' +
+    '<span class="dp-meta">' + (opts.picked ? full : brief) + '</span>' +
     (opts.compareLine || '') +
     (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
     '</button>';
@@ -1007,13 +1210,14 @@ function snackSlotHTML(){
   return '<div class="planslot planslot-snack">' + out + '</div>';
 }
 
-function shoppingListHTML(){
-  var lunch = PLAN.lunch ? recipeById(PLAN.lunch) : null;
+/* Everything the shop and the fit flags both need, computed once. Returns
+   null until there is a full pair to reason about. */
+function shoppingBasis(){
+  var lunch  = PLAN.lunch  ? recipeById(PLAN.lunch)  : null;
   var dinner = PLAN.dinner ? recipeById(PLAN.dinner) : null;
-  if(!lunch || !dinner) return "";
-  var snacks = pickedSnacks(PW.get()).map(recipeById);
+  if(!lunch || !dinner) return null;
 
-  var fit = pairFit(lunch, dinner);
+  var snacks = pickedSnacks(PW.get()).map(recipeById);
   var totals = {}, blocks = 0;
   var chosen = [lunch, dinner];
   snacks.forEach(function(r){ chosen.push(r); });
@@ -1024,20 +1228,25 @@ function shoppingListHTML(){
     });
   });
 
-  var rows = Object.keys(totals).sort(function(a,b){ return totals[b] - totals[a]; })
-    .map(function(fid){
-      return '<li><div class="t">' + esc(D.foodNames[fid] || fid) + '</div>' +
-             '<div class="amt">' + n0(totals[fid]) + ' g</div></li>';
-    }).join("");
+  return { lunch:lunch, dinner:dinner, snacks:snacks, totals:totals,
+           blocks:blocks, fit:pairFit(lunch, dinner) };
+}
 
-  var lunchDays = lunch.servings/2, dinnerDays = dinner.servings/2;
+/* Does this pair work? That is a planning question, so it lives with the
+   picker rather than with the shopping list. */
+function pairFlagsHTML(){
+  var b = shoppingBasis();
+  if(!b) return "";
+
+  var lunchDays = b.lunch.servings/2, dinnerDays = b.dinner.servings/2;
   var mismatch = lunchDays !== dinnerDays
     ? '<div class="flag warn"><div class="ft">Different lengths</div><p>' +
-      esc(lunch.title) + ' makes ' + (Math.round(lunchDays*10)/10) + ' day(s) of lunch for two, ' +
-      esc(dinner.title) + ' makes ' + (Math.round(dinnerDays*10)/10) + ' day(s) of dinner. ' +
+      esc(b.lunch.title) + ' makes ' + (Math.round(lunchDays*10)/10) + ' day(s) of lunch for two, ' +
+      esc(b.dinner.title) + ' makes ' + (Math.round(dinnerDays*10)/10) + ' day(s) of dinner. ' +
       'Cook the shorter one again partway through, or scale the batch by hand.</p></div>'
     : '';
 
+  var fit = b.fit;
   var closes = pairCloses(fit);
   var fitFlag = '<div class="flag' + (closes ? '' : ' warn') + '"><div class="ft">' +
     (closes ? 'This pair closes the day' : 'This pair does not close the day') + '</div><p>' +
@@ -1047,23 +1256,51 @@ function shoppingListHTML(){
     (closes ? '' : ' The gap is real — close it with a snack, or pick a different pairing above.') +
     '</p></div>';
 
-  return mismatch + fitFlag +
-    '<div class="card"><div class="ch"><span class="k">Shopping list</span>' +
-    '<span class="meta">' + Object.keys(totals).length + ' items</span>' +
-    '<span class="title">' + esc(lunch.title) + ' + ' + esc(dinner.title) +
-      snacks.map(function(r){ return ' + ' + esc(r.title); }).join('') + '</span></div>' +
+  return mismatch + fitFlag;
+}
+
+function shoppingListHTML(){
+  var b = shoppingBasis();
+  if(!b) return '<div class="card"><div class="ch"><span class="k">Shopping list</span>' +
+    '<span class="meta">household</span></div>' +
+    '<div class="empty">Pick a lunch and a dinner under <b>Plan</b> and the list ' +
+    'builds itself.</div></div>';
+
+  var totals = b.totals;
+  /* Ticked in a shop, one-handed, with a basket in the other hand — so the
+     whole row is the target, not a 20 px box, and the state survives the
+     screen locking between aisles. */
+  var got = loadGot();
+  var rows = Object.keys(totals).sort(function(a,b2){ return totals[b2] - totals[a]; })
+    .map(function(fid){
+      var on = got.indexOf(fid) !== -1;
+      return '<li class="shop' + (on ? ' got' : '') + '">' +
+        '<button type="button" class="shoptick" data-food="' + esc(fid) + '" ' +
+        'aria-pressed="' + on + '">' +
+        '<span class="box" aria-hidden="true"></span>' +
+        '<span class="t">' + esc(D.foodNames[fid] || fid) + '</span>' +
+        '<span class="amt">' + n0(totals[fid]) + ' g</span>' +
+        '</button></li>';
+    }).join("");
+
+  var done = Object.keys(totals).filter(function(f){ return got.indexOf(f) !== -1; }).length;
+
+  return '<div class="card"><div class="ch"><span class="k">Shopping list</span>' +
+    '<span class="meta">' + done + ' of ' + Object.keys(totals).length + ' &middot; household</span>' +
+    '<span class="title">' + esc(b.lunch.title) + ' + ' + esc(b.dinner.title) +
+      b.snacks.map(function(r){ return ' + ' + esc(r.title); }).join('') + '</span></div>' +
     '<ul class="ing">' + rows + '</ul>' +
-    (blocks > 0 ? '<div class="rnote">Plus <strong>' + n0(blocks) + ' Asian Base Block' +
-      (blocks === 1 ? '' : 's') + '</strong> — see Method below for the batch recipe.</div>' : '') +
+    (b.blocks > 0 ? '<div class="rnote">Plus <strong>' + n0(b.blocks) + ' Asian Base Block' +
+      (b.blocks === 1 ? '' : 's') + '</strong> — the batch recipe is under <b>Cook</b>.</div>' : '') +
     '</div>';
 }
 
 function plannerHTML(){
   return '<div class="card"><div class="ch"><span class="k">Plan the batch</span>' +
-    '<span class="meta">pick lunch, dinner, snack</span></div>' +
+    '<span class="meta">lunch &amp; dinner are the same for both of you</span></div>' +
     '<div class="planrow">' + slotHTML("lunch") + slotHTML("dinner") + '</div>' +
     snackSlotHTML() +
-    '</div>' + shoppingListHTML();
+    '</div>' + pairFlagsHTML();
 }
 
 function recipesHTML(who){
@@ -1076,7 +1313,11 @@ function recipesHTML(who){
       lookForHTML() + addNote() + '</div>';
   }
 
-  return head + list.map(function(r){
+  /* Collapsed. The picked dishes are spelled out above; this is the library
+     you browse, not the thing you cook from, and open it was three thousand
+     pixels of the same rows the picker had already shown. */
+  return head + '<details class="library"><summary>All ' + list.length +
+    ' recipes</summary>' + list.map(function(r){
     var c = r.computed || {};
     var ing = (r.ingredients || []).map(function(i){
       return '<li><div class="t">' + esc(D.foodNames[i.food] || i.food) + '</div>' +
@@ -1096,11 +1337,57 @@ function recipesHTML(who){
         '<ul class="ing">' + ing + '</ul>' +
         (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
       '</details>';
-  }).join("") + lookForHTML() + addNote() + '</div>';
+  }).join("") + '</details>' + lookForHTML() + addNote() + '</div>';
+}
+
+/* The dish actually being cooked, spelled out. Until now the method for your
+   picked dish sat collapsed inside a list of twenty other dishes, while the
+   page gave three full cards to the carb base nobody has to look up. */
+function pickedDetailHTML(open){
+  var want = [];
+  if(PLAN.lunch && PLAN.lunch === PLAN.dinner){
+    want.push({ slot: "Lunch & dinner", id: PLAN.lunch });
+  }else{
+    if(PLAN.lunch)  want.push({ slot: "Lunch",  id: PLAN.lunch });
+    if(PLAN.dinner) want.push({ slot: "Dinner", id: PLAN.dinner });
+  }
+  var snacks = pickedSnacks(PW.get());
+  var seenSnack = {};
+  snacks.forEach(function(id){
+    if(seenSnack[id]) return;
+    seenSnack[id] = 1;
+    want.push({ slot: "Snack", id: id });
+  });
+
+  return want.map(function(x){
+    var r = recipeById(x.id);
+    if(!r) return "";
+    var ing = (r.ingredients || []).map(function(i){
+      return '<li><div class="t">' + esc(D.foodNames[i.food] || i.food) + '</div>' +
+             '<div class="amt">' + esc(i.note || (i.g + " g")) + '</div></li>';
+    }).join("");
+    var steps = (r.steps || []).map(function(st, i){
+      return '<li><span class="n">' + (i + 1) + '</span><div class="t">' + esc(st) + '</div></li>';
+    }).join("");
+    /* Open on the Cook tab — this is now the page you are standing in front of
+       with the pan, so the dish should not need a tap to appear. */
+    return '<div class="card cookcard"><details' + (open ? ' open' : '') + '><summary>' +
+      '<span class="k">' + esc(x.slot) + '</span>' +
+      '<span class="title">' + esc(r.title) + '</span>' +
+      '<span class="meta">' + n0(r.servings) + ' serving' + (r.servings === 1 ? '' : 's') + '</span>' +
+      '</summary>' +
+      '<ul class="ing">' + ing + '</ul>' +
+      (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
+      dishSplitHTML(r) +
+      '</details></div>';
+  }).join("");
 }
 
 function render(){
-  document.getElementById("sub").textContent = base.purpose;
+  /* base.purpose describes the Asian Base Block — one component of one dish.
+     It was standing in as the subtitle for the whole module. */
+  document.getElementById("sub").textContent =
+    "Plan the batch, shop for it, cook it, split it.";
 
   var splitter =
     '<div class="card"><div class="ch"><span class="k">Split the batch</span>' +
@@ -1125,19 +1412,24 @@ function render(){
       '</p></div>'
     : '';
 
-  var ing = '<div class="card"><div class="ch"><span class="k">Ingredients</span>' +
-    '<span class="meta">' + n0(comp.batchTotal.calories) + ' kcal total</span>' +
-    '<span class="title">Asian Base Block</span></div><ul class="ing">' +
+  /* The base block is a component cooked the same way every time, so it folds
+     like the dishes do rather than occupying twelve hundred pixels between the
+     splitter and the day. */
+  var ing = '<div class="card cookcard"><details><summary>' +
+    '<span class="k">Base block</span><span class="title">Ingredients</span>' +
+    '<span class="meta">' + n0(comp.batchTotal.calories) + ' kcal total</span></summary>' +
+    '<ul class="ing">' +
     base.ingredients.map(function(i){
       return '<li><div class="t">' + esc(i.item) + '</div>' +
              '<div class="amt">' + esc(i.amount) + '</div></li>';
-    }).join("") + '</ul></div>';
+    }).join("") + '</ul></details></div>';
 
-  var steps = '<div class="card"><div class="ch"><span class="k">Method</span>' +
-    '<span class="meta">' + esc(D.kitchen.hardware.device.split(" ").slice(0,2).join(" ")) + '</span></div>' +
+  var steps = '<div class="card cookcard"><details><summary>' +
+    '<span class="k">Base block</span><span class="title">Method</span>' +
+    '<span class="meta">' + esc(D.kitchen.hardware.device.split(" ").slice(0,2).join(" ")) + '</span></summary>' +
     '<ol class="steps">' + base.steps.map(function(s,i){
       return '<li><span class="n">' + (i+1) + '</span><div class="t">' + esc(s) + '</div></li>';
-    }).join("") + '</ol></div>';
+    }).join("") + '</ol></details></div>';
 
   var mf = D.kitchen.macroFactorLogging.asianBaseCustomFoodPer100gCooked;
   var rows = "";
@@ -1169,17 +1461,77 @@ function render(){
           '</div><div class="dv">' + esc(D.kitchen.culinaryStandards[k]) + '</div></div>';
       }).join("") + '</div></details>';
 
-  document.getElementById("stage").innerHTML =
-    ledgerHTML(PW.get()) + mealHTML() + plannerHTML() + recipesHTML(PW.get()) +
-    splitter + estimated + ing + steps + extras;
+  /* Three jobs, three tabs. Cooking, shopping and accounting happen at
+     different moments, in different rooms, in different states of mess —
+     stacking them into one scroll meant each had to be found by scrolling
+     past the others. */
+  var picked = (PLAN.lunch ? 1 : 0) + (PLAN.dinner ? 1 : 0);
+  var got = loadGot();
+  var basis = shoppingBasis();
+  var shopCount = basis ? Object.keys(basis.totals).length : 0;
+  var shopLeft = basis
+    ? Object.keys(basis.totals).filter(function(f){ return got.indexOf(f) === -1; }).length
+    : 0;
+
+  var TABS = [
+    { id:"plan", label:"Plan",
+      note: picked === 2 ? "set" : (picked ? "1 of 2" : "nothing picked") },
+    { id:"shop", label:"Shop",
+      note: !basis ? "—" : (shopLeft ? shopLeft + " left" : "all in") },
+    { id:"cook", label:"Cook",
+      note: basis ? "ready" : "—" }
+  ];
+
+  var tabBar = '<div class="ktabs" role="tablist">' + TABS.map(function(t){
+    return '<button type="button" role="tab" class="ktab" data-tab="' + t.id + '" ' +
+      'aria-selected="' + (TAB === t.id) + '">' + esc(t.label) +
+      '<span>' + esc(t.note) + '</span></button>';
+  }).join("") + '</div>';
+
+  var body;
+  if(TAB === "shop"){
+    body = shoppingListHTML();
+  }else if(TAB === "cook"){
+    body = basis
+      ? pickedDetailHTML(true) + splitter + estimated + ing + steps
+      : '<div class="card"><div class="ch"><span class="k">Cook</span></div>' +
+        '<div class="empty">Nothing picked yet. Choose a lunch and a dinner under ' +
+        '<b>Plan</b> and they appear here with their method and their split.</div></div>' +
+        splitter + estimated + ing + steps;
+  }else{
+    body = plannerHTML() +
+      ledgerHTML(PW.get()) + mealHTML() +
+      recipesHTML(PW.get()) + extras;
+  }
+
+  document.getElementById("stage").innerHTML = tabBar + body;
+
+  document.querySelectorAll(".ktab").forEach(function(b){
+    b.addEventListener("click", function(){ setTab(b.dataset.tab); });
+  });
 
   var input = document.getElementById("w");
-  input.addEventListener("input", function(){
+  if(input) input.addEventListener("input", function(){
     var v = parseFloat(input.value);
     if(!(v > 0)) return;
     weight = v; saveWeight(v);
     var card = input.closest(".card");
     card.querySelector(".split").outerHTML = splitHTML();
+  });
+
+  /* Each dish carries its own scale reading. Updated in place — a re-render
+     would close the card you are cooking from. */
+  document.querySelectorAll(".dishweight").forEach(function(el){
+    el.addEventListener("input", function(){
+      var v = parseFloat(el.value);
+      if(!(v > 0)) return;
+      saveDishWeight(el.dataset.dish, v);
+      var r = recipeById(el.dataset.dish);
+      var out = el.closest(".dishsplit").querySelector(".serveout");
+      out.className = "serveout";
+      out.innerHTML = '<b>' + n0(v / r.servings) + ' g</b> per serving &middot; ' +
+        n0(r.servings) + ' servings';
+    });
   });
 }
 
@@ -1190,6 +1542,7 @@ function setSlot(slot, id){
   if(m) PLAN.snacks[Number(m[1])] = id;
   else PLAN[slot] = id;
   savePlan(PLAN);
+  clearGot();
 }
 
 /* Delegated once on the stage, not inside render() — the buttons are replaced
@@ -1205,6 +1558,17 @@ document.getElementById("stage").addEventListener("click", function(ev){
   if(change){
     setSlot(change.dataset.slot, null);
     render();
+    return;
+  }
+  /* Ticked in place — a full re-render would throw away the scroll position
+     halfway down a shopping list, which is the one thing you cannot afford
+     while walking a supermarket. */
+  var tick = ev.target.closest(".shoptick");
+  if(tick){
+    toggleGot(tick.dataset.food);
+    var on = tick.getAttribute("aria-pressed") !== "true";
+    tick.setAttribute("aria-pressed", String(on));
+    tick.closest("li").classList.toggle("got", on);
   }
 });
 

@@ -82,6 +82,28 @@
     paintRail(get());
   }
 
+  /* The sticky bar only grows its dividing rule once it is actually holding
+     position. A 1px sentinel in normal flow above it, cancelled by a -1px
+     margin so it shifts nothing, tells us when that happens. */
+  function mountStickyBar() {
+    var bar = document.querySelector(".pw-bar");
+    if (!bar || bar.dataset.stickyMounted) return;
+    bar.dataset.stickyMounted = "1";
+
+    var probe = document.createElement("div");
+    probe.setAttribute("aria-hidden", "true");
+    probe.style.cssText = "height:1px;margin-bottom:-1px;pointer-events:none";
+    bar.parentNode.insertBefore(probe, bar);
+
+    try {
+      new IntersectionObserver(function (entries) {
+        bar.classList.toggle("stuck", !entries[0].isIntersecting);
+      }).observe(probe);
+    } catch (e) {
+      /* No IntersectionObserver — the bar still sticks, just without the rule. */
+    }
+  }
+
   /* Adds the fixed colour rail marking the active person. */
   function mountRail() {
     if (document.querySelector(".pw-person-rail")) return;
@@ -95,6 +117,11 @@
   /* Four modules, each keeping its own accent so you know where you are.
      Icons match the ones the hub already used. */
   var TABS = [
+    /* Home earns a tab because the top-bar link scrolls away with the page,
+       and on an installed home-screen app there is no browser chrome to fall
+       back on. Neutral accent — the hub is not a module. */
+    { id: "hub", label: "Home", href: "", accent: "var(--text)",
+      path: '<path d="M4 10.6 12 4l8 6.6"/><path d="M6.5 9.4V20h11V9.4"/>' },
     { id: "skincare", label: "Skincare", href: "skincare/", accent: "var(--skin)",
       path: '<path d="M12 3c-3.5 3.2-5.5 6-5.5 9a5.5 5.5 0 0 0 11 0c0-3-2-5.8-5.5-9Z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/>' },
     { id: "hair", label: "Hair", href: "hair/", accent: "var(--hair)",
@@ -115,7 +142,10 @@
     nav.setAttribute("aria-label", "Modules");
     nav.innerHTML = TABS.map(function (t) {
       var here = t.id === current;
-      return '<a href="' + base + t.href + '" style="--tab:' + t.accent + '"' +
+      /* From the hub itself, base and href are both empty — "./" keeps that
+         an explicit link to this page rather than an empty href. */
+      var url = base + t.href || "./";
+      return '<a href="' + url + '" style="--tab:' + t.accent + '"' +
         (here ? ' aria-current="page"' : '') + '>' +
         '<svg viewBox="0 0 24 24" aria-hidden="true">' + t.path + '</svg>' +
         '<span>' + t.label + '</span></a>';
@@ -212,6 +242,13 @@
   /* Paint once as soon as the script runs, so the first render is correct. */
   if (document.documentElement) paintRail(get());
 
+  /* Every page has a .pw-bar, so wire it here rather than in five places. */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mountStickyBar);
+  } else {
+    mountStickyBar();
+  }
+
   global.PW = {
     PEOPLE: PEOPLE,
     ORDER: ORDER,
@@ -221,6 +258,7 @@
     mountSwitcher: mountSwitcher,
     mountRail: mountRail,
     mountTabs: mountTabs,
+    mountStickyBar: mountStickyBar,
     mountThemeToggle: mountThemeToggle,
     getTheme: getTheme,
     setTheme: setTheme,

@@ -47,11 +47,23 @@ def strip_buildonly(kitchen):
     return out
 
 
+def meal_titles():
+    """id -> title, and nothing else.
+
+    The hub needs to name the dishes already picked in Kitchen, which lives in
+    localStorage as ids. Inlining all of recipes.json to resolve three strings
+    would put every ingredient and method on the Today screen; this ships the
+    two hundred bytes the card actually renders.
+    """
+    return {r["id"]: r["title"] for r in load("recipes.json")["recipes"]}
+
+
 data = {
     "profiles": strip_body(load("profiles.json")),
     "training": load("training.json"),
     "routines": load("routines.json"),
     "kitchen": strip_buildonly(load("kitchen.json")),
+    "mealTitles": meal_titles(),
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
@@ -155,6 +167,24 @@ HTML = """<!DOCTYPE html>
     font-variant-numeric:tabular-nums}
   .targets b{display:block;font-size:17px;color:var(--text);font-weight:700;margin-top:2px}
 
+  .meals{display:flex;flex-direction:column;gap:3px;margin-top:2px}
+  .meals div{font-size:14.5px;color:var(--text);display:flex;gap:8px}
+  .meals span{
+    font-family:var(--f-data);font-size:13px;color:var(--muted2);
+    min-width:52px;flex:none;
+  }
+
+  .phase details.why{margin-top:8px}
+  .phase details.why summary{
+    font-family:var(--f-data);font-size:13px;color:var(--muted2);
+    cursor:pointer;list-style:none;min-height:var(--tap);
+    display:flex;align-items:center;
+  }
+  .phase details.why summary::-webkit-details-marker{display:none}
+  .phase details.why summary::after{content:" ▾";margin-left:4px}
+  .phase details.why[open] summary::after{content:" ▴"}
+  .phase details.why summary:focus-visible{outline:2px solid var(--food);outline-offset:2px}
+
   footer{
     margin-top:26px;font-family:var(--f-data);font-size:13px;color:var(--muted2);
     display:flex;justify-content:space-between;align-items:center;
@@ -207,25 +237,69 @@ function trainingToday(who, day){
   if(!rhythm) return null;
   if(rhythm.type !== "training") return { rest:true, what: rhythm.what };
 
-  /* Find the session whose day label mentions today, at whichever location
-     that person last used. Falls back to the first session. */
-  var loc = "gym";
+  /* Preferred location first, then anywhere else. Sunday's shared session is
+     defined at home and travel only — a gym-preferring person would find
+     nothing there, and must never be handed a different day's session
+     instead. That fallback used to show Tuesday's Push every Sunday. */
+  var pref = "gym";
   try{
     var st = JSON.parse(localStorage.getItem("hub.workout." + who) || "null");
-    if(st && st.loc && D.training.sessions[st.loc]) loc = st.loc;
+    if(st && st.loc && D.training.sessions[st.loc]) pref = st.loc;
   }catch(e){}
-  var atLoc = D.training.sessions[loc] || {};
-  var pool = [];
-  Object.keys(atLoc[who] || {}).forEach(function(k){ pool.push(atLoc[who][k]); });
-  Object.keys(atLoc.shared || {}).forEach(function(k){ pool.push(atLoc.shared[k]); });
 
   var LONG = {Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",
               Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
-  var hit = pool.filter(function(s){
-    return (s.day||"").toLowerCase().indexOf(LONG[day].toLowerCase()) !== -1;
-  })[0] || pool[0];
+  var want = LONG[day].toLowerCase();
 
-  return hit ? { rest:false, session:hit, loc:loc, what:rhythm.what } : { rest:true, what:rhythm.what };
+  function findAt(loc){
+    var atLoc = D.training.sessions[loc] || {};
+    var pool = [];
+    Object.keys(atLoc[who] || {}).forEach(function(k){ pool.push(atLoc[who][k]); });
+    Object.keys(atLoc.shared || {}).forEach(function(k){ pool.push(atLoc.shared[k]); });
+    return pool.filter(function(s){
+      return (s.day||"").toLowerCase().indexOf(want) !== -1;
+    })[0] || null;
+  }
+
+  var order = [pref].concat(Object.keys(D.training.sessions).filter(function(l){
+    return l !== pref;
+  }));
+  for(var i = 0; i < order.length; i++){
+    var hit = findAt(order[i]);
+    if(hit) return { rest:false, session:hit, loc:order[i],
+                     elsewhere:(order[i] !== pref), what:rhythm.what };
+  }
+
+  /* A training day with no session recorded for it. Say so plainly. */
+  return { rest:false, session:null, what:rhythm.what };
+}
+
+/* Hair, but only when it has something to say. Same one-date-per-treatment
+   store the Hair page writes — the Hub reads it, never writes it. */
+function hairDue(who){
+  var sched = (D.routines.hair && D.routines.hair.scheduled) || [];
+  var code = PW.PEOPLE[who].code;
+  var t0 = new Date(); t0.setHours(0,0,0,0);
+
+  return sched.filter(function(t){
+    return t.who === "both" || t.who === who;
+  }).map(function(t){
+    var raw = null;
+    try{ raw = localStorage.getItem("hub.hair.done." + t.id + "." + code); }catch(e){}
+    if(!raw) return { t:t, state:"unknown", days:null };
+    var d = new Date(raw + "T00:00:00");
+    if(isNaN(d)) return { t:t, state:"unknown", days:null };
+    var days = Math.round((t0 - d) / 86400000);
+    var due = t.everyDays || 7;
+    var late = t.everyDaysMax || due;
+    if(days === 0) return { t:t, state:"done", days:0 };
+    if(days >= late && late > due) return { t:t, state:"late", days:days };
+    if(days > due && late === due) return { t:t, state:"late", days:days };
+    if(days >= due) return { t:t, state:"due", days:days };
+    return { t:t, state:"soon", days:days };
+  }).filter(function(x){
+    return x.state === "due" || x.state === "late" || x.state === "unknown";
+  });
 }
 
 function seasonFor(r){
@@ -304,11 +378,18 @@ function render(){
     if(train.rest){
       training = card("workout/", "var(--train)", "Training", "",
         '<span class="rest">' + esc(train.what || "Rest day") + '</span>', "");
+    } else if(!train.session){
+      /* Better to admit the gap than to show the wrong workout. */
+      training = card("workout/", "var(--train)", "Training", "",
+        '<span class="rest">' + esc(train.what || "Training day") + '</span>',
+        "No session recorded for today.");
     } else {
       var s = train.session;
       var names = s.exercises.slice(0,3).map(function(e){ return e.name; }).join(" · ");
+      var together = /together|with /i.test(s.day || "");
       training = card("workout/", "var(--train)", "Training",
-        train.loc.charAt(0).toUpperCase()+train.loc.slice(1),
+        train.loc.charAt(0).toUpperCase() + train.loc.slice(1) +
+          (together ? " · together" : ""),
         esc(s.title),
         '<span class="pw-num">' + s.exercises.length + ' exercises</span>' +
         (s.durationMin ? ' <span class="sep">·</span> <span class="pw-num">~' + s.durationMin + ' min</span>' : '') +
@@ -316,17 +397,42 @@ function render(){
     }
   }
 
-  /* Food */
+  /* Food — the targets are constants and were the only thing this card showed.
+     What actually changed today is the plan, and it was already sitting in
+     localStorage one page away. */
   var t = prof.dailyTargets;
   var blocks = D.kitchen.asianMacroBase.blockRules.standardLeanDish;
-  var food = card("kitchen/", "var(--food)", "Food",
-    blocks + (blocks === 1 ? " block / meal" : " blocks / meal"),
-    esc(t.calories + " kcal"),
+
+  var plan = null;
+  try{ plan = JSON.parse(localStorage.getItem("hub.kitchen.plan") || "null"); }catch(e){}
+  function mealName(id){ return id && D.mealTitles[id] ? D.mealTitles[id] : null; }
+  var lunch  = plan ? mealName(plan.lunch)  : null;
+  var dinner = plan ? mealName(plan.dinner) : null;
+
+  var targetsRow =
     '<div class="targets">' +
       '<div>Protein<b>' + t.proteinG + ' g</b></div>' +
       '<div>Fibre<b>' + t.fiberG + ' g</b></div>' +
       '<div>Fat<b>' + t.fatG + ' g</b></div>' +
-    '</div>');
+    '</div>';
+
+  var food;
+  if(lunch || dinner){
+    /* Lead with the meal you have not eaten yet. */
+    var next = (hour >= 15 ? (dinner || lunch) : (lunch || dinner));
+    food = card("kitchen/", "var(--food)", "Food",
+      t.calories + " kcal",
+      esc(next),
+      '<div class="meals">' +
+        (lunch  ? '<div><span>Lunch</span>'  + esc(lunch)  + '</div>' : '') +
+        (dinner ? '<div><span>Dinner</span>' + esc(dinner) + '</div>' : '') +
+      '</div>' + targetsRow);
+  } else {
+    food = card("kitchen/", "var(--food)", "Food",
+      blocks + (blocks === 1 ? " block / meal" : " blocks / meal"),
+      esc(t.calories + " kcal"),
+      targetsRow);
+  }
 
   /* Why the number changed. Without this the target just moves one day and
      the scale goes up a kilo two days later, which reads as failure. */
@@ -334,10 +440,14 @@ function render(){
   if(ph){
     food = food.replace("</a>",
       '</a><div class="phase"><div class="pt">' + esc(ph.name) + '</div>' +
-      '<p>' + esc(ph.expect) + '</p>' +
       '<div class="pm">' + (ph.was == null ? '' :
         'was ' + esc(String(ph.was)) + ' kcal <span class="sep">·</span> ') +
-      'review ' + esc(ph.reviewOn) + '</div></div>');
+      'review ' + esc(ph.reviewOn) + '</div>' +
+      /* The reasoning matters, but not at a glance — a dashboard is for
+         recognition, and this was 45 words of it. */
+      (ph.expect ? '<details class="why"><summary>What to expect</summary>' +
+        '<p>' + esc(ph.expect) + '</p></details>' : '') +
+      '</div>');
   }
 
   /* Tonight */
@@ -353,10 +463,29 @@ function render(){
     }
   }
 
+  /* Hair — silent unless something is actually due. A card that says
+     "nothing to do" every day is a card you stop reading. */
+  var hair = "";
+  var due = hairDue(who);
+  if(due.length){
+    var lead = due[0];
+    hair = card("hair/", "var(--hair)", "Hair",
+      due.length > 1 ? due.length + " due" : "",
+      esc(lead.t.title),
+      esc(lead.state === "unknown"
+            ? "Never logged — " + lead.t.cadence.toLowerCase()
+            : lead.state === "late"
+              ? "Overdue — last done " + lead.days + " days ago"
+              : "Due — last done " + lead.days + " days ago") +
+      (due.length > 1
+        ? ' <span class="sep">·</span> plus ' + esc(due[1].t.title.toLowerCase())
+        : ''));
+  }
+
   /* After 18:00 tonight leads. Before that, the morning does. */
   var order = hour >= 18
-    ? [tonight, training, food, morning]
-    : [morning, training, food, tonight];
+    ? [tonight, hair, training, food, morning]
+    : [morning, hair, training, food, tonight];
 
   document.getElementById("today").innerHTML = order.join("");
 }
@@ -388,7 +517,7 @@ function render(){
 PW.mountRail();
 PW.mountThemeToggle(document.getElementById("switcher"));
 PW.mountSwitcher(document.getElementById("switcher"));
-PW.mountTabs(null, "");
+PW.mountTabs("hub", "");
 window.addEventListener("pw:person", render);
 render();
 PW.registerServiceWorker("sw.js");

@@ -731,7 +731,8 @@
         "recipe": "¼ tsp citric acid per 500 ml warm water — target pH 4–5. Not ½ tsp; that is too acidic.",
         "order": "Shampoo → rinse → pour the citric solution over all hair → wait 1–2 min → rinse out → leave-in as normal.",
         "why": "At 17.3 °dH weekly is the right frequency. The acid dissolves the calcium/magnesium film that makes hair feel coated and stiff.",
-        "caution": "Straw-like texture, brittleness, more tangles or scalp itch mean you are overdoing it. Do not go to 2× weekly, and stay at ¼ tsp."
+        "caution": "Straw-like texture, brittleness, more tangles or scalp itch mean you are overdoing it. Do not go to 2× weekly, and stay at ¼ tsp.",
+        "everyDays": 7
       },
       {
         "id": "chelating",
@@ -741,7 +742,9 @@
         "recipe": "Malibu C Hard Water Wellness — use in place of your regular shampoo.",
         "order": "Lather, leave on 3–5 min, rinse fully. Follow immediately with a deep conditioner or your leave-in — do not skip that.",
         "why": "EDTA binds calcium and magnesium ions inside the hair shaft and pulls them out when you rinse. Regular shampoo — even sulfate-free — physically cannot do this.",
-        "caution": "Strips moisture and protein if used too often. Every 2–3 weeks is enough; the weekly citric rinse handles maintenance in between."
+        "caution": "Strips moisture and protein if used too often. Every 2–3 weeks is enough; the weekly citric rinse handles maintenance in between.",
+        "everyDays": 14,
+        "everyDaysMax": 21
       },
       {
         "id": "deep-mask",
@@ -750,7 +753,8 @@
         "who": "eunice",
         "recipe": "Any mask with glycerin, panthenol or argan oil — Cantu, OGX or Garnier.",
         "order": "After shampooing, before the citric rinse. Leave on 5–10 min in the shower steam, then rinse, run the citric rinse, apply leave-in.",
-        "why": "Longer hair needs deeper conditioning to prevent split ends and manage tangling. Philipp's length does not need this layer."
+        "why": "Longer hair needs deeper conditioning to prevent split ends and manage tangling. Philipp's length does not need this layer.",
+        "everyDays": 7
       }
     ],
     "products": {
@@ -811,7 +815,7 @@
         "note": "Eunice only."
       },
       "testStrips": {
-        "name": "Wasserhärte test strips",
+        "name": "Water hardness test strips",
         "price": "~€5",
         "where": "Amazon.de · Baumarkt"
       }
@@ -885,7 +889,8 @@
     "individualNotes": {
       "philipp": "Morning scalp itch was traced to using a rinse-out conditioner as a leave-in — corrected. If it returns, check the citric rinse is not being overdone.",
       "eunice": "Longer hair means more mineral surface area, so under-cleansing is the bigger risk. The weekly mask and the larger leave-in amount are hers alone."
-    }
+    },
+    "_cadenceNote": "everyDays is the numeric form of the cadence text, so the page can answer 'is it due today?' instead of leaving the date arithmetic to the reader. everyDaysMax, where present, is the far end of a range cadence — past it the treatment reads as late rather than merely due."
   },
   "_gaps": [
     "Philipp's current skincare phase is assumed to be week-9-plus; confirm on the page",

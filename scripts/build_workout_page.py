@@ -126,6 +126,76 @@ html = """<!DOCTYPE html>
      reads the same from both sides. --partner is set inline per tab. */
   .sess-tab.duo[aria-selected="true"]{border-bottom-color:var(--partner)}
   .sess-tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  /* Accent-as-ink on the page ground, not ink-on-accent — that is the pairing
+     that survives both themes, because the themes invert together. */
+  .sess-tab.is-today span{color:var(--accent);font-weight:600}
+
+  .guidelink{
+    display:block;width:100%;min-height:var(--tap);
+    padding:14px 18px;border:0;border-top:1px solid var(--line);
+    background:var(--surface-2);color:var(--muted);
+    font-family:inherit;font-size:14.5px;text-align:left;cursor:pointer;
+  }
+  .guidelink:hover{color:var(--text)}
+  .guidelink:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  .startbtn{
+    margin-top:12px;width:100%;min-height:var(--tap);
+    border:1px solid var(--accent);border-radius:12px;background:var(--accent);
+    color:var(--bg);font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;
+  }
+  .startbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---- in-session ---------------------------------------------------- */
+  .run-head{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+  }
+  .run-count{
+    font-family:var(--f-data);font-size:22px;font-weight:700;color:var(--text);
+    font-variant-numeric:tabular-nums;
+  }
+  .run-count span{font-size:14px;font-weight:400;color:var(--muted2)}
+  .run-sess{font-size:14px;color:var(--muted);flex:1;min-width:0}
+  .run-exit{
+    min-height:var(--tap);padding:0 16px;border-radius:11px;
+    border:1px solid var(--line);background:none;color:var(--muted);
+    font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  }
+
+  .run-dots{display:flex;gap:5px;padding:12px 18px 4px}
+  .run-dot{
+    flex:1;height:20px;padding:0;border:0;background:none;cursor:pointer;
+    position:relative;
+  }
+  .run-dot::after{
+    content:"";position:absolute;left:0;right:0;top:8px;height:4px;border-radius:2px;
+    background:var(--line);
+  }
+  .run-dot.done::after{background:var(--muted2)}
+  .run-dot.on::after{background:var(--accent)}
+  .run-dot:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  /* The single card fills the screen; its own borders would only box it in. */
+  .run-body .ex{border-bottom:0;padding:16px 18px 20px}
+  .run-body .ex-name{font-size:23px;line-height:1.2}
+  .run-body .ex-cue{font-size:16px;line-height:1.55}
+
+  .run-nav{display:flex;gap:10px;padding:0 18px 18px}
+  .run-nav button{
+    flex:1;min-height:56px;border-radius:13px;font-family:inherit;
+    font-size:17px;font-weight:700;cursor:pointer;
+  }
+  .run-prev{border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+  .run-prev:disabled{opacity:.4;cursor:default}
+  .run-next,.run-fin{border:1px solid var(--accent);background:var(--accent);color:var(--bg)}
+  .run-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .today-note{
+    padding:11px 18px;font-size:13.5px;line-height:1.55;
+    color:var(--muted);background:var(--surface-2);border-bottom:1px solid var(--line);
+  }
+  .today-note b{color:var(--text);font-weight:600}
 
   .sess-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
   .sess-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
@@ -265,20 +335,67 @@ function esc(s){
    remembered. Keyed per person: they train different splits. */
 function stashKey(){ return "hub.workout." + PW.get(); }
 
+var DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+function todayKey(){ return DAYS[(new Date().getDay() + 6) % 7]; }
+
+/* One stamp per calendar day. The stash exists to survive a phone locking
+   mid-workout, not to survive until next week — a session held from Tuesday
+   is the wrong answer on Friday. The location preference does carry over. */
+function dayStamp(){
+  var d = new Date();
+  return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+}
+
 function loadState(){
   try{
     var raw = localStorage.getItem(stashKey());
     if(raw){
       var v = JSON.parse(raw);
-      if(v && LOC_LABEL[v.loc]) return { loc: v.loc, sess: v.sess || null };
+      if(v && LOC_LABEL[v.loc]){
+        var fresh = v.d === dayStamp();
+        return { loc: v.loc, sess: fresh ? (v.sess || null) : null,
+                 locPinned: v.locPickedOn === dayStamp() };
+      }
     }
   }catch(e){}
-  return { loc: "gym", sess: null };
+  return { loc: "gym", sess: null, locPinned: false };
 }
 
 function saveState(){
-  try{ localStorage.setItem(stashKey(), JSON.stringify({loc: state.loc, sess: state.sess})); }
-  catch(e){}
+  try{
+    localStorage.setItem(stashKey(), JSON.stringify({
+      loc: state.loc, sess: state.sess, d: dayStamp(),
+      locPickedOn: state.locPinned ? dayStamp() : null
+    }));
+  }catch(e){}
+}
+
+/* Which of this person's sessions belongs to today, by its own day label.
+   Returns null on a day no session claims — a rest day, or a gap. */
+function todaysKey(list){
+  var LONG = {Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",
+              Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
+  var want = LONG[todayKey()].toLowerCase();
+  var hit = list.filter(function(s){
+    return String(s.data.day || "").toLowerCase().indexOf(want) !== -1;
+  })[0];
+  return hit ? hit.key : null;
+}
+
+/* Sunday's shared session exists at home and travel but not at the gym, so a
+   gym-preferring person opening this page on a Sunday would be told there is
+   nothing today — while the Hub, which searches every location, correctly
+   sends them to it. Follow the session to wherever it is defined, unless a
+   location was already chosen by hand today. */
+function resolveTodayLocation(){
+  if(state.sess || state.locPinned) return;
+  var who = person();
+  if(todaysKey(sessionsFor(state.loc, who))) return;
+  var locs = Object.keys(T.sessions);
+  for(var i = 0; i < locs.length; i++){
+    if(locs[i] === state.loc) continue;
+    if(todaysKey(sessionsFor(locs[i], who))){ state.loc = locs[i]; return; }
+  }
 }
 
 function person(){ return PW.get(); }
@@ -291,6 +408,35 @@ var LOC_LABEL = {
 };
 
 var state = loadState();
+
+/* ---- in-session mode ---------------------------------------------------
+   One exercise fills the screen. No logging, no timer — the only job is that
+   you never lose your place between sets, which seven stacked cards and a
+   locking phone cannot promise. The position is stamped with the day, so
+   tomorrow starts at the top rather than halfway through yesterday. */
+function runKey(){ return "hub.workout.run." + PW.get(); }
+function loadRun(){
+  try{
+    var v = JSON.parse(localStorage.getItem(runKey()) || "null");
+    if(v && v.d === dayStamp()) return { on: !!v.on, i: v.i || 0, sess: v.sess || null };
+  }catch(e){}
+  return { on:false, i:0, sess:null };
+}
+function saveRun(){
+  try{
+    localStorage.setItem(runKey(), JSON.stringify(
+      { on:RUN.on, i:RUN.i, sess:RUN.sess, d:dayStamp() }));
+  }catch(e){}
+}
+var RUN = loadRun();
+
+function startRun(sessKey){ RUN = { on:true, i:0, sess:sessKey }; saveRun(); renderStage(); }
+function exitRun(){ RUN.on = false; saveRun(); renderStage(); window.scrollTo(0,0); }
+function goRun(i, n){
+  RUN.i = Math.min(Math.max(i, 0), n - 1);
+  saveRun();
+  renderStage();
+}
 
 function el(tag, cls, html){
   var e = document.createElement(tag || "div");
@@ -318,6 +464,9 @@ function sessionsFor(loc, who){
 
 function setLoc(loc){
   state.loc = loc; state.sess = null;
+  /* Chosen by hand — hold it for the rest of today, so the auto-resolution
+     below cannot drag them back to the gym on their way to the airport. */
+  state.locPinned = true;
   saveState(); renderPills(); renderStage();
 }
 function setSess(s){ state.sess = s; saveState(); renderStage(); }
@@ -325,7 +474,11 @@ function setSess(s){ state.sess = s; saveState(); renderStage(); }
 function renderPills(){
   var wrap = document.getElementById("pills");
   wrap.innerHTML = "";
-  ["gym","home","travel","guide"].forEach(function(loc){
+  /* Three locations, and only locations. "Guide" sat in this row as a fourth
+     pill, which put a reference section inside an equipment control — two
+     different meanings wearing the same clothes. It has its own button below
+     the session now. */
+  ["gym","home","travel"].forEach(function(loc){
     var lbl = LOC_LABEL[loc];
     var p = el("button", "pill",
       "<b>" + esc(lbl[0]) + "</b><span>" + esc(lbl[1]) + "</span>");
@@ -334,6 +487,15 @@ function renderPills(){
     p.addEventListener("click", function(){ setLoc(loc); });
     wrap.appendChild(p);
   });
+}
+
+/* Reference, not equipment: the week, cardio zones, step goal, progression. */
+function guideLinkHTML(){
+  return state.loc === "guide"
+    ? '<button type="button" class="guidelink back" id="guideBtn">' +
+        '&larr; Back to today\u2019s session</button>'
+    : '<button type="button" class="guidelink" id="guideBtn">' +
+        'Your week, cardio &amp; progression &rarr;</button>';
 }
 
 /* The partner's version of the same movement, by name. Only exact matches
@@ -413,12 +575,71 @@ function exHTML(e, mate, mateName){
     '</div>';
 }
 
+var beforeGuide = null;
+function wireGuideBtn(){
+  var b = document.getElementById("guideBtn");
+  if(b) b.addEventListener("click", function(){
+    if(state.loc === "guide"){
+      /* Back to wherever they actually were, not to a hardcoded gym — on a
+         Sunday that would undo the jump to Home. */
+      setLoc(beforeGuide || "gym");
+    }else{
+      beforeGuide = state.loc;
+      setLoc("guide");
+    }
+  });
+}
+
+function runnerHTML(sess){
+  var ex = sess.exercises || [];
+  if(!ex.length) return "";
+  var i = Math.min(Math.max(RUN.i, 0), ex.length - 1);
+  var e = ex[i];
+  var partnerSess = sess.partner ? partnerExercises(sess) : {};
+
+  var dots = ex.map(function(x, n){
+    return '<button type="button" class="run-dot' + (n === i ? " on" : "") +
+      (n < i ? " done" : "") + '" data-go="' + n + '" ' +
+      'aria-label="Exercise ' + (n+1) + ': ' + esc(x.name) + '"' +
+      (n === i ? ' aria-current="true"' : '') + '></button>';
+  }).join("");
+
+  return '<div class="runner">' +
+    '<div class="run-head">' +
+      '<div class="run-count">' + (i + 1) + ' <span>of ' + ex.length + '</span></div>' +
+      '<div class="run-sess">' + esc(sess.title) + '</div>' +
+      '<button type="button" class="run-exit" id="runExit">Done</button>' +
+    '</div>' +
+    '<div class="run-dots">' + dots + '</div>' +
+    '<div class="run-body">' + exHTML(e, partnerSess[e.name], sess.partner) + '</div>' +
+    '<div class="run-nav">' +
+      '<button type="button" class="run-prev" data-go="' + (i - 1) + '"' +
+        (i === 0 ? " disabled" : "") + '>&larr; Back</button>' +
+      (i === ex.length - 1
+        ? '<button type="button" class="run-fin" id="runExit2">Finish</button>'
+        : '<button type="button" class="run-next" data-go="' + (i + 1) + '">Next &rarr;</button>') +
+    '</div>' +
+  '</div>';
+}
+
+function wireRunner(n){
+  var exit = document.getElementById("runExit");
+  if(exit) exit.addEventListener("click", exitRun);
+  var exit2 = document.getElementById("runExit2");
+  if(exit2) exit2.addEventListener("click", exitRun);
+  document.querySelectorAll("[data-go]").forEach(function(b){
+    if(b.disabled) return;
+    b.addEventListener("click", function(){ goRun(Number(b.dataset.go), n); });
+  });
+}
+
 function renderStage(){
   var stage = document.getElementById("stage");
   var who = person();
 
   if(state.loc === "guide"){
-    stage.innerHTML = profileHTML() + guideHTML();
+    stage.innerHTML = profileHTML() + guideHTML() + guideLinkHTML();
+    wireGuideBtn();
     return;
   }
 
@@ -431,19 +652,39 @@ function renderStage(){
     return;
   }
 
+  /* Open on today's session, not on whichever happens to be first. Arriving
+     from the Hub, which already resolved the day, this is what keeps the
+     answer from being thrown away at the door. */
   var keys = list.map(function(s){ return s.key; });
-  if(!state.sess || keys.indexOf(state.sess) === -1) state.sess = keys[0];
+  var tkey = todaysKey(list);
+  if(!state.sess || keys.indexOf(state.sess) === -1) state.sess = tkey || keys[0];
   var current = list.filter(function(s){ return s.key === state.sess; })[0];
   var sess = current.data;
 
   var tabs = list.map(function(s){
     var partner = s.data.partner;
+    var isToday = s.key === tkey;
     return '<button type="button" role="tab" class="sess-tab' + (s.together ? " together" : "") +
-      (partner ? " duo" : "") + '"' +
+      (partner ? " duo" : "") + (isToday ? " is-today" : "") + '"' +
       (partner ? ' style="--partner:var(--' + esc(partner.toLowerCase()) + ')"' : '') +
       ' aria-selected="' + (state.sess === s.key) + '" data-sess="' + esc(s.key) + '">' +
-      esc(s.data.title) + '<span>' + esc(s.data.day) + '</span></button>';
+      esc(s.data.title) + '<span>' + (isToday ? "Today &middot; " : "") +
+      esc(s.data.day) + '</span></button>';
   }).join("");
+
+  /* Say what today actually is when no session claims it, instead of letting
+     an arbitrary open tab imply you are due to train. */
+  var rhythm = (T.weeklyRhythm[who] || []).filter(function(r){
+    return r.day === todayKey();
+  })[0];
+  var restBanner = "";
+  if(!tkey && state.loc !== "guide"){
+    restBanner = '<div class="today-note">' +
+      (rhythm && rhythm.type !== "training"
+        ? 'Today is <b>' + esc(rhythm.what || "a rest day") + '</b> — nothing to train.'
+        : 'No session is recorded for today.') +
+      ' Showing ' + esc(sess.title) + '.</div>';
+  }
 
   var primary = sess.exercises.filter(function(e){ return e.tier === "primary"; });
   var maint = sess.exercises.filter(function(e){ return e.tier === "maint"; });
@@ -471,16 +712,32 @@ function renderStage(){
 
   /* The exercises come first. The profile header is planning information —
      body-fat targets are not what you need on the third set. */
+  /* In session: the runner replaces the page. Everything else here is
+     planning information, and none of it belongs on screen on the third set. */
+  if(RUN.on && RUN.sess === state.sess){
+    stage.innerHTML = runnerHTML(sess);
+    wireRunner(sess.exercises.length);
+    return;
+  }
+
   stage.innerHTML =
     '<div class="sess-tabs" role="tablist">' + tabs + '</div>' +
+    restBanner +
     '<div class="sess-head"><div class="sess-title">' + esc(sess.title) +
     (sess.durationMin ? '<span class="sess-dur">' + esc(sess.exercises.length) +
       ' exercises &middot; ~' + esc(sess.durationMin) + ' min</span>' : '') + '</div>' +
-    '<div class="sess-focus">' + esc(sess.focus) + '</div></div>' +
+    '<div class="sess-focus">' + esc(sess.focus) + '</div>' +
+    '<button type="button" class="startbtn" id="startBtn">Start session &rarr;</button>' +
+    '</div>' +
     (sess.note ? '<div class="opt-banner">' + esc(sess.note) + '</div>' : '') +
     body +
     noticeHTML() +
-    profileHTML();
+    profileHTML() +
+    guideLinkHTML();
+  wireGuideBtn();
+
+  var sb = document.getElementById("startBtn");
+  if(sb) sb.addEventListener("click", function(){ startRun(state.sess); window.scrollTo(0,0); });
 
   stage.querySelectorAll("[data-sess]").forEach(function(t){
     t.addEventListener("click", function(){ setSess(t.getAttribute("data-sess")); });
@@ -560,9 +817,12 @@ PW.mountTabs("workout", "../");
 window.addEventListener("pw:person", function(){
   var restored = loadState();
   state.loc = restored.loc; state.sess = restored.sess;
+  state.locPinned = restored.locPinned;
+  resolveTodayLocation();
   renderPills(); renderStage();
 });
 
+resolveTodayLocation();
 renderPills();
 renderStage();
 saveState();

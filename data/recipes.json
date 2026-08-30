@@ -22,7 +22,7 @@
   "recipes": [
     {
       "id": "magerquark-bowl",
-      "title": "Magerquark-Protein-Bowl",
+      "title": "Quark Protein Bowl",
       "slot": "breakfast",
       "person": "philipp",
       "servings": 1,
@@ -54,15 +54,15 @@
         {
           "food": "zimt",
           "g": 2.6,
-          "note": "1 TL"
+          "note": "1 tsp"
         }
       ],
       "steps": [
-        "Magerquark in eine Schüssel geben",
-        "Whey einrühren bis glatt, Wasser nach Bedarf für die Konsistenz",
-        "Haferflocken und geschrotete Leinsamen unterheben",
-        "Kreatin und Ceylon Zimt einrühren",
-        "Direkt essen, oder kalt stellen für festere Konsistenz"
+        "Spoon the quark into a bowl",
+        "Stir in the whey until smooth, adding water to loosen",
+        "Fold in the oats and the ground flaxseed",
+        "Stir in the creatine and Ceylon cinnamon",
+        "Eat straight away, or chill for a firmer set"
       ],
       "computed": {
         "calories": 379.8,
@@ -113,12 +113,12 @@
         }
       ],
       "steps": [
-        "Ofen auf 220°C vorheizen",
-        "Kirschtomaten in Auflaufform verteilen, mit etwas Olivenöl beträufeln",
-        "Feta-Block in die Mitte, umgeben von den Tomaten",
-        "Restliches Olivenöl mit Knoblauch, Zitronenzeste, Zitronensaft, Oregano, Thymian verrühren",
-        "Lachsfilets um Feta und Tomaten anordnen, mit der Marinade übergießen",
-        "20-25 Min. backen, bis der Lachs gar ist"
+        "Heat the oven to 220°C",
+        "Spread the cherry tomatoes in a baking dish and trickle over a little olive oil",
+        "Set the block of feta in the middle, surrounded by the tomatoes",
+        "Whisk the remaining olive oil with the garlic, lemon zest, lemon juice, oregano and thyme",
+        "Arrange the salmon fillets around the feta and tomatoes and pour the marinade over",
+        "Bake 20–25 min, until the salmon is just cooked"
       ],
       "computed": {
         "calories": 604.5,
@@ -169,9 +169,9 @@
         }
       ],
       "steps": [
-        "Alle Zutaten in den Hochleistungsmixer geben",
-        "1-2 Min. auf höchster Stufe mixen bis glatt",
-        "Bei Bedarf mit mehr Mandelmilch verdünnen"
+        "Everything into the high-speed blender",
+        "Blend 1–2 min on full until smooth",
+        "Loosen with more almond milk if needed"
       ],
       "computed": {
         "calories": 243.9,
@@ -242,11 +242,11 @@
         }
       ],
       "steps": [
-        "Hähnchenstücke mit Ei, Speisestärke, Leinsamen, Paprika, Knoblauchpulver, Salz, Pfeffer vermengen, fest kneten bis eine Paste entsteht",
-        "Sauce: Süß-Chili-Sauce, Sojasauce, Reisessig, Knoblauch, Ingwer, Sriracha, Sesamöl verrühren",
-        "Air Fry 200°C, 14 Min., nach 7 Min. wenden (2 Batches)",
-        "Sauce im Topf einkochen bis sie leicht andickt",
-        "Hähnchen zurück in den Topf, in der Sauce schwenken"
+        "Mix the chicken pieces with the egg, cornflour, flaxseed, paprika, garlic powder, salt and pepper, kneading firmly until it forms a paste",
+        "Sauce: whisk together the sweet chilli sauce, soy sauce, rice vinegar, garlic, ginger, sriracha and sesame oil",
+        "Air fry at 200°C, 14 min, turning after 7 (two batches)",
+        "Reduce the sauce in a pan until it thickens slightly",
+        "Return the chicken to the pan and toss it through the sauce"
       ],
       "computed": {
         "calories": 523.8,
@@ -337,13 +337,13 @@
         }
       ],
       "steps": [
-        "Sauce: Gochugaru, Gochujang, Doenjang, Austernsauce, Mirin, Zucker, Knoblauch, Ingwer, Brühe verrühren",
-        "Hähnchen trocken tupfen, in 5cm-Stücke schneiden",
-        "Scharf anbraten, 2 Min. pro Seite",
-        "Zwiebel, Kartoffeln, Karotte in den Topf, Hähnchen darauf, Sauce darüber",
-        "Pressure Cook High, 8 Min., 5 Min. natürlich ablassen",
-        "Zucchini unterheben, offen 3-4 Min. einkochen",
-        "Frühlingszwiebel und Sesamöl unterrühren"
+        "Sauce: whisk together the gochugaru, gochujang, doenjang, oyster sauce, mirin, sugar, garlic, ginger and stock",
+        "Pat the chicken dry and cut into 5 cm pieces",
+        "Sear hard, 2 min a side",
+        "Onion, potatoes and carrot into the pot, chicken on top, sauce over",
+        "Pressure cook on High, 8 min, then 5 min natural release",
+        "Fold in the courgette and reduce uncovered for 3–4 min",
+        "Stir through the spring onion and sesame oil"
       ],
       "computed": {
         "calories": 428.9,
@@ -358,7 +358,7 @@
         "notes": []
       },
       "fibreLight": true,
-      "_fibreLightNote": "Ballaststoffarm mit Absicht. Die Light-Fassung ist geloescht: Edamame gehoert nicht in Dakbokkeumtang, und die Baby-Kartoffeln, die dafuer weichen mussten, sind dort strukturell — sie zerfallen und binden die Bruehe. Die koreanische Antwort auf Ballaststoffe ist Banchan neben dem Eintopf, nicht Bohnen darin. Laeuft neben einem starken Partner."
+      "_fibreLightNote": "Low in fibre on purpose. The light version is deleted: edamame does not belong in dakbokkeumtang, and the baby potatoes it displaced are structural there — they break down and body the broth. The Korean answer to fibre is banchan beside the stew, not beans in it. Runs next to a strong partner."
     },
     {
       "id": "lemon-herb-roasted-butterflied-chicken",
@@ -384,12 +384,12 @@
         }
       ],
       "steps": [
-        "Ofen auf 220°C vorheizen",
-        "Olivenöl, Salz, Pfeffer, Knoblauch, Thymian, Rosmarin verrühren",
-        "Zitronenscheiben in die Auflaufform legen",
-        "Butterflied-Hähnchen darauf platzieren, mit der Marinade bestreichen",
-        "40-45 Min. backen, bis die Kerntemperatur 74°C erreicht",
-        "5 Min. ruhen lassen vor dem Aufschneiden"
+        "Heat the oven to 220°C",
+        "Whisk together the olive oil, salt, pepper, garlic, thyme and rosemary",
+        "Lay the lemon slices in the roasting dish",
+        "Set the butterflied chicken on top and brush it with the marinade",
+        "Roast 40–45 min, until the core temperature reaches 74°C",
+        "Rest 5 min before carving"
       ],
       "computed": {
         "calories": 518.1,
@@ -412,7 +412,7 @@
       "servings": 6,
       "blocks": 1.0,
       "cuisine": "asian",
-      "source": "umgebaut von inbox/Oranger Ginger Chicken with Quinoa.pdf — weniger Zucker, Gemüse rein, Quinoa raus zugunsten des Asian Base Block",
+      "source": "rebuilt from inbox/Orange Ginger Chicken with Quinoa.pdf — less sugar, vegetables in, quinoa out in favour of the Asian Base Block",
       "ingredients": [
         {
           "food": "haehnchenschenkel",
@@ -456,11 +456,11 @@
         }
       ],
       "steps": [
-        "Hähnchen im Öl scharf anbraten (kein Mehl-Dredge)",
-        "Orangensaft, Marmelade, Honig, Sojasauce, Reisessig, Ingwer aufkochen bis eingedickt",
-        "Belugalinsen kurz mit erwärmen",
-        "Brokkoli getrennt dampfgaren oder kurz mitdünsten",
-        "Hähnchen in der Sauce schwenken, mit Brokkoli, Belugalinsen und 1 Asian Macro Base Block servieren"
+        "Sear the chicken hard in the oil — no flour dredge",
+        "Boil the orange juice, marmalade, honey, soy sauce, rice vinegar and ginger down until thickened",
+        "Warm the beluga lentils through briefly",
+        "Steam the broccoli separately, or sweat it in at the end",
+        "Toss the chicken in the sauce and serve with the broccoli, the lentils and 1 Asian Macro Base block"
       ],
       "computed": {
         "calories": 449.7,
@@ -523,12 +523,12 @@
         }
       ],
       "steps": [
-        "Quinoa nach Packungsanweisung kochen (ergibt 600g)",
-        "Hähnchen mit Salz, Pfeffer würzen, in Mehl wenden",
-        "In Öl portionsweise anbraten, bis durchgegart",
-        "Orangensaft, Marmelade, Sojasauce, Honig, Ingwer in derselben Pfanne aufkochen bis eingedickt",
-        "Hähnchen zurück in die Pfanne, erhitzen",
-        "Über die Quinoa geben"
+        "Cook the quinoa to packet instructions (makes 600 g)",
+        "Season the chicken with salt and pepper, then dredge in flour",
+        "Fry in oil in batches until cooked through",
+        "In the same pan, boil the orange juice, marmalade, soy sauce, honey and ginger down until thickened",
+        "Return the chicken to the pan and heat through",
+        "Spoon it over the quinoa"
       ],
       "computed": {
         "calories": 546.0,
@@ -545,13 +545,13 @@
     },
     {
       "id": "pho-bo-die-sch-ssel-br-he-separat",
-      "title": "Pho Bo — die Schüssel (Brühe separat)",
+      "title": "Pho Bo — the Bowl (broth separate)",
       "slot": "mirror",
       "person": null,
       "servings": 5,
       "blocks": 0.0,
       "cuisine": "asian",
-      "source": "umgebaut von inbox/pho_bo_recipe.txt — Brühe als Batch-Projekt, nur die Schüssel wird erfasst",
+      "source": "rebuilt from inbox/pho_bo_recipe.txt — the broth is a batch project, only the bowl is recorded here",
       "ingredients": [
         {
           "food": "reisbandnudeln",
@@ -572,7 +572,7 @@
         {
           "food": "kraeuter_frisch",
           "g": 150.0,
-          "note": "Thai-Basilikum, Koriander, Minze — der Teller daneben"
+          "note": "Thai basil, coriander, mint — the plate alongside"
         },
         {
           "food": "zitronensaft",
@@ -581,11 +581,11 @@
         }
       ],
       "steps": [
-        "Brühe separat aufsetzen und heiß halten",
-        "Reisbandnudeln nach Packung garen, kalt abschrecken",
-        "Rindfleisch hauchdünn schneiden — es gart in der heißen Brühe in der Schüssel",
-        "Nudeln und Fleisch in die Schüssel, Brühe erst am Tisch angießen",
-        "DAZU der Kräuterteller: 200 g Sprossen, Thai-Basilikum, Koriander, Minze und Limette pro Person, roh daneben. Jeder reißt hinein und drückt aus, so viel er will — das ist kein Beiwerk, das ist die halbe Schüssel"
+        "Get the broth on separately and keep it hot",
+        "Cook the rice noodles to packet, then refresh under cold water",
+        "Slice the beef paper-thin — it cooks in the hot broth in the bowl",
+        "Noodles and beef into the bowl; the broth goes in at the table",
+        "WITH IT, the herb plate: 200 g sprouts, Thai basil, coriander, mint and lime per person, raw alongside. Everyone tears in and squeezes as much as they want — this is not a garnish, it is half the bowl"
       ],
       "computed": {
         "calories": 425.8,
@@ -596,7 +596,7 @@
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "fibreLight": true,
-      "_fibreLightNote": "Es gab kurz eine Light-Fassung mit Edamame. Geloescht: Edamame ist japanisch, Phở ist vietnamesisch, und die Rinderbrust, die dafuer weichen musste, IST das Gericht bei phở bò chín. Der eigentliche Fehler lag aber in der Transkription, nicht im Fit: 40 g Sprossen und keine Kraeuter. So wird Phở nicht serviert. Der rau sống-Teller — Sprossen, Thai-Basilikum, Koriander, Minze, Limette — ist kanonisch und traegt 4.5 g Fibre pro Portion. Das ist kein Makro-Patch, das ist die fehlende Haelfte des Gerichts. Bleibt trotzdem ballaststoffarm und braucht einen starken Partner plus einen Loeffel Flohsamen.",
+      "_fibreLightNote": "There was briefly a light version with edamame. Deleted: edamame is Japanese, phở is Vietnamese, and the brisket it displaced IS the dish in phở bò chín. The real mistake was in the transcription, not the fit: 40 g of sprouts and no herbs. That is not how phở is served. The rau sống plate — sprouts, Thai basil, coriander, mint, lime — is canonical and carries 4.5 g of fibre per serving. That is not a macro patch, it is the missing half of the dish. Still low in fibre, so it needs a strong partner plus a spoon of psyllium.",
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
@@ -642,11 +642,11 @@
         }
       ],
       "steps": [
-        "Ofen auf 175°C vorheizen",
-        "Datteln grob hacken, mit Butter und Ei im Food Processor mixen",
-        "Restliche Zutaten dazu, vermengen",
-        "Löffelweise auf ein Blech setzen, leicht flachdrücken",
-        "Ca. 15 Min. backen bis sie zu bräunen beginnen"
+        "Heat the oven to 175°C",
+        "Roughly chop the dates and blitz them with the butter and egg in the food processor",
+        "Add the remaining ingredients and combine",
+        "Spoon onto a tray and flatten slightly",
+        "Bake about 15 min, until they start to colour"
       ],
       "computed": {
         "calories": 72.7,
@@ -709,12 +709,12 @@
         }
       ],
       "steps": [
-        "Hähnchen mit italienischen Kräutern, Salz, Pfeffer würzen, in Olivenöl scharf anbraten, beiseite stellen",
-        "Zwiebel im selben Topf andünsten, getrocknete Tomaten und Knoblauch dazu",
-        "Kichererbsen kurz mit erwärmen",
-        "Spinat unterheben bis er zusammenfällt",
-        "Topf von der Platte nehmen, Skyr und Parmesan einrühren (NICHT mehr kochen — Skyr flockt bei starker Hitze)",
-        "Hähnchen zurück in den Topf, bei niedriger Hitze durchziehen lassen"
+        "Season the chicken with Italian herbs, salt and pepper, sear hard in olive oil, then set aside",
+        "Sweat the onion in the same pot, then add the sun-dried tomatoes and garlic",
+        "Warm the chickpeas through briefly",
+        "Fold in the spinach until it collapses",
+        "Take the pot off the heat and stir in the skyr and parmesan (do NOT boil it again — skyr splits over high heat)",
+        "Return the chicken to the pot and let it sit over low heat"
       ],
       "computed": {
         "calories": 486.6,
@@ -737,7 +737,7 @@
       "servings": 4,
       "blocks": 1.0,
       "cuisine": "mediterranean",
-      "source": "inbox/Tuscan Chicken.pdf",
+      "source": "rebuilt from inbox/Tuscan Chicken.pdf — cream out, Skyr + chickpeas in",
       "ingredients": [
         {
           "food": "huehnerbrust",
@@ -773,12 +773,12 @@
         }
       ],
       "steps": [
-        "Hähnchen mit italienischen Kräutern, Salz, Pfeffer würzen",
-        "In Olivenöl scharf anbraten, beiseite stellen",
-        "Zwiebel andünsten, getrocknete Tomaten und Knoblauch dazu",
-        "Spinat unterheben bis er zusammenfällt",
-        "Sahne und Parmesan einrühren, aufkochen",
-        "Hähnchen zurück in die Pfanne, durchziehen lassen"
+        "Season the chicken with Italian herbs, salt and pepper",
+        "Sear hard in olive oil, then set aside",
+        "Sweat the onion, then add the sun-dried tomatoes and garlic",
+        "Fold in the spinach until it collapses",
+        "Stir in the cream and parmesan and bring to the boil",
+        "Return the chicken to the pan and let it sit"
       ],
       "computed": {
         "calories": 622.7,
@@ -795,7 +795,7 @@
     },
     {
       "id": "eunice-ehrmann-pudding-breakfast",
-      "title": "Ehrmann High Protein Pudding (Frühstück)",
+      "title": "Ehrmann High Protein Pudding (breakfast)",
       "slot": "breakfast",
       "person": "eunice",
       "servings": 1,
@@ -807,11 +807,11 @@
         {
           "food": "ehrmann_pudding",
           "g": 200.0,
-          "note": "1 Becher, angenommen — Größe/Anzahl ggf. anpassen"
+          "note": "1 pot, assumed — adjust size or count if it differs"
         }
       ],
       "steps": [
-        "Direkt aus dem Kühlschrank essen"
+        "Eat straight from the fridge"
       ],
       "computed": {
         "calories": 174.0,
@@ -828,13 +828,13 @@
     },
     {
       "id": "philipp-whey-shaker",
-      "title": "Whey-Shaker (Frühstück)",
+      "title": "Whey Shaker (breakfast)",
       "slot": "breakfast",
       "person": "philipp",
       "servings": 1,
       "blocks": 0.0,
       "cuisine": null,
-      "source": "Philipps Morgen — trocken abgefüllt, Wasser in der Schule",
+      "source": "Philipp's morning — filled dry, water added at school",
       "ingredients": [
         {
           "food": "whey",
@@ -842,8 +842,8 @@
         }
       ],
       "steps": [
-        "Whey trocken in den Shaker, so mitnehmen",
-        "Vor Ort mit ca. 300 ml Wasser auffüllen und schütteln, gegen 10 Uhr trinken"
+        "Whey dry into the shaker, carried like that",
+        "Top up with about 300 ml water on arrival, shake, drink around 10:00"
       ],
       "computed": {
         "calories": 156.0,
@@ -858,17 +858,17 @@
         "notes": []
       },
       "fixed": true,
-      "_fixedNote": "slot breakfast + fixed:true: der Adapter misst es, skaliert es nie. Das ist keine Zielvorgabe, sondern was er tatsaechlich trinkt."
+      "_fixedNote": "slot breakfast + fixed:true: the adapter measures it and never rescales it. This is not a target, it is what he actually drinks."
     },
     {
       "id": "philipp-overnight-oats",
-      "title": "Overnight Oats (Frühstück)",
+      "title": "Overnight Oats (breakfast)",
       "slot": "breakfast",
       "person": "philipp",
       "servings": 1,
       "blocks": 0.0,
       "cuisine": null,
-      "source": "Philipps Morgen — abends angerührt, gegen 10 Uhr in der Schule gegessen",
+      "source": "Philipp's morning — stirred together the night before, eaten at school around 10:00",
       "ingredients": [
         {
           "food": "haferflocken",
@@ -896,10 +896,10 @@
         }
       ],
       "steps": [
-        "Alles im Glas verrühren, Deckel drauf, über Nacht in den Kühlschrank",
-        "Am nächsten Morgen mitnehmen, gegen 10 Uhr essen — kalt, direkt aus dem Glas",
-        "Drei Gläser auf einmal ansetzen, in derselben Sitzung wie die Vorratsdose. Fünf Minuten mehr, kein Herd",
-        "Wer will, hebt morgens ein paar gefrorene Beeren unter — sie tauen bis zur Pause auf"
+        "Stir it all together in the jar, lid on, into the fridge overnight",
+        "Take it with you next morning, eat around 10:00 — cold, straight from the jar",
+        "Make three jars at once, in the same session as the batch tub. Five minutes more, no hob",
+        "Fold in a few frozen berries in the morning if you like — they thaw by break"
       ],
       "computed": {
         "calories": 319.1,
@@ -918,13 +918,13 @@
     },
     {
       "id": "die-herzhafte-dose-linsen-pute-paprika",
-      "title": "Die herzhafte Dose — Linsen, Pute & Paprika",
+      "title": "The Savoury Tub — Lentils, Turkey & Pepper",
       "slot": "snack",
       "person": null,
       "servings": 4,
       "blocks": 0.0,
       "cuisine": "asian",
-      "source": "die herzhafte Alternative zur süßen Vorratsdose, gleicher Platz im Tag",
+      "source": "the savoury alternative to the sweet batch tub, same slot in the day",
       "ingredients": [
         {
           "food": "belugalinsen_gekocht",
@@ -960,13 +960,13 @@
         }
       ],
       "steps": [
-        "Putenbrust POCHIEREN, nicht braten: in knapp siedendem Wasser ca. 15 Min. gar ziehen lassen, im Sud auskühlen. Gebratene Brust ist am dritten Tag trocken und watteartig, pochierte bleibt saftig",
-        "Ausgekühlt in Streifen schneiden. Reste vom Vortag gehen genauso, wenn sie nicht durchgebraten sind",
-        "Linsen abtropfen lassen, Paprika würfeln, Frühlingszwiebel in Ringe",
-        "Ingwer und Knoblauch fein reiben, mit der Sojasauce verrühren — OHNE das Sesamöl",
-        "Alles vermengen, in EINE Dose, kalt stellen. 4 Portionen, hält 3 Tage",
-        "Sesamöl erst pro Portion darüber, ca. 3 g. In der Charge oxidiert es über drei Tage und wird aus nussig schal",
-        "An der Schüssel eine Zitronenspalte für den, der will. Nicht in die Dose: ohne Säure ist der Salat für Philipp flach, mit Säure für Eunice unangenehm — das ist die einzige Stelle, wo sich das nicht gemeinsam lösen lässt"
+        "POACH the turkey breast, do not fry it: barely simmering water, about 15 min, then let it cool in its own liquid. Fried breast is dry and cottony by the third day; poached stays juicy",
+        "Slice into strips once cool. Yesterday's leftovers work just as well, as long as they were not fried through",
+        "Drain the lentils, dice the pepper, slice the spring onion into rings",
+        "Grate the ginger and garlic fine and stir them into the soy sauce — WITHOUT the sesame oil",
+        "Combine everything, into ONE tub, chill. 4 portions, keeps 3 days",
+        "The sesame oil goes over each portion as you serve it, about 3 g. In the batch it oxidises over three days and turns from nutty to stale",
+        "A lemon wedge at the bowl for whoever wants one. Not in the tub: without acid the salad is flat for Philipp, with it unpleasant for Eunice — the one place this cannot be solved jointly"
       ],
       "computed": {
         "calories": 274.8,
@@ -983,13 +983,13 @@
     },
     {
       "id": "kraeuterquark-mit-linsen",
-      "title": "Kräuterquark mit Linsen",
+      "title": "Herb Quark with Lentils",
       "slot": "snack",
       "person": null,
       "servings": 4,
       "blocks": 0.0,
       "cuisine": "none",
-      "source": "die herzhafte Dose ohne Fleisch — Quark geht, solange es nicht süß ist",
+      "source": "the savoury tub without meat — quark is fine as long as it is not sweet",
       "ingredients": [
         {
           "food": "magerquark",
@@ -1025,12 +1025,12 @@
         }
       ],
       "steps": [
-        "Linsen ZUERST würzen: abgetropft mit dem Olivenöl, der Hälfte des Salzes und etwas Pfeffer vermengen und kurz stehen lassen",
-        "Kräuter: Schnittlauch und Dill führen, Petersilie gibt Körper. Schnittlauch mit scharfem Messer EINMAL durchschneiden, nicht hacken — zermatscht wird er schleimig",
-        "Knoblauch fein reiben, mit dem restlichen Salz und den Kräutern unter den Magerquark rühren",
-        "Gewürzte Linsen unterheben, in EINE Dose, kalt stellen. 4 Portionen, hält 3 Tage",
-        "Gurke und Radieschen NICHT mit hinein: pro Portion frisch würfeln, ca. 80 g Gurke und 40 g Radieschen",
-        "Zu fest? Mit einem Schluck Mineralwasser lockern — nicht mit Zitrone"
+        "Season the lentils FIRST: drained, tossed with the olive oil, half the salt and a little pepper, then left to stand",
+        "Herbs: chives and dill lead, parsley gives body. Cut the chives ONCE with a sharp knife, do not mince them — crushed, they go slimy",
+        "Grate the garlic fine and stir it into the quark with the rest of the salt and the herbs",
+        "Fold in the seasoned lentils, into ONE tub, chill. 4 portions, keeps 3 days",
+        "Cucumber and radish do NOT go in: dice them fresh per portion, about 80 g cucumber and 40 g radish",
+        "Too stiff? Loosen it with a splash of sparkling water — not with lemon"
       ],
       "computed": {
         "calories": 276.6,
@@ -1047,13 +1047,13 @@
     },
     {
       "id": "ehrmann-pudding-nachfueller",
-      "title": "Ehrmann Pudding (Nachfüller)",
+      "title": "Ehrmann Pudding (top-up)",
       "slot": "snack",
       "person": null,
       "servings": 1,
       "blocks": 0.0,
       "cuisine": "none",
-      "source": "dasselbe Produkt wie ihr Frühstück, hier als Kalorien-Nachfüller",
+      "source": "the same product as her breakfast, used here as a calorie top-up",
       "ingredients": [
         {
           "food": "ehrmann_pudding",
@@ -1061,8 +1061,8 @@
         }
       ],
       "steps": [
-        "Aus dem Kühlschrank, fertig. Kein Prep, keine Planung",
-        "Der Griff für Tage, an denen Kalorien fehlen und die Ballaststoffe schon stimmen"
+        "Out of the fridge, done. No prep, no planning",
+        "The move for days that are short on calories when the fibre already adds up"
       ],
       "computed": {
         "calories": 174.0,
@@ -1077,7 +1077,7 @@
         "notes": []
       },
       "fixed": true,
-      "_note": "Der einzige Nachfueller. Es gab kurz ein zweites Rezept zum Anruehren (Skyr, Beeren, Haferkleie) — geloescht, weil es eine dritte Sache zum Merken war, um ein Loch zu stopfen, das ein gekaufter Becher auch stopft. Was von der Fibre-Luecke bleibt, faengt der gedeckelte Flohsamen-Griff ab: ueber sechs simulierte Tage die groesste Luecke 8 g Pulver bei einem Deckel von 10."
+      "_note": "The only top-up. There was briefly a second recipe to stir together (skyr, berries, oat bran) — deleted, because it was a third thing to remember in order to plug a hole a bought pot plugs just as well. What is left of the fibre gap is caught by the capped psyllium move: across six simulated days the largest gap was 8 g of powder against a cap of 10."
     },
     {
       "id": "baked-feta-salmon-light",
@@ -1087,7 +1087,7 @@
       "servings": 4,
       "blocks": 0.0,
       "cuisine": "mediterranean",
-      "source": "Umbau von baked-feta-salmon — so mager wie bei Lachs ehrlich möglich",
+      "source": "rebuild of baked-feta-salmon — as lean as is honestly possible with salmon",
       "ingredients": [
         {
           "food": "lachs",
@@ -1131,11 +1131,11 @@
         }
       ],
       "steps": [
-        "Ofen auf 200°C. Kichererbsen, Kirschtomaten und Zucchini mit Olivenöl, Knoblauch und Zitronensaft auf dem Blech mischen",
-        "Feta in Stücken dazwischen verteilen, 15 Min. vorrösten",
-        "Lachs auflegen, 8 Min. backen",
-        "ERST DANN die Garnelen dazu, weitere 4-5 Min. — sie brauchen ein Drittel der Zeit vom Lachs und werden sonst gummiartig",
-        "Kräuter nach dem Ofen darüber"
+        "Oven to 200°C. Toss the chickpeas, cherry tomatoes and courgette with the olive oil, garlic and lemon juice on the tray",
+        "Dot the feta between them in pieces and roast for 15 min",
+        "Lay the salmon on top and bake for 8 min",
+        "ONLY THEN add the prawns, another 4–5 min — they need a third of the salmon's time and go rubbery otherwise",
+        "Herbs over after it comes out of the oven"
       ],
       "computed": {
         "calories": 560.4,
@@ -1149,7 +1149,7 @@
         "target": "mirrorMeals",
         "notes": []
       },
-      "_note": "Garnelen kommen 8 Minuten nach dem Lachs aufs Blech. Die erste Fassung liess beide gleichzeitig 10-12 Min. backen — das waren gummiartige Garnelen, ein Fehler in der Methode, nicht im Makro-Fit."
+      "_note": "The prawns go on the tray 8 minutes after the salmon. The first version baked both together for 10–12 min — that meant rubbery prawns, a fault in the method rather than in the macro fit."
     },
     {
       "id": "crispy-sweet-chili-chicken-light",
@@ -1159,7 +1159,7 @@
       "servings": 6,
       "blocks": 0.0,
       "cuisine": "asian",
-      "source": "Umbau von crispy-sweet-chili-chicken — hier war Fett das Problem, nicht Fibre",
+      "source": "rebuild of crispy-sweet-chili-chicken — here fat was the problem, not fibre",
       "ingredients": [
         {
           "food": "huehnerbrust",
@@ -1211,11 +1211,11 @@
         }
       ],
       "steps": [
-        "Hähnchenbrust in Streifen, mit Ei und Speisestärke vermengen",
-        "Im Ofen bei 200°C auf einem Gitter knusprig backen, ca. 20 Min., einmal wenden",
-        "Sauce aus Süß-Chili, Sojasauce, Reisessig, Knoblauch, Ingwer und Sriracha kurz einkochen",
-        "Brokkoli und Edamame dämpfen, mit dem Hähnchen und der Sauce vermengen",
-        "Sesamöl vom Herd genommen darüber"
+        "Cut the chicken breast into strips and mix with the egg and cornflour",
+        "Bake crisp on a rack at 200°C, about 20 min, turning once",
+        "Reduce a sauce of sweet chilli, soy sauce, rice vinegar, garlic, ginger and sriracha briefly",
+        "Steam the broccoli and edamame, then combine with the chicken and the sauce",
+        "Sesame oil over once it is off the heat"
       ],
       "computed": {
         "calories": 449.1,
@@ -1238,7 +1238,7 @@
       "servings": 4,
       "blocks": 0.0,
       "cuisine": "mediterranean",
-      "source": "Umbau von lemon-herb-roasted-butterflied-chicken auf das Mirror-Meal-Ziel",
+      "source": "rebuild of lemon-herb-roasted-butterflied-chicken onto the mirror-meal target",
       "ingredients": [
         {
           "food": "huehnerbrust",
@@ -1278,10 +1278,10 @@
         }
       ],
       "steps": [
-        "Ofen auf 200°C. Kichererbsen, grüne Bohnen und Kirschtomaten mit dem Olivenöl, Knoblauch und Salz auf dem Blech mischen",
-        "Hähnchenbrust darauf legen, mit Zitronensaft beträufeln",
-        "25-30 Min. rösten, bis die Brust 74°C Kerntemperatur hat",
-        "Kräuter erst nach dem Ofen darüber — Hitze macht sie grau und nimmt das Aroma"
+        "Oven to 200°C. Toss the chickpeas, green beans and cherry tomatoes with the olive oil, garlic and salt on the tray",
+        "Lay the chicken breast on top and trickle the lemon juice over",
+        "Roast 25–30 min, until the breast reaches 74°C at the core",
+        "Herbs over only after the oven — heat greys them and takes the aroma"
       ],
       "computed": {
         "calories": 431.7,
@@ -1298,13 +1298,13 @@
     },
     {
       "id": "die-vorratsdose-skyr-schoko-nuss",
-      "title": "Die Vorratsdose — Skyr, Schoko & Nuss",
+      "title": "The Batch Tub — Skyr, Chocolate & Nut",
       "slot": "snack",
       "person": null,
       "servings": 9,
       "blocks": 0.0,
       "cuisine": "none",
-      "source": "der geteilte Nachmittags-Baustein — eine Schale, drei Tage, beide",
+      "source": "the shared afternoon building block — one bowl, three days, both of them",
       "ingredients": [
         {
           "food": "skyr",
@@ -1352,12 +1352,12 @@
         }
       ],
       "steps": [
-        "Trockenes zuerst: Whey, Haferkleie, Leinsamen, Kakao, Zimt und Salz gründlich mischen",
-        "Nussmus mit ZWEI Dritteln der Mandelmilch glattrühren — erst dann unter den Skyr, sonst bleiben Klumpen",
-        "Trockenmischung und Vanilleextrakt unterrühren, 20-30 Min. quellen lassen, dann NOCHMAL durchrühren",
-        "In EINE Schale (~1.5 kg), kalt stellen. 9 Portionen: Philipp 2 am Tag, Eunice 1. Eine Portion sind ca. 155 g",
-        "Das letzte Drittel Mandelmilch bleibt im Kühlschrank. Haferkleie und Leinsamen quellen drei Tage weiter — ab Tag 2 pro Portion einen Schluck unterrühren, dann ist die Konsistenz wie an Tag 1",
-        "Banane erst beim Essen unterheben, ca. 30 g. Wer mehr Ballaststoffe will, nimmt stattdessen 80 g gefrorene Beeren"
+        "Dry first: mix the whey, oat bran, flaxseed, cocoa, cinnamon and salt thoroughly",
+        "Stir the nut butter smooth with TWO thirds of the almond milk — only then into the skyr, or it stays lumpy",
+        "Stir in the dry mix and the vanilla extract, let it swell 20–30 min, then stir AGAIN",
+        "Into ONE bowl (~1.5 kg), chill. 9 portions: Philipp 2 a day, Eunice 1. A portion is about 155 g",
+        "The last third of the almond milk stays in the fridge. Oat bran and flaxseed keep swelling for three days — from day 2 stir a splash into each portion and the texture is back to day 1",
+        "Fold the banana in only as you eat, about 30 g. For more fibre, take 80 g frozen berries instead"
       ],
       "computed": {
         "calories": 268.6,

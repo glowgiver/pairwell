@@ -47,7 +47,7 @@
           },
           {
             "item": "Salz",
-            "amount": "1 Prise"
+            "amount": "1 pinch"
           }
         ],
         "_note": "Numbers copied from recipes.json (philipp-overnight-oats), not typed independently. Replaced the whey shaker on 2026-08-30; the shaker stays in the library for days when no jar travels, exactly as the Magerquark bowl stayed for days at home. Overnight oats were never ruled out for him — Eunice's objection was about packing a second jar for work, and that got applied to the whole household without ever being re-checked. They also fix the shaker's one real weakness: a shake does not satiate. The morning went from 0 g of fibre to 5.4."
@@ -89,7 +89,7 @@
         "ingredients": [
           {
             "item": "Ehrmann High Protein Pudding",
-            "amount": "200 g (1 Becher)"
+            "amount": "200 g (1 pot)"
           }
         ],
         "_note": "Numbers copied from recipes.json (eunice-ehrmann-pudding-breakfast), not typed independently — the exact duplication Philipp's breakfast has is deliberately not repeated here."
@@ -176,7 +176,7 @@
       "_why": "A six-day simulation showed both eating short every day: Philipp 95-116 kcal, Eunice 195-216 — 13% of her day. Mechanical, not behavioural: the light dishes come in at 450 and 487 kcal against a 520 spec, twice a day.",
       "calories": "ehrmann-pudding-nachfueller — a cup from the fridge. Nothing to mix, nothing to remember, already on the shopping list. Brings Eunice to -21 kcal; Philipp only needs one on some days (a whole one puts him +58 to +79 over, which is noise but not nothing).",
       "fibre": "A capped spoon of Flohsamenschalen, see kitchen.json dayFineTuning. Over the same six days the largest gap was 8 g of powder against a 10 g cap, and on the days with the light dishes none was needed at all.",
-      "_deleted": "There was briefly a third recipe here — a Nachfüller of skyr, berries and oat bran. Deleted. It closed the same hole as a bought cup while being one more thing to mix and remember, and this household does not need a third decision at the end of a stressed day. Fewer moving parts beats a slightly better fit."
+      "_deleted": "There was briefly a third recipe here — a top-up of skyr, berries and oat bran. Deleted. It closed the same hole as a bought cup while being one more thing to mix and remember, and this household does not need a third decision at the end of a stressed day. Fewer moving parts beats a slightly better fit."
     }
   }
 }
