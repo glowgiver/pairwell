@@ -560,6 +560,34 @@ __CSS__
   .card.other{opacity:.5}
 
   .card.today{border-color:var(--hair)}
+  .card.today ol.steps .t.treat-step{color:var(--hair)}
+  .todaydone{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 14px;border-top:1px solid var(--line)}
+  .todaydone .dobtn{margin-left:0;flex:1 1 auto}
+
+  .schedrow{
+    display:grid;grid-template-columns:1fr auto;align-items:baseline;
+    gap:2px 12px;padding:13px 18px;border-bottom:1px solid var(--line);
+  }
+  .schedrow.other{opacity:.45}
+  .sr-name{font-size:16px;font-weight:600}
+  .sr-who{font-family:var(--f-data);font-size:12.5px;font-weight:400;color:var(--muted2)}
+  .sr-cadence{
+    grid-column:1;font-family:var(--f-data);font-size:13px;color:var(--muted2);
+  }
+  .sr-state{
+    grid-column:2;grid-row:1;font-family:var(--f-data);font-size:13px;
+    color:var(--muted);text-align:right;
+  }
+  .sr-state.due,.sr-state.late,.sr-state.unknown{color:var(--hair);font-weight:600}
+  .sr-btn{
+    grid-column:2;grid-row:2;justify-self:end;
+    min-height:36px;padding:0 14px;border-radius:10px;
+    font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  }
+  .sr-btn.dobtn{background:var(--hair);border:1px solid var(--hair);color:var(--bg)}
+  .sr-btn.undone{background:none;border:1px solid var(--line);color:var(--muted)}
+  .sr-btn:focus-visible{outline:2px solid var(--hair);outline-offset:2px}
+  .dl em{font-style:italic;color:var(--muted2)}
   .todaybody{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
   .tline{font-size:15.5px;line-height:1.45;color:var(--muted)}
   .tline b{color:var(--text);font-weight:600}
@@ -660,6 +688,62 @@ function isDue(t){
   return st === "due" || st === "late" || st === "unknown";
 }
 
+/* Today's shower as ONE sequence.
+
+   The page used to print the four cards and leave you to merge three prose
+   "order" sentences while standing in the shower — wash, then mask, then
+   citric, but each of those sentences only described its own treatment.
+   Chelating replaces the shampoo rather than following it, which is the part
+   that is easiest to get wrong from prose alone. */
+function showerSequence(who){
+  var h = R.hair;
+  var base = h.everyShower.steps;
+  var due = h.scheduled.filter(function(t){
+    return (t.who === "both" || t.who === who) && isDue(t);
+  }).sort(function(a, b){ return (a.rank || 0) - (b.rank || 0); });
+
+  var out = [];
+  base.forEach(function(s, i){
+    var n = i + 1;
+    var replacing = due.filter(function(t){ return t.replacesStep === n; })[0];
+    if(replacing){
+      out.push({ step: replacing.title, how: replacing.recipe + " " + replacing.order,
+                 treat: replacing });
+    }else{
+      out.push({ step: s.step, how: s.how,
+                 extra: s.perPerson && s.perPerson[who] });
+    }
+    due.filter(function(t){ return t.afterStep === n; }).forEach(function(t){
+      out.push({ step: t.title, how: t.recipe, treat: t });
+    });
+  });
+  return { steps: out, due: due };
+}
+
+/* "wash plus X and Y and Z" read badly, and it was wrong about chelating,
+   which replaces the shampoo rather than joining it. */
+function listWords(a){
+  if(a.length <= 1) return a[0] || "";
+  return a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+}
+function showerSummary(seq){
+  if(!seq.due.length) return "A normal wash \u2014 nothing extra due";
+  var swap = seq.due.filter(function(t){ return t.replacesStep; });
+  var add  = seq.due.filter(function(t){ return !t.replacesStep; });
+  var addWords = add.length
+    ? "plus " + listWords(add.map(function(t){ return t.title.toLowerCase(); }))
+    : "";
+  if(swap.length){
+    /* Two clauses, not two list items — joining them with "and" produced
+       "instead of the usual shampoo and plus the mask". */
+    var swapWords = listWords(swap.map(function(t){ return t.title.toLowerCase(); }));
+    var head = swapWords.charAt(0).toUpperCase() + swapWords.slice(1) +
+               " instead of the usual shampoo";
+    return addWords ? head + ", " + addWords : head;
+  }
+  return "A normal wash" + (addWords ? " " + addWords : "");
+}
+
 function renderStage(){
   var h = R.hair;
   var who = person();
@@ -683,45 +767,69 @@ function renderStage(){
 
   /* Scheduled treatments. Ones that belong to the other person are shown
      greyed rather than hidden, so nobody wonders where they went. */
-  var sched = h.scheduled.map(function(t){
-    var mine = t.who === "both" || t.who === who;
-    var d = mine ? dueState(t) : null;
-    return '<div class="card' + (mine ? '' : ' other') + '"><div class="card-head">' +
-      '<span class="k">' + esc(t.cadence) + '</span>' +
-      '<span class="meta">' + (t.who === "both" ? "both" : esc(PW.PEOPLE[t.who].name) + " only") + '</span>' +
-      '<span class="focus">' + esc(t.title) + '</span></div>' +
-      (mine ? '<div class="duebar">' +
-        '<span class="duepill ' + d.state + '">' + esc(d.label) + '</span>' +
-        (d.state === "done"
-          ? '<button type="button" class="undone" data-undone="' + esc(t.id) + '">Undo</button>'
-          : '<button type="button" class="dobtn" data-done="' + esc(t.id) + '">Done today</button>') +
-       '</div>' : '') +
-      '<ol class="steps">' +
-        '<li><span class="n">&bull;</span><div><div class="p">' + esc(t.recipe) + '</div></div></li>' +
-        '<li><span class="n">&rarr;</span><div><div class="h">' + esc(t.order) + '</div></div></li>' +
-      '</ol>' +
-      (t.caution ? '<div class="inline-caution">' + esc(t.caution) + '</div>' : '') +
+  /* One compact schedule instead of three full cards.
+
+     Those cards each carried their own prose "order" sentence, and the citric
+     one read "Shampoo → rinse → pour the citric solution → leave-in as normal"
+     — with no mask in it anywhere. Follow that card and the mask has nowhere
+     to go but after the citric rinse, which is exactly the wrong way round and
+     exactly what happened. Three statements of order on one page, only one of
+     them complete.
+
+     Order now lives in ONE place: the sequence above. This says when, not how. */
+  var sched =
+    '<div class="card"><div class="card-head">' +
+      '<span class="k">Schedule</span>' +
+      '<span class="meta">' + esc(PW.PEOPLE[who].name) + '</span></div>' +
+    h.scheduled.map(function(t){
+      var mine = t.who === "both" || t.who === who;
+      var d = mine ? dueState(t) : null;
+      return '<div class="schedrow' + (mine ? '' : ' other') + '">' +
+        '<div class="sr-name">' + esc(t.title) +
+          (t.who === "both" ? '' : ' <span class="sr-who">' +
+            esc(PW.PEOPLE[t.who].name) + ' only</span>') + '</div>' +
+        '<div class="sr-cadence">' + esc(t.cadence) + '</div>' +
+        (mine
+          ? '<div class="sr-state ' + d.state + '">' + esc(d.label) + '</div>' +
+            (d.state === "done"
+              ? '<button type="button" class="sr-btn undone" data-undone="' + esc(t.id) + '">Undo</button>'
+              : '<button type="button" class="sr-btn dobtn" data-done="' + esc(t.id) + '">Done</button>')
+          : '<div class="sr-state"></div><div></div>') +
       '</div>';
-  }).join("");
+    }).join("") +
+    /* The detail each treatment needs on its own — what to mix, what too much
+       looks like — without restating the order the sequence already owns. */
+    '<details><summary>What each one is, and when to ease off</summary><div class="dl">' +
+      h.scheduled.map(function(t){
+        return '<div><div class="dk">' + esc(t.title) + '</div><div class="dv">' +
+          esc(t.recipe) +
+          (t.caution ? ' <em>' + esc(t.caution) + '</em>' : '') +
+          '</div></div>';
+      }).join("") +
+    '</div></details></div>';
 
   /* Lead with the answer to the question the page exists to answer. Before
      this it opened on frequencies and left the date arithmetic to the reader. */
-  var mineT = h.scheduled.filter(function(t){ return t.who === "both" || t.who === who; });
-  var dueNow = mineT.filter(isDue);
+  var seq = showerSequence(who);
   var todayCard =
     '<div class="card today"><div class="card-head">' +
-      '<span class="k">Today</span>' +
-      '<span class="meta">' + esc(PW.PEOPLE[who].name) + '</span></div>' +
-    '<div class="todaybody">' +
-      '<div class="tline"><b>Wash as normal</b> — ' + h.everyShower.steps.length + ' steps below</div>' +
-      (dueNow.length
-        ? dueNow.map(function(t){
-            var d = dueState(t);
-            return '<div class="tline due"><b>' + esc(t.title) + '</b> — ' +
-              esc(d.state === "unknown" ? "never logged" : d.label.toLowerCase()) + '</div>';
-          }).join("")
-        : '<div class="tline ok">Nothing extra due today.</div>') +
-    '</div></div>';
+      '<span class="k">Today, in order</span>' +
+      '<span class="meta">' + esc(PW.PEOPLE[who].name) + '</span>' +
+      '<span class="focus">' + esc(showerSummary(seq)) + '</span>' +
+    '</div>' +
+    stepList(seq.steps, function(x){
+      return '<div class="t' + (x.treat ? ' treat-step' : '') + '">' + esc(x.step) + '</div>' +
+             (x.how ? '<div class="h">' + esc(x.how) + '</div>' : '') +
+             (x.extra ? '<div class="p"><strong>' + esc(PW.PEOPLE[who].name) +
+                        '</strong> &middot; ' + esc(x.extra) + '</div>' : '');
+    }) +
+    (seq.due.length
+      ? '<div class="todaydone">' + seq.due.map(function(t){
+          return '<button type="button" class="dobtn" data-done="' + esc(t.id) + '">' +
+                 esc(t.title) + ' done</button>';
+        }).join("") + '</div>'
+      : '') +
+    '</div>';
 
   var note = h.individualNotes[who];
   var personal = note
@@ -772,7 +880,10 @@ function renderStage(){
       '<div><div class="dk">Verify</div><div class="dv">' + esc(h.context.verify) + '</div></div>' +
     '</div></details>';
 
-  stage.innerHTML = todayCard + wash + sched + personal + details;
+  /* `wash` is the same four steps the sequence above already contains, so it
+     no longer ships — the sequence IS the wash, with today's extras folded in
+     where they belong. */
+  stage.innerHTML = todayCard + sched + personal + details;
   wireDoneButtons();
 }
 
