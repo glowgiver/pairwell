@@ -302,8 +302,14 @@ function esc(s){
 }
 function n1(v){ return (Math.round(v*10)/10).toFixed(1).replace(/\\.0$/,""); }
 function n0(v){ return Math.round(v); }
-/* mirrorMeals.fatG is the range "12-15", deliberately. Print it, do not round it. */
-function g(v){ return isFinite(v) ? n0(v) : String(v); }
+/* mirrorMeals.fatG is a range like "0-14", deliberately. Print it, do not round it.
+   A range that starts at 0 is a ceiling wearing a range's clothes; say so, because
+   "0-14 g" invites you to hunt for a lower bound that does not exist. */
+function g(v){
+  if(isFinite(v)) return n0(v);
+  var m = String(v).match(/^0\\s*-\\s*(.+)$/);
+  return m ? "\u2264" + m[1] : String(v);
+}
 
 /* Every figure in the ledger is derived here rather than read from the
    pre-computed budget fields in profiles.json. Those fields agree today; the
@@ -346,6 +352,9 @@ function mealRemainder(){
   var blocks = base.blockRules.standardLeanDish;
   var pb = comp.perBlock;
   var m = D.profiles.mirrorMeals.lunch;
+  /* Fat has no floor since 2026-08-30, so the blocks can already exceed what the
+     meal demands. Clamped at zero — a negative need would credit those calories
+     back and make the feasibility floor look lower than it is. */
   var fatLo = parseFloat(String(m.fatG).split("-")[0]);
   return {
     blocks: blocks,
@@ -354,7 +363,8 @@ function mealRemainder(){
     need:  { kcal:m.calories - pb.calories*blocks,
              p:  m.proteinG - pb.proteinG*blocks,
              fib:m.fiberG   - pb.fiberG*blocks,
-             fat:fatLo      - pb.fatG*blocks }
+             fat:Math.max(0, fatLo - pb.fatG*blocks),
+             fatMax:parseFloat(String(m.fatG).split("-").pop()) - pb.fatG*blocks }
   };
 }
 
@@ -464,7 +474,8 @@ function mealHTML(){
         '<div class="ls"><span class="tag">the rest</span>' +
         '<span>P <b>' + n1(r.need.p) + ' g</b></span>' +
         '<span>Fib <b>' + n1(r.need.fib) + ' g</b></span>' +
-        '<span>F <b>' + n1(r.need.fat) + ' g</b></span></div></div>' +
+        '<span>F <b>' + (r.need.fat > 0 ? n1(r.need.fat)
+                          : "\u2264" + n1(r.need.fatMax)) + ' g</b></span></div></div>' +
     '</div></div>' + feasibilityHTML();
 }
 
@@ -505,8 +516,11 @@ function addNote(){
 function lookForHTML(){
   var r = mealRemainder();
   var fat = String(D.profiles.mirrorMeals.lunch.fatG).split("-");
-  var fatLo = parseFloat(fat[0]) - comp.perBlock.fatG * r.blocks;
+  var fatLo = Math.max(0, parseFloat(fat[0]) - comp.perBlock.fatG * r.blocks);
   var fatHi = parseFloat(fat[fat.length - 1]) - comp.perBlock.fatG * r.blocks;
+  /* A floor of zero is not a range to hunt inside, it is a ceiling to stay under. */
+  var fatText = fatLo > 0 ? n0(fatLo) + '–' + n0(fatHi) + ' g fat'
+                          : 'up to ' + n0(fatHi) + ' g fat';
 
   function list(items){
     return '<ul>' + items.map(function(t){ return '<li>' + t + '</li>'; }).join("") + '</ul>';
@@ -514,7 +528,7 @@ function lookForHTML(){
 
   return '<details><summary>What to look for</summary><div class="brief">' +
     '<div class="env">' + n0(r.need.kcal) + ' kcal · ' + n0(r.need.p) + ' g protein · ' +
-      n0(r.need.fib) + ' g fibre · ' + n0(fatLo) + '–' + n0(fatHi) + ' g fat</div>' +
+      n0(r.need.fib) + ' g fibre · ' + fatText + '</div>' +
     '<p>Per serving, the dish on its own — ' + n1(r.blocks) + ' Base block is already ' +
       'going on the plate beside it, so the recipe should bring no rice, noodles or potato ' +
       'of its own.</p>' +
@@ -536,9 +550,9 @@ function lookForHTML(){
           'Sauce on stock, soy, vinegar, mustard, tomato or quark']) +
 
     '<h4>Too rich to fit</h4>' +
-    list(['Coconut milk, cream, cheese sauce, peanut or satay',
+    list(['Coconut milk at full fat, cream, cheese sauce, peanut or satay — the light tin is fine, 40–80 g of it fits',
           'Deep-fried, battered, breaded',
-          'Salmon or tofu as the only protein — both leave no room for the fibre',
+          'Salmon as the only protein — 40 g of it brings 20 g of fat on its own',
           'Salads that reach their fibre through sheer volume',
           'Protein minced into a mixture, so no portion can be weighed']) +
 

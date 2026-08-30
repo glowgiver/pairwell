@@ -35,7 +35,11 @@ def load(name):
 
 
 def lo(v):
-    """mirrorMeals.fatG is the range "12-15". Take the charitable end."""
+    """mirrorMeals.fatG is a range like "0-14". Take the charitable end.
+
+    Since 2026-08-30 the low end is 0: fat is a ceiling, not a target. A meal
+    that comes in leaner is not a miss, it is slack handed to the snack.
+    """
     return float(str(v).split("-")[0])
 
 
@@ -351,7 +355,10 @@ def main():
     for label, blocks in sorted(base["blockRules"].items(), key=lambda kv: kv[1]):
         need_p = m["proteinG"] - pb["proteinG"] * blocks
         need_fib = m["fiberG"] - pb["fiberG"] * blocks
-        need_fat = lo(m["fatG"]) - pb["fatG"] * blocks
+        # Never negative. With no fat floor the blocks can already carry more
+        # fat than the meal demands, and a negative "need" would credit those
+        # calories back and understate the floor.
+        need_fat = max(0.0, lo(m["fatG"]) - pb["fatG"] * blocks)
         have = m["calories"] - pb["calories"] * blocks
         floor = need_p * ef["proteinG"] + need_fat * ef["fatG"] + need_fib * ef["fiberG"]
         delta = floor - have

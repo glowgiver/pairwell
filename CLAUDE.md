@@ -260,12 +260,19 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   it, aroma base included. Run against the old numbers the same search returns
   zero, at 1, 1.5 and 2 blocks — so the check would have caught it.
 
-  What still binds is **fat, not fibre**. The 12 g ceiling puts salmon, eggs
-  and tempeh out of reach of a mirror meal and leaves tofu just outside; they
-  are breakfast and snack foods here for that reason alone. Raising the ceiling
-  to 14 g costs the day nothing (Philipp keeps 17 g for the snack, Eunice 24 g)
-  and returns tofu at every block level plus salmon on the saucy tier. Not
-  changed — that is a plan decision, and the plan is theirs.
+  What bound after that was **fat, not fibre**, and it has since been loosened:
+  the band `8-12` became the ceiling `0-14` on 2026-08-30. The floor was doing
+  nothing — a leaner dish just hands the snack its calories back — while the
+  12 g ceiling put salmon, eggs, tempeh and tofu out of reach of a 40 g protein
+  meal. The day paid for it out of slack it already had. Plates on one block
+  went 4962 → 11992, and tofu is back at every block level.
+
+  `fatG` stays a **range string** so every reader that splits on `-` keeps
+  working; a leading `0` is the signal to render it as `≤14` rather than as a
+  band to hunt inside. Two places clamp the derived need at zero, because with
+  no floor the Base blocks can carry more fat than the meal demands and a
+  negative need would understate the feasibility floor: `check_targets.py`
+  and `mealRemainder()` in `build_kitchen_page.py`.
 - **`cookedWeightG` is estimated, not weighed.** Weigh a batch, type it into the
   splitter, re-run `recompute_macros.py`. The custom food in MacroFactor may
   still hold the old 105 kcal/100 g — it should be 140.
