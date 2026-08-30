@@ -19,23 +19,43 @@
         "netCarbsG": 165
       },
       "fixedBreakfast": {
-        "recipeId": "philipp-whey-shaker",
-        "calories": 156.0,
-        "proteinG": 32.0,
-        "fiberG": 0.0,
-        "fatG": 2.0,
+        "recipeId": "philipp-overnight-oats",
+        "calories": 319.1,
+        "proteinG": 31.8,
+        "fiberG": 5.4,
+        "fatG": 5.1,
         "ingredients": [
           {
-            "item": "Whey Protein (aromatisiert)",
-            "amount": "40 g + ca. 300 ml Wasser"
+            "item": "Haferflocken",
+            "amount": "45 g"
+          },
+          {
+            "item": "Skyr",
+            "amount": "120 g"
+          },
+          {
+            "item": "Whey Protein",
+            "amount": "15 g"
+          },
+          {
+            "item": "Mandelmilch, ungesüßt",
+            "amount": "80 ml"
+          },
+          {
+            "item": "Ceylon Zimt",
+            "amount": "1 g"
+          },
+          {
+            "item": "Salz",
+            "amount": "1 Prise"
           }
         ],
-        "_note": "Numbers copied from recipes.json (philipp-whey-shaker), not typed independently. Replaced the Magerquark-Bowl as the weekday breakfast on 2026-08-30; the bowl stays in the library for days at home. The reason is format, not nutrition: a wet bowl at 10:00 in a school needs a container and a spoon, and neither travels. This also retires the double-entry gap CLAUDE.md documented for him (410 typed against 379.8 derived) — both numbers now come from one place."
+        "_note": "Numbers copied from recipes.json (philipp-overnight-oats), not typed independently. Replaced the whey shaker on 2026-08-30; the shaker stays in the library for days when no jar travels, exactly as the Magerquark bowl stayed for days at home. Overnight oats were never ruled out for him — Eunice's objection was about packing a second jar for work, and that got applied to the whole household without ever being re-checked. They also fix the shaker's one real weakness: a shake does not satiate. The morning went from 0 g of fibre to 5.4."
       },
       "snackBudgetAfterMirrorMeals": {
-        "calories": 704.0,
-        "proteinG": 52.0,
-        "note": "1900 - 156 (breakfast) - 1040 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live rather than reading this. Grew from 450 when breakfast went from the 410 kcal bowl to the 156 kcal shaker — the calories did not vanish, they moved into the afternoon, where 2 portions of vorratspudding-quark-whey-beeren now sit (501 kcal, 55.5 g protein, 16.2 g fibre)."
+        "calories": 540.9,
+        "proteinG": 52.2,
+        "note": "1900 - 319 (breakfast) - 1040 (lunch+dinner) = remainder. Derived; the kitchen page recomputes it live. Two portions of die-vorratsdose-skyr-schoko-banane fill it (549 kcal, 58.8 g protein, 17.2 g fibre) and run 8 kcal past it — noise, deliberately not optimised away."
       },
       "aestheticGoal": "lean athletic, K-drama V-taper, not bulky",
       "_phase": {
@@ -127,20 +147,32 @@
   },
   "_gaps": [
     "Eunice's four targets imply 1598 kcal against a 1580 budget — an 18 kcal rounding gap, left alone. Her numbers have no MacroFactor data behind them, so the model is all there is, and the model was 600 kcal wrong for Philipp. Believe her scale over this arithmetic.",
-    "The Vorratsdose has never been tasted, only calculated. It is built against acidity rather than macros — skyr instead of quark, cocoa in the bowl, banana instead of the tart frozen berries, almond milk to loosen it, salt to blunt the sourness. If skyr is still too sour the next step is Greek yoghurt 0-2%, NOT more sweetener: sweetness masks acid, fat and salt remove it. Mix a small test batch before committing 1.5 kg."
+    "The Vorratsdose has never been tasted, only calculated. It is built against acidity rather than macros — skyr instead of quark, cocoa in the bowl, banana instead of the tart frozen berries, almond milk to loosen it, salt to blunt the sourness. If skyr is still too sour the next step is Greek yoghurt 0-2%, NOT more sweetener: sweetness masks acid, fat and salt remove it. Mix a small test batch before committing 1.5 kg.",
+    "The library was rebuilt on 2026-08-30. Five dishes got the treatment the first two had: a legume as the fibre carrier, the fat source cut, the meat cut because the legume brings protein, then solve() re-fits. Usable lunch+dinner pairings went from 3 of 45 to 22 of 105 for Philipp and 21 for Eunice. The as-found originals are kept alongside the light versions rather than deleted — they are what was actually found, and the light ones are what this household eats.",
+    "baked-feta-salmon-light lands at 22.2 g of fat against a 14 g per-meal guideline, and that is arithmetic rather than a recipe fault: salmon carries 0.67 g of fat per gram of protein, so 40 g of protein from salmon alone is 26.8 g of fat before anything else. Prawns carry part of the protein and the feta is down from 200 g to 80, which halves the fat from 43. It closes the day next to a lean dish (lemon-herb-chicken-light) and not twice in one day — which is exactly why the planner checks pairs."
   ],
   "_bodyNote": "Body composition is NOT in this file and must never be. It lives in private/body.json, which is gitignored, because this repo is public and a bodyweight describes a person rather than a plan. scripts/check_targets.py reads it from there and degrades to a warning when it is absent.",
   "_dayShape": {
     "_decided": "2026-08-30",
     "summary": "Two blocks outside the mirror meals. Morning is per-person and NOT shared; the afternoon pudding IS shared. Sharing only pays off where there is a batch operation — the same reason lunch and dinner are identical. The morning is portioned per person anyway, so unifying it would be cosmetic and would cost Eunice a habit that works.",
     "morning": {
-      "philipp": "philipp-whey-shaker — flavoured whey, dry in the shaker, water on site",
-      "eunice": "eunice-ehrmann-pudding-breakfast — bought, sealed, unchanged"
+      "philipp": "philipp-overnight-oats — mixed the night before, eaten around 10 at school. philipp-whey-shaker stays in the library for days when no jar travels.",
+      "eunice": "eunice-ehrmann-pudding-breakfast — bought, sealed, unchanged. She declined overnight oats because she will not pack a second jar for work; that objection is hers and does not generalise to him."
     },
     "afternoon": {
-      "shared": "die-vorratsdose-skyr-schoko-banane — ONE bowl, 9 portions, 3 days. Philipp takes 2 a day, Eunice 1, both scooping from the same bowl (~165 g a portion). Skyr for both, not quark: Eunice does not eat Magerquark and is put off by sourness, and the price difference to quark is cents. Cocoa is mixed in (dry, keeps, and masks lactic acid); banana is sliced in fresh per portion, berries optional for more fibre."
+      "sweet": "die-vorratsdose-skyr-schoko-nuss — ONE bowl, 9 portions, 3 days. Philipp 2 a day, Eunice 1, ~155 g a portion. Skyr for both; nut butter and cocoa mixed in, banana per portion.",
+      "savoury_meat": "die-herzhafte-dose-linsen-pute-paprika — 4 portions. Turkey poached, not roasted. Sesame oil and lemon go on at the bowl, never into the batch.",
+      "savoury_quark": "kraeuterquark-mit-linsen — 4 portions. Kräuterquark was ruled out because Eunice does not eat Magerquark, but that objection belonged to the SWEET context: the same tang reads wrong in a sweet bowl and right in a herb dip. No lemon, no vinegar.",
+      "_swapping": "All three sit at 275-277 kcal, so any mix closes both days on all four macros without recalculating. Verified across every combination.",
+      "_fatCorrection": "2026-08-30: all three were built fat-phobic by reflex, and the aroma in all of them is fat-soluble — herbs, cocoa, cinnamon. Fat went in as a TRADE, not an addition: the calorie window was already full even though the fat column was not, and fat costs 9 kcal a gram. Sweet bowl: 54 g nut butter in, banana halved, oat bran 171 to 140. Quark bowl: 16 g olive oil in, quark 800 to 660. The turkey bowl needed no fat at 4.7 g and got only technique fixes."
     },
     "batchRhythm": "The pudding is mixed twice a week, not once for three days: 3 portions a day makes a 3-day batch ~2.1 kg in one tub. It needs no heat and no cooling, so twice is the same total work with fresher berries. The 3-day rhythm stays for lunch and dinner, where it exists because of the cooking.",
-    "fibreTiming": "Fibre does not have to be eaten in the morning — only the daily total matters for what fibre is for. What is true is the satiety argument: fibre slows gastric emptying, so a morning item without it holds less long. That is why the shaker suits someone who does not want to eat in the morning anyway."
+    "fibreTiming": "Fibre does not have to be eaten in the morning — only the daily total matters for what fibre is for. What is true is the satiety argument: fibre slows gastric emptying, so a morning item without it holds less long. That is why the shaker suits someone who does not want to eat in the morning anyway.",
+    "topUp": {
+      "_why": "A six-day simulation showed both eating short every day: Philipp 95-116 kcal, Eunice 195-216 — 13% of her day. Mechanical, not behavioural: the light dishes come in at 450 and 487 kcal against a 520 spec, twice a day.",
+      "calories": "ehrmann-pudding-nachfueller — a cup from the fridge. Nothing to mix, nothing to remember, already on the shopping list. Brings Eunice to -21 kcal; Philipp only needs one on some days (a whole one puts him +58 to +79 over, which is noise but not nothing).",
+      "fibre": "A capped spoon of Flohsamenschalen, see kitchen.json dayFineTuning. Over the same six days the largest gap was 8 g of powder against a 10 g cap, and on the days with the light dishes none was needed at all.",
+      "_deleted": "There was briefly a third recipe here — a Nachfüller of skyr, berries and oat bran. Deleted. It closed the same hole as a bought cup while being one more thing to mix and remember, and this household does not need a third decision at the end of a stressed day. Fewer moving parts beats a slightly better fit."
+    }
   }
 }

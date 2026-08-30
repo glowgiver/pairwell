@@ -184,6 +184,20 @@ Two rules keep the shortlist honest:
 - **It is curated, not derived.** `foods.json` knows psyllium husk is 2.5 kcal
   per gram of fibre and would propose it every time. `topUps` lists what
   belongs in food; cost only ranks what is already acceptable.
+
+  There is now a **second, separate list** for the same ingredient the first one
+  bans: `kitchen.json` → `dayFineTuning`. It is read only by
+  `build_kitchen_page.py`, never by `adapt_recipe.py`, and the separation is the
+  point. The two objections to psyllium in `topUps` — it wins every proposal on
+  cost, and nobody wants it stirred into a braise — are objections to putting it
+  in a *dish*. Neither survives contact with a glass of water at the end of a
+  day that landed 4 g short. What does survive is dose and physiology, and that
+  is what `maxG: 10` encodes: psyllium is almost purely viscous soluble fibre,
+  barely fermented, and carries none of the resistant starch or beta-glucan that
+  legumes bring. The daily targets treat fibre as a *marker* for eating plants,
+  so powder can hit the number without doing what the number stands for. Ten
+  grams closes a rounding error; it can never replace a dish, and the Kitchen
+  page says so in as many words when the gap is bigger.
 - **Every candidate has a `maxG`.** Without it the ranking proposed 478 g of
   spinach per serving — the exact failure `inbox/WHAT-TO-LOOK-FOR.md` warns
   about. When nothing fits under its cap, the script proposes a **pair**,

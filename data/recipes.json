@@ -847,8 +847,608 @@
       "_fixedNote": "slot breakfast + fixed:true: der Adapter misst es, skaliert es nie. Das ist keine Zielvorgabe, sondern was er tatsaechlich trinkt."
     },
     {
-      "id": "die-vorratsdose-skyr-schoko-banane",
-      "title": "Die Vorratsdose — Skyr, Schoko & Banane",
+      "id": "philipp-overnight-oats",
+      "title": "Overnight Oats (Frühstück)",
+      "slot": "breakfast",
+      "person": "philipp",
+      "servings": 1,
+      "blocks": 0.0,
+      "cuisine": null,
+      "source": "Philipps Morgen — abends angerührt, gegen 10 Uhr in der Schule gegessen",
+      "ingredients": [
+        {
+          "food": "haferflocken",
+          "g": 45.0
+        },
+        {
+          "food": "skyr",
+          "g": 120.0
+        },
+        {
+          "food": "whey",
+          "g": 15.0
+        },
+        {
+          "food": "mandelmilch",
+          "g": 80.0
+        },
+        {
+          "food": "zimt",
+          "g": 1.0
+        },
+        {
+          "food": "salz",
+          "g": 0.3
+        }
+      ],
+      "steps": [
+        "Alles im Glas verrühren, Deckel drauf, über Nacht in den Kühlschrank",
+        "Am nächsten Morgen mitnehmen, gegen 10 Uhr essen — kalt, direkt aus dem Glas",
+        "Drei Gläser auf einmal ansetzen, in derselben Sitzung wie die Vorratsdose. Fünf Minuten mehr, kein Herd",
+        "Wer will, hebt morgens ein paar gefrorene Beeren unter — sie tauen bis zur Pause auf"
+      ],
+      "computed": {
+        "calories": 319.1,
+        "proteinG": 31.8,
+        "carbsG": 32.6,
+        "fiberG": 5.4,
+        "fatG": 5.1,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      },
+      "fixed": true,
+      "_fixedNote": "slot breakfast + fixed:true: gemessene Gewohnheit, kein Ziel. Der Adapter misst, skaliert nie."
+    },
+    {
+      "id": "die-herzhafte-dose-linsen-pute-paprika",
+      "title": "Die herzhafte Dose — Linsen, Pute & Paprika",
+      "slot": "snack",
+      "person": null,
+      "servings": 4,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "die herzhafte Alternative zur süßen Vorratsdose, gleicher Platz im Tag",
+      "ingredients": [
+        {
+          "food": "belugalinsen_gekocht",
+          "g": 400.0
+        },
+        {
+          "food": "putenbrust",
+          "g": 360.0
+        },
+        {
+          "food": "paprika",
+          "g": 240.0
+        },
+        {
+          "food": "fruehlingszwiebel",
+          "g": 60.0
+        },
+        {
+          "food": "sojasauce",
+          "g": 32.0
+        },
+        {
+          "food": "ingwer",
+          "g": 16.0
+        },
+        {
+          "food": "sesamoel",
+          "g": 12.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 8.0
+        }
+      ],
+      "steps": [
+        "Putenbrust POCHIEREN, nicht braten: in knapp siedendem Wasser ca. 15 Min. gar ziehen lassen, im Sud auskühlen. Gebratene Brust ist am dritten Tag trocken und watteartig, pochierte bleibt saftig",
+        "Ausgekühlt in Streifen schneiden. Reste vom Vortag gehen genauso, wenn sie nicht durchgebraten sind",
+        "Linsen abtropfen lassen, Paprika würfeln, Frühlingszwiebel in Ringe",
+        "Ingwer und Knoblauch fein reiben, mit der Sojasauce verrühren — OHNE das Sesamöl",
+        "Alles vermengen, in EINE Dose, kalt stellen. 4 Portionen, hält 3 Tage",
+        "Sesamöl erst pro Portion darüber, ca. 3 g. In der Charge oxidiert es über drei Tage und wird aus nussig schal",
+        "An der Schüssel eine Zitronenspalte für den, der will. Nicht in die Dose: ohne Säure ist der Salat für Philipp flach, mit Säure für Eunice unangenehm — das ist die einzige Stelle, wo sich das nicht gemeinsam lösen lässt"
+      ],
+      "computed": {
+        "calories": 274.8,
+        "proteinG": 32.8,
+        "carbsG": 25.1,
+        "fiberG": 10.3,
+        "fatG": 4.7,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    },
+    {
+      "id": "kraeuterquark-mit-linsen",
+      "title": "Kräuterquark mit Linsen",
+      "slot": "snack",
+      "person": null,
+      "servings": 4,
+      "blocks": 0.0,
+      "cuisine": "none",
+      "source": "die herzhafte Dose ohne Fleisch — Quark geht, solange es nicht süß ist",
+      "ingredients": [
+        {
+          "food": "magerquark",
+          "g": 660.0
+        },
+        {
+          "food": "belugalinsen_gekocht",
+          "g": 360.0
+        },
+        {
+          "food": "kraeuter_frisch",
+          "g": 60.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 16.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 6.0
+        },
+        {
+          "food": "salz",
+          "g": 2.0
+        },
+        {
+          "food": "gurke",
+          "g": 320.0
+        },
+        {
+          "food": "radieschen",
+          "g": 160.0
+        }
+      ],
+      "steps": [
+        "Linsen ZUERST würzen: abgetropft mit dem Olivenöl, der Hälfte des Salzes und etwas Pfeffer vermengen und kurz stehen lassen",
+        "Kräuter: Schnittlauch und Dill führen, Petersilie gibt Körper. Schnittlauch mit scharfem Messer EINMAL durchschneiden, nicht hacken — zermatscht wird er schleimig",
+        "Knoblauch fein reiben, mit dem restlichen Salz und den Kräutern unter den Magerquark rühren",
+        "Gewürzte Linsen unterheben, in EINE Dose, kalt stellen. 4 Portionen, hält 3 Tage",
+        "Gurke und Radieschen NICHT mit hinein: pro Portion frisch würfeln, ca. 80 g Gurke und 40 g Radieschen",
+        "Zu fest? Mit einem Schluck Mineralwasser lockern — nicht mit Zitrone"
+      ],
+      "computed": {
+        "calories": 276.6,
+        "proteinG": 29.7,
+        "carbsG": 28.1,
+        "fiberG": 9.3,
+        "fatG": 5.1,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    },
+    {
+      "id": "ehrmann-pudding-nachfueller",
+      "title": "Ehrmann Pudding (Nachfüller)",
+      "slot": "snack",
+      "person": null,
+      "servings": 1,
+      "blocks": 0.0,
+      "cuisine": "none",
+      "source": "dasselbe Produkt wie ihr Frühstück, hier als Kalorien-Nachfüller",
+      "ingredients": [
+        {
+          "food": "ehrmann_pudding",
+          "g": 200.0
+        }
+      ],
+      "steps": [
+        "Aus dem Kühlschrank, fertig. Kein Prep, keine Planung",
+        "Der Griff für Tage, an denen Kalorien fehlen und die Ballaststoffe schon stimmen"
+      ],
+      "computed": {
+        "calories": 174.0,
+        "proteinG": 20.0,
+        "carbsG": 11.0,
+        "fiberG": 0.6,
+        "fatG": 4.6,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      },
+      "fixed": true,
+      "_note": "Der einzige Nachfueller. Es gab kurz ein zweites Rezept zum Anruehren (Skyr, Beeren, Haferkleie) — geloescht, weil es eine dritte Sache zum Merken war, um ein Loch zu stopfen, das ein gekaufter Becher auch stopft. Was von der Fibre-Luecke bleibt, faengt der gedeckelte Flohsamen-Griff ab: ueber sechs simulierte Tage die groesste Luecke 8 g Pulver bei einem Deckel von 10."
+    },
+    {
+      "id": "baked-feta-salmon-light",
+      "title": "Baked Feta Salmon, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 0.0,
+      "cuisine": "mediterranean",
+      "source": "Umbau von baked-feta-salmon — so mager wie bei Lachs ehrlich möglich",
+      "ingredients": [
+        {
+          "food": "lachs",
+          "g": 280.0
+        },
+        {
+          "food": "garnelen",
+          "g": 140.0
+        },
+        {
+          "food": "kichererbsen_gekocht",
+          "g": 650.0
+        },
+        {
+          "food": "kirschtomaten",
+          "g": 300.0
+        },
+        {
+          "food": "zucchini",
+          "g": 200.0
+        },
+        {
+          "food": "feta",
+          "g": 80.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 15.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 20.0
+        },
+        {
+          "food": "zitronensaft",
+          "g": 30.0
+        },
+        {
+          "food": "kraeuter_frisch",
+          "g": 20.0
+        }
+      ],
+      "steps": [
+        "Ofen auf 200°C. Kichererbsen, Kirschtomaten und Zucchini mit Olivenöl, Knoblauch und Zitronensaft auf dem Blech mischen",
+        "Feta in Stücken dazwischen verteilen, 15 Min. vorrösten",
+        "Lachs und Garnelen auflegen, weitere 10-12 Min. — der Lachs soll innen noch glasig sein",
+        "Kräuter nach dem Ofen darüber"
+      ],
+      "computed": {
+        "calories": 560.4,
+        "proteinG": 40.1,
+        "carbsG": 51.8,
+        "fiberG": 14.0,
+        "fatG": 22.2,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "crispy-sweet-chili-chicken-light",
+      "title": "Crispy Sweet Chili Chicken, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "Umbau von crispy-sweet-chili-chicken — hier war Fett das Problem, nicht Fibre",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 250.0
+        },
+        {
+          "food": "edamame",
+          "g": 1540.0
+        },
+        {
+          "food": "speisestaerke",
+          "g": 40.0
+        },
+        {
+          "food": "eier",
+          "g": 12.0
+        },
+        {
+          "food": "brokkoli",
+          "g": 200.0
+        },
+        {
+          "food": "suess_chili_sauce",
+          "g": 125.0
+        },
+        {
+          "food": "sojasauce",
+          "g": 60.0
+        },
+        {
+          "food": "reisessig",
+          "g": 60.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 5.0
+        },
+        {
+          "food": "ingwer",
+          "g": 5.0
+        },
+        {
+          "food": "sriracha",
+          "g": 5.0
+        },
+        {
+          "food": "sesamoel",
+          "g": 5.0
+        }
+      ],
+      "steps": [
+        "Hähnchenbrust in Streifen, mit Ei und Speisestärke vermengen",
+        "Im Ofen bei 200°C auf einem Gitter knusprig backen, ca. 20 Min., einmal wenden",
+        "Sauce aus Süß-Chili, Sojasauce, Reisessig, Knoblauch, Ingwer und Sriracha kurz einkochen",
+        "Brokkoli und Edamame dämpfen, mit dem Hähnchen und der Sauce vermengen",
+        "Sesamöl vom Herd genommen darüber"
+      ],
+      "computed": {
+        "calories": 449.1,
+        "proteinG": 40.0,
+        "carbsG": 41.0,
+        "fiberG": 14.0,
+        "fatG": 14.9,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "korean-spicy-chicken-stew-light",
+      "title": "Korean Spicy Chicken Stew, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "Umbau von korean-spicy-chicken-stew-dakbokkeumtang auf das Mirror-Meal-Ziel",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 330.0
+        },
+        {
+          "food": "haehnchenschenkel",
+          "g": 140.0
+        },
+        {
+          "food": "edamame",
+          "g": 1070.0
+        },
+        {
+          "food": "karotte",
+          "g": 200.0
+        },
+        {
+          "food": "zwiebel",
+          "g": 150.0
+        },
+        {
+          "food": "zucchini",
+          "g": 150.0
+        },
+        {
+          "food": "fruehlingszwiebel",
+          "g": 15.0
+        },
+        {
+          "food": "gochugaru",
+          "g": 60.0
+        },
+        {
+          "food": "gochujang",
+          "g": 30.0
+        },
+        {
+          "food": "doenjang",
+          "g": 15.0
+        },
+        {
+          "food": "austernsauce",
+          "g": 60.0
+        },
+        {
+          "food": "mirin",
+          "g": 30.0
+        },
+        {
+          "food": "zucker",
+          "g": 15.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 22.0
+        },
+        {
+          "food": "ingwer",
+          "g": 5.0
+        },
+        {
+          "food": "huehnerbruehe",
+          "g": 80.0
+        },
+        {
+          "food": "sesamoel",
+          "g": 5.0
+        }
+      ],
+      "steps": [
+        "Gochugaru, Gochujang, Doenjang, Austernsauce, Mirin, Zucker, Knoblauch und Ingwer zur Paste rühren",
+        "Hähnchen mit der Paste vermengen, 20 Min. ziehen lassen",
+        "Mit Brühe aufsetzen, Karotte und Zwiebel dazu, 20 Min. köcheln",
+        "Zucchini und Edamame in den letzten 5 Min. dazu — länger und sie zerfallen",
+        "Sesamöl und Frühlingszwiebel erst vom Herd genommen darüber"
+      ],
+      "computed": {
+        "calories": 426.0,
+        "proteinG": 40.0,
+        "carbsG": 36.9,
+        "fiberG": 14.0,
+        "fatG": 14.2,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "lemon-herb-chicken-light",
+      "title": "Lemon Herb Chicken, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 0.0,
+      "cuisine": "mediterranean",
+      "source": "Umbau von lemon-herb-roasted-butterflied-chicken auf das Mirror-Meal-Ziel",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 430.0
+        },
+        {
+          "food": "kichererbsen_gekocht",
+          "g": 585.0
+        },
+        {
+          "food": "gruene_bohnen",
+          "g": 300.0
+        },
+        {
+          "food": "kirschtomaten",
+          "g": 200.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 15.0
+        },
+        {
+          "food": "zitronensaft",
+          "g": 40.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 12.0
+        },
+        {
+          "food": "kraeuter_frisch",
+          "g": 20.0
+        },
+        {
+          "food": "salz",
+          "g": 3.0
+        }
+      ],
+      "steps": [
+        "Ofen auf 200°C. Kichererbsen, grüne Bohnen und Kirschtomaten mit dem Olivenöl, Knoblauch und Salz auf dem Blech mischen",
+        "Hähnchenbrust darauf legen, mit Zitronensaft beträufeln",
+        "25-30 Min. rösten, bis die Brust 74°C Kerntemperatur hat",
+        "Kräuter erst nach dem Ofen darüber — Hitze macht sie grau und nimmt das Aroma"
+      ],
+      "computed": {
+        "calories": 431.7,
+        "proteinG": 39.9,
+        "carbsG": 47.1,
+        "fiberG": 14.0,
+        "fatG": 9.9,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "pho-bo-light",
+      "title": "Pho Bo, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 5,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "Umbau von pho-bo-die-sch-ssel-br-he-separat auf das Mirror-Meal-Ziel",
+      "ingredients": [
+        {
+          "food": "reisbandnudeln",
+          "g": 80.0
+        },
+        {
+          "food": "rinderfilet",
+          "g": 230.0
+        },
+        {
+          "food": "edamame",
+          "g": 1195.0
+        },
+        {
+          "food": "mungobohnensprossen",
+          "g": 250.0
+        },
+        {
+          "food": "pak_choi",
+          "g": 300.0
+        },
+        {
+          "food": "fruehlingszwiebel",
+          "g": 40.0
+        },
+        {
+          "food": "ingwer",
+          "g": 15.0
+        },
+        {
+          "food": "fischsauce",
+          "g": 25.0
+        },
+        {
+          "food": "zitronensaft",
+          "g": 20.0
+        }
+      ],
+      "steps": [
+        "Brühe wie gehabt separat aufsetzen und heiß halten",
+        "Reisbandnudeln nach Packung garen, kalt abschrecken",
+        "Rinderfilet hauchdünn schneiden — es gart in der heißen Brühe in der Schüssel",
+        "Edamame 5 Min. kochen, Pak Choi kurz blanchieren",
+        "Alles in die Schüssel schichten, Sprossen und Frühlingszwiebel roh obendrauf, Brühe erst am Tisch angießen"
+      ],
+      "computed": {
+        "calories": 441.2,
+        "proteinG": 40.0,
+        "carbsG": 39.8,
+        "fiberG": 14.0,
+        "fatG": 14.9,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "die-vorratsdose-skyr-schoko-nuss",
+      "title": "Die Vorratsdose — Skyr, Schoko & Nuss",
       "slot": "snack",
       "person": null,
       "servings": 9,
@@ -866,15 +1466,19 @@
         },
         {
           "food": "haferkleie",
-          "g": 171.0
+          "g": 140.0
         },
         {
           "food": "leinsamen",
-          "g": 56.0
+          "g": 28.0
         },
         {
           "food": "kakaopulver",
           "g": 54.0
+        },
+        {
+          "food": "nussmus",
+          "g": 70.0
         },
         {
           "food": "mandelmilch",
@@ -894,24 +1498,23 @@
         },
         {
           "food": "banane",
-          "g": 540.0
+          "g": 270.0
         }
       ],
       "steps": [
-        "Trockenes zuerst: Whey, Haferkleie, Leinsamen, Kakao, Zimt und Salz gründlich mischen — trocken, sonst klumpt es",
-        "Unter den Skyr rühren, Mandelmilch und Vanilleextrakt dazu",
-        "20-30 Min. quellen lassen, dann NOCHMAL durchrühren. Danach ist die Konsistenz fertig",
-        "In EINE Schale (~1.5 kg), kalt stellen. Sie hält 3 Tage und enthält 9 Portionen: Philipp nimmt 2 am Tag, Eunice 1",
-        "Eine Portion sind ca. 165 g. Einmal abwiegen, damit ihr wisst, wie das in eurer Schale aussieht — danach schaufeln",
-        "Banane erst beim Essen in Scheiben unterheben, ca. 60 g pro Portion. Nicht vorher: sie wird in drei Tagen braun und matschig",
-        "Wer mehr Ballaststoffe will, nimmt statt der Banane 112 g gefrorene Beeren — bringt 3 g Fibre mehr und kühlt die Schale"
+        "Trockenes zuerst: Whey, Haferkleie, Leinsamen, Kakao, Zimt und Salz gründlich mischen",
+        "Nussmus mit ZWEI Dritteln der Mandelmilch glattrühren — erst dann unter den Skyr, sonst bleiben Klumpen",
+        "Trockenmischung und Vanilleextrakt unterrühren, 20-30 Min. quellen lassen, dann NOCHMAL durchrühren",
+        "In EINE Schale (~1.5 kg), kalt stellen. 9 Portionen: Philipp 2 am Tag, Eunice 1. Eine Portion sind ca. 155 g",
+        "Das letzte Drittel Mandelmilch bleibt im Kühlschrank. Haferkleie und Leinsamen quellen drei Tage weiter — ab Tag 2 pro Portion einen Schluck unterrühren, dann ist die Konsistenz wie an Tag 1",
+        "Banane erst beim Essen unterheben, ca. 30 g. Wer mehr Ballaststoffe will, nimmt stattdessen 80 g gefrorene Beeren"
       ],
       "computed": {
-        "calories": 274.6,
-        "proteinG": 29.4,
-        "carbsG": 32.1,
-        "fiberG": 8.6,
-        "fatG": 6.2,
+        "calories": 268.6,
+        "proteinG": 29.9,
+        "carbsG": 25.0,
+        "fiberG": 6.9,
+        "fatG": 8.4,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {

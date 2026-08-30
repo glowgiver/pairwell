@@ -51,11 +51,39 @@ def strip_buildonly(kitchen):
     return out
 
 
+
+def _fine_tune_fiber():
+    """The capped day-level fibre adjustment, resolved to what the page needs.
+
+    Deliberately read from kitchen.json's dayFineTuning and NOT from topUps:
+    adapt_recipe.py must never see psyllium husk, because on cost it would win
+    every proposal it is offered for. A glass of water at the end of a day is a
+    different question from what belongs stirred into a braise.
+    """
+    kit = json.load(open(KITCHEN, encoding="utf-8"))
+    cands = (kit.get("dayFineTuning") or {}).get("fiber") or []
+    if not cands:
+        return None
+    c = cands[0]
+    food = _foods.get(c["food"])
+    if not food or not food["per100g"]["fiberG"]:
+        return None
+    return {
+        "name": food["name"],
+        "maxG": c["maxG"],
+        "note": c.get("note", ""),
+        "fiberPerG": round(food["per100g"]["fiberG"] / 100.0, 4),
+    }
+
+
 data = {
     "kitchen": strip_buildonly(json.load(open(KITCHEN, encoding="utf-8"))),
     "profiles": strip_body(json.load(open(PROFILES, encoding="utf-8"))),
     "recipes": _recipes,
     "foodNames": dict((k, v["name"]) for k, v in _foods.items()),
+    # Resolved here rather than in the page for the same reason foodNames exists:
+    # the page gets the one number it needs, not the nutrition table it came from.
+    "fineTuneFiber": _fine_tune_fiber(),
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
@@ -113,6 +141,12 @@ HTML = """<!DOCTYPE html>
 
   /* ---- the day ledger: what the person switcher is for on this page ---- */
   .ledger{padding:2px 0}
+  /* The fine-tuning line sits under the ledger and only appears on a fully
+     planned day. Quiet by default, amber when the gap is too big for powder. */
+  .finetune{margin:8px 0 0;padding:10px 12px;border-radius:10px;font:400 13px/1.45 var(--f-read);
+            background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--food)}
+  .finetune b{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+  .finetune.warn{background:transparent;border-style:dashed;color:var(--muted)}
   .lrow{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:13px 18px;align-items:baseline}
   .lrow+.lrow{border-top:1px solid var(--line)}
   .lrow .lb{font-size:16px;font-weight:600;letter-spacing:-.01em}
@@ -511,6 +545,32 @@ function ledgerHTML(who){
     esc(PW.PEOPLE[who].name) + '\u2019s day</span>' +
     '<span class="meta">' + n0(t.calories) + ' kcal &middot; ' + n0(t.proteinG) + ' g P</span>' +
     '</div><div class="ledger">' + body + '</div></div>';
+
+  /* The last few grams. Only once lunch, dinner AND a snack are all picked is
+     the day actually specified — before that "left over" is just budget, not a
+     shortfall. Capped hard: psyllium is fine for a rounding error and wrong as
+     a replacement for a dish, and the cap is what keeps that line honest. */
+  /* The last few grams. Only once lunch, dinner AND a snack are all picked is
+     the day actually specified — before that "left over" is budget, not a
+     shortfall. Capped hard: psyllium is fine for a rounding error and wrong as
+     a replacement for a dish, and the cap is what keeps that line honest. */
+  var ft = D.fineTuneFiber;
+  if(ft && PLAN.lunch && PLAN.dinner && PLAN.snack){
+    var open = rows[rows.length - 1];
+    if(open.left && open.fib > 0.05){
+      var needG = open.fib / ft.fiberPerG;
+      if(needG <= ft.maxG){
+        card += '<div class="finetune"><b>' + g(needG) + ' g ' + esc(ft.name) + '</b> ' +
+                'schlie\u00dfen die letzten ' + g(open.fib) + ' g Ballaststoffe \u2014 ' +
+                esc(ft.note) + '.</div>';
+      } else {
+        card += '<div class="finetune warn">' + g(open.fib) + ' g Ballaststoffe fehlen \u2014 ' +
+                'das w\u00e4ren ' + g(needG) + ' g ' + esc(ft.name) + ', mehr als die ' +
+                ft.maxG + ' g, die hier erlaubt sind. Die L\u00fccke geh\u00f6rt ins Gericht, ' +
+                'nicht ins Pulver.</div>';
+      }
+    }
+  }
 
   /* The ingredients only exist for whoever has a fixed breakfast. */
   if(prof.fixedBreakfast){
