@@ -381,84 +381,42 @@
 
   /* ---- what goes in the bowl ----------------------------------------- */
   .blockdial{padding:0;border-top:1px solid var(--line);background:var(--surface-2)}
-  .bowl{padding:13px 18px;border-bottom:1px solid var(--line)}
-  .bowl-k{
-    font-family:var(--f-data);font-size:12px;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--muted2);margin-bottom:4px;
+    .bd-row{
+    display:grid;grid-template-columns:1fr auto;
+    align-items:center;gap:4px 12px;
+    padding:13px 18px;border-bottom:1px solid var(--line);
   }
-  .bowl-v{font-size:16px;line-height:1.45;color:var(--text)}
-  .bowl-v b{font-family:var(--f-data);font-weight:700}
-  .bowl-v i{color:var(--muted2);font-style:italic;font-size:14px}
-  .bowl-v .plus{color:var(--muted2)}
-  .bowl-v .g{font-family:var(--f-data);font-size:13px;color:var(--muted2)}
-  .bowl-m{
-    margin-top:4px;font-family:var(--f-data);font-size:13px;color:var(--muted);
-    font-variant-numeric:tabular-nums;
-  }
-
-  .dp-carb{
-    display:inline-block;margin-right:8px;
-    font-family:var(--f-data);font-size:12px;letter-spacing:.06em;
-    color:var(--muted2);
-  }
-  .dp-carb.own{color:var(--text);font-weight:600}
-  .dishpick.picked .dp-carb{color:inherit;opacity:.8}
-
-  .stock{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-  .stock-row{display:flex;align-items:center;gap:12px}
-  .stock-row label{flex:1;font-size:15px;color:var(--text)}
-  .stock-step{display:flex;align-items:center;gap:2px}
-  .stock-out{
-    margin-top:10px;font-family:var(--f-read);font-size:15px;
-    line-height:1.5;color:var(--muted);
-  }
-  .stock-out b{font-family:var(--f-data);color:var(--text);font-weight:700}
-  .stock-add{
-    margin-top:11px;width:100%;min-height:var(--tap);
-    border:1px solid var(--line);border-radius:11px;background:var(--surface);
-    color:var(--muted);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
-  }
-  .stock-add:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-  .bd-note{
-    padding:0 18px 14px;font-family:var(--f-read);font-size:14.5px;
-    line-height:1.55;color:var(--muted);
-  }
-
-  .bd-head{
-    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
-    padding:12px 18px 6px;font-size:14px;font-weight:600;color:var(--text);
-  }
-  .bd-head span{font-family:var(--f-data);font-size:12.5px;color:var(--muted2);margin-left:auto}
-  /* Name and stepper on one line, the consequence underneath. Three columns
-     on a 375px screen crushed the numbers into four wrapped lines. */
-  .bd-row{
-    display:grid;grid-template-columns:1fr auto;align-items:center;
-    gap:6px 12px;padding:8px 18px 12px;
-  }
-  .bd-who{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600}
+  .bd-who{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700}
   .bd-who .dot{width:8px;height:8px;border-radius:50%;background:var(--who)}
-  .bd-step{display:flex;align-items:center;gap:2px}
+  .bd-step{display:flex;align-items:center;gap:2px;justify-self:end}
   .bd-b{
-    width:var(--tap);height:var(--tap);border:1px solid var(--line);
-    background:var(--surface);color:var(--text);border-radius:11px;
-    font-family:inherit;font-size:20px;line-height:1;cursor:pointer;
+    width:38px;height:38px;border:1px solid var(--line);
+    background:var(--surface);color:var(--text);border-radius:10px;
+    font-family:inherit;font-size:19px;line-height:1;cursor:pointer;
   }
   .bd-b:disabled{opacity:.35;cursor:default}
   .bd-b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .bd-n{
-    min-width:2.4em;text-align:center;font-family:var(--f-data);
-    font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;
+    min-width:1.8em;text-align:center;font-family:var(--f-data);
+    font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;
   }
+  .bd-what{grid-column:1/3;font-size:15px;line-height:1.45;color:var(--text)}
+  .bd-what b{font-family:var(--f-data);font-weight:700}
+  .bd-what i{color:var(--muted2);font-style:italic;font-size:14px}
+  .bd-what .plus{color:var(--muted2)}
+  .bd-what .g{font-family:var(--f-data);font-size:13px;color:var(--muted2)}
   .bd-out{
     grid-column:1/3;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
     font-family:var(--f-data);font-size:12.5px;color:var(--muted2);
     font-variant-numeric:tabular-nums;
   }
-  .bd-out b{font-size:17px;color:var(--text)}
+  .bd-out b{font-size:16px;color:var(--text)}
   .bd-out .bd-delta{margin-left:auto}
-  .bd-delta{color:var(--warn)}
-  .bd-delta.ok{color:var(--muted2)}
+  /* Context, not a verdict. 520 is the mirror-MEAL reference; whether the day
+     works is decided by the day check on Plan, and a bigger plate there is
+     often exactly right for the person with the bigger day. Colouring this
+     red said "wrong" about something that is usually fine. */
+  .bd-delta{color:var(--muted2)}
 
   /* The library, kept reachable but no longer three thousand pixels tall. */
   details.library > summary{font-weight:600}
@@ -898,68 +856,59 @@ function plateFor(r, n){
 /* What actually goes in the bowl, in grams, for one person. The page could
    already derive this and never said it in one place: the dish grams sat in
    the splitter and the block count sat in the dial. */
-function bowlLineHTML(r, who){
-  var n = blocksFor(r, who);
-  var w = loadDishWeight(r.id);
-  var gpb = D.kitchen.asianMacroBase.computed.gramsPerBlock;
-  var dishG = w ? w / r.servings : null;
-  var pl = plateFor(r, n);
-  return '<div class="bowl">' +
-    '<div class="bowl-k">' + esc(PW.PEOPLE[who].name) + '’s bowl</div>' +
-    '<div class="bowl-v">' +
-      (dishG ? '<b>' + n0(dishG) + ' g</b> ' + esc(r.title) : esc(r.title) + ' <i>(weigh the batch)</i>') +
-      (n > 0
-        ? ' <span class="plus">+</span> <b>' + n1(n) + '</b> base block' +
-          (n === 1 ? '' : 's') + ' <span class="g">(' + n0(gpb * n) + ' g)</span>'
-        : (r.carb === "own"
-            ? ' <span class="g">— no block, it brings its own carb</span>'
-            : '')) +
-    '</div>' +
-    '<div class="bowl-m">' + n0(pl.kcal) + ' kcal &middot; P ' + n1(pl.p) +
-      ' &middot; Fib ' + n1(pl.fib) + ' &middot; F ' + n1(pl.fat) + '</div>' +
-  '</div>';
-}
 
+/* One row per person: what goes in their bowl, the dial that changes it, and
+   what it comes to. This was three separate things stacked — a "bowl" line
+   each, then a dial row each with the same totals again — so a plate where
+   both take one block printed the identical figures four times over. */
 function blockDialHTML(r){
   var target = D.profiles.mirrorMeals.lunch;
-  /* Own-carb dishes still show both bowls — they just have no dial, because
-     there is nothing to turn. */
-  if(!takesBlocks(r)){
-    return '<div class="blockdial">' +
-      PW.ORDER.map(function(w){ return bowlLineHTML(r, w); }).join("") +
-      '<div class="bd-note">Eaten as it is. The carb is already in the dish, so ' +
-      'no Asian Macro Block goes beside it.</div></div>';
-  }
+  var gpb = D.kitchen.asianMacroBase.computed.gramsPerBlock;
+  var w = loadDishWeight(r.id);
+  var dishG = w ? w / r.servings : null;
+  var dial = takesBlocks(r);
+
   var rows = PW.ORDER.map(function(who){
-    var n = blockCount(who);
+    var n = blocksFor(r, who);
     var pl = plateFor(r, n);
     var over = pl.kcal - target.calories;
+
+    /* Until the batch is weighed we can still say what the bowl IS, just not
+       in grams. "weigh the batch dish + 2 blocks" was not a sentence; the
+       prompt for the scale is in the splitter directly below. */
+    var what = (dishG ? '<b>' + n0(dishG) + ' g</b> of the dish'
+                      : '<span class="g">one serving</span>') +
+      (n > 0 ? ' <span class="plus">+</span> <b>' + n0(n) + '</b> block' +
+               (n === 1 ? '' : 's') + ' <span class="g">(' + n0(gpb * n) + ' g)</span>'
+             : ' <span class="g">— no block, it brings its own carb</span>');
+
     return '<div class="bd-row" style="--who:' + PW.PEOPLE[who].color + '">' +
       '<div class="bd-who"><span class="dot"></span>' + esc(PW.PEOPLE[who].name) + '</div>' +
-      '<div class="bd-step">' +
-        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="-1"' +
-          (n <= 0 ? ' disabled' : '') + ' aria-label="One block fewer">&minus;</button>' +
-        '<span class="bd-n">' + n0(n) + '</span>' +
-        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="1"' +
-          (n >= 4 ? ' disabled' : '') + ' aria-label="One block more">+</button>' +
-      '</div>' +
+      (dial
+        ? '<div class="bd-step">' +
+            '<button type="button" class="bd-b" data-blk="' + who + '" data-d="-1"' +
+              (n <= 0 ? ' disabled' : '') + ' aria-label="One block fewer">&minus;</button>' +
+            '<span class="bd-n">' + n0(n) + '</span>' +
+            '<button type="button" class="bd-b" data-blk="' + who + '" data-d="1"' +
+              (n >= 4 ? ' disabled' : '') + ' aria-label="One block more">+</button>' +
+          '</div>'
+        : '<div class="bd-step"></div>') +
+      '<div class="bd-what">' + what + '</div>' +
       '<div class="bd-out"><b>' + n0(pl.kcal) + ' kcal</b>' +
         '<span>P ' + n1(pl.p) + ' &middot; Fib ' + n1(pl.fib) + ' &middot; F ' + n1(pl.fat) + '</span>' +
-        '<span class="bd-delta' + (Math.abs(over) <= 25 ? ' ok' : '') + '">' +
-          (over >= 0 ? '+' : '') + n0(over) + ' vs ' + n0(target.calories) + '</span>' +
+        '<span class="bd-delta">' +
+          (over >= 0 ? '+' : '−') + n0(Math.abs(over)) + ' vs the ' +
+          n0(target.calories) + ' meal</span>' +
       '</div></div>';
   }).join("");
 
-  var bowls = PW.ORDER.map(function(w){ return bowlLineHTML(r, w); }).join("");
-
-  return '<div class="blockdial">' + bowls +
-    '<div class="bd-head">Base blocks on the plate' +
-      '<span>' + n0(perBlock().calories) + ' kcal each &middot; baseline ' +
-      n0(baselineBlocks()) + '</span></div>' + rows +
-    '<div class="bd-note">Whole blocks only — a block is a frozen ' +
-      n0(D.kitchen.asianMacroBase.computed.gramsPerBlock) +
-      ' g puck out of the mould, and there is no half of one.</div>' +
-    '</div>';
+  return '<div class="blockdial">' + rows +
+    (dial
+      ? '<div class="bd-note">Whole blocks only — ' + n0(gpb) +
+        ' g frozen, no halves. ' + n0(perBlock().calories) + ' kcal each.</div>'
+      : '<div class="bd-note">The carb is already in the dish, so no block ' +
+        'goes beside it.</div>') +
+  '</div>';
 }
 
 /* ---- the cooked weight of a dish's batch --------------------------------
@@ -1557,6 +1506,33 @@ function setBlockStock(v){
   try{ localStorage.setItem("hub.kitchen.blockstock", String(v)); }catch(e){}
 }
 
+/* How many blocks this plan wants, what the freezer already holds, and how
+   many whole batches that leaves to cook. Shop and Cook both need the answer:
+   Shop to buy for it, Cook because that is where you stand when you make them.
+   It used to live only on Shop, while Shop's own note pointed at Cook for the
+   method — so the number and the method were on different tabs. */
+function blockPlan(){
+  var b = shoppingBasis();
+  if(!b || !D.baseShopping) return null;
+  var need = Math.ceil(b.blocks);
+  if(!(need > 0)) return null;
+  var per = D.baseShopping.blocksPerBatch || 10;
+  var have = blockStock();
+  var short = Math.max(need - have, 0);
+  var batches = Math.ceil(short / per);
+  return { need:need, have:have, short:short, per:per,
+           batches:batches, spare: batches * per - short };
+}
+
+/* Amount strings scale with the batch count; "1 tsp" and "450 ml" included. */
+function scaleAmount(amount, factor){
+  var m = /^([0-9.,]+)\s*(g|ml|tsp)$/.exec(String(amount).trim());
+  if(!m) return amount;
+  var v = parseFloat(m[1].replace(",", ".")) * factor;
+  if(m[2] === "tsp") return (Math.round(v * 2) / 2) + " tsp";
+  return (v < 50 ? Math.round(v) : Math.round(v / 5) * 5) + " " + m[2];
+}
+
 /* The block has ingredients you have to buy, and the list used to end at
    "plus 10 Asian Base Blocks" — a number with no shopping in it. Scaled from
    the batch the recipe is written for. */
@@ -1564,21 +1540,9 @@ function baseBlockShoppingHTML(b){
   var need = Math.ceil(b.blocks);
   if(!(need > 0) || !D.baseShopping) return "";
   var per = D.baseShopping.blocksPerBatch || 10;
-  var have = blockStock();
-  var short = Math.max(need - have, 0);
-  /* You cook whole batches. "0.1 batches" is the same mistake as half a
-     block: the tray holds what it holds, and the surplus goes in the
-     freezer for next time, which is the point of cooking them ahead. */
-  var batches = Math.ceil(short / per);
-  var spare = batches * per - short;
-
-  function scale(amount){
-    var m = /^([0-9.,]+)\s*(g|ml|tsp)$/.exec(amount.trim());
-    if(!m) return amount;
-    var v = parseFloat(m[1].replace(",", ".")) * batches;
-    if(m[2] === "tsp") return (Math.round(v * 2) / 2) + " tsp";
-    return (v < 50 ? Math.round(v) : Math.round(v / 5) * 5) + " " + m[2];
-  }
+  var bp = blockPlan();
+  var have = bp.have, short = bp.short, batches = bp.batches, spare = bp.spare;
+  function scale(amount){ return scaleAmount(amount, batches); }
 
   var stock =
     '<div class="stock">' +
@@ -1743,13 +1707,25 @@ function render(){
   /* The base block is a component cooked the same way every time, so it folds
      like the dishes do rather than occupying twelve hundred pixels between the
      splitter and the day. */
+  /* Cook is where you stand when you make these, so the count belongs here
+     too — it used to live only on Shop, while Shop pointed at Cook for the
+     method. The amounts scale with it; showing one batch while asking for two
+     is how you end up with half the rice. */
+  var bp = blockPlan();
+  var nb = bp ? bp.batches : 1;
   var ing = '<div class="card cookcard"><details><summary>' +
     '<span class="k">Base block</span><span class="title">Ingredients</span>' +
-    '<span class="meta">' + n0(comp.batchTotal.calories) + ' kcal total</span></summary>' +
+    '<span class="meta">' + (bp ? n0(nb) + ' batch' + (nb === 1 ? '' : 'es') +
+      ' &middot; ' + n0(nb * bp.per) + ' blocks' : 'one batch') + '</span></summary>' +
+    (bp
+      ? '<div class="rnote">This plan needs <b>' + n0(bp.need) + '</b>, the freezer has <b>' +
+        n0(bp.have) + '</b>. Make <b>' + n0(nb) + '</b> batch' + (nb === 1 ? '' : 'es') +
+        (bp.spare > 0 ? ' — ' + n0(bp.spare) + ' spare for next time' : '') + '.</div>'
+      : '') +
     '<ul class="ing">' +
     base.ingredients.map(function(i){
       return '<li><div class="t">' + esc(i.item) + '</div>' +
-             '<div class="amt">' + esc(i.amount) + '</div></li>';
+             '<div class="amt">' + esc(scaleAmount(i.amount, nb)) + '</div></li>';
     }).join("") + '</ul></details></div>';
 
   var steps = '<div class="card cookcard"><details><summary>' +
