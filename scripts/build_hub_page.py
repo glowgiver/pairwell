@@ -335,7 +335,8 @@ function render(){
     food = food.replace("</a>",
       '</a><div class="phase"><div class="pt">' + esc(ph.name) + '</div>' +
       '<p>' + esc(ph.expect) + '</p>' +
-      '<div class="pm">was ' + esc(String(ph.was)) + ' kcal <span class="sep">·</span> ' +
+      '<div class="pm">' + (ph.was == null ? '' :
+        'was ' + esc(String(ph.was)) + ' kcal <span class="sep">·</span> ') +
       'review ' + esc(ph.reviewOn) + '</div></div>');
   }
 

@@ -102,7 +102,17 @@
       "notes": [
         "picky eater, strong taste preferences — recipe selection must pass her taste test",
         "~1 year training experience, naturally strong lower body development"
-      ]
+      ],
+      "_phase": {
+        "name": "Provisional — modelled, not measured",
+        "startedOn": "2026-08-30",
+        "reviewOn": "2026-09-26",
+        "why": "Her four targets come from an activity-factor model and nothing else. The same model said Philipp's maintenance was 2424-2688 kcal; MacroFactor measured 1801. A model that was 600 kcal wrong about one person in this household is not evidence about the other. 1580 is a starting guess with roughly +-300 kcal in it, and it should be treated as one until there is an expenditure line to check it against.",
+        "theOpenQuestion": "Whether 45 g of protein fits outside lunch and dinner in practice. On paper it is 250 g of skyr and a scoop of whey; in a real morning it is a habit she does not have yet.",
+        "expect": "Two weeks of hitting 3 of 4 targets on most days. Not perfection — the question is whether the shape of the day is livable, not whether the arithmetic closes.",
+        "thenWhat": "If the protein lands: keep 125 and start trusting the number. If breakfast keeps coming up short, fall back to protein 120 / fat 47 / net carbs 153 — already worked out, same 1580 kcal, and it costs 0.08 g/kg. Do not fall back by eating less protein while leaving the target at 125; change the target, so the report keeps telling the truth.",
+        "blocking": "She has no MacroFactor data at all — private/macrofactor holds only philipp. Until she logs, this phase can only be reviewed against the scale and how she feels, which is exactly the weak evidence that produced the 600 kcal error. Two weeks of logging before 2026-09-26 would give the first real read."
+      }
     }
   },
   "mirrorMeals": {

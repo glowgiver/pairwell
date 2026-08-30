@@ -235,9 +235,16 @@ def energy_balance(profiles, training):
         safe_lo, safe_hi = 0.005 * w * 7700 / 7, 0.010 * w * 7700 / 7
         phase = p.get("_phase") or {}
         if phase:
-            print("    PHASE — %s, since %s, review %s (was %s kcal)"
+            # A phase need not have moved the calorie target. Eunice's says the
+            # numbers are provisional, not that they changed, so "was" is absent
+            # and printing "was None" would invent a history.
+            was = ("" if phase.get("was") is None
+                   else " (was %s kcal)" % phase["was"])
+            print("    PHASE — %s, since %s, review %s%s"
                   % (phase.get("name"), phase.get("startedOn"),
-                     phase.get("reviewOn"), phase.get("was")))
+                     phase.get("reviewOn"), was))
+            if phase.get("blocking"):
+                print("      BLOCKED — %s" % phase["blocking"])
         meas = measured_expenditure(key)
         if meas:
             print("    MEASURED — MacroFactor, %d days to %s" % (meas["n"], meas["to"]))
