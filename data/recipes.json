@@ -76,6 +76,708 @@
         "target": "none (not rescaled)",
         "notes": []
       }
+    },
+    {
+      "id": "baked-feta-salmon",
+      "title": "Baked Feta Salmon",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 1.0,
+      "cuisine": "mediterranean",
+      "source": "inbox/Baked Feta Salmon.pdf",
+      "ingredients": [
+        {
+          "food": "lachs",
+          "g": 615.0
+        },
+        {
+          "food": "kirschtomaten",
+          "g": 200.0
+        },
+        {
+          "food": "feta",
+          "g": 200.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 45.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 20.0
+        },
+        {
+          "food": "zitronensaft",
+          "g": 30.0
+        }
+      ],
+      "steps": [
+        "Ofen auf 220°C vorheizen",
+        "Kirschtomaten in Auflaufform verteilen, mit etwas Olivenöl beträufeln",
+        "Feta-Block in die Mitte, umgeben von den Tomaten",
+        "Restliches Olivenöl mit Knoblauch, Zitronenzeste, Zitronensaft, Oregano, Thymian verrühren",
+        "Lachsfilets um Feta und Tomaten anordnen, mit der Marinade übergießen",
+        "20-25 Min. backen, bis der Lachs gar ist"
+      ],
+      "computed": {
+        "calories": 604.5,
+        "proteinG": 39.9,
+        "carbsG": 12.7,
+        "fiberG": 1.2,
+        "fatG": 43.0,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "chocolate-peanut-butter-protein-banana-smoothie",
+      "title": "Chocolate Peanut Butter Protein Banana Smoothie",
+      "slot": "snack",
+      "person": null,
+      "servings": 2,
+      "blocks": 0.0,
+      "cuisine": "none",
+      "source": "inbox/Chocolate Peanut Butter Protein Banana Smoothie.pdf",
+      "ingredients": [
+        {
+          "food": "banane",
+          "g": 140.0
+        },
+        {
+          "food": "kakaopulver",
+          "g": 10.0
+        },
+        {
+          "food": "erdnussbutter",
+          "g": 10.0
+        },
+        {
+          "food": "vanilleextrakt",
+          "g": 4.0
+        },
+        {
+          "food": "whey",
+          "g": 60.0
+        },
+        {
+          "food": "mandelmilch",
+          "g": 240.0
+        }
+      ],
+      "steps": [
+        "Alle Zutaten in den Hochleistungsmixer geben",
+        "1-2 Min. auf höchster Stufe mixen bis glatt",
+        "Bei Bedarf mit mehr Mandelmilch verdünnen"
+      ],
+      "computed": {
+        "calories": 243.9,
+        "proteinG": 27.7,
+        "carbsG": 22.3,
+        "fiberG": 4.3,
+        "fatG": 6.3,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    },
+    {
+      "id": "crispy-sweet-chili-chicken",
+      "title": "Crispy Sweet Chili Chicken",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 1.0,
+      "cuisine": "asian",
+      "source": "inbox/Crispy Sweet Chili Chicken.pdf",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 740.0
+        },
+        {
+          "food": "eier",
+          "g": 35.0
+        },
+        {
+          "food": "speisestaerke",
+          "g": 60.0
+        },
+        {
+          "food": "leinsamen",
+          "g": 295.0
+        },
+        {
+          "food": "suess_chili_sauce",
+          "g": 125.0
+        },
+        {
+          "food": "sojasauce",
+          "g": 60.0
+        },
+        {
+          "food": "reisessig",
+          "g": 60.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 5.0
+        },
+        {
+          "food": "ingwer",
+          "g": 5.0
+        },
+        {
+          "food": "sriracha",
+          "g": 5.0
+        },
+        {
+          "food": "sesamoel",
+          "g": 5.0
+        }
+      ],
+      "steps": [
+        "Hähnchenstücke mit Ei, Speisestärke, Leinsamen, Paprika, Knoblauchpulver, Salz, Pfeffer vermengen, fest kneten bis eine Paste entsteht",
+        "Sauce: Süß-Chili-Sauce, Sojasauce, Reisessig, Knoblauch, Ingwer, Sriracha, Sesamöl verrühren",
+        "Air Fry 200°C, 14 Min., nach 7 Min. wenden (2 Batches)",
+        "Sauce im Topf einkochen bis sie leicht andickt",
+        "Hähnchen zurück in den Topf, in der Sauce schwenken"
+      ],
+      "computed": {
+        "calories": 523.8,
+        "proteinG": 40.0,
+        "carbsG": 24.9,
+        "fiberG": 14.1,
+        "fatG": 24.8,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "korean-spicy-chicken-stew-dakbokkeumtang",
+      "title": "Korean Spicy Chicken Stew (Dakbokkeumtang)",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 1.0,
+      "cuisine": "asian",
+      "source": "inbox/Korean Spicy Chicken Stew.pdf",
+      "ingredients": [
+        {
+          "food": "haehnchenschenkel",
+          "g": 1085.0
+        },
+        {
+          "food": "baby_kartoffeln",
+          "g": 200.0
+        },
+        {
+          "food": "karotte",
+          "g": 200.0
+        },
+        {
+          "food": "zwiebel",
+          "g": 150.0
+        },
+        {
+          "food": "zucchini",
+          "g": 150.0
+        },
+        {
+          "food": "fruehlingszwiebel",
+          "g": 15.0
+        },
+        {
+          "food": "gochugaru",
+          "g": 60.0
+        },
+        {
+          "food": "gochujang",
+          "g": 30.0
+        },
+        {
+          "food": "doenjang",
+          "g": 15.0
+        },
+        {
+          "food": "austernsauce",
+          "g": 60.0
+        },
+        {
+          "food": "mirin",
+          "g": 30.0
+        },
+        {
+          "food": "zucker",
+          "g": 15.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 22.0
+        },
+        {
+          "food": "ingwer",
+          "g": 5.0
+        },
+        {
+          "food": "huehnerbruehe",
+          "g": 80.0
+        },
+        {
+          "food": "sesamoel",
+          "g": 5.0
+        }
+      ],
+      "steps": [
+        "Sauce: Gochugaru, Gochujang, Doenjang, Austernsauce, Mirin, Zucker, Knoblauch, Ingwer, Brühe verrühren",
+        "Hähnchen trocken tupfen, in 5cm-Stücke schneiden",
+        "Scharf anbraten, 2 Min. pro Seite",
+        "Zwiebel, Kartoffeln, Karotte in den Topf, Hähnchen darauf, Sauce darüber",
+        "Pressure Cook High, 8 Min., 5 Min. natürlich ablassen",
+        "Zucchini unterheben, offen 3-4 Min. einkochen",
+        "Frühlingszwiebel und Sesamöl unterrühren"
+      ],
+      "computed": {
+        "calories": 428.9,
+        "proteinG": 39.9,
+        "carbsG": 31.1,
+        "fiberG": 6.1,
+        "fatG": 16.3,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "lemon-herb-roasted-butterflied-chicken",
+      "title": "Lemon Herb Roasted Butterflied Chicken",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 1.0,
+      "cuisine": "mediterranean",
+      "source": "inbox/Lemon Herb Roasted Butterflied Chicken.pdf",
+      "ingredients": [
+        {
+          "food": "haehnchen_ganz",
+          "g": 830.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 15.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 10.0
+        }
+      ],
+      "steps": [
+        "Ofen auf 220°C vorheizen",
+        "Olivenöl, Salz, Pfeffer, Knoblauch, Thymian, Rosmarin verrühren",
+        "Zitronenscheiben in die Auflaufform legen",
+        "Butterflied-Hähnchen darauf platzieren, mit der Marinade bestreichen",
+        "40-45 Min. backen, bis die Kerntemperatur 74°C erreicht",
+        "5 Min. ruhen lassen vor dem Aufschneiden"
+      ],
+      "computed": {
+        "calories": 518.1,
+        "proteinG": 40.0,
+        "carbsG": 7.4,
+        "fiberG": 0.5,
+        "fatG": 35.4,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "orange-ginger-chicken-light",
+      "title": "Orange Ginger Chicken, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 1.0,
+      "cuisine": "asian",
+      "source": "umgebaut von inbox/Oranger Ginger Chicken with Quinoa.pdf — weniger Zucker, Gemüse rein, Quinoa raus zugunsten des Asian Base Block",
+      "ingredients": [
+        {
+          "food": "haehnchenschenkel",
+          "g": 725.0
+        },
+        {
+          "food": "rapsoel",
+          "g": 10.0
+        },
+        {
+          "food": "orangensaft",
+          "g": 120.0
+        },
+        {
+          "food": "orangenmarmelade",
+          "g": 60.0
+        },
+        {
+          "food": "honig",
+          "g": 15.0
+        },
+        {
+          "food": "sojasauce",
+          "g": 30.0
+        },
+        {
+          "food": "reisessig",
+          "g": 15.0
+        },
+        {
+          "food": "ingwer",
+          "g": 10.0
+        },
+        {
+          "food": "brokkoli",
+          "g": 200.0
+        },
+        {
+          "food": "belugalinsen_gekocht",
+          "g": 890.0
+        }
+      ],
+      "steps": [
+        "Hähnchen im Öl scharf anbraten (kein Mehl-Dredge)",
+        "Orangensaft, Marmelade, Honig, Sojasauce, Reisessig, Ingwer aufkochen bis eingedickt",
+        "Belugalinsen kurz mit erwärmen",
+        "Brokkoli getrennt dampfgaren oder kurz mitdünsten",
+        "Hähnchen in der Sauce schwenken, mit Brokkoli, Belugalinsen und 1 Asian Macro Base Block servieren"
+      ],
+      "computed": {
+        "calories": 449.7,
+        "proteinG": 40.0,
+        "carbsG": 46.9,
+        "fiberG": 14.0,
+        "fatG": 11.9,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "orange-ginger-chicken-with-quinoa",
+      "title": "Orange Ginger Chicken with Quinoa",
+      "slot": "mirror",
+      "person": null,
+      "servings": 6,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "inbox/Oranger Ginger Chicken with Quinoa.pdf",
+      "ingredients": [
+        {
+          "food": "haehnchenschenkel",
+          "g": 1055.0
+        },
+        {
+          "food": "weizenmehl",
+          "g": 40.0
+        },
+        {
+          "food": "rapsoel",
+          "g": 30.0
+        },
+        {
+          "food": "orangensaft",
+          "g": 120.0
+        },
+        {
+          "food": "orangenmarmelade",
+          "g": 160.0
+        },
+        {
+          "food": "sojasauce",
+          "g": 30.0
+        },
+        {
+          "food": "honig",
+          "g": 42.0
+        },
+        {
+          "food": "ingwer",
+          "g": 2.0
+        },
+        {
+          "food": "quinoa_gekocht",
+          "g": 600.0
+        }
+      ],
+      "steps": [
+        "Quinoa nach Packungsanweisung kochen (ergibt 600g)",
+        "Hähnchen mit Salz, Pfeffer würzen, in Mehl wenden",
+        "In Öl portionsweise anbraten, bis durchgegart",
+        "Orangensaft, Marmelade, Sojasauce, Honig, Ingwer in derselben Pfanne aufkochen bis eingedickt",
+        "Hähnchen zurück in die Pfanne, erhitzen",
+        "Über die Quinoa geben"
+      ],
+      "computed": {
+        "calories": 546.0,
+        "proteinG": 40.0,
+        "carbsG": 52.7,
+        "fiberG": 3.2,
+        "fatG": 20.2,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "pho-bo-die-sch-ssel-br-he-separat",
+      "title": "Pho Bo — die Schüssel (Brühe separat)",
+      "slot": "mirror",
+      "person": null,
+      "servings": 5,
+      "blocks": 0.0,
+      "cuisine": "asian",
+      "source": "umgebaut von inbox/pho_bo_recipe.txt — Brühe als Batch-Projekt, nur die Schüssel wird erfasst",
+      "ingredients": [
+        {
+          "food": "reisbandnudeln",
+          "g": 80.0
+        },
+        {
+          "food": "rinderbrust",
+          "g": 515.0
+        },
+        {
+          "food": "rinderfilet",
+          "g": 275.0
+        },
+        {
+          "food": "mungobohnensprossen",
+          "g": 40.0
+        }
+      ],
+      "steps": [
+        "Nudeln nach Packungsangabe kochen oder in warmem Wasser einweichen, kurz aufkochen",
+        "Gekochte Rinderbrust dünn aufschneiden, rohes Filet hauchdünn (Tipp: 20 Min. anfrieren erleichtert das Schneiden)",
+        "Nudeln in die Schüssel, Fleisch obenauf anrichten",
+        "Kochend heiße Brühe darübergießen — die Hitze gart das rohe Filet in Sekunden",
+        "Mit Sprossen, Kräutern, Limette servieren"
+      ],
+      "computed": {
+        "calories": 417.4,
+        "proteinG": 39.9,
+        "carbsG": 13.8,
+        "fiberG": 0.4,
+        "fatG": 21.8,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "sugar-free-oatmeal-date-cookies",
+      "title": "Sugar-Free Oatmeal Date Cookies",
+      "slot": "snack",
+      "person": null,
+      "servings": 15,
+      "blocks": 0.0,
+      "cuisine": "none",
+      "source": "inbox/Sugar-Free Oatmeal Date Cookies.pdf",
+      "ingredients": [
+        {
+          "food": "medjool_datteln",
+          "g": 113.0
+        },
+        {
+          "food": "butter",
+          "g": 56.0
+        },
+        {
+          "food": "eier",
+          "g": 25.0
+        },
+        {
+          "food": "weizenmehl",
+          "g": 46.0
+        },
+        {
+          "food": "haferflocken",
+          "g": 45.0
+        },
+        {
+          "food": "natron",
+          "g": 1.2
+        },
+        {
+          "food": "zimt",
+          "g": 1.2
+        }
+      ],
+      "steps": [
+        "Ofen auf 175°C vorheizen",
+        "Datteln grob hacken, mit Butter und Ei im Food Processor mixen",
+        "Restliche Zutaten dazu, vermengen",
+        "Löffelweise auf ein Blech setzen, leicht flachdrücken",
+        "Ca. 15 Min. backen bis sie zu bräunen beginnen"
+      ],
+      "computed": {
+        "calories": 72.7,
+        "proteinG": 1.1,
+        "carbsG": 9.8,
+        "fiberG": 0.9,
+        "fatG": 3.4,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "none (not rescaled)",
+        "notes": []
+      }
+    },
+    {
+      "id": "tuscan-chicken-light",
+      "title": "Tuscan Chicken, Light",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 1.0,
+      "cuisine": "mediterranean",
+      "source": "umgebaut von inbox/Tuscan Chicken.pdf — Sahne raus, Skyr + Kichererbsen rein",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 295.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 15.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 20.0
+        },
+        {
+          "food": "zwiebel",
+          "g": 40.0
+        },
+        {
+          "food": "getrocknete_tomaten",
+          "g": 55.0
+        },
+        {
+          "food": "babyspinat",
+          "g": 60.0
+        },
+        {
+          "food": "skyr",
+          "g": 130.0
+        },
+        {
+          "food": "parmesan",
+          "g": 25.0
+        },
+        {
+          "food": "kichererbsen_gekocht",
+          "g": 590.0
+        }
+      ],
+      "steps": [
+        "Hähnchen mit italienischen Kräutern, Salz, Pfeffer würzen, in Olivenöl scharf anbraten, beiseite stellen",
+        "Zwiebel im selben Topf andünsten, getrocknete Tomaten und Knoblauch dazu",
+        "Kichererbsen kurz mit erwärmen",
+        "Spinat unterheben bis er zusammenfällt",
+        "Topf von der Platte nehmen, Skyr und Parmesan einrühren (NICHT mehr kochen — Skyr flockt bei starker Hitze)",
+        "Hähnchen zurück in den Topf, bei niedriger Hitze durchziehen lassen"
+      ],
+      "computed": {
+        "calories": 486.6,
+        "proteinG": 40.0,
+        "carbsG": 59.2,
+        "fiberG": 14.0,
+        "fatG": 11.5,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
+    },
+    {
+      "id": "tuscan-chicken",
+      "title": "Tuscan Chicken",
+      "slot": "mirror",
+      "person": null,
+      "servings": 4,
+      "blocks": 1.0,
+      "cuisine": "mediterranean",
+      "source": "inbox/Tuscan Chicken.pdf",
+      "ingredients": [
+        {
+          "food": "huehnerbrust",
+          "g": 555.0
+        },
+        {
+          "food": "olivenoel",
+          "g": 45.0
+        },
+        {
+          "food": "knoblauch",
+          "g": 20.0
+        },
+        {
+          "food": "zwiebel",
+          "g": 40.0
+        },
+        {
+          "food": "getrocknete_tomaten",
+          "g": 55.0
+        },
+        {
+          "food": "babyspinat",
+          "g": 60.0
+        },
+        {
+          "food": "sahne",
+          "g": 357.0
+        },
+        {
+          "food": "parmesan",
+          "g": 25.0
+        }
+      ],
+      "steps": [
+        "Hähnchen mit italienischen Kräutern, Salz, Pfeffer würzen",
+        "In Olivenöl scharf anbraten, beiseite stellen",
+        "Zwiebel andünsten, getrocknete Tomaten und Knoblauch dazu",
+        "Spinat unterheben bis er zusammenfällt",
+        "Sahne und Parmesan einrühren, aufkochen",
+        "Hähnchen zurück in die Pfanne, durchziehen lassen"
+      ],
+      "computed": {
+        "calories": 622.7,
+        "proteinG": 40.1,
+        "carbsG": 20.3,
+        "fiberG": 2.8,
+        "fatG": 43.1,
+        "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
+      },
+      "adapted": {
+        "target": "mirrorMeals",
+        "notes": []
+      }
     }
   ]
 }
