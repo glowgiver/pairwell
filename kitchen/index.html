@@ -944,11 +944,15 @@ function dishIcon(r){
 }
 
 /* "asian" is a continent rather than a cuisine, which kitchen.json already
-   says about itself. Shown as recorded rather than guessed at. */
+   says about itself. Shown as recorded rather than guessed at.
+
+   "none" is a real value here, not a missing one: it tells adapt_recipe.py to
+   filter nothing from the top-up shortlist. It is a fact about the solver, not
+   a label for a person, so it does not get a tag. */
 function cuisineTag(r){
-  return r.cuisine
-    ? '<span class="dp-cuisine">' + esc(r.cuisine.replace(/-/g, " ")) + '</span>'
-    : '';
+  var c = r.cuisine;
+  if(!c || c === "none") return '';
+  return '<span class="dp-cuisine">' + esc(c.replace(/-/g, " ")) + '</span>';
 }
 
 function dishChip(r, opts){
