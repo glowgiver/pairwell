@@ -330,6 +330,7 @@ HTML = """<!DOCTYPE html>
     color:var(--muted2);margin-bottom:10px;
   }
   .ps-hint{text-transform:none;letter-spacing:0;font-family:var(--f-read);color:var(--muted2)}
+  .ps-portion + .ps-portion{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
   .ps-tier{margin:14px 0 6px;font:600 12px/1 var(--f-ui);letter-spacing:.06em;
            text-transform:uppercase;color:var(--muted)}
   .ps-rest{margin-top:14px;border-top:1px solid var(--line)}
@@ -436,13 +437,11 @@ function mealsOfDay(who){
     rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1), tag: picked ? "picked" : "mirror",
                 kcal:c.calories, p:c.proteinG, fib:c.fiberG, fat:c.fatG });
   });
-  if(PLAN.snack){
-    var s = recipeById(PLAN.snack);
-    if(s){
-      rows.push({ label:s.title, tag:"snack", kcal:s.computed.calories, p:s.computed.proteinG,
-                  fib:s.computed.fiberG, fat:s.computed.fatG });
-    }
-  }
+  pickedSnacks(who).forEach(function(id){
+    var c = recipeById(id).computed;
+    rows.push({ label:recipeById(id).title, tag:"snack", kcal:c.calories, p:c.proteinG,
+                fib:c.fiberG, fat:c.fatG });
+  });
 
   var used = rows.reduce(function(a,r){
     a.kcal += r.kcal; a.p += r.p; a.fib += r.fib || 0;
@@ -565,7 +564,8 @@ function ledgerHTML(who){
      shortfall. Capped hard: psyllium is fine for a rounding error and wrong as
      a replacement for a dish, and the cap is what keeps that line honest. */
   var ft = D.fineTuneFiber;
-  if(ft && PLAN.lunch && PLAN.dinner && PLAN.snack){
+  var snacksDone = pickedSnacks(who).length === snackSlots(who);
+  if(ft && PLAN.lunch && PLAN.dinner && snacksDone){
     var open = rows[rows.length - 1];
     if(open.left && open.fib > 0.05){
       var needG = open.fib / ft.fiberPerG;
@@ -709,10 +709,25 @@ function lookForHTML(){
    gap, say) by ranking the other slot's candidates on how well the PAIR closes
    the full day, not just how each dish does alone. ---- */
 function loadPlan(){
+  var empty = {lunch:null, dinner:null, snacks:[]};
   try{
     var v = JSON.parse(localStorage.getItem("hub.kitchen.plan") || "{}");
-    return { lunch: v.lunch || null, dinner: v.dinner || null, snack: v.snack || null };
-  }catch(e){ return {lunch:null, dinner:null, snack:null}; }
+    /* Migration: the plan used to hold one snack for everybody, which quietly
+       understated a two-portion day by a portion. */
+    var snacks = Array.isArray(v.snacks) ? v.snacks.slice() : (v.snack ? [v.snack] : []);
+    return { lunch: v.lunch || null, dinner: v.dinner || null, snacks: snacks };
+  }catch(e){ return empty; }
+}
+
+/* How many portions of the afternoon bowl this person eats. Data, not a guess:
+   the two of them scoop from one tub and he takes twice what she does. */
+function snackSlots(who){
+  var n = D.profiles.people[who].afternoonPortions;
+  return (typeof n === "number" && n > 0) ? n : 1;
+}
+function pickedSnacks(who){
+  return PLAN.snacks.slice(0, snackSlots(who))
+    .filter(function(id){ return id && recipeById(id); });
 }
 function savePlan(p){
   try{ localStorage.setItem("hub.kitchen.plan", JSON.stringify(p)); }catch(e){}
@@ -898,6 +913,12 @@ function remainingBeforeSnack(who){
     var c = picked ? picked.computed : mm[k];
     kcal -= c.calories; p -= c.proteinG; fib -= c.fiberG;
   });
+  /* Portions already chosen are spent, so the next one is ranked against what
+     is actually left rather than against the whole afternoon again. */
+  pickedSnacks(who).forEach(function(id){
+    var c = recipeById(id).computed;
+    kcal -= c.calories; p -= c.proteinG; fib -= c.fiberG;
+  });
   return { kcal:kcal, p:p, fib:fib };
 }
 
@@ -932,48 +953,70 @@ function snackCompareLine(remaining, snack){
 
 function snackSlotHTML(){
   var who = PW.get();
-  var pickedId = PLAN.snack;
-  if(pickedId && !recipeById(pickedId)){ pickedId = null; PLAN.snack = null; savePlan(PLAN); }
+  var slots = snackSlots(who);
+  /* The plan is one household plan — lunch and dinner are mirror meals and the
+     afternoon bowl is shared, so slot 2 simply is Philipp's second portion.
+     Do NOT truncate the list when Eunice is showing: pickedSnacks() slices to
+     the person's own count for display, and truncating here would throw his
+     second pick away the moment she chose anything. */
+  var dirty = false;
+  for(var i = 0; i < slots; i++){
+    if(PLAN.snacks[i] && !recipeById(PLAN.snacks[i])){ PLAN.snacks[i] = null; dirty = true; }
+    if(PLAN.snacks[i] === undefined){ PLAN.snacks[i] = null; }
+  }
+  if(dirty) savePlan(PLAN);
 
-  if(pickedId){
-    var r = recipeById(pickedId);
-    return '<div class="planslot planslot-snack"><div class="ps-label">Snack</div>' +
-      dishChip(r, {slot:"snack", picked:true}) +
-      '<button class="ps-change" data-slot="snack">change</button></div>';
+  function label(i){
+    return slots === 1 ? "Snack" : "Snack " + (i + 1) + " of " + slots;
   }
 
-  var remaining = remainingBeforeSnack(who);
-  var scored = snackRecipes(who).map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
-  scored.sort(function(a,b){ return a.s - b.s; });
-  var body = scored.map(function(x, i){
-    return dishChip(x.r, {
-      slot:"snack",
-      badge: i === 0 ? "closest fit" : "",
-      compareLine: snackCompareLine(remaining, x.r)
-    });
-  }).join("");
-
-  if(!scored.length){
-    return '<div class="planslot planslot-snack"><div class="ps-label">Snack</div>' +
-      '<div class="empty">No snack recipes ready yet.</div></div>';
+  var out = "";
+  var nextOpen = -1;
+  for(var j = 0; j < slots; j++){
+    if(PLAN.snacks[j]){
+      out += '<div class="ps-portion"><div class="ps-label">' + label(j) + '</div>' +
+        dishChip(recipeById(PLAN.snacks[j]), {slot:"snack:" + j, picked:true}) +
+        '<button class="ps-change" data-slot="snack:' + j + '">change</button></div>';
+    }else if(nextOpen < 0){
+      nextOpen = j;
+    }
   }
 
-  return '<div class="planslot planslot-snack"><div class="ps-label">Snack ' +
-    '<span class="ps-hint">&middot; ranked to fit ' + esc(PW.PEOPLE[who].name) +
-    '’s remaining ' + n0(Math.max(remaining.kcal, 0)) + ' kcal</span></div>' +
-    '<div class="ps-list">' + body + '</div></div>';
+  /* One list at a time. Two ranked lists side by side is a decision too many,
+     and the second portion should be ranked against what the first one left. */
+  if(nextOpen >= 0){
+    var remaining = remainingBeforeSnack(who);
+    var scored = snackRecipes(who).map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
+    scored.sort(function(a,b){ return a.s - b.s; });
+    if(!scored.length){
+      out += '<div class="ps-portion"><div class="ps-label">' + label(nextOpen) + '</div>' +
+        '<div class="empty">No snack recipes ready yet.</div></div>';
+    }else{
+      out += '<div class="ps-portion"><div class="ps-label">' + label(nextOpen) +
+        ' <span class="ps-hint">&middot; ranked to fit ' + esc(PW.PEOPLE[who].name) +
+        '\u2019s remaining ' + n0(Math.max(remaining.kcal, 0)) + ' kcal</span></div>' +
+        '<div class="ps-list">' + scored.map(function(x, i){
+          return dishChip(x.r, {
+            slot: "snack:" + nextOpen,
+            badge: i === 0 ? "closest fit" : "",
+            compareLine: snackCompareLine(remaining, x.r)
+          });
+        }).join("") + '</div></div>';
+    }
+  }
+  return '<div class="planslot planslot-snack">' + out + '</div>';
 }
 
 function shoppingListHTML(){
   var lunch = PLAN.lunch ? recipeById(PLAN.lunch) : null;
   var dinner = PLAN.dinner ? recipeById(PLAN.dinner) : null;
   if(!lunch || !dinner) return "";
-  var snack = PLAN.snack ? recipeById(PLAN.snack) : null;
+  var snacks = pickedSnacks(PW.get()).map(recipeById);
 
   var fit = pairFit(lunch, dinner);
   var totals = {}, blocks = 0;
   var chosen = [lunch, dinner];
-  if(snack) chosen.push(snack);
+  snacks.forEach(function(r){ chosen.push(r); });
   chosen.forEach(function(r){
     blocks += (r.blocks || 0) * r.servings;
     (r.ingredients || []).forEach(function(i){
@@ -1008,7 +1051,7 @@ function shoppingListHTML(){
     '<div class="card"><div class="ch"><span class="k">Shopping list</span>' +
     '<span class="meta">' + Object.keys(totals).length + ' items</span>' +
     '<span class="title">' + esc(lunch.title) + ' + ' + esc(dinner.title) +
-      (snack ? ' + ' + esc(snack.title) : '') + '</span></div>' +
+      snacks.map(function(r){ return ' + ' + esc(r.title); }).join('') + '</span></div>' +
     '<ul class="ing">' + rows + '</ul>' +
     (blocks > 0 ? '<div class="rnote">Plus <strong>' + n0(blocks) + ' Asian Base Block' +
       (blocks === 1 ? '' : 's') + '</strong> — see Method below for the batch recipe.</div>' : '') +
@@ -1140,20 +1183,27 @@ function render(){
   });
 }
 
+/* "lunch" and "dinner" address the plan directly; "snack:N" addresses one
+   portion of the afternoon bowl. */
+function setSlot(slot, id){
+  var m = /^snack:([0-9]+)$/.exec(slot);
+  if(m) PLAN.snacks[Number(m[1])] = id;
+  else PLAN[slot] = id;
+  savePlan(PLAN);
+}
+
 /* Delegated once on the stage, not inside render() — the buttons are replaced
    on every render(), but the stage element itself is not. */
 document.getElementById("stage").addEventListener("click", function(ev){
   var pick = ev.target.closest(".dishpick");
   if(pick){
-    PLAN[pick.dataset.slot] = pick.dataset.id;
-    savePlan(PLAN);
+    setSlot(pick.dataset.slot, pick.dataset.id);
     render();
     return;
   }
   var change = ev.target.closest(".ps-change");
   if(change){
-    PLAN[change.dataset.slot] = null;
-    savePlan(PLAN);
+    setSlot(change.dataset.slot, null);
     render();
   }
 });

@@ -52,6 +52,7 @@
         ],
         "_note": "Numbers copied from recipes.json (philipp-overnight-oats), not typed independently. Replaced the whey shaker on 2026-08-30; the shaker stays in the library for days when no jar travels, exactly as the Magerquark bowl stayed for days at home. Overnight oats were never ruled out for him — Eunice's objection was about packing a second jar for work, and that got applied to the whole household without ever being re-checked. They also fix the shaker's one real weakness: a shake does not satiate. The morning went from 0 g of fibre to 5.4."
       },
+      "afternoonPortions": 2,
       "snackBudgetAfterMirrorMeals": {
         "calories": 540.9,
         "proteinG": 52.2,
@@ -93,6 +94,7 @@
         ],
         "_note": "Numbers copied from recipes.json (eunice-ehrmann-pudding-breakfast), not typed independently — the exact duplication Philipp's breakfast has is deliberately not repeated here."
       },
+      "afternoonPortions": 1,
       "breakfastPlusSnackBudget": {
         "_stale": "Written before fixedBreakfast existed for her. The real pudding is 174 kcal / 20 g P / 0.6 g fibre against the 330/28 assumed below — the gap rolls into 'left for snacks' automatically since the kitchen page computes that live, not from this field. Left as-is rather than reconciled by hand; the 2026-09-26 review is the natural point to redo this split against real data.",
         "calories": 540,
@@ -165,7 +167,8 @@
       "savoury_meat": "die-herzhafte-dose-linsen-pute-paprika — 4 portions. Turkey poached, not roasted. Sesame oil and lemon go on at the bowl, never into the batch.",
       "savoury_quark": "kraeuterquark-mit-linsen — 4 portions. Kräuterquark was ruled out because Eunice does not eat Magerquark, but that objection belonged to the SWEET context: the same tang reads wrong in a sweet bowl and right in a herb dip. No lemon, no vinegar.",
       "_swapping": "All three sit at 275-277 kcal, so any mix closes both days on all four macros without recalculating. Verified across every combination.",
-      "_fatCorrection": "2026-08-30: all three were built fat-phobic by reflex, and the aroma in all of them is fat-soluble — herbs, cocoa, cinnamon. Fat went in as a TRADE, not an addition: the calorie window was already full even though the fat column was not, and fat costs 9 kcal a gram. Sweet bowl: 54 g nut butter in, banana halved, oat bran 171 to 140. Quark bowl: 16 g olive oil in, quark 800 to 660. The turkey bowl needed no fat at 4.7 g and got only technique fixes."
+      "_fatCorrection": "2026-08-30: all three were built fat-phobic by reflex, and the aroma in all of them is fat-soluble — herbs, cocoa, cinnamon. Fat went in as a TRADE, not an addition: the calorie window was already full even though the fat column was not, and fat costs 9 kcal a gram. Sweet bowl: 54 g nut butter in, banana halved, oat bran 171 to 140. Quark bowl: 16 g olive oil in, quark 800 to 660. The turkey bowl needed no fat at 4.7 g and got only technique fixes.",
+      "_portions": "afternoonPortions on each person: Philipp 2, Eunice 1, both from the same bowl. The Kitchen planner reads it and asks for that many picks, so he can put a sweet portion next to a savoury one on the same day — which is the whole reason the savoury tubs exist. Before this the planner had one snack slot for everyone and quietly understated his day by a portion."
     },
     "batchRhythm": "The pudding is mixed twice a week, not once for three days: 3 portions a day makes a 3-day batch ~2.1 kg in one tub. It needs no heat and no cooling, so twice is the same total work with fresher berries. The 3-day rhythm stays for lunch and dinner, where it exists because of the cooking.",
     "fibreTiming": "Fibre does not have to be eaten in the morning — only the daily total matters for what fibre is for. What is true is the satiety argument: fibre slows gastric emptying, so a morning item without it holds less long. That is why the shaker suits someone who does not want to eat in the morning anyway.",
