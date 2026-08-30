@@ -11,13 +11,14 @@
     "title": "display name",
     "slot": "mirror | breakfast | snack — mirror dishes are adapted to profiles.mirrorMeals",
     "person": "philipp | eunice | null — null means both, which is the point of a mirror meal",
-    "servings": "how many portions the amounts below produce",
-    "blocks": "Asian Base blocks per serving; 0 for dishes that carry their own carb",
+    "servings": "how many portions the amounts below produce — mirror dishes are 6, which is three days of that meal for two people, the rhythm they actually meal-prep in",
+    "blocks": "Asian Base blocks per serving. Mirror dishes are 0: the dish carries the protein and the fibre, and the base block is added at the plate, per person, because their days are different sizes",
     "source": "where it came from — a link, or who it belongs to",
     "ingredients": "[{ food: id from foods.json, g: grams, note?: 'as bought' }]",
     "steps": "Ninja OL750 method, numbered, with mode/level/time where it matters",
     "computed": "written by the script — do not edit by hand",
-    "adapted": "written by the script — what it had to change to hit the target"
+    "adapted": "written by the script — what it had to change to hit the target",
+    "carb": "mirror dishes only. 'block' = protein and veg, served on Asian Macro Blocks, fitted to mirrorMeals.dish so dish + 1 block hits the plate target. 'own' = the dish brings its own carb base (rice noodles, quinoa) and is fitted to the full plate target with no block on top. Not derivable from role:carb — cornflour on the chicken is a coating, not a base."
   },
   "recipes": [
     {
@@ -82,34 +83,34 @@
       "title": "Baked Feta Salmon",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 1.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "inbox/Baked Feta Salmon.pdf",
       "ingredients": [
         {
           "food": "lachs",
-          "g": 615.0
+          "g": 835.0
         },
         {
           "food": "kirschtomaten",
-          "g": 200.0
+          "g": 300.0
         },
         {
           "food": "feta",
-          "g": 200.0
+          "g": 300.0
         },
         {
           "food": "olivenoel",
-          "g": 45.0
+          "g": 70.0
         },
         {
           "food": "knoblauch",
-          "g": 20.0
+          "g": 30.0
         },
         {
           "food": "zitronensaft",
-          "g": 30.0
+          "g": 45.0
         }
       ],
       "steps": [
@@ -121,17 +122,18 @@
         "Bake 20–25 min, until the salmon is just cooked"
       ],
       "computed": {
-        "calories": 604.5,
-        "proteinG": 39.9,
-        "carbsG": 12.7,
-        "fiberG": 1.2,
-        "fatG": 43.0,
+        "calories": 542.7,
+        "proteinG": 35.7,
+        "carbsG": 6.0,
+        "fiberG": 0.7,
+        "fatG": 41.1,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "chocolate-peanut-butter-protein-banana-smoothie",
@@ -192,17 +194,17 @@
       "slot": "mirror",
       "person": null,
       "servings": 6,
-      "blocks": 1.0,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "inbox/Crispy Sweet Chili Chicken.pdf",
       "ingredients": [
         {
           "food": "huehnerbrust",
-          "g": 740.0
+          "g": 675.0
         },
         {
           "food": "eier",
-          "g": 35.0
+          "g": 32.0
         },
         {
           "food": "speisestaerke",
@@ -210,7 +212,7 @@
         },
         {
           "food": "leinsamen",
-          "g": 295.0
+          "g": 265.0
         },
         {
           "food": "suess_chili_sauce",
@@ -249,17 +251,18 @@
         "Return the chicken to the pan and toss it through the sauce"
       ],
       "computed": {
-        "calories": 523.8,
-        "proteinG": 40.0,
-        "carbsG": 24.9,
-        "fiberG": 14.1,
-        "fatG": 24.8,
+        "calories": 461.0,
+        "proteinG": 35.7,
+        "carbsG": 20.3,
+        "fiberG": 12.4,
+        "fatG": 22.2,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "korean-spicy-chicken-stew-dakbokkeumtang",
@@ -267,13 +270,13 @@
       "slot": "mirror",
       "person": null,
       "servings": 6,
-      "blocks": 1.0,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "inbox/Korean Spicy Chicken Stew.pdf",
       "ingredients": [
         {
           "food": "haehnchenschenkel",
-          "g": 1085.0
+          "g": 980.0
         },
         {
           "food": "baby_kartoffeln",
@@ -346,11 +349,11 @@
         "Stir through the spring onion and sesame oil"
       ],
       "computed": {
-        "calories": 428.9,
-        "proteinG": 39.9,
-        "carbsG": 31.1,
-        "fiberG": 6.1,
-        "fatG": 16.3,
+        "calories": 380.1,
+        "proteinG": 35.7,
+        "carbsG": 26.7,
+        "fiberG": 5.8,
+        "fatG": 14.8,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
@@ -358,29 +361,30 @@
         "notes": []
       },
       "fibreLight": true,
-      "_fibreLightNote": "Low in fibre on purpose. The light version is deleted: edamame does not belong in dakbokkeumtang, and the baby potatoes it displaced are structural there — they break down and body the broth. The Korean answer to fibre is banchan beside the stew, not beans in it. Runs next to a strong partner."
+      "_fibreLightNote": "Low in fibre on purpose. The light version is deleted: edamame does not belong in dakbokkeumtang, and the baby potatoes it displaced are structural there — they break down and body the broth. The Korean answer to fibre is banchan beside the stew, not beans in it. Runs next to a strong partner.",
+      "carb": "block"
     },
     {
       "id": "lemon-herb-roasted-butterflied-chicken",
       "title": "Lemon Herb Roasted Butterflied Chicken",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 1.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "inbox/Lemon Herb Roasted Butterflied Chicken.pdf",
       "ingredients": [
         {
           "food": "haehnchen_ganz",
-          "g": 830.0
+          "g": 1145.0
         },
         {
           "food": "olivenoel",
-          "g": 15.0
+          "g": 22.0
         },
         {
           "food": "knoblauch",
-          "g": 10.0
+          "g": 15.0
         }
       ],
       "steps": [
@@ -392,17 +396,18 @@
         "Rest 5 min before carving"
       ],
       "computed": {
-        "calories": 518.1,
-        "proteinG": 40.0,
-        "carbsG": 7.4,
-        "fiberG": 0.5,
-        "fatG": 35.4,
+        "calories": 446.4,
+        "proteinG": 35.7,
+        "carbsG": 0.8,
+        "fiberG": 0.1,
+        "fatG": 32.5,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "orange-ginger-chicken-light",
@@ -410,13 +415,13 @@
       "slot": "mirror",
       "person": null,
       "servings": 6,
-      "blocks": 1.0,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "rebuilt from inbox/Orange Ginger Chicken with Quinoa.pdf — less sugar, vegetables in, quinoa out in favour of the Asian Base Block",
       "ingredients": [
         {
           "food": "haehnchenschenkel",
-          "g": 725.0
+          "g": 660.0
         },
         {
           "food": "rapsoel",
@@ -452,7 +457,7 @@
         },
         {
           "food": "belugalinsen_gekocht",
-          "g": 890.0
+          "g": 800.0
         }
       ],
       "steps": [
@@ -463,17 +468,18 @@
         "Toss the chicken in the sauce and serve with the broccoli, the lentils and 1 Asian Macro Base block"
       ],
       "computed": {
-        "calories": 449.7,
-        "proteinG": 40.0,
-        "carbsG": 46.9,
-        "fiberG": 14.0,
-        "fatG": 11.9,
+        "calories": 392.6,
+        "proteinG": 35.7,
+        "carbsG": 39.5,
+        "fiberG": 12.4,
+        "fatG": 10.8,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "orange-ginger-chicken-with-quinoa",
@@ -481,7 +487,7 @@
       "slot": "mirror",
       "person": null,
       "servings": 6,
-      "blocks": 0.0,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "inbox/Oranger Ginger Chicken with Quinoa.pdf",
       "ingredients": [
@@ -541,42 +547,43 @@
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "own"
     },
     {
       "id": "pho-bo-die-sch-ssel-br-he-separat",
       "title": "Pho Bo — the Bowl (broth separate)",
       "slot": "mirror",
       "person": null,
-      "servings": 5,
-      "blocks": 0.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "rebuilt from inbox/pho_bo_recipe.txt — the broth is a batch project, only the bowl is recorded here",
       "ingredients": [
         {
           "food": "reisbandnudeln",
-          "g": 80.0
+          "g": 95.0
         },
         {
           "food": "rinderbrust",
-          "g": 425.0
+          "g": 510.0
         },
         {
           "food": "rinderfilet",
-          "g": 230.0
+          "g": 275.0
         },
         {
           "food": "mungobohnensprossen",
-          "g": 1000.0
+          "g": 1200.0
         },
         {
           "food": "kraeuter_frisch",
-          "g": 150.0,
+          "g": 180.0,
           "note": "Thai basil, coriander, mint — the plate alongside"
         },
         {
           "food": "zitronensaft",
-          "g": 75.0,
+          "g": 90.0,
           "note": "Limette"
         }
       ],
@@ -588,9 +595,9 @@
         "WITH IT, the herb plate: 200 g sprouts, Thai basil, coriander, mint and lime per person, raw alongside. Everyone tears in and squeezes as much as they want — this is not a garnish, it is half the bowl"
       ],
       "computed": {
-        "calories": 425.8,
-        "proteinG": 40.0,
-        "carbsG": 26.7,
+        "calories": 425.0,
+        "proteinG": 39.9,
+        "carbsG": 26.6,
         "fiberG": 4.8,
         "fatG": 18.6,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
@@ -600,7 +607,8 @@
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "own"
     },
     {
       "id": "sugar-free-oatmeal-date-cookies",
@@ -666,46 +674,46 @@
       "title": "Tuscan Chicken, Light",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 1.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "umgebaut von inbox/Tuscan Chicken.pdf — Sahne raus, Skyr + Kichererbsen rein",
       "ingredients": [
         {
           "food": "huehnerbrust",
-          "g": 295.0
+          "g": 405.0
         },
         {
           "food": "olivenoel",
-          "g": 15.0
+          "g": 22.0
         },
         {
           "food": "knoblauch",
-          "g": 20.0
+          "g": 30.0
         },
         {
           "food": "zwiebel",
-          "g": 40.0
-        },
-        {
-          "food": "getrocknete_tomaten",
-          "g": 55.0
-        },
-        {
-          "food": "babyspinat",
           "g": 60.0
         },
         {
+          "food": "getrocknete_tomaten",
+          "g": 80.0
+        },
+        {
+          "food": "babyspinat",
+          "g": 90.0
+        },
+        {
           "food": "skyr",
-          "g": 130.0
+          "g": 180.0
         },
         {
           "food": "parmesan",
-          "g": 25.0
+          "g": 38.0
         },
         {
           "food": "kichererbsen_gekocht",
-          "g": 590.0
+          "g": 800.0
         }
       ],
       "steps": [
@@ -717,59 +725,60 @@
         "Return the chicken to the pot and let it sit over low heat"
       ],
       "computed": {
-        "calories": 486.6,
-        "proteinG": 40.0,
-        "carbsG": 59.2,
-        "fiberG": 14.0,
-        "fatG": 11.5,
+        "calories": 418.4,
+        "proteinG": 35.7,
+        "carbsG": 48.3,
+        "fiberG": 12.4,
+        "fatG": 10.6,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "tuscan-chicken",
       "title": "Tuscan Chicken",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 1.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "rebuilt from inbox/Tuscan Chicken.pdf — cream out, Skyr + chickpeas in",
       "ingredients": [
         {
           "food": "huehnerbrust",
-          "g": 555.0
+          "g": 750.0
         },
         {
           "food": "olivenoel",
-          "g": 45.0
+          "g": 70.0
         },
         {
           "food": "knoblauch",
-          "g": 20.0
+          "g": 30.0
         },
         {
           "food": "zwiebel",
-          "g": 40.0
-        },
-        {
-          "food": "getrocknete_tomaten",
-          "g": 55.0
-        },
-        {
-          "food": "babyspinat",
           "g": 60.0
         },
         {
+          "food": "getrocknete_tomaten",
+          "g": 80.0
+        },
+        {
+          "food": "babyspinat",
+          "g": 90.0
+        },
+        {
           "food": "sahne",
-          "g": 357.0
+          "g": 535.0
         },
         {
           "food": "parmesan",
-          "g": 25.0
+          "g": 38.0
         }
       ],
       "steps": [
@@ -781,17 +790,18 @@
         "Return the chicken to the pan and let it sit"
       ],
       "computed": {
-        "calories": 622.7,
-        "proteinG": 40.1,
-        "carbsG": 20.3,
-        "fiberG": 2.8,
-        "fatG": 43.1,
+        "calories": 575.1,
+        "proteinG": 35.6,
+        "carbsG": 13.5,
+        "fiberG": 2.2,
+        "fatG": 42.9,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "eunice-ehrmann-pudding-breakfast",
@@ -1084,50 +1094,50 @@
       "title": "Baked Feta Salmon, Light",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 0.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "rebuild of baked-feta-salmon — as lean as is honestly possible with salmon",
       "ingredients": [
         {
           "food": "lachs",
-          "g": 280.0
+          "g": 370.0
         },
         {
           "food": "garnelen",
-          "g": 140.0
+          "g": 185.0
         },
         {
           "food": "kichererbsen_gekocht",
-          "g": 650.0
+          "g": 845.0
         },
         {
           "food": "kirschtomaten",
-          "g": 300.0
+          "g": 450.0
         },
         {
           "food": "zucchini",
-          "g": 200.0
+          "g": 300.0
         },
         {
           "food": "feta",
-          "g": 80.0
+          "g": 120.0
         },
         {
           "food": "olivenoel",
-          "g": 15.0
+          "g": 22.0
         },
         {
           "food": "knoblauch",
-          "g": 20.0
-        },
-        {
-          "food": "zitronensaft",
           "g": 30.0
         },
         {
+          "food": "zitronensaft",
+          "g": 45.0
+        },
+        {
           "food": "kraeuter_frisch",
-          "g": 20.0
+          "g": 30.0
         }
       ],
       "steps": [
@@ -1138,18 +1148,19 @@
         "Herbs over after it comes out of the oven"
       ],
       "computed": {
-        "calories": 560.4,
-        "proteinG": 40.1,
-        "carbsG": 51.8,
-        "fiberG": 14.0,
-        "fatG": 22.2,
+        "calories": 503.3,
+        "proteinG": 35.6,
+        "carbsG": 45.8,
+        "fiberG": 12.4,
+        "fatG": 20.4,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
       },
-      "_note": "The prawns go on the tray 8 minutes after the salmon. The first version baked both together for 10–12 min — that meant rubbery prawns, a fault in the method rather than in the macro fit."
+      "_note": "The prawns go on the tray 8 minutes after the salmon. The first version baked both together for 10–12 min — that meant rubbery prawns, a fault in the method rather than in the macro fit.",
+      "carb": "block"
     },
     {
       "id": "crispy-sweet-chili-chicken-light",
@@ -1157,17 +1168,17 @@
       "slot": "mirror",
       "person": null,
       "servings": 6,
-      "blocks": 0.0,
+      "blocks": 0,
       "cuisine": "asian",
       "source": "rebuild of crispy-sweet-chili-chicken — here fat was the problem, not fibre",
       "ingredients": [
         {
           "food": "huehnerbrust",
-          "g": 250.0
+          "g": 230.0
         },
         {
           "food": "edamame",
-          "g": 1540.0
+          "g": 1350.0
         },
         {
           "food": "speisestaerke",
@@ -1175,7 +1186,7 @@
         },
         {
           "food": "eier",
-          "g": 12.0
+          "g": 11.0
         },
         {
           "food": "brokkoli",
@@ -1218,63 +1229,64 @@
         "Sesame oil over once it is off the heat"
       ],
       "computed": {
-        "calories": 449.1,
-        "proteinG": 40.0,
-        "carbsG": 41.0,
-        "fiberG": 14.0,
-        "fatG": 14.9,
+        "calories": 407.2,
+        "proteinG": 35.7,
+        "carbsG": 38.1,
+        "fiberG": 12.4,
+        "fatG": 13.2,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "lemon-herb-chicken-light",
       "title": "Lemon Herb Chicken, Light",
       "slot": "mirror",
       "person": null,
-      "servings": 4,
-      "blocks": 0.0,
+      "servings": 6,
+      "blocks": 0,
       "cuisine": "mediterranean",
       "source": "rebuild of lemon-herb-roasted-butterflied-chicken onto the mirror-meal target",
       "ingredients": [
         {
           "food": "huehnerbrust",
-          "g": 430.0
-        },
-        {
-          "food": "kichererbsen_gekocht",
           "g": 585.0
         },
         {
+          "food": "kichererbsen_gekocht",
+          "g": 755.0
+        },
+        {
           "food": "gruene_bohnen",
-          "g": 300.0
+          "g": 450.0
         },
         {
           "food": "kirschtomaten",
-          "g": 200.0
+          "g": 300.0
         },
         {
           "food": "olivenoel",
-          "g": 15.0
+          "g": 22.0
         },
         {
           "food": "zitronensaft",
-          "g": 40.0
+          "g": 60.0
         },
         {
           "food": "knoblauch",
-          "g": 12.0
+          "g": 18.0
         },
         {
           "food": "kraeuter_frisch",
-          "g": 20.0
+          "g": 30.0
         },
         {
           "food": "salz",
-          "g": 3.0
+          "g": 4.5
         }
       ],
       "steps": [
@@ -1284,17 +1296,18 @@
         "Herbs over only after the oven — heat greys them and takes the aroma"
       ],
       "computed": {
-        "calories": 431.7,
-        "proteinG": 39.9,
-        "carbsG": 47.1,
-        "fiberG": 14.0,
-        "fatG": 9.9,
+        "calories": 386.4,
+        "proteinG": 35.8,
+        "carbsG": 41.5,
+        "fiberG": 12.4,
+        "fatG": 9.1,
         "_generated": "by scripts/adapt_recipe.py — do not edit by hand"
       },
       "adapted": {
         "target": "mirrorMeals",
         "notes": []
-      }
+      },
+      "carb": "block"
     },
     {
       "id": "die-vorratsdose-skyr-schoko-nuss",

@@ -145,7 +145,16 @@
     },
     "_revised": "2026-08-29 — was 425 kcal / 17 g fibre / 12-15 g fat on 1.5 Asian Base blocks. That target could not be cooked: the cheapest combination of these staples reaching it came to 533 kcal, 108 kcal over, at every meal. Raised to 470 kcal on 1 block with 14 g fibre, which the same search reaches at 432 kcal — leaving real slack for sauce and aromatics instead of sitting on the theoretical floor. Run scripts/check_targets.py after touching any of these numbers.",
     "_revised2": "2026-08-30 — fat band 8-12 -> ceiling of 14, no floor. The day pays for it out of slack it already had: Philipp keeps 17 g of fat for the snack, Eunice 24 g for breakfast plus snack. check_targets.py's REAL FOOD search goes from 4962 to 5697 plates on one block and returns tofu at every block level, salmon on the saucy tier.",
-    "_revised3": "2026-08-30 — mirror meal 470 -> 520 kcal, and Eunice's protein 105 -> 125 g with fat 52 -> 45 and net carbs 160 -> 151 paying for it. Her breakfast-plus-snack envelope was 640 kcal asking for 25 g of protein: 40% of her day, 16% of it accounted for. Because lunch and dinner are identical for both people, growing the meal shrinks both envelopes at once — hers to 540, his to 450. Protein per meal stays 40: raising it would have relieved his snack and emptied hers, which is backwards. The ceiling on how far this can go is HIS snack, which reaches 32% protein at 520 and 37% at 550. Cooking gets easier, not harder — check_targets.py finds 18260 plates at 520 against 11992 at 470."
+    "_revised3": "2026-08-30 — mirror meal 470 -> 520 kcal, and Eunice's protein 105 -> 125 g with fat 52 -> 45 and net carbs 160 -> 151 paying for it. Her breakfast-plus-snack envelope was 640 kcal asking for 25 g of protein: 40% of her day, 16% of it accounted for. Because lunch and dinner are identical for both people, growing the meal shrinks both envelopes at once — hers to 540, his to 450. Protein per meal stays 40: raising it would have relieved his snack and emptied hers, which is backwards. The ceiling on how far this can go is HIS snack, which reaches 32% protein at 520 and 37% at 550. Cooking gets easier, not harder — check_targets.py finds 18260 plates at 520 against 11992 at 470.",
+    "dish": {
+      "calories": 401,
+      "proteinG": 35.7,
+      "fiberG": 12.4,
+      "fatG": "0-12.9",
+      "_baselineBlocks": 1,
+      "_why": "The plate is the dish plus base blocks. lunch/dinner above describe the whole PLATE; this describes the dish on its own, which is what adapt_recipe.py actually fits. It is the plate minus 1 standard block (119.4 kcal, 4.3 g protein, 1.6 g fibre, 1.1 g fat), so dish + 1 block lands exactly on the plate target.",
+      "_perPerson": "The block count is a dial at the plate, not a property of the recipe. Philipp's day is 1900 kcal and Eunice's 1580, so the same dish can carry a different number of blocks for each of them. Kitchen shows both. Taking fewer than the baseline leaves protein and fibre a little short; taking more only adds."
+    }
   },
   "_gaps": [
     "Five dishes were rebuilt on 2026-08-30 (legume as the fibre carrier, fat cut, meat cut, solve() re-fits). Two of the five were reverted the same day: edamame is Japanese, and putting it in a Vietnamese phở and a Korean stew was a macro fix in costume — it also cost the brisket that IS phở bò chín and the potatoes that thicken a dakbokkeumtang. Root cause was in the data: topUps filed edamame under 'asian', which is a continent rather than a cuisine. Fixed there too.",

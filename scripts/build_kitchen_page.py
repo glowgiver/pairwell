@@ -97,6 +97,27 @@ _KIND_BY_FOOD = {
 }
 
 
+def _base_shopping():
+    """The block batch as its own lines, and the blocks that batch yields.
+
+    Deliberately NOT matched against foods.json. The base block's raw
+    components — jasmine rice, raw quinoa, dry red lentils — are not in the
+    food table at all, because the block carries its own computed macros in
+    kitchen.json rather than deriving them per ingredient. A first attempt at
+    matching by name quietly paired raw quinoa with "Quinoa, gekocht" and dry
+    lentils with "Rote Linsen, gekocht" — three times the calories per gram,
+    on the wrong side of cooking — and lost the rice entirely.
+
+    A shopping list needs a name and an amount, which these lines already are.
+    """
+    base = json.load(open(KITCHEN, encoding="utf-8"))["asianMacroBase"]
+    return {
+        "ingredients": [dict(item=i["item"], amount=i["amount"])
+                        for i in base["ingredients"]],
+        "blocksPerBatch": base["yield"]["blocks"],
+    }
+
+
 def _dish_kinds():
     out = {}
     for r in _recipes:
@@ -118,6 +139,10 @@ data = {
     "recipes": _recipes,
     "foodNames": dict((k, v["name"]) for k, v in _foods.items()),
     "dishKinds": _dish_kinds(),
+    # The block is cooked from real ingredients that have to be bought. The
+    # shopping list said "plus 10 Asian Base Blocks" and left you to remember
+    # what that meant at the shop.
+    "baseShopping": _base_shopping(),
     # Resolved here rather than in the page for the same reason foodNames exists:
     # the page gets the one number it needs, not the nutrition table it came from.
     "fineTuneFiber": _fine_tune_fiber(),
@@ -515,6 +540,71 @@ HTML = """<!DOCTYPE html>
   }
   .refcard > details:first-of-type{border-top:0}
 
+  /* ---- what goes in the bowl ----------------------------------------- */
+  .blockdial{padding:0;border-top:1px solid var(--line);background:var(--surface-2)}
+  .bowl{padding:13px 18px;border-bottom:1px solid var(--line)}
+  .bowl-k{
+    font-family:var(--f-data);font-size:12px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted2);margin-bottom:4px;
+  }
+  .bowl-v{font-size:16px;line-height:1.45;color:var(--text)}
+  .bowl-v b{font-family:var(--f-data);font-weight:700}
+  .bowl-v i{color:var(--muted2);font-style:italic;font-size:14px}
+  .bowl-v .plus{color:var(--muted2)}
+  .bowl-v .g{font-family:var(--f-data);font-size:13px;color:var(--muted2)}
+  .bowl-m{
+    margin-top:4px;font-family:var(--f-data);font-size:13px;color:var(--muted);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .dp-carb{
+    display:inline-block;margin-right:8px;
+    font-family:var(--f-data);font-size:12px;letter-spacing:.06em;
+    color:var(--muted2);
+  }
+  .dp-carb.own{color:var(--text);font-weight:600}
+  .dishpick.picked .dp-carb{color:inherit;opacity:.8}
+
+  .bd-note{
+    padding:0 18px 14px;font-family:var(--f-read);font-size:14.5px;
+    line-height:1.55;color:var(--muted);
+  }
+
+  .bd-head{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    padding:12px 18px 6px;font-size:14px;font-weight:600;color:var(--text);
+  }
+  .bd-head span{font-family:var(--f-data);font-size:12.5px;color:var(--muted2);margin-left:auto}
+  /* Name and stepper on one line, the consequence underneath. Three columns
+     on a 375px screen crushed the numbers into four wrapped lines. */
+  .bd-row{
+    display:grid;grid-template-columns:1fr auto;align-items:center;
+    gap:6px 12px;padding:8px 18px 12px;
+  }
+  .bd-who{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600}
+  .bd-who .dot{width:8px;height:8px;border-radius:50%;background:var(--who)}
+  .bd-step{display:flex;align-items:center;gap:2px}
+  .bd-b{
+    width:var(--tap);height:var(--tap);border:1px solid var(--line);
+    background:var(--surface);color:var(--text);border-radius:11px;
+    font-family:inherit;font-size:20px;line-height:1;cursor:pointer;
+  }
+  .bd-b:disabled{opacity:.35;cursor:default}
+  .bd-b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .bd-n{
+    min-width:2.4em;text-align:center;font-family:var(--f-data);
+    font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;
+  }
+  .bd-out{
+    grid-column:1/3;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    font-family:var(--f-data);font-size:12.5px;color:var(--muted2);
+    font-variant-numeric:tabular-nums;
+  }
+  .bd-out b{font-size:17px;color:var(--text)}
+  .bd-out .bd-delta{margin-left:auto}
+  .bd-delta{color:var(--warn)}
+  .bd-delta.ok{color:var(--muted2)}
+
   /* The library, kept reachable but no longer three thousand pixels tall. */
   details.library > summary{font-weight:600}
 
@@ -893,6 +983,110 @@ function pickedSnacks(who){
   return PLAN.snacks.slice(0, snackSlots(who))
     .filter(function(id){ return id && recipeById(id); });
 }
+/* ---- how many base blocks each of them puts on the plate ---------------
+   The dish is fitted to the plate target MINUS one standard block, so dish
+   plus one block lands on the target. The count is a dial rather than a
+   property of the recipe, because their days are different sizes: 1900 kcal
+   against 1580. Taking fewer than the baseline leaves protein and fibre a
+   little short; taking more only adds. */
+function blockCount(who){
+  try{
+    var v = parseFloat(localStorage.getItem("hub.kitchen.blocks." + PW.PEOPLE[who].code));
+    if(v >= 0 && v <= 4) return v;
+  }catch(e){}
+  return baselineBlocks();
+}
+function setBlockCount(who, v){
+  try{ localStorage.setItem("hub.kitchen.blocks." + PW.PEOPLE[who].code, String(v)); }catch(e){}
+}
+function baselineBlocks(){
+  var b = D.kitchen.asianMacroBase.blockRules.standardLeanDish;
+  return typeof b === "number" ? b : 1;
+}
+function perBlock(){ return D.kitchen.asianMacroBase.computed.perBlock; }
+
+/* Not every dish is eaten on a block. Pho arrives with rice noodles and the
+   quinoa version arrives with quinoa: those dishes ARE the whole plate, and
+   putting a rice block beside them would be carb on carb. */
+function takesBlocks(r){
+  return r.slot === "mirror" && r.carb !== "own";
+}
+function blocksFor(r, who){ return takesBlocks(r) ? blockCount(who) : 0; }
+
+/* A plate = one serving of the dish + n blocks. */
+function plateFor(r, n){
+  var c = r.computed || {}, b = perBlock();
+  return {
+    kcal: (c.calories || 0) + b.calories * n,
+    p:    (c.proteinG || 0) + b.proteinG * n,
+    fib:  (c.fiberG   || 0) + b.fiberG   * n,
+    fat:  (c.fatG     || 0) + b.fatG     * n
+  };
+}
+
+/* What actually goes in the bowl, in grams, for one person. The page could
+   already derive this and never said it in one place: the dish grams sat in
+   the splitter and the block count sat in the dial. */
+function bowlLineHTML(r, who){
+  var n = blocksFor(r, who);
+  var w = loadDishWeight(r.id);
+  var gpb = D.kitchen.asianMacroBase.computed.gramsPerBlock;
+  var dishG = w ? w / r.servings : null;
+  var pl = plateFor(r, n);
+  return '<div class="bowl">' +
+    '<div class="bowl-k">' + esc(PW.PEOPLE[who].name) + '\u2019s bowl</div>' +
+    '<div class="bowl-v">' +
+      (dishG ? '<b>' + n0(dishG) + ' g</b> ' + esc(r.title) : esc(r.title) + ' <i>(weigh the batch)</i>') +
+      (n > 0
+        ? ' <span class="plus">+</span> <b>' + n1(n) + '</b> base block' +
+          (n === 1 ? '' : 's') + ' <span class="g">(' + n0(gpb * n) + ' g)</span>'
+        : (r.carb === "own"
+            ? ' <span class="g">\u2014 no block, it brings its own carb</span>'
+            : '')) +
+    '</div>' +
+    '<div class="bowl-m">' + n0(pl.kcal) + ' kcal &middot; P ' + n1(pl.p) +
+      ' &middot; Fib ' + n1(pl.fib) + ' &middot; F ' + n1(pl.fat) + '</div>' +
+  '</div>';
+}
+
+function blockDialHTML(r){
+  var target = D.profiles.mirrorMeals.lunch;
+  /* Own-carb dishes still show both bowls — they just have no dial, because
+     there is nothing to turn. */
+  if(!takesBlocks(r)){
+    return '<div class="blockdial">' +
+      PW.ORDER.map(function(w){ return bowlLineHTML(r, w); }).join("") +
+      '<div class="bd-note">Eaten as it is. The carb is already in the dish, so ' +
+      'no Asian Macro Block goes beside it.</div></div>';
+  }
+  var rows = PW.ORDER.map(function(who){
+    var n = blockCount(who);
+    var pl = plateFor(r, n);
+    var over = pl.kcal - target.calories;
+    return '<div class="bd-row" style="--who:' + PW.PEOPLE[who].color + '">' +
+      '<div class="bd-who"><span class="dot"></span>' + esc(PW.PEOPLE[who].name) + '</div>' +
+      '<div class="bd-step">' +
+        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="-0.5"' +
+          (n <= 0 ? ' disabled' : '') + ' aria-label="Fewer blocks">&minus;</button>' +
+        '<span class="bd-n">' + n1(n) + '</span>' +
+        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="0.5"' +
+          (n >= 4 ? ' disabled' : '') + ' aria-label="More blocks">+</button>' +
+      '</div>' +
+      '<div class="bd-out"><b>' + n0(pl.kcal) + ' kcal</b>' +
+        '<span>P ' + n1(pl.p) + ' &middot; Fib ' + n1(pl.fib) + ' &middot; F ' + n1(pl.fat) + '</span>' +
+        '<span class="bd-delta' + (Math.abs(over) <= 25 ? ' ok' : '') + '">' +
+          (over >= 0 ? '+' : '') + n0(over) + ' vs ' + n0(target.calories) + '</span>' +
+      '</div></div>';
+  }).join("");
+
+  var bowls = PW.ORDER.map(function(w){ return bowlLineHTML(r, w); }).join("");
+
+  return '<div class="blockdial">' + bowls +
+    '<div class="bd-head">Base blocks on the plate' +
+      '<span>' + n0(perBlock().calories) + ' kcal each &middot; baseline ' +
+      n1(baselineBlocks()) + '</span></div>' + rows + '</div>';
+}
+
 /* ---- the cooked weight of a dish's batch --------------------------------
    The base block has one of these; every dish now gets its own. Macros per
    serving never needed the weight — they come from the ingredients divided by
@@ -1091,6 +1285,15 @@ function cuisineTag(r){
   return '<span class="dp-cuisine">' + esc(c.replace(/-/g, " ")) + '</span>';
 }
 
+/* Whether you need to put a block beside it is a fact about the dish worth
+   knowing before you pick it, not after. */
+function carbTag(r){
+  if(r.slot !== "mirror") return '';
+  return r.carb === "own"
+    ? '<span class="dp-carb own">own carb</span>'
+    : '<span class="dp-carb">+ block</span>';
+}
+
 function dishChip(r, opts){
   opts = opts || {};
   var c = r.computed || {};
@@ -1116,7 +1319,8 @@ function dishChip(r, opts){
     esc(opts.slot) + '" data-id="' + esc(r.id) + '">' +
     '<span class="dp-top">' + dishIcon(r) +
       '<span class="dp-title">' + esc(r.title) + '</span></span>' +
-    '<span class="dp-meta">' + cuisineTag(r) + (opts.picked ? full : brief) + '</span>' +
+    '<span class="dp-meta">' + cuisineTag(r) + carbTag(r) +
+      (opts.picked ? full : brief) + '</span>' +
     (opts.compareLine || '') +
     (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
     '</button>';
@@ -1311,8 +1515,12 @@ function shoppingBasis(){
   var totals = {}, blocks = 0;
   var chosen = [lunch, dinner];
   snacks.forEach(function(r){ chosen.push(r); });
+  /* Blocks are no longer a property of the recipe. A mirror dish makes
+     servings/2 days for two, and on each of those days each of them puts
+     their own number of blocks on the plate. */
+  var perDay = blockCount("philipp") + blockCount("eunice");
   chosen.forEach(function(r){
-    blocks += (r.blocks || 0) * r.servings;
+    if(takesBlocks(r)) blocks += (r.servings / 2) * perDay;
     (r.ingredients || []).forEach(function(i){
       totals[i.food] = (totals[i.food] || 0) + i.g;
     });
@@ -1380,9 +1588,39 @@ function shoppingListHTML(){
     '<span class="title">' + esc(b.lunch.title) + ' + ' + esc(b.dinner.title) +
       b.snacks.map(function(r){ return ' + ' + esc(r.title); }).join('') + '</span></div>' +
     '<ul class="ing">' + rows + '</ul>' +
-    (b.blocks > 0 ? '<div class="rnote">Plus <strong>' + n0(b.blocks) + ' Asian Base Block' +
-      (b.blocks === 1 ? '' : 's') + '</strong> — the batch recipe is under <b>Cook</b>.</div>' : '') +
-    '</div>';
+    '</div>' + baseBlockShoppingHTML(b);
+}
+
+/* The block has ingredients you have to buy, and the list used to end at
+   "plus 10 Asian Base Blocks" — a number with no shopping in it. Scaled from
+   the batch the recipe is written for. */
+function baseBlockShoppingHTML(b){
+  var need = Math.ceil(b.blocks);
+  if(!(need > 0) || !D.baseShopping) return "";
+  var per = D.baseShopping.blocksPerBatch || 10;
+  var batches = need / per;
+
+  function scale(amount){
+    var m = /^([0-9.,]+)\s*(g|ml|tsp)$/.exec(amount.trim());
+    if(!m) return amount;
+    var v = parseFloat(m[1].replace(",", ".")) * batches;
+    if(m[2] === "tsp") return (Math.round(v * 2) / 2) + " tsp";
+    return (v < 50 ? Math.round(v) : Math.round(v / 5) * 5) + " " + m[2];
+  }
+
+  var rows = D.baseShopping.ingredients.map(function(i){
+    return '<li><div class="t">' + esc(i.item) + '</div>' +
+           '<div class="amt">' + esc(scale(i.amount)) + '</div></li>';
+  }).join("");
+
+  return '<div class="card"><div class="ch"><span class="k">Asian Base Block</span>' +
+    '<span class="meta">' + n0(need) + ' block' + (need === 1 ? '' : 's') +
+      ' &middot; ' + n1(batches) + ' batch' + (batches === 1 ? '' : 'es') + '</span>' +
+    '<span class="title">Philipp ' + n1(blockCount("philipp")) + ' &middot; Eunice ' +
+      n1(blockCount("eunice")) + ' per plate</span></div>' +
+    '<ul class="ing">' + rows + '</ul>' +
+    '<div class="rnote">One batch makes ' + n0(per) + ' blocks. The method is under ' +
+    '<b>Cook</b>.</div></div>';
 }
 
 function plannerHTML(){
@@ -1468,6 +1706,7 @@ function pickedDetailHTML(open){
       '</summary>' +
       '<ul class="ing">' + ing + '</ul>' +
       (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
+      (r.slot === "mirror" ? blockDialHTML(r) : '') +
       dishSplitHTML(r) +
       '</details></div>';
   }).join("");
@@ -1658,6 +1897,14 @@ document.getElementById("stage").addEventListener("click", function(ev){
   /* Ticked in place — a full re-render would throw away the scroll position
      halfway down a shopping list, which is the one thing you cannot afford
      while walking a supermarket. */
+  var blk = ev.target.closest("[data-blk]");
+  if(blk){
+    var who = blk.dataset.blk;
+    var v = Math.min(Math.max(blockCount(who) + parseFloat(blk.dataset.d), 0), 4);
+    setBlockCount(who, v);
+    render();
+    return;
+  }
   var tick = ev.target.closest(".shoptick");
   if(tick){
     toggleGot(tick.dataset.food);

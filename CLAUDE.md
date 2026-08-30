@@ -208,6 +208,60 @@ and that is a cooking decision. A recipe may declare `cuisine` to filter the
 shortlist; without one nothing is filtered and chickpeas may turn up in a Thai
 curry.
 
+## The plate: dish + blocks
+
+**A plate is a dish serving plus base blocks, and the blocks are a dial, not a
+property of the recipe.** Philipp's day is 1900 kcal and Eunice's 1580, so the
+same dish carries a different number of blocks for each of them. Kitchen shows
+both bowls in grams and lets each of them step their own count.
+
+Three numbers keep this coherent, and they must stay in step:
+
+- `mirrorMeals.lunch` / `.dinner` — the whole **plate**: 520 kcal, 40 g protein,
+  14 g fibre, ≤14 g fat.
+- `mirrorMeals.dish` — the **dish alone**, which is what `adapt_recipe.py`
+  actually fits. It is the plate minus one standard block, so dish + 1 block
+  lands exactly on the plate target. Derived, not invented: 401 kcal, 35.7 g
+  protein, 12.4 g fibre, ≤12.9 g fat.
+- `asianMacroBase.computed.perBlock` — one block, 85 g: 119.4 kcal, 4.3 g
+  protein, 1.6 g fibre, 1.1 g fat.
+
+**Not every dish is eaten on a block.** A mirror recipe declares `carb`:
+
+- `carb: "block"` — protein and veg. Fitted to `mirrorMeals.dish`, so dish plus
+  one block lands on the plate target. The dial applies.
+- `carb: "own"` — the dish arrives with its own carb base: phở with rice
+  noodles, the quinoa version with quinoa. It IS the whole plate, fitted to
+  `mirrorMeals.lunch`, and no block goes beside it. Kitchen says so and hides
+  the dial rather than offering carb on carb.
+
+This is **not** derivable from `role: "carb"` in `foods.json`. Cornflour on the
+chicken and a flour dredge are both `role: carb` and are coatings, not a base;
+testing for the role alone mis-sorted both Crispy Sweet Chili variants.
+
+Mirror recipes therefore carry `blocks: 0`: the stored macros describe the dish
+on its own, and the page adds the blocks. Taking fewer than the baseline leaves
+protein and fibre slightly short; taking more only adds.
+
+**The bug this replaced is worth remembering.** `blocks` was documented as
+per serving, and the shopping list read it that way (`blocks × servings`), but
+`adapt_recipe.py` added the block to the *batch* and then divided by the
+servings — and treated a block as 100 g when the batch yields 85 g ones. A
+four-serving dish marked `blocks: 1` gave each plate a quarter of a block, so
+every mirror meal understated itself by 84–96 kcal. One field, two readings,
+inside one repository.
+
+**Mirror dishes are 6 servings** — three days of that meal for two people,
+which is the rhythm they actually meal-prep in.
+
+**The block's own ingredients are on the shopping list**, scaled from the batch
+that makes ten of them. They are carried as the lines `kitchen.json` already
+writes, deliberately *not* matched against `foods.json`: raw jasmine rice, raw
+quinoa and dry red lentils are not in the food table, because the block
+computes its macros as a batch. An attempt to match by name silently paired raw
+quinoa with "Quinoa, gekocht" and dry lentils with "Rote Linsen, gekocht" —
+roughly three times the calories per gram — and lost the rice entirely.
+
 **No macro is ever typed for a dish.** This is the same rule the Asian Base Block
 learned the hard way, and it is the reason a recipe cannot be added by pasting a
 nutrition panel — the ingredients go in, the numbers come out.
@@ -300,6 +354,12 @@ fetch strategy is stale-while-revalidate, so a stale phone self-corrects on the
   no floor the Base blocks can carry more fat than the meal demands and a
   negative need would understate the feasibility floor: `check_targets.py`
   and `mealRemainder()` in `build_kitchen_page.py`.
+- **Phở carries 15.8 g of dry rice noodles per serving.** A phở bowl is 80–120 g
+  dry. The solver never catches it because `reisbandnudeln` is `role: carb` and
+  only protein and fibre sources are scaled, so the figure has stood since
+  transcription. It is why the dish lands at 425 kcal against a 520 plate.
+  Undecided because it is a recipe question, not an arithmetic one: raising the
+  noodles is the obvious fix, and it changes what the bowl is.
 - **`cookedWeightG` is estimated, not weighed.** Weigh a batch, type it into the
   splitter, re-run `recompute_macros.py`. The custom food in MacroFactor may
   still hold the old 105 kcal/100 g — it should be 140.

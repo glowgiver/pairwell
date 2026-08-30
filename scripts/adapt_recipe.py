@@ -55,19 +55,41 @@ def weighable(g):
     return float(round(g / 5.0) * 5)
 
 
-def totals(recipe, foods, block, servings_divisor=True):
-    acc = add(zero(), block, 100.0 * recipe.get("blocks", 0)) if recipe.get("blocks") else zero()
+def blocks_macros(block, grams_per_block, n_blocks):
+    """Macros for n whole Asian Base blocks.
+
+    Two bugs used to live in one line here. `blocks` is documented as blocks
+    PER SERVING, but the contribution was added to the batch and then divided
+    by the servings — so a four-serving dish marked `blocks: 1` gave each plate
+    a quarter of a block. And a "block" was taken as 100 g when the batch
+    actually yields 85 g ones. Together those understated the base by 84-96
+    kcal per serving, which is why a dish never seemed to be counted with its
+    carb component at all.
+    """
+    if not n_blocks:
+        return zero()
+    return add(zero(), block, grams_per_block * n_blocks)
+
+
+def totals(recipe, foods, block, servings_divisor=True, grams_per_block=85.0):
+    acc = zero()
     for ing in recipe["ingredients"]:
         f = foods[ing["food"]]
         add(acc, f["per100g"], ing["g"])
     n = recipe.get("servings", 1) if servings_divisor else 1
-    return dict((k, v / n) for k, v in acc.items())
+    out = dict((k, v / n) for k, v in acc.items())
+    # Per serving, so it goes on after the division — never before it.
+    b = blocks_macros(block, grams_per_block, recipe.get("blocks", 0))
+    for k in out:
+        out[k] += b[k]
+    return out
 
 
-def solve(recipe, foods, block, target):
+def solve(recipe, foods, block, target, grams_per_block=85.0):
     """Return {ingredient index: new grams}, or None if the recipe cannot be fitted."""
     groups = {"protein": [], "fiber": []}
-    fixed = add(zero(), block, 100.0 * recipe.get("blocks", 0)) if recipe.get("blocks") else zero()
+    fixed = zero()
+    per_serving_block = blocks_macros(block, grams_per_block, recipe.get("blocks", 0))
 
     for i, ing in enumerate(recipe["ingredients"]):
         role = foods[ing["food"]]["role"]
@@ -87,9 +109,10 @@ def solve(recipe, foods, block, target):
 
     A, B = group_totals(groups["protein"]), group_totals(groups["fiber"])
 
-    # per serving
-    need_p = target["proteinG"] - fixed["proteinG"] / n
-    need_f = target["fiberG"] - fixed["fiberG"] / n
+    # per serving. `fixed` is a batch total and divides; the block is already
+    # per serving and does not.
+    need_p = target["proteinG"] - fixed["proteinG"] / n - per_serving_block["proteinG"]
+    need_f = target["fiberG"] - fixed["fiberG"] / n - per_serving_block["fiberG"]
     ap, af = A["proteinG"] / n, A["fiberG"] / n
     bp, bf = B["proteinG"] / n, B["fiberG"] / n
 
@@ -305,11 +328,11 @@ def topups(recipe, foods, block, kitchen, target, result):
     print("\n    Amounts are for the whole recipe (%d servings), as written." % n)
 
 
-def report(recipe, foods, block, target, changes, notes, kitchen=None):
+def report(recipe, foods, block, target, changes, notes, kitchen=None, grams_per_block=85.0):
     orig = [ing["g"] for ing in recipe["ingredients"]]
     for i, g in (changes or {}).items():
         recipe["ingredients"][i]["g"] = g
-    result = totals(recipe, foods, block)
+    result = totals(recipe, foods, block, grams_per_block=grams_per_block)
 
     print("\n" + "=" * 66)
     print(recipe["title"])
@@ -381,7 +404,14 @@ def main():
     recipes = load("recipes.json")
     profiles, kitchen = load("profiles.json"), load("kitchen.json")
     block = kitchen["asianMacroBase"]["computed"]["per100gCooked"]
-    mirror = profiles["mirrorMeals"]["lunch"]
+    gpb = float(kitchen["asianMacroBase"]["computed"]["gramsPerBlock"])
+    # Two targets, because not every dish is eaten on a block. A dish that
+    # brings its own carb base — pho with rice noodles, chicken on quinoa —
+    # IS the whole plate and is fitted to the plate target. A dish that is
+    # protein and veg is fitted to the plate minus one block, so that dish
+    # plus one block lands on the plate.
+    plate = profiles["mirrorMeals"]["lunch"]
+    dish_only = profiles["mirrorMeals"].get("dish") or plate
 
     missing = set()
     for r in recipes["recipes"]:
@@ -397,10 +427,12 @@ def main():
         if only and r["id"] != only:
             continue
         touched += 1
-        target = mirror if (r["slot"] == "mirror" and not r.get("fixed")) else None
+        target = None
+        if r["slot"] == "mirror" and not r.get("fixed"):
+            target = plate if r.get("carb") == "own" else dish_only
         changes, notes, err = None, None, None
         if target:
-            out, err = solve(r, foods, block, target)
+            out, err = solve(r, foods, block, target, gpb)
             if err:
                 # not fatal any more: the dish cannot be rescaled into the
                 # target, which is exactly when the top-up list is worth
@@ -408,7 +440,7 @@ def main():
                 notes = ["could not rescale: " + err]
             else:
                 changes, notes = out
-        result = report(r, foods, block, target, changes, notes, kitchen)
+        result = report(r, foods, block, target, changes, notes, kitchen, gpb)
         r["computed"] = dict((k, round(v, 1)) for k, v in result.items())
         r["computed"]["_generated"] = "by scripts/adapt_recipe.py — do not edit by hand"
         r["adapted"] = {"target": "mirrorMeals" if target else "none (not rescaled)",
