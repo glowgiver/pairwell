@@ -172,7 +172,8 @@
         "_note": "changing the water also changes the cooked weight — re-weigh and re-run the calculator"
       }
     },
-    "_blockRulesNote": "Halved on 2026-08-29. The old ladder (1 / 1.5 / 2) spent 179 kcal of a 425 kcal meal on the carb base, which is what made the target unreachable."
+    "_blockRulesNote": "Halved on 2026-08-29. The old ladder (1 / 1.5 / 2) spent 179 kcal of a 425 kcal meal on the carb base, which is what made the target unreachable.",
+    "_wholeBlocksOnly": "A block is a frozen 85 g puck out of a 100-120 ml silicone mould. You cannot take half of one, so the plate deals in whole blocks and the Kitchen dial steps by one. blockRules below still carries 0.5 and 1.5 because they say what a dish type WANTS in carb terms, and check_targets.py searches those levels to prove the target is reachable — but on an actual plate they round to a whole puck. If half blocks are ever wanted for real, freeze a second tray in smaller moulds; do not chip one in half at the counter."
   },
   "recipeOutputFormat": {
     "_note": "The shape of the report scripts/adapt_recipe.py prints. Product language is English, so the block names are too; ingredient names stay German, because that is what is on the packet.",

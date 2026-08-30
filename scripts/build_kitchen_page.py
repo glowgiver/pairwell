@@ -565,6 +565,22 @@ HTML = """<!DOCTYPE html>
   .dp-carb.own{color:var(--text);font-weight:600}
   .dishpick.picked .dp-carb{color:inherit;opacity:.8}
 
+  .stock{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+  .stock-row{display:flex;align-items:center;gap:12px}
+  .stock-row label{flex:1;font-size:15px;color:var(--text)}
+  .stock-step{display:flex;align-items:center;gap:2px}
+  .stock-out{
+    margin-top:10px;font-family:var(--f-read);font-size:15px;
+    line-height:1.5;color:var(--muted);
+  }
+  .stock-out b{font-family:var(--f-data);color:var(--text);font-weight:700}
+  .stock-add{
+    margin-top:11px;width:100%;min-height:var(--tap);
+    border:1px solid var(--line);border-radius:11px;background:var(--surface);
+    color:var(--muted);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .stock-add:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   .bd-note{
     padding:0 18px 14px;font-family:var(--f-read);font-size:14.5px;
     line-height:1.55;color:var(--muted);
@@ -687,9 +703,13 @@ function mealsOfDay(who){
      should know that, not just the idealised number. */
   ["lunch","dinner"].forEach(function(k){
     var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
-    var c = picked ? picked.computed : mm[k];
-    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1), tag: picked ? "picked" : "mirror",
-                kcal:c.calories, p:c.proteinG, fib:c.fiberG, fat:c.fatG });
+    var c = picked ? eatenBy(picked, who)
+                   : { kcal:mm[k].calories, p:mm[k].proteinG,
+                       fib:mm[k].fiberG, fat:mm[k].fatG };
+    var n = picked ? blocksFor(picked, who) : 0;
+    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1),
+                tag: picked ? (n ? "picked + " + n0(n) + " blk" : "picked") : "mirror",
+                kcal:c.kcal, p:c.p, fib:c.fib, fat:c.fat });
   });
   pickedSnacks(who).forEach(function(id){
     var c = recipeById(id).computed;
@@ -992,9 +1012,11 @@ function pickedSnacks(who){
 function blockCount(who){
   try{
     var v = parseFloat(localStorage.getItem("hub.kitchen.blocks." + PW.PEOPLE[who].code));
-    if(v >= 0 && v <= 4) return v;
+    /* Whole pucks only — rounded on the way out too, so a half left over from
+       an earlier build cannot ask for something the freezer cannot give. */
+    if(v >= 0 && v <= 4) return Math.round(v);
   }catch(e){}
-  return baselineBlocks();
+  return Math.round(baselineBlocks());
 }
 function setBlockCount(who, v){
   try{ localStorage.setItem("hub.kitchen.blocks." + PW.PEOPLE[who].code, String(v)); }catch(e){}
@@ -1012,6 +1034,16 @@ function takesBlocks(r){
   return r.slot === "mirror" && r.carb !== "own";
 }
 function blocksFor(r, who){ return takesBlocks(r) ? blockCount(who) : 0; }
+
+/* What `who` actually eats of this dish: the serving plus their own blocks.
+   Every reader that used to take `r.computed` straight has to come through
+   here now, because `computed` describes the dish alone and a plate is the
+   dish plus blocks. Missing one of them is what folded the whole dinner list
+   away after picking pho: the pair check was summing two dishes without their
+   carb and comparing that to two full plates. */
+function eatenBy(r, who){
+  return plateFor(r, blocksFor(r, who));
+}
 
 /* A plate = one serving of the dish + n blocks. */
 function plateFor(r, n){
@@ -1066,11 +1098,11 @@ function blockDialHTML(r){
     return '<div class="bd-row" style="--who:' + PW.PEOPLE[who].color + '">' +
       '<div class="bd-who"><span class="dot"></span>' + esc(PW.PEOPLE[who].name) + '</div>' +
       '<div class="bd-step">' +
-        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="-0.5"' +
-          (n <= 0 ? ' disabled' : '') + ' aria-label="Fewer blocks">&minus;</button>' +
-        '<span class="bd-n">' + n1(n) + '</span>' +
-        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="0.5"' +
-          (n >= 4 ? ' disabled' : '') + ' aria-label="More blocks">+</button>' +
+        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="-1"' +
+          (n <= 0 ? ' disabled' : '') + ' aria-label="One block fewer">&minus;</button>' +
+        '<span class="bd-n">' + n0(n) + '</span>' +
+        '<button type="button" class="bd-b" data-blk="' + who + '" data-d="1"' +
+          (n >= 4 ? ' disabled' : '') + ' aria-label="One block more">+</button>' +
       '</div>' +
       '<div class="bd-out"><b>' + n0(pl.kcal) + ' kcal</b>' +
         '<span>P ' + n1(pl.p) + ' &middot; Fib ' + n1(pl.fib) + ' &middot; F ' + n1(pl.fat) + '</span>' +
@@ -1084,7 +1116,11 @@ function blockDialHTML(r){
   return '<div class="blockdial">' + bowls +
     '<div class="bd-head">Base blocks on the plate' +
       '<span>' + n0(perBlock().calories) + ' kcal each &middot; baseline ' +
-      n1(baselineBlocks()) + '</span></div>' + rows + '</div>';
+      n0(baselineBlocks()) + '</span></div>' + rows +
+    '<div class="bd-note">Whole blocks only \u2014 a block is a frozen ' +
+      n0(D.kitchen.asianMacroBase.computed.gramsPerBlock) +
+      ' g puck out of the mould, and there is no half of one.</div>' +
+    '</div>';
 }
 
 /* ---- the cooked weight of a dish's batch --------------------------------
@@ -1198,42 +1234,102 @@ function recipeById(id){
    because those are the two macros a single dish genuinely misses here —
    see the Pho Bo / Crispy Sweet Chili Chicken gaps. Protein shortfall matters;
    a calorie miss is softest, appetite already varies day to day. */
-function pairFit(a, b){
-  var mm = D.profiles.mirrorMeals.lunch;
-  var fatHi = parseFloat(String(mm.fatG).split("-").pop());
-  var tKcal = mm.calories*2, tP = mm.proteinG*2, tFib = mm.fiberG*2, tFatHi = fatHi*2;
-  var c = a.computed, d = b.computed;
-  var sKcal = c.calories + d.calories, sP = c.proteinG + d.proteinG,
-      sFib = c.fiberG + d.fiberG, sFat = c.fatG + d.fatG;
-  var dKcal = Math.abs(sKcal - tKcal) / tKcal;
-  var dP   = Math.max(0, tP   - sP)   / tP;
-  var dFib = Math.max(0, tFib - sFib) / tFib;
-  var dFat = Math.max(0, sFat - tFatHi) / tFatHi;
-  return { score: dKcal*0.5 + dP*1.5 + dFib*2 + dFat*2,
-           kcal:sKcal, p:sP, fib:sFib, fat:sFat, tKcal:tKcal, tP:tP, tFib:tFib, tFatHi:tFatHi };
+/* ---- does the DAY close? ------------------------------------------------
+   This used to ask whether lunch and dinner together reached two mirror
+   targets — 28 g of fibre out of two meals. That is not the question. The DAY
+   is what has to close, the afternoon tub is part of it, and a capped spoon of
+   husk is there for the last few grams. Judged as a pair, pho was rejected
+   against all eleven partners; judged as a day it closes comfortably, which is
+   what the kitchen actually produces.
+
+   Breakfast is fixed, lunch and dinner are these two, and the afternoon has
+   `slots` portions left to fill whatever remains. Returns the snack that does
+   the job best and what it leaves over. */
+function dayFit(lunchR, dinnerR, who){
+  who = who || PW.get();
+  var prof = D.profiles.people[who];
+  var t = prof.dailyTargets;
+  var kcal = t.calories, p = t.proteinG, fib = t.fiberG;
+
+  var bf = prof.fixedBreakfast;
+  if(bf){ kcal -= bf.calories; p -= bf.proteinG; fib -= bf.fiberG; }
+
+  var L = eatenBy(lunchR, who), Dn = eatenBy(dinnerR, who);
+  kcal -= L.kcal + Dn.kcal;
+  p    -= L.p    + Dn.p;
+  fib  -= L.fib  + Dn.fib;
+
+  var slots = snackSlots(who);
+  var ft = D.fineTuneFiber;
+  var best = null;
+
+  snackRecipes(who).forEach(function(r){
+    var c = r.computed;
+    var rk = kcal - c.calories * slots;
+    var rp = p    - c.proteinG * slots;
+    var rf = fib  - c.fiberG   * slots;
+    var husk = (ft && rf > 0) ? rf / ft.fiberPerG : 0;
+
+    /* Overshooting calories a little is not a failure — these targets are
+       1 kcal from contradicting themselves as it is. Being short on protein
+       is, and so is a fibre gap wider than the capped spoon. */
+    var tier = (rk < -60 || rp > 0.5 || !ft || husk > ft.maxG) ? 2
+             : (husk <= 0.5 ? 0 : 1);
+
+    var cand = { snack:r, tier:tier, husk:husk,
+                 leftKcal:rk, leftP:rp, leftFib:rf,
+                 score: tier * 100 + Math.max(husk, 0) + Math.abs(rk) / 300 };
+    if(!best || cand.score < best.score) best = cand;
+  });
+
+  if(!best){
+    best = { snack:null, tier: fib > 0.5 ? 2 : 0, husk:0,
+             leftKcal:kcal, leftP:p, leftFib:fib, score:0 };
+  }
+  best.afterMeals = { kcal:kcal, p:p, fib:fib };
+  best.slots = slots;
+  return best;
 }
-function pairCloses(fit){
-  return fit.fib >= fit.tFib - 0.5 && fit.fat <= fit.tFatHi + 0.5 && fit.p >= fit.tP - 0.5;
-}
+
+/* Thin names, so the slot rendering reads as it did. */
+function pairFit(a, b, who){ return dayFit(a, b, who); }
+function pairCloses(fit){ return fit.tier === 0; }
 
 /* Only decorates a candidate when picking it would actually CLOSE the day —
    a found-recipe library is fibre-poor by nature, so on most picks every
    single candidate falls short, and repeating a red warning nine times over
    is noise, not information. Silence is the honest default; a green line is
    the exception worth calling out. */
+/* leftX is what the target still wants. For protein and fibre that means
+   positive is a shortfall. For calories it is the opposite: unspent calories
+   are room, not a deficit, which is why they get their own words. */
+function shortOrSpare(v, unit){
+  if(v > 0.05)  return n1(v) + ' ' + unit + ' short';
+  if(v < -0.05) return n1(-v) + ' ' + unit + ' spare';
+  return 'the ' + unit + ' exactly';
+}
+function roomOrOver(v){
+  if(v > 0.5)  return n0(v) + ' kcal of room';
+  if(v < -0.5) return n0(-v) + ' kcal over';
+  return 'the calories exactly';
+}
+
 function pairCompareLine(otherR, r){
-  var fit = pairFit(otherR, r);
-  if(pairCloses(fit)){
-    return '<span class="dp-pair ok">\u2713 closes the day \u2014 together ' +
-      n0(fit.kcal) + ' kcal &middot; ' + n1(fit.p) + ' g P &middot; ' + n1(fit.fib) +
-      ' g Fib &middot; ' + n1(fit.fat) + ' g F</span>';
+  var f = dayFit(otherR, r, PW.get());
+  var name = f.snack ? esc(f.snack.title) : "the afternoon";
+  if(f.tier === 0){
+    return '<span class="dp-pair ok">\u2713 closes your day with ' + name + '</span>';
   }
-  if(pairTier(fit) === 1){
-    var ft = D.fineTuneFiber;
-    return '<span class="dp-pair husk">plus ' + g((fit.tFib - fit.fib) / ft.fiberPerG) +
-      ' g ' + esc(ft.name) + ' \u2014 ' + n1(fit.fib) + ' of ' + n1(fit.tFib) + ' g fibre</span>';
+  if(f.tier === 1){
+    return '<span class="dp-pair husk">closes with ' + name + ' plus ' +
+      g(f.husk) + ' g ' + esc(D.fineTuneFiber.name) + '</span>';
   }
-  return "";
+  var why = [];
+  if(f.leftP > 0.5) why.push(n1(f.leftP) + " g protein short");
+  if(D.fineTuneFiber && f.husk > D.fineTuneFiber.maxG) why.push(n1(f.leftFib) + " g fibre short");
+  if(f.leftKcal < -60) why.push(n0(-f.leftKcal) + " kcal over");
+  return '<span class="dp-pair">' +
+    esc(why.length ? why.join(" \u00b7 ") : "does not close the day") + '</span>';
 }
 
 /* Three tiers, not two. The library now holds dishes that are deliberately
@@ -1242,13 +1338,7 @@ function pairCompareLine(otherR, r){
    answer from "no", and folding it in with the failures would hide exactly the
    dishes this household wants to eat. Protein and fat still have to be right:
    powder only ever buys fibre. */
-function pairTier(fit){
-  if(pairCloses(fit)) return 0;
-  var ft = D.fineTuneFiber;
-  var proteinFatOk = fit.p >= fit.tP - 0.5 && fit.fat <= fit.tFatHi + 0.5;
-  if(ft && proteinFatOk && (fit.tFib - fit.fib) / ft.fiberPerG <= ft.maxG) return 1;
-  return 2;
-}
+function pairTier(fit){ return fit.tier; }
 
 /* A shape and a cuisine, so the picker can be scanned rather than read. Both
    are derived — the shape from the heaviest protein, the cuisine from the
@@ -1374,18 +1464,24 @@ function slotHTML(slot){
       (fits.length ? 'Or, with a spoon of husk' : 'One spoon of husk short') +
       '</div><div class="ps-list">' + chips(near, !fits.length) + '</div>';
   }
-  /* What cannot work is folded away rather than removed. An empty list is a
-     mystery; a closed disclosure is an answer, and it stays one tap away. */
-  if(no.length){
+  /* What cannot work is folded away rather than removed — but only when there
+     is something better on offer. Folding ALL of them left you looking at a
+     sentence and a closed disclosure with nothing to pick, which is how a
+     dish like pho made the dinner slot feel broken. When nothing qualifies,
+     the whole list stays open and ranked: you are choosing dinner either way,
+     and the app's job is to say what the gap costs, not to refuse. */
+  var anyGood = fits.length || near.length;
+  if(no.length && anyGood){
     body += '<details class="ps-rest"><summary>' + no.length +
-      (no.length === 1 ? ' more that cannot close' : ' more that cannot close') +
-      ' the day with ' + esc(otherR.title) + '</summary><div class="ps-list">' +
-      chips(no, false) + '</div></details>';
+      ' more that cannot close the day with ' + esc(otherR.title) +
+      '</summary><div class="ps-list">' + chips(no, false) + '</div></details>';
   }
-  if(!fits.length && !near.length){
-    body = '<p class="ps-note">Nothing here closes the day with ' + esc(otherR.title) +
-      ', not even with husk. Pick what you want to eat and take the gap, or change ' +
-      'the other dish.</p>' + body;
+  if(!anyGood){
+    body = '<p class="ps-note">No dinner here closes the day beside <b>' +
+      esc(otherR.title) + '</b> \u2014 not with the afternoon tub, not with a spoon ' +
+      'of husk on top. Pick what you want to eat; what each one falls short by ' +
+      'is named underneath it.</p>' +
+      '<div class="ps-list">' + chips(no, true) + '</div>';
   }
 
   return '<div class="planslot"><div class="ps-label">' + label +
@@ -1407,8 +1503,9 @@ function remainingBeforeSnack(who){
   }
   ["lunch","dinner"].forEach(function(k){
     var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
-    var c = picked ? picked.computed : mm[k];
-    kcal -= c.calories; p -= c.proteinG; fib -= c.fiberG;
+    var c = picked ? eatenBy(picked, who)
+                   : { kcal:mm[k].calories, p:mm[k].proteinG, fib:mm[k].fiberG };
+    kcal -= c.kcal; p -= c.p; fib -= c.fib;
   });
   /* Portions already chosen are spent, so the next one is ranked against what
      is actually left rather than against the whole afternoon again. */
@@ -1545,13 +1642,28 @@ function pairFlagsHTML(){
     : '';
 
   var fit = b.fit;
-  var closes = pairCloses(fit);
-  var fitFlag = '<div class="flag' + (closes ? '' : ' warn') + '"><div class="ft">' +
-    (closes ? 'This pair closes the day' : 'This pair does not close the day') + '</div><p>' +
-    'Together: ' + n0(fit.kcal) + ' kcal, ' + n1(fit.p) + ' g protein (target ' + n0(fit.tP) +
-    '), ' + n1(fit.fib) + ' g fibre (target ' + n0(fit.tFib) + '), ' + n1(fit.fat) +
-    ' g fat (ceiling ' + n0(fit.tFatHi) + ') — both mirror meals combined.' +
-    (closes ? '' : ' The gap is real — close it with a snack, or pick a different pairing above.') +
+  var who = PW.get();
+  var closes = fit.tier === 0;
+  var head = fit.tier === 0 ? 'This closes ' + esc(PW.PEOPLE[who].name) + '\u2019s day'
+           : fit.tier === 1 ? 'Closes with a spoon of husk'
+           : 'This does not close ' + esc(PW.PEOPLE[who].name) + '\u2019s day';
+  var fitFlag = '<div class="flag' + (fit.tier === 2 ? ' warn' : '') + '">' +
+    '<div class="ft">' + head + '</div><p>' +
+    'Breakfast, both meals and ' + n0(fit.slots) + ' afternoon portion' +
+    (fit.slots === 1 ? '' : 's') +
+    (fit.snack ? ' of ' + esc(fit.snack.title) : '') + '. ' +
+    /* leftX is what the target still WANTS: positive is short, negative is
+       spare. Saying "-0.2 g fibre still owed" was both signs at once. */
+    'That leaves ' + roomOrOver(fit.leftKcal) + ', ' +
+    shortOrSpare(fit.leftP, 'g protein') + ' and ' +
+    shortOrSpare(fit.leftFib, 'g fibre') + '.' +
+    (fit.tier === 1
+      ? ' Finish it with ' + g(fit.husk) + ' g ' + esc(D.fineTuneFiber.name) +
+        ' in a glass of water.'
+      : '') +
+    (fit.tier === 2
+      ? ' Change one of the two, or take the gap knowingly.'
+      : '') +
     '</p></div>';
 
   return mismatch + fitFlag;
@@ -1591,6 +1703,21 @@ function shoppingListHTML(){
     '</div>' + baseBlockShoppingHTML(b);
 }
 
+/* How many blocks are already in the freezer. They are cooked ahead in their
+   own session, not as part of the weekly dish prep, so the shopping question
+   is not "what does this plan need" but "what does this plan need that is not
+   already frozen". */
+function blockStock(){
+  try{
+    var v = parseInt(localStorage.getItem("hub.kitchen.blockstock"), 10);
+    if(v >= 0 && v <= 200) return v;
+  }catch(e){}
+  return 0;
+}
+function setBlockStock(v){
+  try{ localStorage.setItem("hub.kitchen.blockstock", String(v)); }catch(e){}
+}
+
 /* The block has ingredients you have to buy, and the list used to end at
    "plus 10 Asian Base Blocks" — a number with no shopping in it. Scaled from
    the batch the recipe is written for. */
@@ -1598,7 +1725,13 @@ function baseBlockShoppingHTML(b){
   var need = Math.ceil(b.blocks);
   if(!(need > 0) || !D.baseShopping) return "";
   var per = D.baseShopping.blocksPerBatch || 10;
-  var batches = need / per;
+  var have = blockStock();
+  var short = Math.max(need - have, 0);
+  /* You cook whole batches. "0.1 batches" is the same mistake as half a
+     block: the tray holds what it holds, and the surplus goes in the
+     freezer for next time, which is the point of cooking them ahead. */
+  var batches = Math.ceil(short / per);
+  var spare = batches * per - short;
 
   function scale(amount){
     var m = /^([0-9.,]+)\s*(g|ml|tsp)$/.exec(amount.trim());
@@ -1608,19 +1741,46 @@ function baseBlockShoppingHTML(b){
     return (v < 50 ? Math.round(v) : Math.round(v / 5) * 5) + " " + m[2];
   }
 
-  var rows = D.baseShopping.ingredients.map(function(i){
+  var stock =
+    '<div class="stock">' +
+      '<div class="stock-row">' +
+        '<label for="bstock">Already in the freezer</label>' +
+        '<div class="stock-step">' +
+          '<button type="button" class="bd-b" data-stock="-1"' +
+            (have <= 0 ? ' disabled' : '') + ' aria-label="One block fewer">&minus;</button>' +
+          '<span class="bd-n">' + n0(have) + '</span>' +
+          '<button type="button" class="bd-b" data-stock="1" aria-label="One block more">+</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="stock-out">' +
+        (short > 0
+          ? 'This plan needs <b>' + n0(need) + '</b>, so <b>' + n0(short) + '</b> ' +
+            (short === 1 ? 'is' : 'are') + ' missing. Cook <b>' + n0(batches) + '</b> batch' +
+            (batches === 1 ? '' : 'es') + ' \u2014 ' + n0(batches * per) + ' blocks' +
+            (spare > 0 ? ', ' + n0(spare) + ' spare for next time' : '') + '.'
+          : 'This plan needs <b>' + n0(need) + '</b> and the freezer has them. ' +
+            'Nothing to cook, nothing to buy.') +
+      '</div>' +
+      '<button type="button" class="stock-add" data-stock="' + n0(per) + '">' +
+        'Cooked a batch (+' + n0(per) + ')</button>' +
+    '</div>';
+
+  var rows = short > 0 ? D.baseShopping.ingredients.map(function(i){
     return '<li><div class="t">' + esc(i.item) + '</div>' +
            '<div class="amt">' + esc(scale(i.amount)) + '</div></li>';
-  }).join("");
+  }).join("") : "";
 
-  return '<div class="card"><div class="ch"><span class="k">Asian Base Block</span>' +
-    '<span class="meta">' + n0(need) + ' block' + (need === 1 ? '' : 's') +
-      ' &middot; ' + n1(batches) + ' batch' + (batches === 1 ? '' : 'es') + '</span>' +
-    '<span class="title">Philipp ' + n1(blockCount("philipp")) + ' &middot; Eunice ' +
-      n1(blockCount("eunice")) + ' per plate</span></div>' +
-    '<ul class="ing">' + rows + '</ul>' +
-    '<div class="rnote">One batch makes ' + n0(per) + ' blocks. The method is under ' +
-    '<b>Cook</b>.</div></div>';
+  return '<div class="card"><div class="ch"><span class="k">Asian Macro Block</span>' +
+    '<span class="meta">' + n0(need) + ' needed &middot; ' + n0(have) + ' frozen</span>' +
+    '<span class="title">Philipp ' + n0(blockCount("philipp")) + ' &middot; Eunice ' +
+      n0(blockCount("eunice")) + ' per plate</span></div>' +
+    stock +
+    (rows ? '<ul class="ing">' + rows + '</ul>' +
+            '<div class="rnote">For <b>' + n0(batches) + '</b> batch' +
+            (batches === 1 ? '' : 'es') + '. Cooked ahead in its own session and ' +
+            'frozen, not alongside the dishes. One batch makes ' + n0(per) +
+            ' blocks; the method is under <b>Cook</b>.</div>' : '') +
+    '</div>';
 }
 
 function plannerHTML(){
@@ -1897,10 +2057,16 @@ document.getElementById("stage").addEventListener("click", function(ev){
   /* Ticked in place — a full re-render would throw away the scroll position
      halfway down a shopping list, which is the one thing you cannot afford
      while walking a supermarket. */
+  var st = ev.target.closest("[data-stock]");
+  if(st){
+    setBlockStock(Math.max(blockStock() + parseInt(st.dataset.stock, 10), 0));
+    render();
+    return;
+  }
   var blk = ev.target.closest("[data-blk]");
   if(blk){
     var who = blk.dataset.blk;
-    var v = Math.min(Math.max(blockCount(who) + parseFloat(blk.dataset.d), 0), 4);
+    var v = Math.min(Math.max(blockCount(who) + parseInt(blk.dataset.d, 10), 0), 4);
     setBlockCount(who, v);
     render();
     return;

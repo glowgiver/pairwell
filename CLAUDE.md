@@ -254,6 +254,42 @@ inside one repository.
 **Mirror dishes are 6 servings** — three days of that meal for two people,
 which is the rhythm they actually meal-prep in.
 
+**Whole blocks, whole batches.** A block is a frozen 85 g puck out of a
+100–120 ml mould; there is no half of one, so the dial steps by one and rounds
+anything fractional it finds in storage. The same applies one level up: you
+cook whole batches, so "0.1 batches" is the same mistake as half a block. The
+Kitchen rounds up and says what the surplus is — *cook 1 batch, 10 blocks, 9
+spare for next time* — because the surplus is the point.
+
+`blockRules` still carries `0.5` and `1.5`. Those say what a dish type wants in
+carb terms and `check_targets.py` searches those levels to prove the target is
+reachable; on a plate they round to a whole puck. If half blocks are ever
+wanted for real, freeze a second tray in smaller moulds.
+
+**The verdict is a DAY check, not a pair check.** For a while the planner
+asked whether lunch and dinner between them reached two mirror targets — 28 g
+of fibre out of two meals. That is not the question and it produced a nonsense
+answer: phở carries 4.8 g of fibre, so it was rejected against all eleven
+possible partners and the dinner list folded away entirely, which read as the
+app being broken.
+
+The day is what has to close. Breakfast is fixed, lunch and dinner are the
+picks, the afternoon tub is part of the answer, and `dayFineTuning` is there
+for the last few grams. `dayFit()` walks exactly that: target, minus breakfast,
+minus both plates *with that person's blocks*, then the best snack at their
+portion count, then husk under its cap. Phở plus Lemon Herb closes Philipp's
+day with room to spare and Eunice's with 7 g of husk.
+
+Three tiers follow from it: closes outright, closes with a spoon, cannot close.
+And when nothing qualifies the list stays **open** — folding every option away
+leaves you unable to choose at all, and you are cooking dinner either way.
+
+**Blocks are cooked ahead and frozen, in their own session.** So the shopping
+question is not "what does this plan need" but "what does it need that is not
+already in the freezer". Kitchen keeps a block count you step by hand, with a
+*Cooked a batch (+10)* button, and when the freezer already covers the plan it
+prints nothing to buy at all.
+
 **The block's own ingredients are on the shopping list**, scaled from the batch
 that makes ten of them. They are carried as the lines `kitchen.json` already
 writes, deliberately *not* matched against `foods.json`: raw jasmine rice, raw
