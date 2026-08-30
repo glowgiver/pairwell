@@ -49,13 +49,23 @@ html,body{margin:0;padding:0}
 /* ---------- person switcher ---------------------------------------------
    Present on every page. One tap, persisted immediately, applies app-wide. */
 
+/* Sticky, because the person switcher is useless once it has scrolled away
+   and the Kitchen page is nine screens long. Opaque for the same reason the
+   tab bar is: what scrolls underneath must not decide the contrast. */
 .pw-bar{
+  position:sticky;top:0;z-index:15;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
   margin-bottom:22px;
+  padding:8px 0;
+  background:var(--bg);
+  border-bottom:1px solid transparent;
 }
+/* The rule appears only once the bar is actually holding position, so it
+   reads as a divider rather than as decoration at rest. */
+.pw-bar.stuck{border-bottom-color:var(--line)}
 
 .pw-back{
   display:inline-flex;align-items:center;gap:7px;
