@@ -231,6 +231,11 @@
     color:var(--muted2);margin-bottom:10px;
   }
   .ps-hint{text-transform:none;letter-spacing:0;font-family:var(--f-read);color:var(--muted2)}
+  .ps-tier{margin:14px 0 6px;font:600 12px/1 var(--f-ui);letter-spacing:.06em;
+           text-transform:uppercase;color:var(--muted)}
+  .ps-rest{margin-top:14px;border-top:1px solid var(--line)}
+  .ps-rest>summary{cursor:pointer;font:400 13px/1.4 var(--f-read);color:var(--muted);
+                   padding:12px 0;min-height:var(--tap);display:flex;align-items:center}
   .ps-note{
     margin:0 0 12px;font-family:var(--f-read);font-size:14px;line-height:1.55;
     color:var(--muted2);
@@ -260,6 +265,11 @@
   }
   .dp-pair.ok{color:var(--accent)}
   .dp-pair.warn{color:var(--warn)}
+  /* A pair that is one spoon of husk away is not a failure — red said "error"
+     for something that works. Reserve --warn for actually being over budget;
+     the pairs that genuinely cannot close no longer print a line at all,
+     because they are folded into the disclosure. */
+  .dp-pair.husk{color:var(--muted)}
   .dp-badge{
     display:inline-block;margin-top:6px;font-family:var(--f-data);font-size:11.5px;
     font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);
@@ -656,10 +666,31 @@ function pairCloses(fit){
    the exception worth calling out. */
 function pairCompareLine(otherR, r){
   var fit = pairFit(otherR, r);
-  if(!pairCloses(fit)) return "";
-  return '<span class="dp-pair ok">✓ closes the day — together ' +
-    n0(fit.kcal) + ' kcal &middot; ' + n1(fit.p) + ' g P &middot; ' + n1(fit.fib) +
-    ' g Fib &middot; ' + n1(fit.fat) + ' g F</span>';
+  if(pairCloses(fit)){
+    return '<span class="dp-pair ok">✓ closes the day — together ' +
+      n0(fit.kcal) + ' kcal &middot; ' + n1(fit.p) + ' g P &middot; ' + n1(fit.fib) +
+      ' g Fib &middot; ' + n1(fit.fat) + ' g F</span>';
+  }
+  if(pairTier(fit) === 1){
+    var ft = D.fineTuneFiber;
+    return '<span class="dp-pair husk">plus ' + g((fit.tFib - fit.fib) / ft.fiberPerG) +
+      ' g ' + esc(ft.name) + ' — ' + n1(fit.fib) + ' of ' + n1(fit.tFib) + ' g fibre</span>';
+  }
+  return "";
+}
+
+/* Three tiers, not two. The library now holds dishes that are deliberately
+   fibre-light — a pho stops being a pho if you fix its fibre by hand — so a
+   pair can also be one spoon of husk away from closing. That is a different
+   answer from "no", and folding it in with the failures would hide exactly the
+   dishes this household wants to eat. Protein and fat still have to be right:
+   powder only ever buys fibre. */
+function pairTier(fit){
+  if(pairCloses(fit)) return 0;
+  var ft = D.fineTuneFiber;
+  var proteinFatOk = fit.p >= fit.tP - 0.5 && fit.fat <= fit.tFatHi + 0.5;
+  if(ft && proteinFatOk && (fit.tFib - fit.fib) / ft.fiberPerG <= ft.maxG) return 1;
+  return 2;
 }
 
 function dishChip(r, opts){
@@ -692,9 +723,9 @@ function slotHTML(slot){
   if(pickedId && !recipeById(pickedId)){ pickedId = null; PLAN[slot] = null; savePlan(PLAN); }
 
   if(pickedId){
-    var r = recipeById(pickedId);
+    var picked = recipeById(pickedId);
     return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
-      dishChip(r, {slot:slot, picked:true}) +
+      dishChip(picked, {slot:slot, picked:true}) +
       '<button class="ps-change" data-slot="' + esc(slot) + '">change</button></div>';
   }
 
@@ -703,29 +734,52 @@ function slotHTML(slot){
   var scored = list.map(function(r){
     return { r:r, fit: otherR ? pairFit(otherR, r) : null };
   });
-  if(otherR) scored.sort(function(a,b){ return a.fit.score - b.fit.score; });
-  var anyCloses = otherR ? scored.some(function(x){ return pairCloses(x.fit); }) : false;
 
-  var body = scored.map(function(x, i){
-    return dishChip(x.r, {
-      slot:slot,
-      badge: (otherR && i === 0) ? "closest fit" : "",
-      compareLine: otherR ? pairCompareLine(otherR, x.r) : ""
-    });
-  }).join("");
+  function chips(items, withBadge){
+    return items.map(function(x, i){
+      return dishChip(x.r, {
+        slot: slot,
+        badge: (withBadge && i === 0) ? "closest fit" : "",
+        compareLine: otherR ? pairCompareLine(otherR, x.r) : ""
+      });
+    }).join("");
+  }
 
-  /* One honest line instead of nine repeated warnings — this is the common
-     case with a fibre-poor library, and it should read as information, not
-     as the app scolding every choice. */
-  var noneClose = (otherR && !anyCloses)
-    ? '<p class="ps-note">None of these close the day with ' + esc(otherR.title) +
-      ' on their own — the closest still leaves a real gap. Pick freely; ' +
-      'close it with a snack, or look for dishes with more built-in fibre.</p>'
-    : '';
+  /* Nothing picked in the other slot yet, so there is no pair to judge. */
+  if(!otherR){
+    return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
+      '<div class="ps-list">' + chips(scored, false) + '</div></div>';
+  }
+
+  scored.sort(function(a, b){ return a.fit.score - b.fit.score; });
+  var fits = scored.filter(function(x){ return pairTier(x.fit) === 0; });
+  var near = scored.filter(function(x){ return pairTier(x.fit) === 1; });
+  var no   = scored.filter(function(x){ return pairTier(x.fit) === 2; });
+
+  var body = "";
+  if(fits.length) body += '<div class="ps-list">' + chips(fits, true) + '</div>';
+  if(near.length){
+    body += '<div class="ps-tier">' +
+      (fits.length ? 'Or, with a spoon of husk' : 'One spoon of husk short') +
+      '</div><div class="ps-list">' + chips(near, !fits.length) + '</div>';
+  }
+  /* What cannot work is folded away rather than removed. An empty list is a
+     mystery; a closed disclosure is an answer, and it stays one tap away. */
+  if(no.length){
+    body += '<details class="ps-rest"><summary>' + no.length +
+      (no.length === 1 ? ' more that cannot close' : ' more that cannot close') +
+      ' the day with ' + esc(otherR.title) + '</summary><div class="ps-list">' +
+      chips(no, false) + '</div></details>';
+  }
+  if(!fits.length && !near.length){
+    body = '<p class="ps-note">Nothing here closes the day with ' + esc(otherR.title) +
+      ', not even with husk. Pick what you want to eat and take the gap, or change ' +
+      'the other dish.</p>' + body;
+  }
 
   return '<div class="planslot"><div class="ps-label">' + label +
-    (otherR ? ' <span class="ps-hint">&middot; ranked to fit ' + esc(otherR.title) + '</span>' : '') +
-    '</div>' + noneClose + '<div class="ps-list">' + body + '</div></div>';
+    ' <span class="ps-hint">&middot; ranked to fit ' + esc(otherR.title) + '</span>' +
+    '</div>' + body + '</div>';
 }
 
 /* What is actually left for a snack once breakfast (if fixed) and the
