@@ -277,6 +277,40 @@ HTML = """<!DOCTYPE html>
   .dl .dv{font-family:var(--f-read);font-size:15px;line-height:1.55;color:var(--muted)}
   .dl .dv strong{color:var(--text)}
 
+  /* ---- the planner: pick a dish, get the other one and the shopping list ---- */
+  .planrow{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+  .planslot{background:var(--surface);padding:14px 16px}
+  .planslot-snack{border-top:1px solid var(--line);padding:14px 16px}
+  .planslot-snack .ps-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:420px){ .planslot-snack .ps-list{grid-template-columns:1fr} }
+  .ps-label{
+    font-family:var(--f-data);font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted2);margin-bottom:10px;
+  }
+  .ps-hint{text-transform:none;letter-spacing:0;font-family:var(--f-read);color:var(--muted2)}
+  .ps-list{display:flex;flex-direction:column;gap:8px}
+  .dishpick{
+    display:block;width:100%;text-align:left;min-height:var(--tap);
+    background:var(--surface-2);border:1px solid var(--line-2,var(--line));
+    border-radius:12px;padding:9px 12px;cursor:pointer;position:relative;
+  }
+  .dishpick:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .dishpick.picked{border-color:var(--accent);background:var(--accent);color:var(--bg)}
+  .dp-title{display:block;font-size:15px;font-weight:600;line-height:1.35}
+  .dp-meta{
+    display:block;margin-top:3px;font-family:var(--f-data);font-size:12.5px;
+    color:var(--muted2);font-variant-numeric:tabular-nums;line-height:1.5;
+  }
+  .dishpick.picked .dp-meta{color:var(--bg);opacity:.82}
+  .dp-badge{
+    display:inline-block;margin-top:6px;font-family:var(--f-data);font-size:11.5px;
+    font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);
+  }
+  .ps-change{
+    margin-top:10px;min-height:36px;background:none;border:1px solid var(--line);
+    border-radius:10px;padding:0 14px;font-size:13px;color:var(--muted);cursor:pointer;
+  }
+
   @media (prefers-reduced-motion:reduce){ details summary::after{transition:none} }
 </style>
 </head>
@@ -325,11 +359,23 @@ function mealsOfDay(who){
     rows.push({ label:"Breakfast", tag:"fixed", kcal:b.calories, p:b.proteinG,
                 fib:b.fiberG, fat:b.fatG, ing:b.ingredients });
   }
+  /* Once a dish is actually picked in the planner below, the ledger uses its
+     real computed macros instead of the abstract mirror target — Baked Feta
+     Salmon really does carry 1.2 g fibre, not 14, and "left for snacks"
+     should know that, not just the idealised number. */
   ["lunch","dinner"].forEach(function(k){
-    var m = mm[k];
-    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1), tag:"mirror",
-                kcal:m.calories, p:m.proteinG, fib:m.fiberG, fat:m.fatG });
+    var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
+    var c = picked ? picked.computed : mm[k];
+    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1), tag: picked ? "picked" : "mirror",
+                kcal:c.calories, p:c.proteinG, fib:c.fiberG, fat:c.fatG });
   });
+  if(PLAN.snack){
+    var s = recipeById(PLAN.snack);
+    if(s){
+      rows.push({ label:s.title, tag:"snack", kcal:s.computed.calories, p:s.computed.proteinG,
+                  fib:s.computed.fiberG, fat:s.computed.fatG });
+    }
+  }
 
   var used = rows.reduce(function(a,r){
     a.kcal += r.kcal; a.p += r.p; a.fib += r.fib || 0;
@@ -564,6 +610,227 @@ function lookForHTML(){
     '</div></details>';
 }
 
+/* ---- the planner: lunch and dinner target the SAME macros (mirrorMeals.lunch
+   covers both), so any two ready mirror dishes already "fit" on their own.
+   What this adds is honesty about real dishes that fall short (Pho Bo's fibre
+   gap, say) by ranking the other slot's candidates on how well the PAIR closes
+   the full day, not just how each dish does alone. ---- */
+function loadPlan(){
+  try{
+    var v = JSON.parse(localStorage.getItem("hub.kitchen.plan") || "{}");
+    return { lunch: v.lunch || null, dinner: v.dinner || null, snack: v.snack || null };
+  }catch(e){ return {lunch:null, dinner:null, snack:null}; }
+}
+function savePlan(p){
+  try{ localStorage.setItem("hub.kitchen.plan", JSON.stringify(p)); }catch(e){}
+}
+var PLAN = loadPlan();
+
+function mirrorRecipes(){
+  return (D.recipes || []).filter(function(r){ return r.slot === "mirror" && r.computed; });
+}
+function snackRecipes(){
+  return (D.recipes || []).filter(function(r){ return r.slot === "snack" && r.computed; });
+}
+function recipeById(id){
+  var found = null;
+  (D.recipes || []).forEach(function(r){ if(r.id === id) found = r; });
+  return found;
+}
+
+/* Lower is better. Fibre-short and fat-over-ceiling are weighted heaviest
+   because those are the two macros a single dish genuinely misses here —
+   see the Pho Bo / Crispy Sweet Chili Chicken gaps. Protein shortfall matters;
+   a calorie miss is softest, appetite already varies day to day. */
+function pairFit(a, b){
+  var mm = D.profiles.mirrorMeals.lunch;
+  var fatHi = parseFloat(String(mm.fatG).split("-").pop());
+  var tKcal = mm.calories*2, tP = mm.proteinG*2, tFib = mm.fiberG*2, tFatHi = fatHi*2;
+  var c = a.computed, d = b.computed;
+  var sKcal = c.calories + d.calories, sP = c.proteinG + d.proteinG,
+      sFib = c.fiberG + d.fiberG, sFat = c.fatG + d.fatG;
+  var dKcal = Math.abs(sKcal - tKcal) / tKcal;
+  var dP   = Math.max(0, tP   - sP)   / tP;
+  var dFib = Math.max(0, tFib - sFib) / tFib;
+  var dFat = Math.max(0, sFat - tFatHi) / tFatHi;
+  return { score: dKcal*0.5 + dP*1.5 + dFib*2 + dFat*2,
+           kcal:sKcal, p:sP, fib:sFib, fat:sFat, tKcal:tKcal, tP:tP, tFib:tFib, tFatHi:tFatHi };
+}
+
+function dishChip(r, opts){
+  opts = opts || {};
+  var c = r.computed || {};
+  /* Mirror dishes are eaten by both, so their servings convert to days for
+     two. Snacks are not meal-prepped on that same 1-per-person-per-day
+     assumption, so just say how many the batch makes. */
+  var tail = r.slot === "mirror"
+    ? (function(){
+        var days = r.servings / 2;
+        return (Math.round(days*10)/10) + (days === 1 ? ' day' : ' days') + ' for two';
+      })()
+    : r.servings + (r.servings === 1 ? ' serving' : ' servings');
+  return '<button class="dishpick' + (opts.picked ? ' picked' : '') + '" data-slot="' +
+    esc(opts.slot) + '" data-id="' + esc(r.id) + '">' +
+    '<span class="dp-title">' + esc(r.title) + '</span>' +
+    '<span class="dp-meta">' + n0(c.calories) + ' kcal &middot; ' + n1(c.proteinG) + ' g P &middot; ' +
+      n1(c.fiberG) + ' g Fib &middot; ' + n1(c.fatG) + ' g F &middot; ' + tail + '</span>' +
+    (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
+    '</button>';
+}
+
+function slotHTML(slot){
+  var list = mirrorRecipes();
+  var label = slot.charAt(0).toUpperCase() + slot.slice(1);
+  var otherSlot = slot === "lunch" ? "dinner" : "lunch";
+  var pickedId = PLAN[slot];
+  if(pickedId && !recipeById(pickedId)){ pickedId = null; PLAN[slot] = null; savePlan(PLAN); }
+
+  if(pickedId){
+    var r = recipeById(pickedId);
+    return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
+      dishChip(r, {slot:slot, picked:true}) +
+      '<button class="ps-change" data-slot="' + esc(slot) + '">change</button></div>';
+  }
+
+  var otherId = PLAN[otherSlot];
+  var otherR = otherId ? recipeById(otherId) : null;
+  var scored = list.map(function(r){
+    return { r:r, s: otherR ? pairFit(otherR, r).score : null };
+  });
+  if(otherR) scored.sort(function(a,b){ return a.s - b.s; });
+
+  var body = scored.map(function(x, i){
+    return dishChip(x.r, {slot:slot, badge: (otherR && i === 0) ? "closest fit" : ""});
+  }).join("");
+
+  return '<div class="planslot"><div class="ps-label">' + label +
+    (otherR ? ' <span class="ps-hint">&middot; ranked to fit ' + esc(otherR.title) + '</span>' : '') +
+    '</div><div class="ps-list">' + body + '</div></div>';
+}
+
+/* What is actually left for a snack once breakfast (if fixed) and the
+   lunch/dinner picks (real macros if chosen, else the mirror target) are
+   accounted for. Deliberately ignores any snack already picked — this is
+   the budget to rank CANDIDATES against, not what remains after one. */
+function remainingBeforeSnack(who){
+  var prof = D.profiles.people[who];
+  var t = prof.dailyTargets;
+  var mm = D.profiles.mirrorMeals;
+  var kcal = t.calories, p = t.proteinG, fib = t.fiberG;
+  if(prof.fixedBreakfast){
+    kcal -= prof.fixedBreakfast.calories; p -= prof.fixedBreakfast.proteinG; fib -= prof.fixedBreakfast.fiberG;
+  }
+  ["lunch","dinner"].forEach(function(k){
+    var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
+    var c = picked ? picked.computed : mm[k];
+    kcal -= c.calories; p -= c.proteinG; fib -= c.fiberG;
+  });
+  return { kcal:kcal, p:p, fib:fib };
+}
+
+/* Lower is better. A snack that blows past the remaining calories is
+   penalised; one that still leaves protein or fibre short is penalised more
+   — those are the two the day structurally struggles with, same weighting
+   as pairFit above. */
+function snackFit(remaining, snack){
+  var c = snack.computed;
+  var kcalOver = Math.max(0, c.calories - Math.max(remaining.kcal, 0));
+  var pShort   = Math.max(0, remaining.p   - c.proteinG);
+  var fibShort = Math.max(0, remaining.fib - c.fiberG);
+  return kcalOver / Math.max(remaining.kcal, 1) * 1.0 +
+         pShort   / Math.max(remaining.p, 1)   * 1.5 +
+         fibShort / Math.max(remaining.fib, 1) * 1.5;
+}
+
+function snackSlotHTML(){
+  var who = PW.get();
+  var pickedId = PLAN.snack;
+  if(pickedId && !recipeById(pickedId)){ pickedId = null; PLAN.snack = null; savePlan(PLAN); }
+
+  if(pickedId){
+    var r = recipeById(pickedId);
+    return '<div class="planslot planslot-snack"><div class="ps-label">Snack</div>' +
+      dishChip(r, {slot:"snack", picked:true}) +
+      '<button class="ps-change" data-slot="snack">change</button></div>';
+  }
+
+  var remaining = remainingBeforeSnack(who);
+  var scored = snackRecipes().map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
+  scored.sort(function(a,b){ return a.s - b.s; });
+  var body = scored.map(function(x, i){
+    return dishChip(x.r, {slot:"snack", badge: i === 0 ? "closest fit" : ""});
+  }).join("");
+
+  if(!scored.length){
+    return '<div class="planslot planslot-snack"><div class="ps-label">Snack</div>' +
+      '<div class="empty">No snack recipes ready yet.</div></div>';
+  }
+
+  return '<div class="planslot planslot-snack"><div class="ps-label">Snack ' +
+    '<span class="ps-hint">&middot; ranked to fit ' + esc(PW.PEOPLE[who].name) +
+    '’s remaining ' + n0(Math.max(remaining.kcal, 0)) + ' kcal</span></div>' +
+    '<div class="ps-list">' + body + '</div></div>';
+}
+
+function shoppingListHTML(){
+  var lunch = PLAN.lunch ? recipeById(PLAN.lunch) : null;
+  var dinner = PLAN.dinner ? recipeById(PLAN.dinner) : null;
+  if(!lunch || !dinner) return "";
+  var snack = PLAN.snack ? recipeById(PLAN.snack) : null;
+
+  var fit = pairFit(lunch, dinner);
+  var totals = {}, blocks = 0;
+  var chosen = [lunch, dinner];
+  if(snack) chosen.push(snack);
+  chosen.forEach(function(r){
+    blocks += (r.blocks || 0) * r.servings;
+    (r.ingredients || []).forEach(function(i){
+      totals[i.food] = (totals[i.food] || 0) + i.g;
+    });
+  });
+
+  var rows = Object.keys(totals).sort(function(a,b){ return totals[b] - totals[a]; })
+    .map(function(fid){
+      return '<li><div class="t">' + esc(D.foodNames[fid] || fid) + '</div>' +
+             '<div class="amt">' + n0(totals[fid]) + ' g</div></li>';
+    }).join("");
+
+  var lunchDays = lunch.servings/2, dinnerDays = dinner.servings/2;
+  var mismatch = lunchDays !== dinnerDays
+    ? '<div class="flag warn"><div class="ft">Different lengths</div><p>' +
+      esc(lunch.title) + ' makes ' + (Math.round(lunchDays*10)/10) + ' day(s) of lunch for two, ' +
+      esc(dinner.title) + ' makes ' + (Math.round(dinnerDays*10)/10) + ' day(s) of dinner. ' +
+      'Cook the shorter one again partway through, or scale the batch by hand.</p></div>'
+    : '';
+
+  var closes = fit.fib >= fit.tFib - 0.5 && fit.fat <= fit.tFatHi + 0.5 && fit.p >= fit.tP - 0.5;
+  var fitFlag = '<div class="flag' + (closes ? '' : ' warn') + '"><div class="ft">' +
+    (closes ? 'This pair closes the day' : 'This pair does not close the day') + '</div><p>' +
+    'Together: ' + n0(fit.kcal) + ' kcal, ' + n1(fit.p) + ' g protein (target ' + n0(fit.tP) +
+    '), ' + n1(fit.fib) + ' g fibre (target ' + n0(fit.tFib) + '), ' + n1(fit.fat) +
+    ' g fat (ceiling ' + n0(fit.tFatHi) + ') — both mirror meals combined.' +
+    (closes ? '' : ' The gap is real — close it with a snack, or pick a different pairing above.') +
+    '</p></div>';
+
+  return mismatch + fitFlag +
+    '<div class="card"><div class="ch"><span class="k">Shopping list</span>' +
+    '<span class="meta">' + Object.keys(totals).length + ' items</span>' +
+    '<span class="title">' + esc(lunch.title) + ' + ' + esc(dinner.title) +
+      (snack ? ' + ' + esc(snack.title) : '') + '</span></div>' +
+    '<ul class="ing">' + rows + '</ul>' +
+    (blocks > 0 ? '<div class="rnote">Plus <strong>' + n0(blocks) + ' Asian Base Block' +
+      (blocks === 1 ? '' : 's') + '</strong> — see Method below for the batch recipe.</div>' : '') +
+    '</div>';
+}
+
+function plannerHTML(){
+  return '<div class="card"><div class="ch"><span class="k">Plan the batch</span>' +
+    '<span class="meta">pick lunch, dinner, snack</span></div>' +
+    '<div class="planrow">' + slotHTML("lunch") + slotHTML("dinner") + '</div>' +
+    snackSlotHTML() +
+    '</div>' + shoppingListHTML();
+}
+
 function recipesHTML(who){
   var list = recipesFor(who);
   var head = '<div class="card"><div class="ch"><span class="k">Recipes</span>' +
@@ -668,7 +935,7 @@ function render(){
       }).join("") + '</div></details>';
 
   document.getElementById("stage").innerHTML =
-    ledgerHTML(PW.get()) + mealHTML() + recipesHTML(PW.get()) +
+    ledgerHTML(PW.get()) + mealHTML() + plannerHTML() + recipesHTML(PW.get()) +
     splitter + estimated + ing + steps + extras;
 
   var input = document.getElementById("w");
@@ -680,6 +947,24 @@ function render(){
     card.querySelector(".split").outerHTML = splitHTML();
   });
 }
+
+/* Delegated once on the stage, not inside render() — the buttons are replaced
+   on every render(), but the stage element itself is not. */
+document.getElementById("stage").addEventListener("click", function(ev){
+  var pick = ev.target.closest(".dishpick");
+  if(pick){
+    PLAN[pick.dataset.slot] = pick.dataset.id;
+    savePlan(PLAN);
+    render();
+    return;
+  }
+  var change = ev.target.closest(".ps-change");
+  if(change){
+    PLAN[change.dataset.slot] = null;
+    savePlan(PLAN);
+    render();
+  }
+});
 
 PW.mountRail();
 PW.mountThemeToggle(document.getElementById("switcher"));
