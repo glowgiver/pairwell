@@ -176,6 +176,66 @@ html = """<!DOCTYPE html>
   .run-dot.on::after{background:var(--accent)}
   .run-dot:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
+  /* ---- set tracker + rest timer -------------------------------------- */
+  .run-do{padding:2px 18px 6px;display:flex;flex-direction:column;gap:12px}
+
+  .run-track{
+    background:var(--surface-2);border:1px solid var(--line);
+    border-radius:14px;padding:12px 14px;
+  }
+  .track-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .track-lbl{
+    font-family:var(--f-data);font-size:12px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted2);
+  }
+  .track-count{font-family:var(--f-data);font-size:14px;color:var(--muted)}
+  .track-count b{color:var(--text);font-size:18px}
+  .track-pills{display:flex;gap:8px;flex-wrap:wrap}
+  .set-pill{
+    flex:1;min-width:56px;min-height:var(--tap);
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    border:1px solid var(--line);border-radius:12px;background:var(--surface);
+    color:var(--muted);font-family:var(--f-data);font-size:16px;font-weight:700;
+    cursor:pointer;transition:background .12s ease,color .12s ease;
+  }
+  .set-pill .set-n{font-variant-numeric:tabular-nums}
+  .set-pill svg{
+    width:16px;height:16px;stroke:currentColor;fill:none;
+    stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+    opacity:0;transform:scale(.6);transition:opacity .12s ease,transform .12s ease;
+  }
+  .set-pill.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+  .set-pill.on svg{opacity:1;transform:none}
+  .set-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .run-rest{
+    display:flex;align-items:center;gap:12px;width:100%;
+    min-height:var(--tap);padding:10px 16px;
+    border:1px solid var(--line);border-radius:13px;
+    background:var(--surface);color:var(--muted);
+    font-family:inherit;cursor:pointer;
+  }
+  .run-rest svg{
+    width:22px;height:22px;flex:none;stroke:currentColor;fill:none;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .run-rest #restLbl{font-size:15px;font-weight:600}
+  .run-rest b{
+    font-family:var(--f-data);font-variant-numeric:tabular-nums;
+    font-size:26px;font-weight:700;color:var(--text);margin-left:auto;
+  }
+  .run-rest.live{border-color:var(--accent);color:var(--text)}
+  .run-rest.live b{color:var(--accent)}
+  .run-rest.done{border-color:var(--accent);background:var(--accent);color:var(--bg)}
+  .run-rest.done b{color:var(--bg)}
+  .run-rest:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){
+    .set-pill,.set-pill svg{transition:none}
+  }
+
   /* The single card fills the screen; its own borders would only box it in. */
   .run-body .ex{border-bottom:0;padding:16px 18px 20px}
   .run-body .ex-name{font-size:23px;line-height:1.2}
@@ -410,32 +470,100 @@ var LOC_LABEL = {
 var state = loadState();
 
 /* ---- in-session mode ---------------------------------------------------
-   One exercise fills the screen. No logging, no timer — the only job is that
-   you never lose your place between sets, which seven stacked cards and a
-   locking phone cannot promise. The position is stamped with the day, so
-   tomorrow starts at the top rather than halfway through yesterday. */
+   One exercise fills the screen, so you never lose your place between sets
+   when the phone locks. Two things are now tracked and stamped with the day:
+   which sets you have ticked off (persisted, because that is the thing you
+   forget), and the rest countdown a ticked set starts (in memory only — a
+   countdown that survived a locked phone could only ever be wrong).
+   Tomorrow starts at the top rather than halfway through yesterday. */
 function runKey(){ return "hub.workout.run." + PW.get(); }
 function loadRun(){
   try{
     var v = JSON.parse(localStorage.getItem(runKey()) || "null");
-    if(v && v.d === dayStamp()) return { on: !!v.on, i: v.i || 0, sess: v.sess || null };
+    if(v && v.d === dayStamp())
+      return { on: !!v.on, i: v.i || 0, sess: v.sess || null, setsDone: v.setsDone || {} };
   }catch(e){}
-  return { on:false, i:0, sess:null };
+  return { on:false, i:0, sess:null, setsDone:{} };
 }
 function saveRun(){
   try{
     localStorage.setItem(runKey(), JSON.stringify(
-      { on:RUN.on, i:RUN.i, sess:RUN.sess, d:dayStamp() }));
+      { on:RUN.on, i:RUN.i, sess:RUN.sess, setsDone:RUN.setsDone, d:dayStamp() }));
   }catch(e){}
 }
 var RUN = loadRun();
 
-function startRun(sessKey){ RUN = { on:true, i:0, sess:sessKey }; saveRun(); renderStage(); }
-function exitRun(){ RUN.on = false; saveRun(); renderStage(); window.scrollTo(0,0); }
+/* Starting the same session again resumes its ticks; a different one is a
+   clean slate. */
+function startRun(sessKey){
+  var keep = (RUN.sess === sessKey) ? RUN.setsDone : null;
+  RUN = { on:true, i:0, sess:sessKey, setsDone: keep || {} };
+  saveRun(); renderStage();
+}
+function exitRun(){ RUN.on = false; stopRest(); saveRun(); renderStage(); window.scrollTo(0,0); }
 function goRun(i, n){
   RUN.i = Math.min(Math.max(i, 0), n - 1);
+  stopRest();
   saveRun();
   renderStage();
+}
+
+/* Which sets of exercise i are ticked, as a fixed-length array of booleans. */
+function setsArr(i, n){
+  var a = (RUN.setsDone && RUN.setsDone[i]) || [];
+  var out = [];
+  for(var k = 0; k < n; k++) out.push(!!a[k]);
+  return out;
+}
+function toggleSet(i, k, nSets, restSec){
+  if(!RUN.setsDone) RUN.setsDone = {};
+  var a = setsArr(i, nSets);
+  a[k] = !a[k];
+  RUN.setsDone[i] = a;
+  saveRun();
+  /* Completing a set with work still to come starts the rest that follows it. */
+  var allDone = a.filter(Boolean).length >= nSets;
+  if(a[k] && !allDone && restSec) armRest(restSec);
+  renderStage();
+}
+
+/* ---- rest timer --------------------------------------------------------
+   Ephemeral. The ticking interval is created in wireRunner, bound to the
+   node on screen, so it lives exactly as long as the runner is mounted. */
+var Rest = { endsAt: 0, iv: null };
+function parseRestSec(s){
+  var m = String(s || "").match(/(\\d+)\\s*s/i);
+  return m ? Number(m[1]) : 0;
+}
+function restLeft(){
+  return Rest.endsAt ? Math.max(0, Math.round((Rest.endsAt - Date.now()) / 1000)) : 0;
+}
+function stopRest(){
+  if(Rest.iv){ clearInterval(Rest.iv); Rest.iv = null; }
+  Rest.endsAt = 0;
+}
+function armRest(sec){
+  if(Rest.iv){ clearInterval(Rest.iv); Rest.iv = null; }
+  Rest.endsAt = Date.now() + sec * 1000;
+}
+function mountRestTick(){
+  if(Rest.iv){ clearInterval(Rest.iv); Rest.iv = null; }
+  if(!Rest.endsAt) return;
+  function paint(){
+    var num = document.getElementById("restNum");
+    var btn = document.getElementById("restBtn");
+    var lbl = document.getElementById("restLbl");
+    var left = restLeft();
+    if(num) num.textContent = left > 0 ? left : "";
+    if(left <= 0){
+      clearInterval(Rest.iv); Rest.iv = null; Rest.endsAt = 0;
+      if(btn){ btn.classList.remove("live"); btn.classList.add("done"); }
+      if(lbl) lbl.textContent = "Rest done — go";
+      try{ if(navigator.vibrate) navigator.vibrate([120, 60, 120]); }catch(e){}
+    }
+  }
+  Rest.iv = setInterval(paint, 250);
+  paint();
 }
 
 function el(tag, cls, html){
@@ -598,11 +726,44 @@ function runnerHTML(sess){
   var partnerSess = sess.partner ? partnerExercises(sess) : {};
 
   var dots = ex.map(function(x, n){
+    /* An exercise whose sets are all ticked reads as done in the strip too,
+       even if you have not walked past it with Next. */
+    var xs = parseInt(x.sets, 10) || 0;
+    var allTicked = xs > 0 && setsArr(n, xs).filter(Boolean).length >= xs;
     return '<button type="button" class="run-dot' + (n === i ? " on" : "") +
-      (n < i ? " done" : "") + '" data-go="' + n + '" ' +
+      ((n < i || allTicked) ? " done" : "") + '" data-go="' + n + '" ' +
       'aria-label="Exercise ' + (n+1) + ': ' + esc(x.name) + '"' +
       (n === i ? ' aria-current="true"' : '') + '></button>';
   }).join("");
+
+  var nSets = Math.max(1, parseInt(e.sets, 10) || 1);
+  var done = setsArr(i, nSets);
+  var nDone = done.filter(Boolean).length;
+  var setPills = done.map(function(on, k){
+    return '<button type="button" class="set-pill' + (on ? " on" : "") + '" ' +
+      'data-set="' + k + '" aria-pressed="' + on + '" ' +
+      'aria-label="Set ' + (k+1) + (on ? ", done — tap to undo" : "") + '">' +
+      '<span class="set-n">' + (k+1) + '</span>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
+    '</button>';
+  }).join("");
+  var trackHTML = '<div class="run-track" data-n="' + nSets + '">' +
+    '<div class="track-head"><span class="track-lbl">Sets done</span>' +
+      '<span class="track-count"><b>' + nDone + '</b> / ' + nSets + '</span></div>' +
+    '<div class="track-pills">' + setPills + '</div>' +
+  '</div>';
+
+  var restSec = parseRestSec(e.extras && e.extras.rest);
+  var live = restSec && Rest.endsAt && restLeft() > 0;
+  var restHTML = restSec
+    ? '<button type="button" class="run-rest' + (live ? " live" : "") + '" ' +
+        'id="restBtn" data-sec="' + restSec + '" aria-label="Rest timer">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+          '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>' +
+        '<span id="restLbl">' + (live ? "Resting" : "Rest " + restSec + "s") + '</span>' +
+        '<b id="restNum">' + (live ? restLeft() : "") + '</b>' +
+      '</button>'
+    : '';
 
   return '<div class="runner">' +
     '<div class="run-head">' +
@@ -612,6 +773,7 @@ function runnerHTML(sess){
     '</div>' +
     '<div class="run-dots">' + dots + '</div>' +
     '<div class="run-body">' + exHTML(e, partnerSess[e.name], sess.partner) + '</div>' +
+    '<div class="run-do">' + trackHTML + restHTML + '</div>' +
     '<div class="run-nav">' +
       '<button type="button" class="run-prev" data-go="' + (i - 1) + '"' +
         (i === 0 ? " disabled" : "") + '>&larr; Back</button>' +
@@ -631,6 +793,22 @@ function wireRunner(n){
     if(b.disabled) return;
     b.addEventListener("click", function(){ goRun(Number(b.dataset.go), n); });
   });
+
+  var track = document.querySelector(".run-track");
+  var nSets = track ? Number(track.dataset.n) : 0;
+  var rb = document.getElementById("restBtn");
+  var restSec = rb ? Number(rb.dataset.sec) : 0;
+
+  document.querySelectorAll(".set-pill").forEach(function(b){
+    b.addEventListener("click", function(){
+      toggleSet(RUN.i, Number(b.dataset.set), nSets, restSec);
+    });
+  });
+  if(rb) rb.addEventListener("click", function(){
+    if(Rest.endsAt && restLeft() > 0){ stopRest(); renderStage(); }
+    else { armRest(restSec); renderStage(); }
+  });
+  mountRestTick();
 }
 
 function renderStage(){

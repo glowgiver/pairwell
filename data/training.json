@@ -167,7 +167,7 @@
               "sets": 4,
               "reps": "10-12",
               "extras": {
-                "load": "20 kg",
+                "load": "10 kg/arm",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -181,7 +181,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "45 kg",
+                "load": "21.25 kg",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -271,7 +271,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "45 kg",
+                "load": "21.25 kg",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
