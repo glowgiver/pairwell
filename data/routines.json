@@ -791,7 +791,7 @@
         ]
       },
       "leaveIn": {
-        "_note": "A leave-in CREAM — not a rinse-out conditioner, not a thin spray. Dense hair holds a cream. Apply to damp hair and do not rinse; its job is to re-soften the cuticle the hard water roughened. Look for glycerin or panthenol high on the INCI.",
+        "_note": "A leave-in you don't rinse out — its job is to re-soften the cuticle the hard water roughened. A rich cream suits long, dense hair; a light keratin or oil spray suits short hair. Either works — the one thing to avoid is using a rinse-out conditioner as a leave-in. For a cream, look for glycerin or panthenol high on the INCI.",
         "options": [
           {
             "name": "Garnier Fructis Leave-in Creme Aloe Air Dry",
@@ -806,6 +806,13 @@
             "price": "~€8",
             "where": "Amazon.de · dm",
             "note": "Same brand as your shampoo, built for dense, coarse hair. Search Amazon.de for \"Cantu Leave-In\" — reliably stocked there. Richer than the Garnier: pea-size for Philipp, 2–3× for Eunice."
+          },
+          {
+            "name": "Garnier Fructis Schadenlöscher 10-in-1 Leave-in (spray)",
+            "rank": "A spray — good for short hair",
+            "price": "~€6 · 150 ml",
+            "where": "Amazon.de · dm · Rossmann",
+            "note": "A keratin-and-oil spray rather than a glycerin cream — a different tool for the same job, and the lighter one. Ideal for short hair (Philipp): a spritz or two on damp ends, off the scalp; it also protects to 230 °C if you heat-style. Fine on long hair too (Eunice) — if it ever feels stiff or straw-like over weeks, that is keratin build-up, so drop to every other wash."
           },
           {
             "name": "Any leave-in with glycerin or panthenol near the top",
