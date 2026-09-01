@@ -791,10 +791,29 @@
         ]
       },
       "leaveIn": {
-        "name": "Garnier Fructis Hair Drink Leave-in",
-        "price": "~€5",
-        "where": "dm · Rossmann · Budni",
-        "inci": "Look for panthenol or glycerin near the top."
+        "_note": "A leave-in CREAM — not a rinse-out conditioner, not a thin spray. Dense hair holds a cream. Apply to damp hair and do not rinse; its job is to re-soften the cuticle the hard water roughened. Look for glycerin or panthenol high on the INCI.",
+        "options": [
+          {
+            "name": "Garnier Fructis Leave-in Creme Aloe Air Dry",
+            "rank": "In the drugstore",
+            "price": "~€6 · 400 ml",
+            "where": "dm · Rossmann · Budni",
+            "note": "This is the current name for the old \"Hair Drink\" — Garnier renamed the line, which is why searching the old name found nothing. Glycerin sits high on its list, exactly the humectant this protocol wants. Grab it in the aisle; Amazon stock is patchy."
+          },
+          {
+            "name": "Cantu Shea Butter Leave-In Repair Cream",
+            "rank": "To order online",
+            "price": "~€8",
+            "where": "Amazon.de · dm",
+            "note": "Same brand as your shampoo, built for dense, coarse hair. Search Amazon.de for \"Cantu Leave-In\" — reliably stocked there. Richer than the Garnier: pea-size for Philipp, 2–3× for Eunice."
+          },
+          {
+            "name": "Any leave-in with glycerin or panthenol near the top",
+            "rank": "Or just by the label",
+            "where": "any drugstore",
+            "note": "The brand does not matter. A cream or milk with glycerin/panthenol high, ideally a light oil (argan/shea) too. Skip anything led by silicones (an ingredient ending -cone or -xane first) — at 17.3 °dH they build up."
+          }
+        ]
       },
       "towel": {
         "name": "Microfiber hair towel",
@@ -837,7 +856,7 @@
           "status": "now",
           "items": [
             "Shampoo: Cantu → HASK → Alverde only in emergencies",
-            "Leave-in: Garnier Hair Drink, no rinse",
+            "Leave-in cream: Garnier Aloe Air-Dry or Cantu, no rinse",
             "Citric acid: ¼ tsp / 500 ml, once weekly",
             "Microfiber towel — pat only",
             "Malibu C chelating shampoo every 2–3 weeks",

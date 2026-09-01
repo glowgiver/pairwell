@@ -207,6 +207,22 @@ function esc(s){
     .replace(/"/g,"&quot;");
 }
 
+/* Turn a JSON key into a readable label. The Products list used the raw key
+   as its heading, so "vitaminC" and "eyeCreamAM" rendered as VITAMINC and
+   EYECREAMAM — a mashed word that read like an error code. The heading is
+   shown uppercase by CSS, so all this has to do is restore the word breaks
+   the key name swallowed, and keep known acronyms whole. */
+var ACRO = { am:"AM", pm:"PM", spf:"SPF", bha:"BHA", pha:"PHA", pdrn:"PDRN", uv:"UV" };
+function humanizeLabel(k){
+  return String(k)
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/([a-zA-Z])(\\d)/g, "$1 $2")
+    .replace(/(\\d)([a-zA-Z])/g, "$1 $2")
+    .split(" ")
+    .map(function(w){ return ACRO[w.toLowerCase()] || w; })
+    .join(" ");
+}
+
 var DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 var DAY_LONG = {Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",
                 Fri:"Friday",Sat:"Saturday",Sun:"Sunday"};
@@ -460,7 +476,7 @@ function renderStage(){
   if(r.coreProducts){
     var rows = "";
     for(var k in r.coreProducts){
-      rows += '<div><div class="dk">' + esc(k) + '</div><div class="dv">' + esc(r.coreProducts[k]) + '</div></div>';
+      rows += '<div><div class="dk">' + esc(humanizeLabel(k)) + '</div><div class="dv">' + esc(r.coreProducts[k]) + '</div></div>';
     }
     details += '<details><summary>Products</summary><div class="dl">' + rows + '</div></details>';
   }
@@ -468,7 +484,7 @@ function renderStage(){
     var b = "";
     if(r.skinType) b += '<div><div class="dk">Skin</div><div class="dv">' + esc(r.skinType) + '</div></div>';
     if(r.concerns && r.concerns.length)
-      b += '<div><div class="dk">Focus</div><div class="dv">' + esc(r.concerns.join(" &middot; ")) + '</div></div>';
+      b += '<div><div class="dk">Focus</div><div class="dv">' + esc(r.concerns.join(" · ")) + '</div></div>';
     if(r.timeline) b += '<div><div class="dk">Timeline</div><div class="dv">' + esc(r.timeline) + '</div></div>';
     details += '<details><summary>Background</summary><div class="dl">' + b + '</div></details>';
   }
@@ -837,21 +853,46 @@ function renderStage(){
       esc(note) + '</p></div>' : "";
 
   /* Detail behind a tap */
-  var shampoo = h.products.shampoo.options.map(function(o){
-    return '<div><div class="dk">' + esc(o.rank) + ' &middot; ' + esc(o.price) + '</div>' +
-      '<div class="dv"><strong>' + esc(o.name) + '</strong> &middot; ' + esc(o.where) + '<br>' +
-      esc(o.note) + '</div></div>';
-  }).join("");
+  /* Every buy row is the same card — an eyebrow, then the bold product name
+     with its shop and price, then the note. Ranked options and lone products
+     differ only in what the eyebrow says, so the whole list reads as one list
+     instead of flipping grammar halfway down: the leave-in and towel used to
+     put the product NAME in the tiny eyebrow slot and the price in the body,
+     the exact inverse of the shampoo cards above them. */
+  var PROD_CAT = { shampoo:"Shampoo", leaveIn:"Leave-in", towel:"Towel",
+    citricAcid:"Citric acid", chelator:"Chelating shampoo", mask:"Deep mask",
+    testStrips:"Test strips" };
 
-  var others = "";
-  ["leaveIn","towel","citricAcid","chelator","mask","testStrips"].forEach(function(k){
+  function buyCard(eyebrow, name, where, price, note, inci){
+    /* Separator is the raw middle-dot, not the &middot; entity: this string
+       goes through esc(), which would turn the entity's & into &amp; and
+       print "&middot;" verbatim. The data already uses the raw · anyway. */
+    var meta = [where, price].filter(Boolean).join(" · ");
+    return '<div><div class="dk">' + esc(eyebrow) + '</div>' +
+      '<div class="dv"><strong>' + esc(name) + '</strong>' +
+      (meta ? ' · ' + esc(meta) : '') +
+      (note ? '<br>' + esc(note) : '') +
+      (inci ? '<br>' + esc(inci) : '') + '</div></div>';
+  }
+
+  function productBlock(k){
     var p = h.products[k];
-    if(!p) return;
-    others += '<div><div class="dk">' + esc(p.name) + '</div><div class="dv">' +
-      esc([p.price, p.where].filter(Boolean).join(" &middot; ")) +
-      (p.note ? '<br>' + esc(p.note) : '') +
-      (p.inci ? '<br>' + esc(p.inci) : '') + '</div></div>';
-  });
+    if(!p) return "";
+    var cat = PROD_CAT[k] || k;
+    if(p.options){
+      /* The category and its shared note, then one card per option. */
+      return (p._note
+          ? '<div><div class="dk">' + esc(cat) + '</div><div class="dv">' + esc(p._note) + '</div></div>'
+          : '') +
+        p.options.map(function(o){
+          return buyCard(o.rank, o.name, o.where, o.price, o.note, o.inci);
+        }).join("");
+    }
+    return buyCard(cat, p.name, p.where, p.price, p.note, p.inci);
+  }
+
+  var productList = ["shampoo","leaveIn","towel","citricAcid","chelator","mask","testStrips"]
+    .map(productBlock).join("");
 
   var packages = h.rollout.packages.map(function(p){
     return '<div><div class="dk">' + esc(p.id) + ' &middot; ' + esc(p.title) + ' &middot; ' + esc(p.cost) + '</div>' +
@@ -866,8 +907,7 @@ function renderStage(){
 
   var details =
     '<details><summary>Products &amp; where to buy</summary><div class="dl">' +
-      '<div><div class="dk">Shampoo — priority order</div><div class="dv">' +
-      esc(h.products.shampoo._note) + '</div></div>' + shampoo + others + '</div></details>' +
+      productList + '</div></details>' +
     '<details><summary>Rollout plan</summary><div class="dl">' +
       '<div><div class="dk">Golden rule</div><div class="dv">' + esc(h.rollout.goldenRule) + '</div></div>' +
       packages + '</div></details>' +
