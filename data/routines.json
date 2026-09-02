@@ -334,8 +334,8 @@
           "am": {
             "durationMin": 3,
             "steps": [
-              "No water wash",
-              "HA 2% + B5 on damp skin",
+              "Micellar water (or hydrating toner) on a pad — no hard tap water",
+              "HA 2% + B5 while the skin is still damp from the wipe",
               "Nivea Day Cream",
               "SPF"
             ]
@@ -589,8 +589,8 @@
           "am": {
             "durationMin": 3,
             "steps": [
-              "No water wash",
-              "HA 2% + B5 on damp skin",
+              "Micellar water (or hydrating toner) on a pad — no hard tap water",
+              "HA 2% + B5 while the skin is still damp from the wipe",
               "Nivea Day Cream",
               "SPF"
             ],
@@ -675,6 +675,7 @@
       },
       "coreProducts": {
         "hydrator": "The Ordinary Hyaluronic Acid 2% + B5 — apply to damp skin",
+        "micellar": "Micellar water — the gentle, Kalk-free morning cleanse for winter/autumn. Bioderma Sensibio or any fragrance-free one; lifts overnight oil off the nose without hard tap water.",
         "dayCream": "Nivea Day Cream",
         "nightCream": "Nivea Night Cream",
         "spf": "SPF daily; SPF 50 strictly in summer",
