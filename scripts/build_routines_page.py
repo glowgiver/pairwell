@@ -193,6 +193,34 @@ SHARED_CSS = """
 
   .foot{font-size:13px;color:var(--muted2);line-height:1.6;margin-top:20px}
 
+  /* Weekly check — a "when did I last do this" row, one per infrequent
+     treatment. Shared by Hair's shower schedule and Skincare's weekly
+     devices, so it takes its color from --accent rather than a fixed hue. */
+  .schedrow{
+    display:grid;grid-template-columns:1fr auto;align-items:baseline;
+    gap:2px 12px;padding:13px 18px;border-bottom:1px solid var(--line);
+  }
+  .schedrow.other{opacity:.45}
+  .sr-name{font-size:16px;font-weight:600}
+  .sr-who{font-family:var(--f-data);font-size:12.5px;font-weight:400;color:var(--muted2)}
+  .sr-cadence{
+    grid-column:1;font-family:var(--f-data);font-size:13px;color:var(--muted2);
+  }
+  .sr-state{
+    grid-column:2;grid-row:1;font-family:var(--f-data);font-size:13px;
+    color:var(--muted);text-align:right;
+  }
+  .sr-state.due,.sr-state.late,.sr-state.unknown{color:var(--accent);font-weight:600}
+  .sr-btn{
+    grid-column:2;grid-row:2;justify-self:end;
+    min-height:36px;padding:0 14px;border-radius:10px;
+    font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
+  }
+  .sr-btn.dobtn{background:var(--accent);border:1px solid var(--accent);color:var(--bg)}
+  .sr-btn.undone{background:none;border:1px solid var(--line);color:var(--muted)}
+  .sr-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .dl em{font-style:italic;color:var(--muted2)}
+
   @media (prefers-reduced-motion:reduce){
     details summary::after{transition:none}
   }
@@ -277,6 +305,51 @@ var phasePanelOpen = false;
 
 function person(){ return PW.get(); }
 function routine(){ return R.skincare[person()]; }
+
+/* ---- weekly check: when was it last done -----------------------------
+   Same idea as Hair's shower schedule, applied to skincare's own
+   easy-to-miss weekly devices (MFU, Collagen Glow Pen) — a mark-done
+   button plus a due state, so a skipped Saturday shows as overdue
+   instead of quietly vanishing back into "next week". */
+
+function doneKey(id){ return "hub.skin.done." + id + "." + PW.person().code; }
+
+function today0(){ var d = new Date(); d.setHours(0,0,0,0); return d; }
+
+function lastDone(id){
+  try{
+    var v = localStorage.getItem(doneKey(id));
+    if(!v) return null;
+    var d = new Date(v + "T00:00:00");
+    return isNaN(d) ? null : d;
+  }catch(e){ return null; }
+}
+
+function markDone(id){
+  var d = today0();
+  var iso = d.getFullYear() + "-" +
+            String(d.getMonth()+1).padStart(2,"0") + "-" +
+            String(d.getDate()).padStart(2,"0");
+  try{ localStorage.setItem(doneKey(id), iso); }catch(e){}
+}
+function clearDone(id){ try{ localStorage.removeItem(doneKey(id)); }catch(e){} }
+
+/* Returns {state, days, label} where state is one of
+   unknown | done | soon | due | late. */
+function dueState(t){
+  var last = lastDone(t.id);
+  if(!last) return { state:"unknown", days:null, label:"Never logged" };
+  var days = Math.round((today0() - last) / 86400000);
+  if(days === 0) return { state:"done", days:0, label:"Done today" };
+
+  var due = t.everyDays || 7;
+  var late = t.everyDaysMax || due;
+  if(days >= late && late > due) return { state:"late", days:days, label:days + " days ago — overdue" };
+  if(days > due && late === due) return { state:"late", days:days, label:days + " days ago — overdue" };
+  if(days >= due) return { state:"due", days:days, label:"Due — " + days + " days ago" };
+  var left = due - days;
+  return { state:"soon", days:days, label:"In " + left + " day" + (left === 1 ? "" : "s") };
+}
 
 /* Which season covers today. Eunice's plan is seasonal; Philipp's is not. */
 function seasonFor(r, date){
@@ -497,6 +570,27 @@ function renderStage(){
     details += '<details><summary>The four seasons</summary><div class="dl">' + seasonRows + '</div></details>';
   }
 
+  /* Weekly check — the devices that are easy to skip on a bad Saturday and
+     then forget about entirely, since nothing else on the page would tell
+     you. Only rendered when the person actually has any (Eunice today). */
+  var weekly = "";
+  if(r.weeklyTreatments && r.weeklyTreatments.length){
+    weekly = '<div class="card"><div class="card-head">' +
+      '<span class="k">Weekly check</span></div>' +
+      r.weeklyTreatments.map(function(t){
+        var d = dueState(t);
+        return '<div class="schedrow">' +
+          '<div class="sr-name">' + esc(t.title) + '</div>' +
+          '<div class="sr-cadence">' + esc(t.cadence) + '</div>' +
+          '<div class="sr-state ' + d.state + '">' + esc(d.label) + '</div>' +
+          (d.state === "done"
+            ? '<button type="button" class="sr-btn undone" data-undone="' + esc(t.id) + '">Undo</button>'
+            : '<button type="button" class="sr-btn dobtn" data-done="' + esc(t.id) + '">Done</button>') +
+        '</div>';
+      }).join("") +
+    '</div>';
+  }
+
   /* After 18:00 the evening is what you need first — and the other routine
      folds away rather than merely moving below. Standing at the sink at 22:00
      you should not scroll 700 px of this morning to reach tonight's step one.
@@ -519,7 +613,14 @@ function renderStage(){
   }else{
     body = morning + folded("Tonight", pmCount, evening);
   }
-  stage.innerHTML = body + dayRules + details;
+  stage.innerHTML = body + weekly + dayRules + details;
+
+  document.querySelectorAll("[data-done]").forEach(function(b){
+    b.addEventListener("click", function(){ markDone(b.dataset.done); renderStage(); });
+  });
+  document.querySelectorAll("[data-undone]").forEach(function(b){
+    b.addEventListener("click", function(){ clearDone(b.dataset.undone); renderStage(); });
+  });
 
   /* Phase strip lives above the stage, so wire it after each render. */
   var toggle = document.getElementById("phaseToggle");
@@ -579,31 +680,6 @@ __CSS__
   .card.today ol.steps .t.treat-step{color:var(--hair)}
   .todaydone{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 14px;border-top:1px solid var(--line)}
   .todaydone .dobtn{margin-left:0;flex:1 1 auto}
-
-  .schedrow{
-    display:grid;grid-template-columns:1fr auto;align-items:baseline;
-    gap:2px 12px;padding:13px 18px;border-bottom:1px solid var(--line);
-  }
-  .schedrow.other{opacity:.45}
-  .sr-name{font-size:16px;font-weight:600}
-  .sr-who{font-family:var(--f-data);font-size:12.5px;font-weight:400;color:var(--muted2)}
-  .sr-cadence{
-    grid-column:1;font-family:var(--f-data);font-size:13px;color:var(--muted2);
-  }
-  .sr-state{
-    grid-column:2;grid-row:1;font-family:var(--f-data);font-size:13px;
-    color:var(--muted);text-align:right;
-  }
-  .sr-state.due,.sr-state.late,.sr-state.unknown{color:var(--hair);font-weight:600}
-  .sr-btn{
-    grid-column:2;grid-row:2;justify-self:end;
-    min-height:36px;padding:0 14px;border-radius:10px;
-    font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;
-  }
-  .sr-btn.dobtn{background:var(--hair);border:1px solid var(--hair);color:var(--bg)}
-  .sr-btn.undone{background:none;border:1px solid var(--line);color:var(--muted)}
-  .sr-btn:focus-visible{outline:2px solid var(--hair);outline-offset:2px}
-  .dl em{font-style:italic;color:var(--muted2)}
   .todaybody{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
   .tline{font-size:15.5px;line-height:1.45;color:var(--muted)}
   .tline b{color:var(--text);font-weight:600}

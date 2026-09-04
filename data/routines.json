@@ -673,6 +673,26 @@
         "guaSha": "Gua Sha — manual, always over oil",
         "collagenGlowPen": "Collagen Glow Pen — Fridays, neck"
       },
+      "weeklyTreatments": [
+        {
+          "id": "mfu",
+          "title": "High Focus Shot (MFU)",
+          "day": "Sat",
+          "cadence": "Weekly · Saturdays",
+          "everyDays": 7,
+          "everyDaysMax": 8,
+          "caution": "Max once a week — see the MFU safety rule.",
+          "critical": true
+        },
+        {
+          "id": "collagenGlowPen",
+          "title": "Collagen Glow Pen",
+          "day": "Fri",
+          "cadence": "Weekly · Fridays",
+          "everyDays": 7,
+          "everyDaysMax": 9
+        }
+      ],
       "coreProducts": {
         "hydrator": "The Ordinary Hyaluronic Acid 2% + B5 — apply to damp skin",
         "micellar": "Micellar water — the gentle, Kalk-free morning cleanse for winter/autumn. Bioderma Sensibio or any fragrance-free one; lifts overnight oil off the nose without hard tap water.",
