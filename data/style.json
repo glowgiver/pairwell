@@ -1,169 +1,284 @@
 {
   "_source": "Personal/12_Notizen/01_Style/*.md — transcribed 2026-09-05.",
+  "_revised": "2026-09-05, same day: the transcription was faithful but the notes were stale. The two color-analysis files contradicted each other, the chino plan prescribed a Western-preppy slim cut that works against the stated goal, and nothing in the folder said what the target register actually is. This file now carries both layers and says which is which: fields marked as facts (size, brands) are still transcription; direction, palette, silhouette, hair and buyNext are a styling judgement made against photographs, and can be argued with.",
   "_excluded": "Appearance.md from the same folder is deliberately never transcribed here or anywhere in this repo: it names real people and must never enter a public project.",
   "_gaps": [
-    "Color_Combination.md and Autumn_Type_Color_Palette_and_Style.md were written as two separate personal-color-analysis notes and were never reconciled — the first only ever recorded a 'Winter' season type, the second is titled 'Autumn Type'. Both are kept verbatim under their own heading rather than guessing which one is current.",
-    "Outfit_Planner.md has content for Monday only; the rest of the week was empty in the source."
+    "OPEN TEST — undertone. Hold something gold and then something silver, palm-sized or larger, directly under the chin. Daylight at a window, all lamps off, exposure locked. Watch the skin under the jaw, not the metal: gold better = Dark Autumn, silver better = Dark Winter, no clear winner = neutral, in which case `core` is the whole palette. Until then `palette.conditional` stays unresolved. Nothing on `buyNext` depends on the answer as long as charcoal is taken over camel and cream.",
+    "The wardrobe direction is written against photographs, not a fitting. Anything about how a specific garment actually falls on him is unverified until something is tried on.",
+    "Outfit_Planner.md carried one entry, on Monday: white chunky sweater, 90s light denim, loafers, gold small hoop earrings, trench coat. It is kept here rather than in his planner because the earrings and the chunky-knit-plus-trench combination read as someone else's outfit — possibly Eunice's, possibly saved inspiration. Nothing is lost; it just should not stand as Philipp's Monday until he confirms it.",
+    "Trouser model names shift every season. The chino plan holds the brands and the cut; the specific SKUs in the original note are already partly superseded and should be re-checked in store rather than trusted here."
   ],
   "philipp": {
-    "colorAnalysis": {
-      "type": "Winter",
-      "note": "From Color_Combination.md. Describes the Winter season type generically (its own diagnostic traits), not confirmed here as Philipp's own type — see _gaps.",
-      "traits": "Extreme contrast between skin, hair and eyes. Common among Southern Europeans, Asians, and people with black skin.",
-      "skin": "Porcelain-like, cool in lighter skin, slightly olive in darker skin",
-      "tan": "None or only slight in lighter skin, fast tanning in darker skin",
-      "hair": "Dark brown to blue-black; grey hair shows strong contrast against the skin",
-      "browsLashes": "Dark brown to blue-black",
-      "eyes": "Intense blue, green, cool grey, or dark brown to almost black",
-      "colors": [
-        "Apple green", "Leaf green", "Bottle green", "Sun yellow", "Dark green",
-        "Lemon yellow", "Cherry red", "Ruby", "Light to dark purple", "Raspberry",
-        "Fuchsia", "Ice pink", "Gentian blue", "Royal/Caribbean blue", "Black",
-        "White", "Dark bittersweet-chocolate brown", "Pink", "Navy"
+    "direction": {
+      "register": "Deep, structured, unbranded",
+      "thesis": "Hair-led, silhouette-second, logo-never. Most of the effect is settled at the head before a garment is touched; the clothes then hold a vertical, tonal column with a defined shoulder. Nothing here depends on being thin — it depends on line.",
+      "builtFrom": "Three facts about him, not a look: colouring that is Dark and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the palette, the trouser cut, and how far the styling may mature. Everything else follows from them.",
+      "onTheOriginalFraming": "This was first written in Korean-actor vocabulary, because that is what was asked for. Almost none of it actually depended on that — the palette comes from his colouring, the cut from his measurements, the hair from his face shape. The label was dropped on request; the substance did not change.",
+      "ageRead": "Reads early-to-mid 30s in photographs, not 43: full hairline, even skin tone, no deep static lines. The clothes are currently the oldest thing in the picture. That widens the range rather than narrowing it — the limiter is context (school, parent evenings, Germany), not the birth year, and over-mature styling would hand back years the face has not lost.",
+      "notThis": {
+        "register": "Costume",
+        "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."
+      },
+      "referencesNote": "These are visual shorthand, not a destination. They are useful because their colouring and build sit close to his, so what works on them transfers directly — not because the goal is to look Korean.",
+      "references": [
+        {
+          "name": "Gong Yoo",
+          "why": "Closest thing to a template: structured ease, volume in the hair, tonal and quiet."
+        },
+        {
+          "name": "Hyun Bin",
+          "why": "Same age bracket, and the coat-over-knit silhouette is near-exactly the target."
+        },
+        {
+          "name": "Park Seo-joon",
+          "why": "For the younger read the face actually supports — relaxed tailoring, nothing costume about it."
+        }
       ],
-      "avoid": "No orange, no blue-violet other than the listed purples, no washed-out violet tones"
+      "readOfCurrentPhotos": "Four photographs, four sets of functional clothing: sport tee, polo, sport tee, printed sweatshirt. Not a taste problem — a control problem. Nothing in the set is a chosen silhouette. What already works: the gum-sole Sambas, and navy, which appears in three of four and flatters in all three. What works against him: the printed sweatshirt (busy, boxy, adds volume exactly where the training is removing it) and visible athletic branding outside the gym."
     },
-    "seasonalWardrobe": {
-      "note": "From Autumn_Type_Color_Palette_and_Style.md — a baseline palette plus one capsule per calendar season, not per color-analysis type.",
-      "paletteNote": "Warm, earthy tones: olive green, rust red, mustard yellow, chocolate brown, copper, terracotta, petrol, camel.",
-      "styleNote": "Natural fabrics — wool, cotton, leather — suit this palette well. Avoid bright, cool colors; stay muted and warm.",
-      "seasons": [
+    "hair": {
+      "priority": "The single biggest lever — roughly 60% of the effect is decided before any garment is chosen. Hair either rounds the face or lengthens it, and nothing worn below the collar can undo that.",
+      "current": "Short, flat on top, growing forward, no taper at the sides and no volume at the crown. It rounds the face and takes height away.",
+      "cut": "Two-block — 7–10 cm on top, sides tapered rather than shaved. If the name does not land at the barber, ask for length and volume on top with the sides tapered short but not clipped.",
+      "shape": "Soft side sweep or a loose middle part, with lift at the crown",
+      "color": "One step softer than the current hard black: dark brown with a warm undertone",
+      "product": "Matte clay, not gel. Blow-dry lift from underneath first — glossy is a decade out of date.",
+      "why": "Vertical lift lengthens the face and gives the jaw its line back. Hard black next to skin raises contrast and sharpens every irregularity; shaved sides would read harder than intended and add years the face has not earned."
+    },
+    "palette": {
+      "type": "Dark — deep and high-contrast. Undertone open, leaning warm.",
+      "confidence": "Depth and contrast: established. Undertone: about 60/40 toward warm, which is a leaning and not a diagnosis. Splitting Dark Autumn from Dark Winter needs a controlled gold-versus-silver comparison held at the face, and none of the photographs so far carries one.",
+      "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it. This is the half that decides most of the wardrobe, and it is settled.",
+      "open": "Warm versus cool. The two candidates are Dark Autumn and Dark Winter. Both are Dark seasons and share most of their palette, which is why this stays open without blocking anything: see `core` for what holds either way.",
+      "rule": "Low contrast within an outfit, deep tones throughout. Depth is the rule that carries; the undertone only decides the edges.",
+      "core": [
+        { "name": "Navy", "hex": "#1F2A44" },
+        { "name": "Charcoal", "hex": "#3A3F47" },
+        { "name": "Black", "hex": "#16181C" },
+        { "name": "Forest", "hex": "#2E4535" },
+        { "name": "Deep olive", "hex": "#4A503A" },
+        { "name": "Burgundy", "hex": "#6B2233" }
+      ],
+      "conditional": {
+        "note": "These depend on the open undertone question. Buy from `core` until it is settled; these are the two ways the edges could go.",
+        "ifWarm": [
+          { "name": "Camel", "hex": "#A8825A" },
+          { "name": "Chocolate", "hex": "#4A3728" },
+          { "name": "Rust", "hex": "#9C4A2A" },
+          { "name": "Cream", "hex": "#EFE7D8" }
+        ],
+        "ifCool": [
+          { "name": "Emerald", "hex": "#0F5C4A" },
+          { "name": "Sapphire", "hex": "#1B3F7A" },
+          { "name": "True white", "hex": "#FFFFFF" },
+          { "name": "Deep berry", "hex": "#7A1140" }
+        ]
+      },
+      "avoid": [
+        { "name": "Fuchsia", "hex": "#E4409B", "why": "Out for both — too light and too bright against this depth" },
+        { "name": "Apple green", "hex": "#8DC63F", "why": "Same reason: brightness, not undertone" },
+        { "name": "Lemon yellow", "hex": "#F2E85C", "why": "Light and bright — disappears next to near-black hair" },
+        { "name": "Ice pink", "hex": "#F5D3DE", "why": "Pale and washed — the opposite of a Dark palette" },
+        { "name": "Mid grey", "hex": "#9AA0A8", "why": "Not wrong, just inert — mid tones flatten a high-contrast face. Go darker." }
+      ]
+    },
+    "silhouette": {
+      "rules": [
         {
-          "season": "Spring",
-          "heading": "Light Fabrics and Warm Shades",
-          "tops": "Light shirts or polo shirts in apricot, coral, or warm beige",
-          "outerwear": "Lightweight transitional jackets in olive green or camel",
-          "bottoms": "Chinos in sand or khaki",
-          "shoes": "Loafers or light leather shoes in brown or cognac tones"
+          "rule": "Straight leg, mid-to-high rise",
+          "why": "Hip 105 cm over waist 80 cm is a 25 cm drop. A slim cut pulls at the seat and advertises exactly the ratio the training is working on; straight falls clear of the hip and lengthens the leg."
         },
         {
-          "season": "Summer",
-          "heading": "Breezy Clothing in Natural Colors",
-          "tops": "Linen shirts or T-shirts in warm white, terracotta, or mustard yellow",
-          "bottoms": "Shorts in olive green or beige",
-          "accessories": "Straw hats or sunglasses with brown lenses",
-          "shoes": "Sandals or espadrilles in natural tones"
+          "rule": "Defined shoulder line",
+          "why": "The taper is being built in the gym. Outerwear with a real shoulder seam — overshirt, coat, unstructured blazer — anticipates it instead of waiting for it."
         },
         {
-          "season": "Autumn",
-          "heading": "Layering with Warm Colors",
-          "tops": "Sweaters or cardigans in rust red, dark green, or chocolate brown",
-          "outerwear": "Transitional jackets or coats in camel or olive green",
-          "bottoms": "Jeans or corduroy pants in dark brown or mustard yellow",
-          "shoes": "Ankle boots or boots in brown or cognac tones"
+          "rule": "Tonal column, top to bottom",
+          "why": "One depth of colour head to foot reads as height. Splitting light-over-dark cuts the body in half at the waist, which is the one place not to draw a line."
         },
         {
-          "season": "Winter",
-          "heading": "Warm Fabrics and Deep Tones",
-          "tops": "Turtleneck sweaters or flannel shirts in dark green, burgundy, or petrol",
-          "outerwear": "Wool coats or parkas in chocolate brown or dark olive",
-          "bottoms": "Thermal pants or jeans in dark brown or black",
-          "shoes": "Lined boots in dark brown tones"
+          "rule": "Outerwear to the knee, single-breasted",
+          "why": "A long unbroken vertical is the most reliable lengthening device there is. Double-breasted adds width across the chest and works against it."
+        },
+        {
+          "rule": "No visible branding outside the gym",
+          "why": "Sport logos say 'on the way to train'. The clothes should not be doing that when the destination is a classroom."
+        },
+        {
+          "rule": "Relaxed, never skinny — and never baggy",
+          "why": "Easy through the leg, clean at the line. Tight reads dated and fights the hip; oversized reads borrowed and loses the shoulder the whole silhouette is built on."
         }
       ]
     },
-    "brands": [
-      { "name": "Charles Tyrwhitt", "category": "Shirts" },
-      { "name": "Suitsupply", "category": "Suits" },
-      { "name": "Eterna", "category": "Silk ties" },
-      { "name": "Uniqlo", "category": "Sweaters" },
-      { "name": "Burberry", "category": null },
-      { "name": "Shoepassion", "category": "Men's shoes" },
-      { "name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit" },
-      { "name": "Adidas", "category": "Basketball socks" },
-      { "name": "Levi's", "category": "Jeans — Denim 511 Slim" },
-      { "name": "Villeroy und Boch", "category": "Porcelain (not clothing)" }
+    "buyNext": [
+      {
+        "item": "Overshirt / shirt jacket",
+        "colors": "Charcoal or deep olive",
+        "why": "Replaces the printed sweatshirt outright. The slight shoulder structure does work a sweatshirt physically cannot, and it goes over anything already in the wardrobe."
+      },
+      {
+        "item": "Fine-gauge merino knit, crew or mock neck",
+        "colors": "Navy, charcoal",
+        "why": "The base layer the whole tonal column is built on. Uniqlo is already on the brand list and their merino is exactly the right weight."
+      },
+      {
+        "item": "Straight-leg trousers, mid-to-high rise",
+        "colors": "Charcoal — safe whichever way the undertone goes. Cream only once it is settled warm.",
+        "why": "The actual silhouette change. This is the piece that does more than the other four combined."
+      },
+      {
+        "item": "Single-breasted coat, knee length",
+        "colors": "Charcoal — safe either way. Camel only once the undertone is settled warm.",
+        "why": "The signature garment of the reference set, and it works unchanged from a school corridor to an evening out."
+      },
+      {
+        "item": "One clean leather shoe beside the Sambas",
+        "colors": "Dark brown",
+        "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8."
+      }
     ],
-    "size": {
-      "collar": "38 cm",
-      "armLength": "83 cm",
-      "shoulder": "46 cm",
-      "chest": "96 cm",
-      "waist": "87 cm",
-      "hip": "105 cm",
-      "sleeveLength": "61 cm",
-      "shirtLength": "67 cm",
-      "notes": [
-        "Extra Slim Fit — Tyrwhitt 38 business shirt, casual size S",
-        "31/32 Regular Fit — Boss Orange chino",
-        "Shoes: 26 cm foot = EU 42.6–43.3 at Adidas, EU 43 at Nike",
-        "Shoepassion size 8"
+    "seasonalWardrobe": {
+      "note": "Rewritten 2026-09-05 into the target register. The original was generic Autumn-type advice; this is the same four-season structure with the resolved palette and the straight-leg correction applied.",
+      "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, and a defined shoulder on whatever is outermost.",
+      "seasons": [
+        {
+          "season": "Spring",
+          "heading": "Light layers, one tone",
+          "tops": "Fine merino or cotton knit in navy or cream, worn under rather than alone",
+          "outerwear": "Overshirt or unlined coach jacket in deep olive or charcoal",
+          "bottoms": "Straight chinos in cream or stone",
+          "shoes": "Sambas, or a dark brown derby when the day needs it"
+        },
+        {
+          "season": "Summer",
+          "heading": "Cut, not exposure",
+          "tops": "Boxy-but-clean linen or linen-blend shirt in cream or slate blue, short sleeve with a proper shoulder seam",
+          "bottoms": "Straight trousers in stone, or wide-leg shorts to just above the knee — not sport shorts",
+          "accessories": "Dark tortoise or brown-lens sunglasses",
+          "shoes": "Clean white leather sneaker or a woven loafer"
+        },
+        {
+          "season": "Autumn",
+          "heading": "The strongest season for this palette",
+          "tops": "Merino crew or mock neck in chocolate, forest or burgundy",
+          "outerwear": "Overshirt layered under a camel or charcoal coat",
+          "bottoms": "Straight trousers in charcoal, or dark denim with no fading",
+          "shoes": "Dark brown chelsea or derby"
+        },
+        {
+          "season": "Winter",
+          "heading": "Long lines, deep tones",
+          "tops": "Heavier knit in navy or charcoal, mock or turtleneck",
+          "outerwear": "Knee-length single-breasted wool coat, charcoal or camel",
+          "bottoms": "Straight wool-blend trousers in charcoal or black",
+          "shoes": "Lined dark brown boot"
+        }
       ]
     },
     "chinoPlan": {
-      "goal": "End goal: capsule wardrobe entirely in Ralph Lauren (the collector's preppy signature brand)",
-      "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium/end goal)",
-      "fit": "Slim Fit + Mid-Rise — balances a longer torso and a small stomach, elongates the legs, gives a clean preppy line",
+      "goal": "End goal: capsule wardrobe largely in Ralph Lauren — collector's brand, kept because it means something to him, not because the styling requires it",
+      "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium)",
+      "fit": "Straight leg, mid-to-high rise. Ask for the straight or relaxed cut by fit, not by model name.",
+      "revision": {
+        "date": "2026-09-05",
+        "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Brands and the Ralph Lauren end goal stand.",
+        "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. Only the cut changed."
+      },
       "purchases": [
         {
           "brand": "Dockers",
-          "model": "Ultimate Chino Slim Fit",
-          "colors": "Navy, Grey, Beige",
+          "model": "Ultimate Chino — straight fit (not the slim the original note listed)",
+          "colors": "Charcoal, Navy, Stone",
           "priceNew": "€40–50",
           "whereNew": "Dockers DE, Zalando, Amazon.de",
-          "secondHandSearch": "\"Dockers Ultimate Chino Slim 32/32\", \"Dockers Chino W32\"",
+          "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"",
           "status": "Planned"
         },
         {
           "brand": "Suitsupply",
-          "model": "Brescia Slim Fit Chino",
-          "colors": "Khaki (sand), Navy, Grey",
+          "model": "Ask for the wider chino cut in store — Brescia is their slim block",
+          "colors": "Stone, Navy, Charcoal",
           "priceNew": "~€119",
           "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)",
-          "secondHandSearch": "\"Suitsupply Brescia 32/32\", \"Suitsupply Chino Slim\"",
+          "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in the listing photos, not the model name",
           "status": "Planned"
         },
         {
           "brand": "Ralph Lauren",
-          "model": "Slim Fit Stretch Chino",
-          "colors": "Classic Khaki, Navy, Grey, White",
+          "model": "Stretch Chino — straight or relaxed, not the slim fit",
+          "colors": "Classic Khaki, Navy, Charcoal, Cream",
           "priceNew": "€120–150 (outlet/Vinted often €80–100)",
           "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
-          "secondHandSearch": "\"Ralph Lauren Chino Slim 32/32\", \"Polo Ralph Lauren Flat Front\"",
+          "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"",
           "status": "End goal"
         }
       ],
       "roadmap": [
         {
           "phase": "Phase 1 — Now",
-          "item": "Dockers Ultimate Chino Slim Fit",
-          "colors": "Navy or Grey",
-          "purpose": "Everyday, school, robust daily chino",
+          "item": "Dockers Ultimate Chino, straight",
+          "colors": "Charcoal or Navy",
+          "purpose": "Everyday, school — the cheapest way to test whether the straight cut reads better on him before spending real money",
           "status": "Planned"
         },
         {
-          "phase": "Phase 1 — Now",
-          "item": "Suitsupply Brescia Slim Chino",
-          "colors": "Khaki (sand) or Navy",
-          "purpose": "Smart casual, better fit for proportion",
+          "phase": "Phase 2 — Once the cut is confirmed",
+          "item": "Suitsupply chino, wider block",
+          "colors": "Stone or Navy",
+          "purpose": "Smart casual, and the first one where the fabric shows",
           "status": "Planned"
         },
         {
-          "phase": "Phase 2 — 1–2 years",
-          "item": "Ralph Lauren Slim Fit Stretch Chino",
+          "phase": "Phase 3 — 1–2 years",
+          "item": "Ralph Lauren Stretch Chino, straight",
           "colors": "Classic Khaki + Navy",
-          "purpose": "Prestige, parent-teacher evenings, events",
+          "purpose": "Prestige, parent evenings, events",
           "status": "Planned"
         },
         {
-          "phase": "Phase 3 — End goal",
-          "item": "Ralph Lauren Slim Fit Stretch Chino",
-          "colors": "Grey, White (summer), possibly Olive",
-          "purpose": "Complete the preppy capsule, collector's goal",
+          "phase": "Phase 4 — End goal",
+          "item": "Ralph Lauren Stretch Chino, straight",
+          "colors": "Charcoal, Cream, possibly Olive",
+          "purpose": "Complete the capsule",
           "status": "End goal"
         }
       ]
     },
+    "brands": [
+      { "name": "Charles Tyrwhitt", "category": "Shirts", "note": "Stands — collar 38, extra slim fit already established" },
+      { "name": "Suitsupply", "category": "Suits, chinos", "note": "Stands for tailoring; take the wider chino block, not Brescia" },
+      { "name": "Uniqlo", "category": "Knitwear", "note": "Now the most important name on this list — the merino line is the tonal base layer" },
+      { "name": "Eterna", "category": "Silk ties" },
+      { "name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the dark brown derby or chelsea comes from here" },
+      { "name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. The branded sport tees stay in the gym." },
+      { "name": "Levi's", "category": "Jeans — Denim 511 Slim", "note": "511 is a slim cut; the straight-leg correction applies here too when it is replaced" },
+      { "name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit", "note": "Superseded by the fit revision" },
+      { "name": "Burberry", "category": null },
+      { "name": "Villeroy und Boch", "category": "Porcelain (not clothing)" }
+    ],
+    "size": {
+      "_note": "Transcribed facts, unrevised. The waist figure was corrected on 2026-09-05: the source lists Bauch 87 and Taille 80 separately, and the first transcription kept only the 87.",
+      "collar": "38 cm",
+      "shoulder": "46 cm",
+      "chest": "96 cm",
+      "belly": "87 cm",
+      "waist": "80 cm",
+      "hip": "105 cm",
+      "armLength": "83 cm",
+      "sleeveLength": "61 cm",
+      "shirtLength": "67 cm",
+      "notes": [
+        "Extra Slim Fit — Tyrwhitt 38 business shirt, casual size S",
+        "31/32 Regular Fit — Boss Orange chino",
+        "Shoes: 26 cm foot = EU 42.6–43.3 at Adidas, EU 43 at Nike",
+        "Shoepassion size 8",
+        "Waist 80 to hip 105 is a 25 cm drop — the single measurement that decides the trouser cut"
+      ]
+    },
     "outfitPlanner": {
+      "note": "Empty on purpose. The one entry the source carried is parked in _gaps until it is confirmed as his.",
       "days": [
-        {
-          "day": "Monday",
-          "top": "White chunky sweater",
-          "bottom": "90s-style light denim jeans",
-          "shoes": "Loafers",
-          "accessories": "Gold small hoop earrings",
-          "outerwear": "Trench coat"
-        },
+        { "day": "Monday" },
         { "day": "Tuesday" },
         { "day": "Wednesday" },
         { "day": "Thursday" },

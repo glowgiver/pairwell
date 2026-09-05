@@ -55,11 +55,24 @@ html = """<!DOCTYPE html>
   .ref-title{font-size:18px;font-weight:700}
   .ref-intro{font-family:var(--f-read);font-size:14.5px;color:var(--muted);margin-top:4px;line-height:1.55}
   .ref-body{padding:4px 16px}
-  .ref-item{display:grid;grid-template-columns:104px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  /* Stacked first. Several values here are full paragraphs, and a fixed label
+     column on a 375px screen leaves them about 215px wide — a text ribbon.
+     The side-by-side form is an enhancement for wider screens only. */
+  .ref-item{padding:10px 0;border-bottom:1px solid var(--line)}
   .ref-item:last-child{border-bottom:none}
   .ref-item-k{font-family:var(--f-data);font-size:13px;font-weight:700;color:var(--accent)}
-  .ref-item-v{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.55}
+  .ref-item-v{font-family:var(--f-read);font-size:15px;color:var(--muted);line-height:1.55;margin-top:3px}
   .ref-item-v strong{color:var(--text)}
+
+  /* Short values — measurements — keep the label column at every width,
+     because "38 cm" on its own line is wasted space, not clarity. */
+  .ref-item.compact{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline}
+  .ref-item.compact .ref-item-v{margin-top:0}
+
+  @media (min-width:480px){
+    .ref-item{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:baseline}
+    .ref-item .ref-item-v{margin-top:0}
+  }
 
   .tagrow{display:flex;flex-wrap:wrap;gap:7px;padding:12px 16px 14px}
   .tag{
@@ -70,6 +83,68 @@ html = """<!DOCTYPE html>
   .note{padding:11px 16px 14px;font-family:var(--f-read);font-size:14.5px;
     color:var(--muted);line-height:1.55;border-top:1px solid var(--line)}
   .note strong{color:var(--text)}
+
+  /* Colour swatches. The name always sits BESIDE the chip, never on it —
+     these are arbitrary wardrobe colours, so no contrast ratio against them
+     can be guaranteed and text on top would be a coin flip. */
+  .sw{display:flex;flex-wrap:wrap;gap:10px 14px;padding:13px 16px 15px}
+  .sw-item{display:flex;align-items:center;gap:8px;min-height:24px}
+  /* Outlined with --muted2, not --line: half this palette is deep navy and
+     charcoal, which vanish against the dark card if the ring is as faint as
+     a divider. --muted2 is a mid-tone that holds in both themes. */
+  .sw-dot{width:20px;height:20px;border-radius:6px;border:1px solid var(--muted2);flex:none}
+  .sw-name{font-family:var(--f-data);font-size:13px;color:var(--text);white-space:nowrap}
+  .sw-why{font-family:var(--f-read);font-size:13px;color:var(--muted2);line-height:1.4}
+  /* When each swatch carries a reason, one per row — inline flow turned the
+     two-word names into two-line names. */
+  .sw.reasons{gap:11px}
+  .sw.reasons .sw-item{width:100%;align-items:baseline}
+  .sw.reasons .sw-dot{align-self:center}
+  .sw-label{
+    font-family:var(--f-data);font-size:12.5px;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted2);padding:12px 16px 0;
+  }
+  /* One level below .sw-label — the two branches of an unresolved question,
+     which are subordinate to it rather than siblings of Core and Avoid. */
+  .sw-sub{
+    font-family:var(--f-data);font-size:13px;font-weight:600;
+    color:var(--accent);padding:10px 16px 0;
+  }
+
+  /* Silhouette rules — the rule reads as a heading, the reason underneath it. */
+  .rule{padding:12px 16px;border-bottom:1px solid var(--line)}
+  .rule:last-child{border-bottom:none}
+  .rule-r{font-size:15px;font-weight:700;line-height:1.35}
+  .rule-w{font-family:var(--f-read);font-size:14.5px;color:var(--muted);
+    margin-top:4px;line-height:1.55}
+
+  /* Buy next — ordered, because the order is the advice. */
+  .buy{list-style:none;margin:0;padding:4px 0}
+  .buy li{display:grid;grid-template-columns:26px 1fr;gap:12px;
+    padding:12px 16px;align-items:baseline;border-bottom:1px solid var(--line)}
+  .buy li:last-child{border-bottom:none}
+  .buy .n{font-family:var(--f-data);font-size:15px;font-weight:700;color:var(--accent);
+    font-variant-numeric:tabular-nums}
+  .buy .t{font-size:15.5px;font-weight:700}
+  .buy .c{font-family:var(--f-data);font-size:13px;color:var(--muted2);margin-top:2px}
+  .buy .p{font-family:var(--f-read);font-size:14.5px;color:var(--muted);
+    margin-top:5px;line-height:1.55}
+
+  /* Reference figures */
+  .refperson{padding:11px 16px;border-bottom:1px solid var(--line)}
+  .refperson:last-child{border-bottom:none}
+  .refperson .rp-n{font-size:15px;font-weight:700}
+  .refperson .rp-w{font-family:var(--f-read);font-size:14.5px;color:var(--muted);
+    margin-top:3px;line-height:1.55}
+
+  /* A revision note — something that was deliberately changed, with the reason.
+     Same shape as .note but marked, so it does not read as original source. */
+  .rev{padding:12px 16px;border-top:1px solid var(--line);background:var(--surface-2)}
+  .rev-t{font-family:var(--f-data);font-size:12.5px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent)}
+  .rev p{margin:5px 0 0;font-family:var(--f-read);font-size:14.5px;
+    color:var(--muted);line-height:1.55}
+  .rev p strong{color:var(--text)}
 
   /* Seasons — one sub-card per calendar season, inside the wardrobe card. */
   .season{padding:13px 16px;border-bottom:1px solid var(--line)}
@@ -119,7 +194,7 @@ html = """<!DOCTYPE html>
 </div>
 
 <h1>Style</h1>
-<p class="sub">Color type, wardrobe, brands, sizes — a lookup, not a checklist.</p>
+<p class="sub">Direction, palette, silhouette, sizes — a lookup, not a checklist.</p>
 
 <div id="stage"></div>
 
@@ -136,27 +211,128 @@ function esc(s){
 function person(){ return PW.get(); }
 function profile(){ return S[person()]; }
 
-function colorAnalysisCard(c){
-  if(!c) return "";
+/* The frame everything else is read through, so it comes first. */
+function directionCard(d){
+  if(!d) return "";
+  var refs = (d.references || []).map(function(r){
+    return '<div class="refperson"><div class="rp-n">' + esc(r.name) + '</div>' +
+      '<div class="rp-w">' + esc(r.why) + '</div></div>';
+  }).join("");
+
+  return '<div class="ref-card"><div class="ref-head">' +
+    '<div class="ref-title">Direction — ' + esc(d.register) + '</div>' +
+    (d.thesis ? '<div class="ref-intro">' + esc(d.thesis) + '</div>' : '') +
+    '</div><div class="ref-body">' +
+    (d.builtFrom ? '<div class="ref-item"><div class="ref-item-k">Built from</div>' +
+      '<div class="ref-item-v">' + esc(d.builtFrom) + '</div></div>' : '') +
+    (d.ageRead ? '<div class="ref-item"><div class="ref-item-k">Age read</div>' +
+      '<div class="ref-item-v">' + esc(d.ageRead) + '</div></div>' : '') +
+    (d.readOfCurrentPhotos ? '<div class="ref-item"><div class="ref-item-k">Where it stands</div>' +
+      '<div class="ref-item-v">' + esc(d.readOfCurrentPhotos) + '</div></div>' : '') +
+    '</div>' +
+    (refs
+      ? '<div class="sw-label">Reference</div>' +
+        (d.referencesNote ? '<div class="rule-w" style="padding:0 16px 6px">' + esc(d.referencesNote) + '</div>' : '') +
+        refs
+      : '') +
+    (d.onTheOriginalFraming
+      ? '<div class="rev"><div class="rev-t">On the framing</div><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
+      : '') +
+    (d.notThis
+      ? '<div class="rev"><div class="rev-t">Not this — ' + esc(d.notThis.register) + '</div>' +
+        '<p>' + esc(d.notThis.why) + '</p></div>'
+      : '') +
+    '</div>';
+}
+
+/* Its own card rather than a line in Direction, because it is the one change
+   that outranks every garment on the page. */
+function hairCard(h){
+  if(!h) return "";
   var rows = [
-    ["Traits", c.traits], ["Skin", c.skin], ["Tan", c.tan],
-    ["Brows/lashes", c.browsLashes], ["Eyes", c.eyes]
+    ["Now", h.current], ["Cut", h.cut], ["Shape", h.shape],
+    ["Color", h.color], ["Product", h.product]
   ].filter(function(r){ return r[1]; }).map(function(r){
     return '<div class="ref-item"><div class="ref-item-k">' + esc(r[0]) + '</div>' +
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
   return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Color analysis — ' + esc(c.type) + '</div>' +
-    (c.note ? '<div class="ref-intro">' + esc(c.note) + '</div>' : '') +
+    '<div class="ref-title">Hair — the biggest lever</div>' +
+    (h.priority ? '<div class="ref-intro">' + esc(h.priority) + '</div>' : '') +
     '</div><div class="ref-body">' + rows + '</div>' +
-    (c.colors && c.colors.length
-      ? '<div class="tagrow">' + c.colors.map(function(col){
-          return '<span class="tag">' + esc(col) + '</span>';
-        }).join("") + '</div>'
-      : "") +
-    (c.avoid ? '<div class="note"><strong>Avoid:</strong> ' + esc(c.avoid) + '</div>' : '') +
+    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '') +
     '</div>';
+}
+
+function swatches(list, withWhy){
+  return '<div class="sw' + (withWhy ? ' reasons' : '') + '">' + list.map(function(c){
+    return '<div class="sw-item">' +
+      '<span class="sw-dot" style="background:' + esc(c.hex) + '"></span>' +
+      '<span class="sw-name">' + esc(c.name) + '</span>' +
+      (withWhy && c.why ? '<span class="sw-why">' + esc(c.why) + '</span>' : '') +
+      '</div>';
+  }).join("") + '</div>';
+}
+
+function paletteCard(p){
+  if(!p) return "";
+
+  /* Split deliberately: what is settled sits above what is still a coin toss,
+     and the conditional block says outright that it is unresolved rather than
+     presenting two half-palettes as if either were the answer. */
+  var cond = "";
+  if(p.conditional){
+    var c = p.conditional;
+    cond = '<div class="sw-label">Depends on the undertone</div>' +
+      (c.note ? '<div class="rule-w" style="padding:0 16px 4px">' + esc(c.note) + '</div>' : '') +
+      (c.ifWarm ? '<div class="sw-sub">If warm — Dark Autumn</div>' + swatches(c.ifWarm, false) : '') +
+      (c.ifCool ? '<div class="sw-sub">If cool — Dark Winter</div>' + swatches(c.ifCool, false) : '');
+  }
+
+  return '<div class="ref-card"><div class="ref-head">' +
+    '<div class="ref-title">Palette — ' + esc(p.type) + '</div>' +
+    (p.rule ? '<div class="ref-intro">' + esc(p.rule) + '</div>' : '') +
+    '</div><div class="ref-body">' +
+    (p.established ? '<div class="ref-item"><div class="ref-item-k">Settled</div>' +
+      '<div class="ref-item-v">' + esc(p.established) + '</div></div>' : '') +
+    (p.open ? '<div class="ref-item"><div class="ref-item-k">Still open</div>' +
+      '<div class="ref-item-v">' + esc(p.open) + '</div></div>' : '') +
+    '</div>' +
+    (p.core ? '<div class="sw-label">Core — safe either way</div>' + swatches(p.core, false) : '') +
+    cond +
+    (p.avoid ? '<div class="sw-label">Avoid</div>' + swatches(p.avoid, true) : '') +
+    (p.confidence
+      ? '<div class="rev"><div class="rev-t">Confidence</div><p>' + esc(p.confidence) + '</p></div>'
+      : '') +
+    '</div>';
+}
+
+function silhouetteCard(s){
+  if(!s || !s.rules) return "";
+  var rules = s.rules.map(function(r){
+    return '<div class="rule"><div class="rule-r">' + esc(r.rule) + '</div>' +
+      '<div class="rule-w">' + esc(r.why) + '</div></div>';
+  }).join("");
+  return '<div class="ref-card"><div class="ref-head">' +
+    '<div class="ref-title">Silhouette</div>' +
+    '<div class="ref-intro">Six rules. They do more work than any single garment.</div>' +
+    '</div>' + rules + '</div>';
+}
+
+function buyNextCard(list){
+  if(!list || !list.length) return "";
+  var items = list.map(function(b, i){
+    return '<li><span class="n">' + (i + 1) + '</span><div>' +
+      '<div class="t">' + esc(b.item) + '</div>' +
+      (b.colors ? '<div class="c">' + esc(b.colors) + '</div>' : '') +
+      (b.why ? '<div class="p">' + esc(b.why) + '</div>' : '') +
+      '</div></li>';
+  }).join("");
+  return '<div class="ref-card"><div class="ref-head">' +
+    '<div class="ref-title">Buy next</div>' +
+    '<div class="ref-intro">In this order. The order is the advice.</div>' +
+    '</div><ul class="buy">' + items + '</ul></div>';
 }
 
 function seasonalWardrobeCard(w){
@@ -186,7 +362,8 @@ function seasonalWardrobeCard(w){
 function brandsCard(brands){
   if(!brands || !brands.length) return "";
   var rows = brands.map(function(b){
-    return '<div class="brandrow"><span class="bn">' + esc(b.name) + '</span>' +
+    return '<div class="brandrow"><div><span class="bn">' + esc(b.name) + '</span>' +
+      (b.note ? '<div class="rule-w">' + esc(b.note) + '</div>' : '') + '</div>' +
       (b.category ? '<span class="bc">' + esc(b.category) + '</span>' : '') + '</div>';
   }).join("");
   return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Brands</div></div>' + rows + '</div>';
@@ -195,13 +372,14 @@ function brandsCard(brands){
 function sizeCard(sz){
   if(!sz) return "";
   var FIELDS = [
-    ["collar", "Collar"], ["armLength", "Arm length"], ["shoulder", "Shoulder"],
-    ["chest", "Chest"], ["waist", "Waist"], ["hip", "Hip"],
-    ["sleeveLength", "Sleeve"], ["shirtLength", "Shirt length"]
+    ["collar", "Collar"], ["shoulder", "Shoulder"], ["chest", "Chest"],
+    ["belly", "Belly"], ["waist", "Waist"], ["hip", "Hip"],
+    ["armLength", "Arm length"], ["sleeveLength", "Sleeve"],
+    ["shirtLength", "Shirt length"]
   ];
   var rows = FIELDS.filter(function(f){ return sz[f[0]]; }).map(function(f){
-    return '<div class="ref-item"><div class="ref-item-k">' + esc(f[1]) + '</div>' +
-      '<div class="ref-item-v">' + esc(sz[f[0]]) + '</div></div>';
+    return '<div class="ref-item compact"><div class="ref-item-k">' + esc(f[1]) + '</div>' +
+      '<div class="ref-item-v"><strong>' + esc(sz[f[0]]) + '</strong></div></div>';
   }).join("");
   var notes = (sz.notes || []).map(function(n){
     return '<div class="note">' + esc(n) + '</div>';
@@ -230,8 +408,15 @@ function chinoPlanCard(p){
       '</div>';
   }).join("");
 
+  var rev = p.revision
+    ? '<div class="rev"><div class="rev-t">Revised ' + esc(p.revision.date) + '</div>' +
+      '<p><strong>' + esc(p.revision.change) + '</strong></p>' +
+      '<p>' + esc(p.revision.why) + '</p></div>'
+    : "";
+
   return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Chino plan</div>' +
     '<div class="ref-intro">' + esc(p.goal) + '</div></div>' +
+    rev +
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
@@ -254,7 +439,9 @@ function outfitPlannerCard(op){
     return '<div class="outfitrow"><div class="or-day">' + esc(d.day) + '</div>' +
       '<div class="or-body">' + body + '</div></div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Outfit planner</div></div>' + rows + '</div>';
+  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Outfit planner</div>' +
+    (op.note ? '<div class="ref-intro">' + esc(op.note) + '</div>' : '') +
+    '</div>' + rows + '</div>';
 }
 
 function renderStage(){
@@ -268,12 +455,19 @@ function renderStage(){
     return;
   }
 
+  /* Ordered by how much each one changes, not by how the source notes were
+     filed: direction frames everything, hair outranks any garment, palette and
+     silhouette are the rules, and only then the things you actually buy. */
   stage.innerHTML =
-    colorAnalysisCard(p.colorAnalysis) +
+    directionCard(p.direction) +
+    hairCard(p.hair) +
+    paletteCard(p.palette) +
+    silhouetteCard(p.silhouette) +
+    buyNextCard(p.buyNext) +
     seasonalWardrobeCard(p.seasonalWardrobe) +
+    chinoPlanCard(p.chinoPlan) +
     brandsCard(p.brands) +
     sizeCard(p.size) +
-    chinoPlanCard(p.chinoPlan) +
     outfitPlannerCard(p.outfitPlanner);
 }
 
