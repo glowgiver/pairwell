@@ -15,6 +15,7 @@
   --hair:#C9A6F2;
   --train:#5A8DEE;
   --food:#F2A65A;
+  --style:#E8899E;
 
   /* person colours — same hues as the workout module already used */
   --philipp:#5A8DEE;
@@ -163,6 +164,7 @@ html,body{margin:0;padding:0}
     --hair:#663BB0;
     --train:#2750B4;
     --food:#8A5209;
+    --style:#A32247;
 
     --philipp:#2750B4;
     --eunice:#663BB0;
@@ -185,6 +187,7 @@ html,body{margin:0;padding:0}
   --hair:#663BB0;
   --train:#2750B4;
   --food:#8A5209;
+  --style:#A32247;
 
   --philipp:#2750B4;
   --eunice:#663BB0;
