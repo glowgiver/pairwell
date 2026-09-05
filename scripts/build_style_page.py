@@ -5,7 +5,31 @@ DATA_PATH = os.path.join(BASE, "..", "data", "style.json")
 OUT_PATH = os.path.join(BASE, "..", "hub", "style", "index.html")
 
 data = json.load(open(DATA_PATH, encoding="utf-8"))
-data_json = json.dumps(data, ensure_ascii=False)
+
+
+def strip_private(node):
+    """Drop every key starting with "_" before the data is inlined.
+
+    Those keys are repo bookkeeping — _source, _revised, _gaps, _undertone,
+    size._note — and no renderer reads one. Until now the build inlined the
+    file wholesale, so all of it shipped to a public site inside a page that
+    never displayed a character of it.
+
+    That is worth fixing for its own sake, but the real reason is the shape of
+    the mistake it invites: this repository keeps notes-to-self in the same
+    file as the data, and `_excluded` exists precisely to record something
+    that must not become public. A build that inlines whatever it is handed
+    makes the next such note a publishing decision nobody remembers making.
+    Prefixing a key is now the way to keep it in the repo and out of the page.
+    """
+    if isinstance(node, dict):
+        return {k: strip_private(v) for k, v in node.items() if not k.startswith("_")}
+    if isinstance(node, list):
+        return [strip_private(v) for v in node]
+    return node
+
+
+data_json = json.dumps(strip_private(data), ensure_ascii=False)
 
 def _digest(rel):
     """Content hash for a shared asset, so a stale HTTP cache entry cannot
@@ -50,9 +74,39 @@ html = """<!DOCTYPE html>
     border-radius:14px;background:var(--surface)}
   .empty strong{color:var(--text)}
 
-  .ref-card{margin-bottom:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+  /* Jump bar. Ten cards is roughly seven screens, and the two things looked up
+     most often in a shop — Size and Brands — sit at the bottom because the
+     reading order is by importance, not by how often you need it. Rather than
+     fight that, this gives every card a one-tap address. It scrolls
+     horizontally and is built from the cards actually rendered, so it cannot
+     drift out of step with them. */
+  .jump{
+    display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;
+    margin:0 -16px 18px;padding:2px 16px 6px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .jump::-webkit-scrollbar{display:none}
+  .jump a{
+    flex:none;display:inline-flex;align-items:center;min-height:var(--tap);
+    padding:0 14px;border-radius:22px;text-decoration:none;
+    background:var(--surface);border:1px solid var(--line);
+    font-family:var(--f-data);font-size:15px;color:var(--muted);
+  }
+  .jump a:active{background:var(--surface-2);color:var(--text)}
+  .jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* The top bar is sticky, so an anchor that lands flush at the viewport top
+     lands underneath it. Its height is min-height var(--tap) plus 8px of
+     padding either side. */
+  .ref-card{
+    margin-bottom:16px;border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;background:var(--surface);
+    scroll-margin-top:calc(var(--tap) + 26px);
+  }
   .ref-head{padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-  .ref-title{font-size:18px;font-weight:700}
+  /* A real h2, not a styled div: this page is ten sections of reference text
+     and without headings it has no outline to navigate by at all. */
+  .ref-title{font-size:18px;font-weight:700;margin:0;letter-spacing:-.01em}
   .ref-intro{font-family:var(--f-read);font-size:14.5px;color:var(--muted);margin-top:4px;line-height:1.55}
   .ref-body{padding:4px 16px}
   /* Stacked first. Several values here are full paragraphs, and a fixed label
@@ -104,12 +158,9 @@ html = """<!DOCTYPE html>
     font-family:var(--f-data);font-size:12.5px;font-weight:700;letter-spacing:.09em;
     text-transform:uppercase;color:var(--muted2);padding:12px 16px 0;
   }
-  /* One level below .sw-label — the two branches of an unresolved question,
-     which are subordinate to it rather than siblings of Core and Avoid. */
-  .sw-sub{
-    font-family:var(--f-data);font-size:13px;font-weight:600;
-    color:var(--accent);padding:10px 16px 0;
-  }
+  /* .sw-sub lived here for the two branches of the unresolved undertone
+     question. The question is answered, there are no branches, and a rule
+     nothing uses is worse than no rule. */
 
   /* Silhouette rules — the rule reads as a heading, the reason underneath it. */
   .rule{padding:12px 16px;border-bottom:1px solid var(--line)}
@@ -146,10 +197,49 @@ html = """<!DOCTYPE html>
     color:var(--muted);line-height:1.55}
   .rev p strong{color:var(--text)}
 
+  /* Progressive disclosure, same shape the skincare page already uses. What
+     goes in here is the read-once justification — why a recommendation was
+     changed, how well supported it is. Real reference content never folds:
+     hiding a colour or a measurement behind a tap would defeat the page. */
+  details.fold{border-top:1px solid var(--line);background:var(--surface-2)}
+  details.fold summary{
+    min-height:var(--tap);display:flex;align-items:center;gap:9px;
+    padding:11px 16px;cursor:pointer;list-style:none;
+    font-family:var(--f-data);font-size:15px;font-weight:600;color:var(--muted);
+  }
+  details.fold summary::-webkit-details-marker{display:none}
+  details.fold summary::after{
+    content:"";margin-left:auto;width:8px;height:8px;flex:none;
+    border-right:2px solid var(--muted2);border-bottom:2px solid var(--muted2);
+    transform:rotate(45deg);transition:transform .18s ease;
+  }
+  details.fold[open] summary{color:var(--text)}
+  details.fold[open] summary::after{transform:rotate(-135deg)}
+  details.fold summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  details.fold .rev{border-top:none;padding-top:0}
+  details.fold .note{border-top:none}
+
+  /* An intro paragraph belonging to a .sw-label section. Was an inline style
+     repeated at three call sites. */
+  .sect-note{font-family:var(--f-read);font-size:14.5px;color:var(--muted);
+    line-height:1.55;padding:2px 16px 4px}
+
   /* Seasons — one sub-card per calendar season, inside the wardrobe card. */
   .season{padding:13px 16px;border-bottom:1px solid var(--line)}
   .season:last-child{border-bottom:none}
-  .season-h{font-size:15.5px;font-weight:700;display:flex;align-items:baseline;gap:8px}
+  /* Style is the only module with no notion of "today", which is why it is
+     absent from the Today screen. The wardrobe is the one place a date does
+     mean something, so the current season is marked — cheap, and it turns
+     four blocks of text into one answer plus three for reference. */
+  .season.now{background:var(--surface-2)}
+  .season-h{font-size:15.5px;font-weight:700;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .season-h .now-pill{
+    /* 13px, the secondary floor. The .pi-status pill nearby is 12px and
+       predates the rule; new markup holds it. */
+    font-family:var(--f-data);font-size:13px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 8px;border-radius:20px;
+    background:var(--accent);color:var(--bg);
+  }
   .season-h .heading{font-family:var(--f-read);font-style:italic;font-weight:400;font-size:13.5px;color:var(--muted2)}
   .season dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
   .season dt{font-family:var(--f-data);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);white-space:nowrap}
@@ -183,6 +273,10 @@ html = """<!DOCTYPE html>
   .outfitrow dd{margin:0;font-family:var(--f-read);font-size:14.5px;color:var(--text)}
   .outfitrow .or-empty{font-family:var(--f-read);font-size:14px;font-style:italic;color:var(--muted2);margin-top:4px}
 
+  /* Deliberately no scroll-behavior:smooth. This page is around fifteen
+     screens tall, so animating a jump from the index to Size is a couple of
+     seconds of blur on the way to somewhere you already chose. A jump link
+     should jump; the browser's Back button restores the previous position. */
   @media (prefers-reduced-motion:reduce){ * { transition:none !important } }
 </style>
 </head>
@@ -196,7 +290,7 @@ html = """<!DOCTYPE html>
 <h1>Style</h1>
 <p class="sub">Direction, palette, silhouette, sizes — a lookup, not a checklist.</p>
 
-<div id="stage"></div>
+<main id="stage"></main>
 
 <script src="../app.js?v=__JSV__"></script>
 <script>
@@ -211,6 +305,27 @@ function esc(s){
 function person(){ return PW.get(); }
 function profile(){ return S[person()]; }
 
+/* Card functions return a card's INSIDE — head plus body. renderStage wraps
+   each one in its <section> and derives the anchor id from the nav label, so
+   the jump bar and the cards cannot disagree about what a section is called
+   or whether it exists. Both arguments are HTML and are escaped by callers,
+   because most titles are a literal joined to an escaped value. */
+function head(title, intro){
+  return '<div class="ref-head"><h2 class="ref-title">' + title + '</h2>' +
+    (intro ? '<div class="ref-intro">' + intro + '</div>' : '') + '</div>';
+}
+
+/* For the read-once material: why something was changed, how well supported a
+   call is. Never for a colour, a measurement or a rule. */
+function fold(label, inner){
+  if(!inner) return "";
+  return '<details class="fold"><summary>' + esc(label) + '</summary>' + inner + '</details>';
+}
+
+function slug(s){
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 /* The frame everything else is read through, so it comes first. */
 function directionCard(d){
   if(!d) return "";
@@ -219,10 +334,8 @@ function directionCard(d){
       '<div class="rp-w">' + esc(r.why) + '</div></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Direction — ' + esc(d.register) + '</div>' +
-    (d.thesis ? '<div class="ref-intro">' + esc(d.thesis) + '</div>' : '') +
-    '</div><div class="ref-body">' +
+  return head('Direction — ' + esc(d.register), d.thesis ? esc(d.thesis) : "") +
+    '<div class="ref-body">' +
     (d.builtFrom ? '<div class="ref-item"><div class="ref-item-k">Built from</div>' +
       '<div class="ref-item-v">' + esc(d.builtFrom) + '</div></div>' : '') +
     (d.ageRead ? '<div class="ref-item"><div class="ref-item-k">Age read</div>' +
@@ -232,17 +345,19 @@ function directionCard(d){
     '</div>' +
     (refs
       ? '<div class="sw-label">Reference</div>' +
-        (d.referencesNote ? '<div class="rule-w" style="padding:0 16px 6px">' + esc(d.referencesNote) + '</div>' : '') +
+        (d.referencesNote ? '<div class="sect-note">' + esc(d.referencesNote) + '</div>' : '') +
         refs
       : '') +
-    (d.onTheOriginalFraming
-      ? '<div class="rev"><div class="rev-t">On the framing</div><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
-      : '') +
+    /* "Not this" stays open — it is a rule about what to avoid, which is
+       lookup content. The note about how this file came to be written is
+       not, and folds. */
     (d.notThis
       ? '<div class="rev"><div class="rev-t">Not this — ' + esc(d.notThis.register) + '</div>' +
         '<p>' + esc(d.notThis.why) + '</p></div>'
       : '') +
-    '</div>';
+    fold("How this was framed", d.onTheOriginalFraming
+      ? '<div class="rev"><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
+      : "");
 }
 
 /* Its own card rather than a line in Direction, because it is the one change
@@ -257,12 +372,12 @@ function hairCard(h){
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Hair — the biggest lever</div>' +
-    (h.priority ? '<div class="ref-intro">' + esc(h.priority) + '</div>' : '') +
-    '</div><div class="ref-body">' + rows + '</div>' +
-    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '') +
-    '</div>';
+  return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "") +
+    '<div class="ref-body">' + rows + '</div>' +
+    /* The reasoning stays open here on purpose: this card asks him to go to a
+       barber and say something specific, and the why is what makes that
+       worth doing. */
+    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '');
 }
 
 function swatches(list, withWhy){
@@ -278,34 +393,36 @@ function swatches(list, withWhy){
 function paletteCard(p){
   if(!p) return "";
 
-  /* Split deliberately: what is settled sits above what is still a coin toss,
-     and the conditional block says outright that it is unresolved rather than
-     presenting two half-palettes as if either were the answer. */
-  var cond = "";
-  if(p.conditional){
-    var c = p.conditional;
-    cond = '<div class="sw-label">Depends on the undertone</div>' +
-      (c.note ? '<div class="rule-w" style="padding:0 16px 4px">' + esc(c.note) + '</div>' : '') +
-      (c.ifWarm ? '<div class="sw-sub">If warm — Dark Autumn</div>' + swatches(c.ifWarm, false) : '') +
-      (c.ifCool ? '<div class="sw-sub">If cool — Dark Winter</div>' + swatches(c.ifCool, false) : '');
+  /* The undertone used to be an open question and this card used to say so,
+     showing two half-palettes side by side under "if warm" / "if cool". The
+     gold-versus-silver test settled it cool, so the shape changed with the
+     answer: one palette, then the colours the answer took away. Keeping the
+     ruled-out list visible is the point — camel and stone are what he would
+     otherwise reach for, so the card has to say why they are gone, not just
+     omit them. */
+  function group(g, label, withWhy){
+    if(!g || !g.colors) return "";
+    return '<div class="sw-label">' + esc(label) + '</div>' +
+      (g.note ? '<div class="sect-note">' + esc(g.note) + '</div>' : '') +
+      swatches(g.colors, withWhy);
   }
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Palette — ' + esc(p.type) + '</div>' +
-    (p.rule ? '<div class="ref-intro">' + esc(p.rule) + '</div>' : '') +
-    '</div><div class="ref-body">' +
-    (p.established ? '<div class="ref-item"><div class="ref-item-k">Settled</div>' +
+  return head('Palette — ' + esc(p.type), p.rule ? esc(p.rule) : "") +
+    '<div class="ref-body">' +
+    (p.established ? '<div class="ref-item"><div class="ref-item-k">Colouring</div>' +
       '<div class="ref-item-v">' + esc(p.established) + '</div></div>' : '') +
-    (p.open ? '<div class="ref-item"><div class="ref-item-k">Still open</div>' +
-      '<div class="ref-item-v">' + esc(p.open) + '</div></div>' : '') +
+    (p.resolved ? '<div class="ref-item"><div class="ref-item-k">Undertone</div>' +
+      '<div class="ref-item-v">' + esc(p.resolved) + '</div></div>' : '') +
+    (p.metal ? '<div class="ref-item"><div class="ref-item-k">Metal</div>' +
+      '<div class="ref-item-v">' + esc(p.metal) + '</div></div>' : '') +
     '</div>' +
-    (p.core ? '<div class="sw-label">Core — safe either way</div>' + swatches(p.core, false) : '') +
-    cond +
-    (p.avoid ? '<div class="sw-label">Avoid</div>' + swatches(p.avoid, true) : '') +
-    (p.confidence
-      ? '<div class="rev"><div class="rev-t">Confidence</div><p>' + esc(p.confidence) + '</p></div>'
-      : '') +
-    '</div>';
+    (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
+    group(p.accent, "Accents", false) +
+    group(p.ruledOut, "Ruled out by the undertone test", true) +
+    (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
+    fold("How solid is this?", p.confidence
+      ? '<div class="rev"><p>' + esc(p.confidence) + '</p></div>'
+      : "");
 }
 
 function silhouetteCard(s){
@@ -314,10 +431,10 @@ function silhouetteCard(s){
     return '<div class="rule"><div class="rule-r">' + esc(r.rule) + '</div>' +
       '<div class="rule-w">' + esc(r.why) + '</div></div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Silhouette</div>' +
-    '<div class="ref-intro">Six rules. They do more work than any single garment.</div>' +
-    '</div>' + rules + '</div>';
+  /* The count came from counting the rules, so it is counted rather than
+     written down — the sentence used to say "six" and the array is data. */
+  return head('Silhouette', s.rules.length +
+    ' rules. They do more work than any single garment.') + rules;
 }
 
 function buyNextCard(list){
@@ -329,10 +446,16 @@ function buyNextCard(list){
       (b.why ? '<div class="p">' + esc(b.why) + '</div>' : '') +
       '</div></li>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Buy next</div>' +
-    '<div class="ref-intro">In this order. The order is the advice.</div>' +
-    '</div><ul class="buy">' + items + '</ul></div>';
+  return head('Buy next', 'In this order. The order is the advice.') +
+    '<ol class="buy">' + items + '</ol>';
+}
+
+/* Meteorological seasons, northern hemisphere — the boundaries a wardrobe
+   actually follows. Astronomical dates would put the first three weeks of
+   September in Summer, which is not what anyone wears. */
+function currentSeason(){
+  return ["Winter","Winter","Spring","Spring","Spring","Summer",
+          "Summer","Summer","Autumn","Autumn","Autumn","Winter"][new Date().getMonth()];
 }
 
 function seasonalWardrobeCard(w){
@@ -341,22 +464,23 @@ function seasonalWardrobeCard(w){
     ["tops", "Tops"], ["outerwear", "Outerwear"], ["bottoms", "Bottoms"],
     ["shoes", "Shoes"], ["accessories", "Accessories"]
   ];
+  var now = currentSeason();
   var seasons = (w.seasons || []).map(function(s){
+    var here = s.season === now;
     var dl = FIELDS.filter(function(f){ return s[f[0]]; }).map(function(f){
       return '<dt>' + esc(f[1]) + '</dt><dd>' + esc(s[f[0]]) + '</dd>';
     }).join("");
-    return '<div class="season"><div class="season-h">' + esc(s.season) +
+    return '<div class="season' + (here ? ' now' : '') + '"><div class="season-h">' +
+      esc(s.season) +
+      (here ? '<span class="now-pill">Now</span>' : '') +
       (s.heading ? '<span class="heading">' + esc(s.heading) + '</span>' : '') +
       '</div><dl>' + dl + '</dl></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Seasonal wardrobe</div>' +
-    (w.paletteNote ? '<div class="ref-intro">' + esc(w.paletteNote) + '</div>' : '') +
-    '</div>' + seasons +
+  return head('Seasonal wardrobe', w.paletteNote ? esc(w.paletteNote) : "") +
+    seasons +
     (w.styleNote ? '<div class="note">' + esc(w.styleNote) + '</div>' : '') +
-    (w.note ? '<div class="note">' + esc(w.note) + '</div>' : '') +
-    '</div>';
+    fold("What changed here", w.note ? '<div class="note">' + esc(w.note) + '</div>' : "");
 }
 
 function brandsCard(brands){
@@ -366,7 +490,7 @@ function brandsCard(brands){
       (b.note ? '<div class="rule-w">' + esc(b.note) + '</div>' : '') + '</div>' +
       (b.category ? '<span class="bc">' + esc(b.category) + '</span>' : '') + '</div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Brands</div></div>' + rows + '</div>';
+  return head('Brands', 'Where the sizes are already known.') + rows;
 }
 
 function sizeCard(sz){
@@ -384,8 +508,8 @@ function sizeCard(sz){
   var notes = (sz.notes || []).map(function(n){
     return '<div class="note">' + esc(n) + '</div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Size</div></div>' +
-    '<div class="ref-body">' + rows + '</div>' + notes + '</div>';
+  return head('Size', 'The one card that gets opened in a shop.') +
+    '<div class="ref-body">' + rows + '</div>' + notes;
 }
 
 function chinoPlanCard(p){
@@ -408,19 +532,21 @@ function chinoPlanCard(p){
       '</div>';
   }).join("");
 
+  /* The change itself is one line and stays visible; the paragraph arguing
+     for it is what folds. Moved below the plan too — it used to sit between
+     the heading and the fit, so the first thing this card said was a note
+     about its own edit history. */
   var rev = p.revision
-    ? '<div class="rev"><div class="rev-t">Revised ' + esc(p.revision.date) + '</div>' +
-      '<p><strong>' + esc(p.revision.change) + '</strong></p>' +
-      '<p>' + esc(p.revision.why) + '</p></div>'
+    ? fold("Revised " + p.revision.date,
+        '<div class="rev"><p><strong>' + esc(p.revision.change) + '</strong></p>' +
+        '<p>' + esc(p.revision.why) + '</p></div>')
     : "";
 
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Chino plan</div>' +
-    '<div class="ref-intro">' + esc(p.goal) + '</div></div>' +
-    rev +
+  return head('Chino plan', esc(p.goal)) +
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
-    '</div>' + purchases + roadmap + '</div>';
+    '</div>' + purchases + roadmap + rev;
 }
 
 function outfitPlannerCard(op){
@@ -439,9 +565,7 @@ function outfitPlannerCard(op){
     return '<div class="outfitrow"><div class="or-day">' + esc(d.day) + '</div>' +
       '<div class="or-body">' + body + '</div></div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Outfit planner</div>' +
-    (op.note ? '<div class="ref-intro">' + esc(op.note) + '</div>' : '') +
-    '</div>' + rows + '</div>';
+  return head('Outfit planner', op.note ? esc(op.note) : "") + rows;
 }
 
 function renderStage(){
@@ -457,18 +581,31 @@ function renderStage(){
 
   /* Ordered by how much each one changes, not by how the source notes were
      filed: direction frames everything, hair outranks any garment, palette and
-     silhouette are the rules, and only then the things you actually buy. */
-  stage.innerHTML =
-    directionCard(p.direction) +
-    hairCard(p.hair) +
-    paletteCard(p.palette) +
-    silhouetteCard(p.silhouette) +
-    buyNextCard(p.buyNext) +
-    seasonalWardrobeCard(p.seasonalWardrobe) +
-    chinoPlanCard(p.chinoPlan) +
-    brandsCard(p.brands) +
-    sizeCard(p.size) +
-    outfitPlannerCard(p.outfitPlanner);
+     silhouette are the rules, and only then the things you actually buy.
+     The jump bar is what makes that order affordable — reading order stays
+     by importance, and Size is still one tap away. */
+  var CARDS = [
+    ["Direction",  directionCard(p.direction)],
+    ["Hair",       hairCard(p.hair)],
+    ["Palette",    paletteCard(p.palette)],
+    ["Silhouette", silhouetteCard(p.silhouette)],
+    ["Buy next",   buyNextCard(p.buyNext)],
+    ["Wardrobe",   seasonalWardrobeCard(p.seasonalWardrobe)],
+    ["Chinos",     chinoPlanCard(p.chinoPlan)],
+    ["Brands",     brandsCard(p.brands)],
+    ["Size",       sizeCard(p.size)],
+    ["Planner",    outfitPlannerCard(p.outfitPlanner)]
+  ].filter(function(c){ return c[1]; });
+
+  var jump = CARDS.length > 1
+    ? '<nav class="jump" aria-label="Jump to section">' + CARDS.map(function(c){
+        return '<a href="#' + slug(c[0]) + '">' + esc(c[0]) + '</a>';
+      }).join("") + '</nav>'
+    : "";
+
+  stage.innerHTML = jump + CARDS.map(function(c){
+    return '<section class="ref-card" id="' + slug(c[0]) + '">' + c[1] + '</section>';
+  }).join("");
 }
 
 PW.mountRail();

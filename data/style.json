@@ -2,10 +2,10 @@
   "_source": "Personal/12_Notizen/01_Style/*.md — transcribed 2026-09-05.",
   "_revised": "2026-09-05, same day: the transcription was faithful but the notes were stale. The two color-analysis files contradicted each other, the chino plan prescribed a Western-preppy slim cut that works against the stated goal, and nothing in the folder said what the target register actually is. This file now carries both layers and says which is which: fields marked as facts (size, brands) are still transcription; direction, palette, silhouette, hair and buyNext are a styling judgement made against photographs, and can be argued with.",
   "_excluded": "Appearance.md from the same folder is deliberately never transcribed here or anywhere in this repo: it names real people and must never enter a public project.",
+  "_undertone": "RESOLVED 2026-09-05, by the gold-versus-silver test held at the face: silver clearly better, gold a definite no. That settles Dark Winter and closes the only question this file was carrying. Everything downstream of it was updated in the same pass — the warm neutrals (camel, cream, stone, khaki, chocolate, rust, olive, tan) are out of the palette, out of buyNext, out of the seasonal wardrobe and out of the chino roadmap; the cool accents are promoted from conditional to real. The one non-obvious casualty is the hair note, which had recommended softening the near-black to a warm brown. That recommendation was undertone-dependent and did not survive.",
   "_gaps": [
-    "OPEN TEST — undertone. Hold something gold and then something silver, palm-sized or larger, directly under the chin. Daylight at a window, all lamps off, exposure locked. Watch the skin under the jaw, not the metal: gold better = Dark Autumn, silver better = Dark Winter, no clear winner = neutral, in which case `core` is the whole palette. Until then `palette.conditional` stays unresolved. Nothing on `buyNext` depends on the answer as long as charcoal is taken over camel and cream.",
     "The wardrobe direction is written against photographs, not a fitting. Anything about how a specific garment actually falls on him is unverified until something is tried on.",
-    "Outfit_Planner.md carried one entry, on Monday: white chunky sweater, 90s light denim, loafers, gold small hoop earrings, trench coat. It is kept here rather than in his planner because the earrings and the chunky-knit-plus-trench combination read as someone else's outfit — possibly Eunice's, possibly saved inspiration. Nothing is lost; it just should not stand as Philipp's Monday until he confirms it.",
+    "Outfit_Planner.md carried one entry, on Monday: white chunky sweater, 90s light denim, loafers, gold small hoop earrings, trench coat. It is kept here rather than in his planner because the earrings and the chunky-knit-plus-trench combination read as someone else's outfit — possibly Eunice's, possibly saved inspiration. The undertone test adds a small piece of evidence rather than proof: gold at the ear is the metal he just ruled out, and light 90s denim is a warm wash. Nothing is lost; it just should not stand as Philipp's Monday until he confirms it.",
     "Trouser model names shift every season. The chino plan holds the brands and the cut; the specific SKUs in the original note are already partly superseded and should be re-checked in store rather than trusted here."
   ],
   "philipp": {
@@ -41,42 +41,48 @@
       "current": "Short, flat on top, growing forward, no taper at the sides and no volume at the crown. It rounds the face and takes height away.",
       "cut": "Two-block — 7–10 cm on top, sides tapered rather than shaved. If the name does not land at the barber, ask for length and volume on top with the sides tapered short but not clipped.",
       "shape": "Soft side sweep or a loose middle part, with lift at the crown",
-      "color": "One step softer than the current hard black: dark brown with a warm undertone",
+      "color": "Leave it. Near-black is a Dark Winter's own colour and the high contrast against the skin is the asset. If it is ever touched, a cool dark brown — ash or espresso, never caramel or warm brown.",
       "product": "Matte clay, not gel. Blow-dry lift from underneath first — glossy is a decade out of date.",
-      "why": "Vertical lift lengthens the face and gives the jaw its line back. Hard black next to skin raises contrast and sharpens every irregularity; shaved sides would read harder than intended and add years the face has not earned."
+      "why": "Vertical lift lengthens the face and gives the jaw its line back; shaved sides would read harder than intended and add years the face has not earned. The colour advice here used to say the opposite — soften the black to a warm brown — and the undertone test overturned it. That recommendation was warm-season reasoning applied to cool skin, and it was the one thing in this file genuinely riding on the answer. The cut is unaffected: it comes from face shape, not colouring."
     },
     "palette": {
-      "type": "Dark — deep and high-contrast. Undertone open, leaning warm.",
-      "confidence": "Depth and contrast: established. Undertone: about 60/40 toward warm, which is a leaning and not a diagnosis. Splitting Dark Autumn from Dark Winter needs a controlled gold-versus-silver comparison held at the face, and none of the photographs so far carries one.",
-      "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it. This is the half that decides most of the wardrobe, and it is settled.",
-      "open": "Warm versus cool. The two candidates are Dark Autumn and Dark Winter. Both are Dark seasons and share most of their palette, which is why this stays open without blocking anything: see `core` for what holds either way.",
-      "rule": "Low contrast within an outfit, deep tones throughout. Depth is the rule that carries; the undertone only decides the edges.",
+      "type": "Dark Winter — deep, high-contrast, cool",
+      "confidence": "Settled, both halves. Depth and contrast were never in doubt; the undertone was, and the gold-versus-silver test answered it on 2026-09-05 — silver clearly better, gold a definite no. That is the one comparison photographs cannot make, which is why this file spent a day refusing to guess it. It is now the strongest-supported claim in here, and it is his own read rather than an inference from a picture.",
+      "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it.",
+      "resolved": "Cool. Silver at the face reads clean; gold pulls yellow into the skin. Dark Winter, not Dark Autumn — so the deep colours stay, the warm neutrals go, and the contrast that a softer season would have tried to tone down is the thing to lean into instead.",
+      "rule": "Deep tones throughout, and let the contrast stand. Black is a real neutral here, mid tones are not, and every neutral in the wardrobe should be cool: charcoal and true white, never stone and cream.",
+      "metal": "Silver, steel, white gold, gunmetal. This is the direct output of the test rather than a separate opinion, and it is the cheapest rule in the file to follow: watch, belt buckle, glasses frames, any ring. Gold sits at the wrist and the face, which is exactly where a wrong metal shows.",
       "core": [
+        { "name": "Black", "hex": "#16181C" },
         { "name": "Navy", "hex": "#1F2A44" },
         { "name": "Charcoal", "hex": "#3A3F47" },
-        { "name": "Black", "hex": "#16181C" },
+        { "name": "True white", "hex": "#FFFFFF" },
         { "name": "Forest", "hex": "#2E4535" },
-        { "name": "Deep olive", "hex": "#4A503A" },
         { "name": "Burgundy", "hex": "#6B2233" }
       ],
-      "conditional": {
-        "note": "These depend on the open undertone question. Buy from `core` until it is settled; these are the two ways the edges could go.",
-        "ifWarm": [
-          { "name": "Camel", "hex": "#A8825A" },
-          { "name": "Chocolate", "hex": "#4A3728" },
-          { "name": "Rust", "hex": "#9C4A2A" },
-          { "name": "Cream", "hex": "#EFE7D8" }
-        ],
-        "ifCool": [
+      "accent": {
+        "note": "Unlocked by the test. These were the cool half of the old conditional block; they are now simply part of the palette, and they are where colour is allowed to happen in an otherwise very dark wardrobe.",
+        "colors": [
           { "name": "Emerald", "hex": "#0F5C4A" },
           { "name": "Sapphire", "hex": "#1B3F7A" },
-          { "name": "True white", "hex": "#FFFFFF" },
-          { "name": "Deep berry", "hex": "#7A1140" }
+          { "name": "Deep berry", "hex": "#7A1140" },
+          { "name": "Icy blue", "hex": "#BFD4E8" }
+        ]
+      },
+      "ruledOut": {
+        "note": "Taken away by the test. Not wrong on anyone — wrong next to cool skin, where each of these turns the face sallow rather than the garment bad.",
+        "colors": [
+          { "name": "Camel", "hex": "#A8825A", "why": "The coat colour the plan used to hedge on. Charcoal takes the job." },
+          { "name": "Cream", "hex": "#EFE7D8", "why": "Replaced by true white, which does the same job cool." },
+          { "name": "Stone / khaki", "hex": "#C2B49A", "why": "The default chino colour, and the reason the roadmap changed. Navy and charcoal instead." },
+          { "name": "Chocolate", "hex": "#4A3728", "why": "Warm brown near the face is the exact mismatch the test found." },
+          { "name": "Rust", "hex": "#9C4A2A", "why": "Autumn's signature and the clearest single tell of the wrong season." },
+          { "name": "Deep olive", "hex": "#4A503A", "why": "The one colour that moved out of core. Olive is a warm neutral; forest does the same work cool." }
         ]
       },
       "avoid": [
-        { "name": "Fuchsia", "hex": "#E4409B", "why": "Out for both — too light and too bright against this depth" },
-        { "name": "Apple green", "hex": "#8DC63F", "why": "Same reason: brightness, not undertone" },
+        { "name": "Fuchsia", "hex": "#E4409B", "why": "Too light and too bright against this depth — this was never an undertone question" },
+        { "name": "Apple green", "hex": "#8DC63F", "why": "Same reason: brightness. Cool it further and it is still wrong." },
         { "name": "Lemon yellow", "hex": "#F2E85C", "why": "Light and bright — disappears next to near-black hair" },
         { "name": "Ice pink", "hex": "#F5D3DE", "why": "Pale and washed — the opposite of a Dark palette" },
         { "name": "Mid grey", "hex": "#9AA0A8", "why": "Not wrong, just inert — mid tones flatten a high-contrast face. Go darker." }
@@ -113,7 +119,7 @@
     "buyNext": [
       {
         "item": "Overshirt / shirt jacket",
-        "colors": "Charcoal or deep olive",
+        "colors": "Charcoal or forest — forest replaces the deep olive this used to say",
         "why": "Replaces the printed sweatshirt outright. The slight shoulder structure does work a sweatshirt physically cannot, and it goes over anything already in the wardrobe."
       },
       {
@@ -123,55 +129,55 @@
       },
       {
         "item": "Straight-leg trousers, mid-to-high rise",
-        "colors": "Charcoal — safe whichever way the undertone goes. Cream only once it is settled warm.",
+        "colors": "Charcoal first, navy second. Not stone, not cream — those were the hedge and the test removed them.",
         "why": "The actual silhouette change. This is the piece that does more than the other four combined."
       },
       {
         "item": "Single-breasted coat, knee length",
-        "colors": "Charcoal — safe either way. Camel only once the undertone is settled warm.",
+        "colors": "Charcoal, or navy. Camel is out — that hedge is now decided against it.",
         "why": "The signature garment of the reference set, and it works unchanged from a school corridor to an evening out."
       },
       {
         "item": "One clean leather shoe beside the Sambas",
-        "colors": "Dark brown",
-        "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8."
+        "colors": "Black, or espresso if a softer option is wanted — never tan or cognac",
+        "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8. This one changed with the test: brown was the default answer, black is the Dark Winter answer, and it also happens to be the shoe that goes with a charcoal coat and charcoal trousers."
       }
     ],
     "seasonalWardrobe": {
-      "note": "Rewritten 2026-09-05 into the target register. The original was generic Autumn-type advice; this is the same four-season structure with the resolved palette and the straight-leg correction applied.",
-      "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, and a defined shoulder on whatever is outermost.",
+      "note": "Rewritten 2026-09-05 into the target register, then corrected the same day when the undertone test came back cool. The original was generic Autumn-type advice and the first rewrite still carried its neutrals — cream, stone, camel, chocolate, tortoise, dark brown. All of them are gone. The four-season structure, the straight-leg correction and the tonal-column rule are unchanged.",
+      "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, a defined shoulder on whatever is outermost, and every neutral cool — charcoal and true white doing the work stone and cream used to.",
       "seasons": [
         {
           "season": "Spring",
           "heading": "Light layers, one tone",
-          "tops": "Fine merino or cotton knit in navy or cream, worn under rather than alone",
-          "outerwear": "Overshirt or unlined coach jacket in deep olive or charcoal",
-          "bottoms": "Straight chinos in cream or stone",
-          "shoes": "Sambas, or a dark brown derby when the day needs it"
+          "tops": "Fine merino or cotton knit in navy or true white, worn under rather than alone",
+          "outerwear": "Overshirt or unlined coach jacket in forest or charcoal",
+          "bottoms": "Straight chinos in charcoal or navy",
+          "shoes": "Sambas, or a black derby when the day needs it"
         },
         {
           "season": "Summer",
           "heading": "Cut, not exposure",
-          "tops": "Boxy-but-clean linen or linen-blend shirt in cream or slate blue, short sleeve with a proper shoulder seam",
-          "bottoms": "Straight trousers in stone, or wide-leg shorts to just above the knee — not sport shorts",
-          "accessories": "Dark tortoise or brown-lens sunglasses",
-          "shoes": "Clean white leather sneaker or a woven loafer"
+          "tops": "Boxy-but-clean linen or linen-blend shirt in true white or sapphire, short sleeve with a proper shoulder seam",
+          "bottoms": "Straight trousers in charcoal or navy, or wide-leg shorts to just above the knee — not sport shorts",
+          "accessories": "Sunglasses in black or dark grey with a grey lens. Tortoise is a warm frame and sits at the face, which is the one place the undertone actually matters.",
+          "shoes": "Clean white leather sneaker or a black loafer"
         },
         {
           "season": "Autumn",
-          "heading": "The strongest season for this palette",
-          "tops": "Merino crew or mock neck in chocolate, forest or burgundy",
-          "outerwear": "Overshirt layered under a camel or charcoal coat",
+          "heading": "Deep tones, before the coats come out",
+          "tops": "Merino crew or mock neck in forest, burgundy or deep berry",
+          "outerwear": "Overshirt layered under a charcoal or navy coat",
           "bottoms": "Straight trousers in charcoal, or dark denim with no fading",
-          "shoes": "Dark brown chelsea or derby"
+          "shoes": "Black chelsea or derby"
         },
         {
           "season": "Winter",
-          "heading": "Long lines, deep tones",
-          "tops": "Heavier knit in navy or charcoal, mock or turtleneck",
-          "outerwear": "Knee-length single-breasted wool coat, charcoal or camel",
+          "heading": "The strongest season for this palette",
+          "tops": "Heavier knit in navy, charcoal or emerald, mock or turtleneck",
+          "outerwear": "Knee-length single-breasted wool coat in charcoal or black",
           "bottoms": "Straight wool-blend trousers in charcoal or black",
-          "shoes": "Lined dark brown boot"
+          "shoes": "Lined black boot"
         }
       ]
     },
@@ -181,14 +187,14 @@
       "fit": "Straight leg, mid-to-high rise. Ask for the straight or relaxed cut by fit, not by model name.",
       "revision": {
         "date": "2026-09-05",
-        "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Brands and the Ralph Lauren end goal stand.",
-        "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. Only the cut changed."
+        "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Colours corrected the same day, after the undertone test: stone and Classic Khaki out, navy and charcoal in. Brands and the Ralph Lauren end goal stand.",
+        "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. The colour change rests on the gold-versus-silver test, and it costs something real: khaki is Ralph Lauren's signature and the reason half the catalogue looks the way it does. It is still the wrong neutral for cool skin, and their navy and charcoal are the same trouser."
       },
       "purchases": [
         {
           "brand": "Dockers",
           "model": "Ultimate Chino — straight fit (not the slim the original note listed)",
-          "colors": "Charcoal, Navy, Stone",
+          "colors": "Charcoal, Navy, Black",
           "priceNew": "€40–50",
           "whereNew": "Dockers DE, Zalando, Amazon.de",
           "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"",
@@ -197,7 +203,7 @@
         {
           "brand": "Suitsupply",
           "model": "Ask for the wider chino cut in store — Brescia is their slim block",
-          "colors": "Stone, Navy, Charcoal",
+          "colors": "Navy, Charcoal, Black",
           "priceNew": "~€119",
           "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)",
           "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in the listing photos, not the model name",
@@ -206,7 +212,7 @@
         {
           "brand": "Ralph Lauren",
           "model": "Stretch Chino — straight or relaxed, not the slim fit",
-          "colors": "Classic Khaki, Navy, Charcoal, Cream",
+          "colors": "Navy, Charcoal, Black. Not Classic Khaki — their signature colour is the one this palette cannot take.",
           "priceNew": "€120–150 (outlet/Vinted often €80–100)",
           "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
           "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"",
@@ -224,21 +230,21 @@
         {
           "phase": "Phase 2 — Once the cut is confirmed",
           "item": "Suitsupply chino, wider block",
-          "colors": "Stone or Navy",
+          "colors": "Navy or Charcoal",
           "purpose": "Smart casual, and the first one where the fabric shows",
           "status": "Planned"
         },
         {
           "phase": "Phase 3 — 1–2 years",
           "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Classic Khaki + Navy",
+          "colors": "Navy + Charcoal",
           "purpose": "Prestige, parent evenings, events",
           "status": "Planned"
         },
         {
           "phase": "Phase 4 — End goal",
           "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Charcoal, Cream, possibly Olive",
+          "colors": "Black, Charcoal, possibly Forest",
           "purpose": "Complete the capsule",
           "status": "End goal"
         }
@@ -249,7 +255,7 @@
       { "name": "Suitsupply", "category": "Suits, chinos", "note": "Stands for tailoring; take the wider chino block, not Brescia" },
       { "name": "Uniqlo", "category": "Knitwear", "note": "Now the most important name on this list — the merino line is the tonal base layer" },
       { "name": "Eterna", "category": "Silk ties" },
-      { "name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the dark brown derby or chelsea comes from here" },
+      { "name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the black derby or chelsea comes from here. Was dark brown until the undertone test." },
       { "name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. The branded sport tees stay in the gym." },
       { "name": "Levi's", "category": "Jeans — Denim 511 Slim", "note": "511 is a slim cut; the straight-leg correction applies here too when it is replaced" },
       { "name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit", "note": "Superseded by the fit revision" },
@@ -276,7 +282,7 @@
       ]
     },
     "outfitPlanner": {
-      "note": "Empty on purpose. The one entry the source carried is parked in _gaps until it is confirmed as his.",
+      "note": "Empty on purpose. The source carried a single day, and it reads as someone else's outfit — it is held back in the repo notes until he confirms it is his.",
       "days": [
         { "day": "Monday" },
         { "day": "Tuesday" },

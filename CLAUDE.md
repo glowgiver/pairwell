@@ -342,6 +342,34 @@ folder outside this repo. One file in that folder, `Appearance.md`, names real
 people and must never be transcribed into `style.json` or anywhere else in
 this project — it was checked once and deliberately excluded.
 
+**A leading `_` keeps a key in the repo and out of the page.**
+`build_style_page.py` strips every `_`-prefixed key, at any depth, before it
+inlines the JSON. This matters because the build *inlines* rather than
+renders: anything in the file ships to a public site whether or not a
+renderer ever reads it, so `_source`, `_revised`, `_gaps`, `_undertone` and
+`size._note` were all being published inside a page that displayed none of
+them. That is a small waste on its own; the reason it is a rule is that this
+repo deliberately keeps notes-to-self beside the data — `style.json`
+`_excluded` exists precisely to record something that must not become public
+— and a build that ships whatever it is handed turns the next such note into
+a publishing decision nobody made.
+
+**Only `build_style_page.py` does this today, and the other four have the same
+leak.** All five inline with a bare `json.dumps(data)`, and every data file
+carries `_` keys that are never rendered — `_gaps` and `_source` in most of
+them, and `profiles.json` alone ships nineteen distinct ones including
+`_bodyNote` and `_deleted`. All of them were read through on 2026-09-05 and
+none carries anything sensitive — they are design rationale, which is fine to
+publish and pointless to publish. The check is the point: it is the only
+thing standing between a note-to-self and the public site, and it has to be
+redone whenever one of those files gains a note.
+
+The filter was not simply copied across, for a reason that is easy to miss:
+`build_routines_page.py` **renders** `products[k]._note` on the hair page, so
+a blanket strip would silently blank a visible field. The rule is therefore
+per-script and needs the same check each time — which `_` keys does this
+page actually read? — rather than a shared helper applied on faith.
+
 ## Deploying
 
 `main` holds the project. The site is served from the **`gh-pages` branch**,
