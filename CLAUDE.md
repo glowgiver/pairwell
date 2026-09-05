@@ -370,6 +370,48 @@ a blanket strip would silently blank a visible field. The rule is therefore
 per-script and needs the same check each time — which `_` keys does this
 page actually read? — rather than a shared helper applied on faith.
 
+**Illustrations, not photographs.** The Style page draws each look as flat
+SVG until a real illustration exists at `hub/style/img/<occasion-slug>.png`,
+at which point the next build swaps it in — the same bargain Teaching Hub's
+`image_fit.find_local_image` makes, and for the same reason: the prompt lives
+in the data, the placeholder is useful on its own, and nothing has to be
+wired up per image. The prompt is assembled at render time from
+`looks.imageStyle` plus the look's `imagePrompt`, so the shared style and the
+figure description cannot drift between the five.
+
+The style is Teaching Hub's graphic-novel ink, with one deliberate change
+recorded in `imageStyle.deviation`: colour is allowed. On a wardrobe page the
+colour *is* the content, and a black-and-white plate would remove the thing
+the reader came for.
+
+This is also the answer to why there are no photographs. Runtime image
+fetching is out because the whole page must work offline, and photographs of
+*him* are out because `hub/` is published wholesale to `gh-pages` — a photo
+of a person is the most identifying thing there is, and the rule above says
+nothing identifying may be published. An illustration of a generic figure
+carries none of that. `hub/style/img/README.md` says so at the place someone
+would be about to drop a photo in.
+
+`build_sw.py` stamps whatever is in that folder into the offline shell,
+hash and all. Without that step an illustration only exists once the phone
+has been online, which defeats the point.
+
+`scripts/adopt_look_image.py` is the "Übernehmen" button, as a command: it
+takes the newest image from `~/Downloads`, installs it under the right name,
+runs both builds and steps `CACHE`. Teaching Hub can offer this as a button
+because `engine/hub.py` is a local HTTP server with an `/api/image/adopt`
+endpoint; Pairwell is static with no backend, and a page on GitHub Pages
+cannot write into the repository. Adding a server to close that gap would
+cost the property the whole app is built on, so the script is the answer
+rather than a smaller version of the same idea.
+
+Three places have to agree on a look's filename, so `scripts/style_slug.py`
+holds the definition and both Python callers import it. The third is the
+page's own inline JavaScript, which cannot import Python and is a deliberate
+mirror — the module says so, and says why it is ASCII-only: `str.isalnum()`
+keeps "ü" and `/[^a-z0-9]/` does not, so a German occasion name would have
+been written to disk under a name the page then could not find.
+
 ## Deploying
 
 `main` holds the project. The site is served from the **`gh-pages` branch**,

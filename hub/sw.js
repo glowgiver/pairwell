@@ -1,7 +1,7 @@
 /* Pairwell service worker.
    Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v71";
+const CACHE = "hub-v74";
 
 const SHELL = [
   "./",
@@ -17,7 +17,15 @@ const SHELL = [
   "./hair/",
   "./workout/",
   "./kitchen/",
-  "./style/"
+  "./style/",
+  /* Style illustrations, stamped by build_sw.py from whatever is in
+     hub/style/img/. The fetch handler would cache them on first view anyway,
+     but "first view" means online, and an outfit you cannot see in a shop is
+     the one place this page is used. Empty until the first one is generated. */
+  // <style-img>
+  "./style/img/parent-evening.png?v=f1996dd5",
+  "./style/img/school-day.png?v=0f27dc0a",
+  // </style-img>
 ];
 
 // Install: cache each shell file individually.

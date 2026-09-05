@@ -88,6 +88,80 @@
         { "name": "Mid grey", "hex": "#9AA0A8", "why": "Not wrong, just inert — mid tones flatten a high-contrast face. Go darker." }
       ]
     },
+    "looks": {
+      "note": "Added 2026-09-05 because the page could describe a wardrobe but not show one. Every colour here comes from `palette.core` or `palette.accent` — these are assemblies, not new decisions, and if the palette changes these have to change with it. Five is deliberate: enough to cover the week he actually has, few enough that each one is a real outfit rather than a combination generator.",
+      "imageStyle": {
+        "adaptedFrom": "The Teaching Hub house style — 'black and white graphic novel illustration, bold clean ink lines, no grey gradients, white background, no text, no labels, no captions'. Reused so the two projects look like they come from the same hand.",
+        "deviation": "One deliberate change: colour is allowed. On a wardrobe page the colour IS the content — a navy knit under a charcoal overshirt is the whole point — and a black-and-white plate would remove exactly the thing the reader came for. So: ink linework as in Teaching Hub, but garments filled flat in the palette hexes, with no rendering, no gradients and no fabric texture.",
+        "prefix": "Full-length fashion-plate illustration in a graphic novel style. Bold clean black ink outlines of even weight, no cross-hatching, no shading, no grey gradients. Garments filled with flat solid colour exactly as specified, no texture and no fabric rendering. Plain white background, no scenery, no props, no shadow on the ground. No text, no labels, no captions, no logos, no visible branding of any kind.",
+        "figure": "The same man in all five images so they read as one series: early-30s East Asian man, slim athletic build, near-black hair with length and volume on top and tapered sides, calm neutral expression, standing straight and facing the viewer, arms relaxed at his sides, full body visible from head to shoes.",
+        "suffix": "Portrait orientation, roughly 3:4. The whole figure must fit inside the frame with clear margin above the head and below the shoes.",
+        "howToUse": "Concatenate prefix + figure + the look's own `imagePrompt` + suffix, generate, and drop the file into hub/style/img/ named after the occasion slug — school-day.png, parent-evening.png, weekend.png, evening-out.png, colour-carefully.png. The build picks it up on the next run and replaces the drawn placeholder; .png, .jpg and .webp are all accepted.",
+        "background": "A transparent background is better than white if the generator can do it, because the page has a dark theme as well as a light one. If it cannot, white is fine — the build puts the image on its own white plate so it looks deliberate in both themes rather than like a bug."
+      },
+      "items": [
+        {
+          "occasion": "School day",
+          "when": "The default, and the one worth getting right — it is most of the week",
+          "note": "Tonal from collar to shoe, one shoulder seam on the outside. Nothing here needs ironing on a Tuesday morning.",
+          "imagePrompt": "He wears an open charcoal grey overshirt (#3A3F47) with a defined shoulder seam, worn over a navy blue fine-gauge merino crew neck knit (#1F2A44), straight-leg charcoal grey trousers (#3A3F47) that fall clear of the hip and break once at the ankle, and black leather chelsea boots (#16181C). The overshirt hangs open and straight, forming one unbroken vertical line down each side.",
+          "layers": [
+            { "part": "Outerwear", "item": "Charcoal overshirt", "hex": "#3A3F47" },
+            { "part": "Top", "item": "Navy merino crew", "hex": "#1F2A44" },
+            { "part": "Bottom", "item": "Charcoal straight trousers", "hex": "#3A3F47" },
+            { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" }
+          ]
+        },
+        {
+          "occasion": "Parent evening",
+          "when": "When the room has other adults in it and the clothes are read once, quickly",
+          "note": "The only look with real contrast, and it is at the collar where it flatters. The coat does the work; nothing else is trying.",
+          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a crisp pure white shirt (#FFFFFF) buttoned to the collar with no tie, straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
+          "layers": [
+            { "part": "Outerwear", "item": "Charcoal knee-length coat", "hex": "#3A3F47" },
+            { "part": "Top", "item": "True white shirt", "hex": "#FFFFFF" },
+            { "part": "Bottom", "item": "Navy straight trousers", "hex": "#1F2A44" },
+            { "part": "Shoes", "item": "Black derby", "hex": "#16181C" }
+          ]
+        },
+        {
+          "occasion": "Weekend",
+          "when": "Errands, coffee, the park",
+          "note": "The Sambas stay. They are the one thing in the current photographs that already works, and shoes sit far enough from the face that the palette rule is not doing much down there.",
+          "imagePrompt": "He wears an open dark forest green overshirt (#2E4535) over a plain pure white t-shirt (#FFFFFF), straight-leg dark indigo denim jeans (#23314A) in a deep even wash with no fading and no distressing, and low-profile white leather sneakers with a gum sole (#E9E7E2) and three plain stripes. Relaxed but not loose; the jeans are straight through the leg, never skinny and never baggy.",
+          "layers": [
+            { "part": "Outerwear", "item": "Forest overshirt", "hex": "#2E4535" },
+            { "part": "Top", "item": "True white tee", "hex": "#FFFFFF" },
+            { "part": "Bottom", "item": "Dark straight denim, no fading", "hex": "#23314A" },
+            { "part": "Shoes", "item": "Samba", "hex": "#E9E7E2" }
+          ]
+        },
+        {
+          "occasion": "Evening out",
+          "when": "Dinner, a bar, anywhere with low light",
+          "note": "Black on black on black, broken only by the coat being a shade lighter. This is the look the high contrast in his colouring was made for.",
+          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) reaching just below the knee, over a black fine-gauge mock neck knit (#16181C), straight-leg black trousers (#16181C), and black leather chelsea boots (#16181C). Almost entirely black from the neck down, with the coat one clear shade lighter so the silhouette still separates from the layers beneath it.",
+          "layers": [
+            { "part": "Outerwear", "item": "Charcoal coat", "hex": "#3A3F47" },
+            { "part": "Top", "item": "Black mock neck", "hex": "#16181C" },
+            { "part": "Bottom", "item": "Black straight trousers", "hex": "#16181C" },
+            { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" }
+          ]
+        },
+        {
+          "occasion": "Colour, carefully",
+          "when": "When the whole week has been navy and charcoal",
+          "note": "One accent, at the top, with everything under it quiet. Emerald is a Dark Winter colour rather than a bright one, so it reads as depth and not as a statement.",
+          "imagePrompt": "He wears an open navy blue overshirt (#1F2A44) over a deep emerald green fine-gauge merino crew neck knit (#0F5C4A), straight-leg charcoal grey trousers (#3A3F47), and black leather chelsea boots (#16181C). The emerald is deep and saturated rather than bright or minty, and it is the only colour in the image that draws the eye.",
+          "layers": [
+            { "part": "Outerwear", "item": "Navy overshirt", "hex": "#1F2A44" },
+            { "part": "Top", "item": "Emerald merino crew", "hex": "#0F5C4A" },
+            { "part": "Bottom", "item": "Charcoal straight trousers", "hex": "#3A3F47" },
+            { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" }
+          ]
+        }
+      ]
+    },
     "silhouette": {
       "rules": [
         {

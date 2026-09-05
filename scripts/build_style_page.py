@@ -1,4 +1,7 @@
-import hashlib, json, os
+import hashlib, json, os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from style_slug import slug as _slug
 
 BASE = os.path.dirname(__file__)
 DATA_PATH = os.path.join(BASE, "..", "data", "style.json")
@@ -38,6 +41,33 @@ def _digest(rel):
     return hashlib.sha1(open(p, "rb").read()).hexdigest()[:8]
 
 ASSET_V = {"css": _digest("app.css"), "js": _digest("app.js")}
+
+IMG_DIR = os.path.join(BASE, "..", "hub", "style", "img")
+IMG_EXT = (".png", ".jpg", ".jpeg", ".webp")
+
+
+def find_images():
+    """Map look-slug -> "img/<file>?v=<hash>" for whatever is actually on disk.
+
+    Same bargain as Teaching Hub's find_local_image: the prompt lives in the
+    data and the page draws a placeholder until a real file with the matching
+    name turns up beside it, at which point the next build swaps it in with no
+    further step. Hashed like the other assets so a regenerated image is not
+    served from a stale cache under its old name.
+    """
+    found = {}
+    if not os.path.isdir(IMG_DIR):
+        return found
+    for name in sorted(os.listdir(IMG_DIR)):
+        stem, ext = os.path.splitext(name)
+        if ext.lower() not in IMG_EXT:
+            continue
+        h = hashlib.sha1(open(os.path.join(IMG_DIR, name), "rb").read()).hexdigest()[:8]
+        found[_slug(stem)] = "img/" + name + "?v=" + h
+    return found
+
+
+IMAGES = find_images()
 
 html = """<!DOCTYPE html>
 <html lang="en">
@@ -161,6 +191,50 @@ html = """<!DOCTYPE html>
   /* .sw-sub lived here for the two branches of the unresolved undertone
      question. The question is answered, there are no branches, and a rule
      nothing uses is worse than no rule. */
+
+  /* Looks — the drawn outfits. */
+  .look{padding:14px 16px;border-bottom:1px solid var(--line)}
+  .look:last-of-type{border-bottom:none}
+  .lk-when{font-size:16px;font-weight:700}
+  .lk-sub{font-family:var(--f-read);font-size:13.5px;color:var(--muted2);margin-top:2px;line-height:1.45}
+  .lk-body{display:flex;gap:14px;align-items:flex-start;margin-top:11px}
+  /* The drawing is fixed-width so five of them line up down the page; a
+     figure that resized per card would read as five different people. */
+  .fig{width:82px;height:150px;flex:none}
+  .lk-rows{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+  .lk-row{display:grid;grid-template-columns:20px 74px 1fr;gap:8px;align-items:baseline}
+  .lk-row .sw-dot{align-self:center}
+  .lk-part{font-family:var(--f-data);font-size:12.5px;color:var(--muted2);
+    text-transform:uppercase;letter-spacing:.04em}
+  .lk-item{font-family:var(--f-read);font-size:14.5px;color:var(--text);line-height:1.4}
+  .lk-note{font-family:var(--f-read);font-size:14px;color:var(--muted);
+    margin-top:10px;line-height:1.55}
+  /* The generated illustration sits on its own white plate. The house style
+     asks for a white background, and a white rectangle floating on a dark
+     card reads as a bug — a plate with a border and a radius reads as a
+     lookbook page, and works unchanged in both themes. */
+  .lk-plate{width:96px;aspect-ratio:3/4;flex:none;background:#fff;
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;line-height:0}
+  .lk-img{width:100%;height:100%;display:block;object-fit:contain}
+  /* Prompt, shown only while an illustration is missing. */
+  .pr{padding:0 16px 14px}
+  .pr-t{margin:0 0 10px;font-family:var(--f-read);font-size:13.5px;
+    color:var(--muted);line-height:1.5}
+  .pr-c{
+    min-height:var(--tap);padding:0 16px;border-radius:22px;cursor:pointer;
+    background:var(--accent);color:var(--bg);border:none;
+    font-family:var(--f-data);font-size:15px;font-weight:700;
+  }
+  .pr-c:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pr-h{margin:10px 0 0;font-family:var(--f-read);font-size:13px;
+    color:var(--muted2);line-height:1.5}
+  .pr-h b{color:var(--text);font-family:var(--f-data)}
+  /* Below ~360px the three-column row runs out of room for the garment name. */
+  @media (max-width:359px){
+    .lk-row{grid-template-columns:20px 1fr}
+    .lk-part{grid-column:2}
+    .lk-item{grid-column:2}
+  }
 
   /* Silhouette rules — the rule reads as a heading, the reason underneath it. */
   .rule{padding:12px 16px;border-bottom:1px solid var(--line)}
@@ -295,6 +369,9 @@ html = """<!DOCTYPE html>
 <script src="../app.js?v=__JSV__"></script>
 <script>
 const S = __DATA__;
+/* Filled by the build from whatever is in hub/style/img/. Empty until the
+   first illustration is generated, which is the normal state, not an error. */
+const IMG = __IMAGES__;
 
 function esc(s){
   return String(s == null ? "" : s)
@@ -334,15 +411,19 @@ function directionCard(d){
       '<div class="rp-w">' + esc(r.why) + '</div></div>';
   }).join("");
 
+  /* Three long paragraphs used to open the page. The thesis in the head says
+     the same thing in a sentence; these argue for it, and arguing is what
+     folds. */
+  var reasoning = [
+    ["Built from", d.builtFrom], ["Age read", d.ageRead],
+    ["Where it stands", d.readOfCurrentPhotos]
+  ].filter(function(r){ return r[1]; }).map(function(r){
+    return '<div class="ref-item"><div class="ref-item-k">' + esc(r[0]) + '</div>' +
+      '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
+  }).join("");
+
   return head('Direction — ' + esc(d.register), d.thesis ? esc(d.thesis) : "") +
-    '<div class="ref-body">' +
-    (d.builtFrom ? '<div class="ref-item"><div class="ref-item-k">Built from</div>' +
-      '<div class="ref-item-v">' + esc(d.builtFrom) + '</div></div>' : '') +
-    (d.ageRead ? '<div class="ref-item"><div class="ref-item-k">Age read</div>' +
-      '<div class="ref-item-v">' + esc(d.ageRead) + '</div></div>' : '') +
-    (d.readOfCurrentPhotos ? '<div class="ref-item"><div class="ref-item-k">Where it stands</div>' +
-      '<div class="ref-item-v">' + esc(d.readOfCurrentPhotos) + '</div></div>' : '') +
-    '</div>' +
+    fold("What this is built on", reasoning ? '<div class="ref-body">' + reasoning + '</div>' : "") +
     (refs
       ? '<div class="sw-label">Reference</div>' +
         (d.referencesNote ? '<div class="sect-note">' + esc(d.referencesNote) + '</div>' : '') +
@@ -374,10 +455,7 @@ function hairCard(h){
 
   return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "") +
     '<div class="ref-body">' + rows + '</div>' +
-    /* The reasoning stays open here on purpose: this card asks him to go to a
-       barber and say something specific, and the why is what makes that
-       worth doing. */
-    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '');
+    fold("Why", h.why ? '<div class="note">' + esc(h.why) + '</div>' : "");
 }
 
 function swatches(list, withWhy){
@@ -407,22 +485,128 @@ function paletteCard(p){
       swatches(g.colors, withWhy);
   }
 
+  /* Metal stays open — it is a rule you act on when buying a watch or frames.
+     Colouring and undertone are the evidence for the swatches below, and the
+     swatches are the answer, so the evidence folds. */
+  var evidence = [
+    ["Colouring", p.established], ["Undertone", p.resolved]
+  ].filter(function(r){ return r[1]; }).map(function(r){
+    return '<div class="ref-item"><div class="ref-item-k">' + esc(r[0]) + '</div>' +
+      '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
+  }).join("");
+
   return head('Palette — ' + esc(p.type), p.rule ? esc(p.rule) : "") +
-    '<div class="ref-body">' +
-    (p.established ? '<div class="ref-item"><div class="ref-item-k">Colouring</div>' +
-      '<div class="ref-item-v">' + esc(p.established) + '</div></div>' : '') +
-    (p.resolved ? '<div class="ref-item"><div class="ref-item-k">Undertone</div>' +
-      '<div class="ref-item-v">' + esc(p.resolved) + '</div></div>' : '') +
-    (p.metal ? '<div class="ref-item"><div class="ref-item-k">Metal</div>' +
-      '<div class="ref-item-v">' + esc(p.metal) + '</div></div>' : '') +
-    '</div>' +
+    (p.metal ? '<div class="ref-body"><div class="ref-item"><div class="ref-item-k">Metal</div>' +
+      '<div class="ref-item-v">' + esc(p.metal) + '</div></div></div>' : '') +
     (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
     group(p.accent, "Accents", false) +
     group(p.ruledOut, "Ruled out by the undertone test", true) +
     (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
-    fold("How solid is this?", p.confidence
-      ? '<div class="rev"><p>' + esc(p.confidence) + '</p></div>'
-      : "");
+    fold("Why this palette", (evidence ? '<div class="ref-body">' + evidence + '</div>' : "") +
+      (p.confidence ? '<div class="rev"><div class="rev-t">Confidence</div><p>' +
+        esc(p.confidence) + '</p></div>' : ""));
+}
+
+/* The page could describe a wardrobe but not show one, and "a lot of text and
+   you cannot picture any of it" was the verdict. Photographs are out — zero
+   external requests is the rule, and the useful ones would be someone else's
+   copyright anyway — so the outfit is drawn instead. Flat geometry, filled
+   with the outfit's own hexes: a coat open over a top, straight legs, shoes.
+   It is not a fashion illustration and does not pretend to be; what it has to
+   carry is the tonal column, which is exactly what a stack of four colours
+   in the right proportions does show. */
+function figure(layers){
+  var by = {};
+  layers.forEach(function(l){ by[l.part] = l.hex; });
+  var outer = by.Outerwear, top = by.Top, bottom = by.Bottom, shoe = by.Shoes;
+
+  /* Sleeves belong to whatever is outermost. Without them the first version
+     read as a tabard rather than a coat over a knit, which was the single
+     thing the drawing had to communicate. */
+  var sleeve = outer || top;
+
+  return '<svg class="fig" viewBox="0 0 104 190" aria-hidden="true">' +
+    /* Trousers first, so the coat falls over them the way a coat does.
+       Straight leg, no taper — the one silhouette rule that rests on a
+       measurement rather than on taste. */
+    (bottom ? '<path d="M38 88h28l-1 66h-10l-3-44-3 44H39z" fill="' + esc(bottom) + '"/>' : '') +
+    (shoe ? '<path d="M37 152h12v6a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z" fill="' + esc(shoe) + '"/>' +
+            '<path d="M55 152h12v6a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z" fill="' + esc(shoe) + '"/>' : '') +
+    /* Neck and torso in the top colour. Only a strip of this stays visible
+       once the coat is drawn over it — which is exactly what an open coat
+       shows of the knit underneath. */
+    (top ? '<path d="M48 22h8v8h-8z" fill="' + esc(top) + '"/>' +
+           '<path d="M40 28h24v66H40z" fill="' + esc(top) + '"/>' : '') +
+    (sleeve ? '<path d="M24 34l10-5 1 60h-10z" fill="' + esc(sleeve) + '"/>' +
+              '<path d="M80 34l-10-5-1 60h10z" fill="' + esc(sleeve) + '"/>' : '') +
+    /* Two open front panels to just below the knee: the long unbroken
+       vertical every silhouette rule on this page keeps asking for. */
+    (outer ? '<path d="M28 34l18-6v104H30z" fill="' + esc(outer) + '"/>' +
+             '<path d="M76 34l-18-6v104h16z" fill="' + esc(outer) + '"/>' : '') +
+    '<circle cx="52" cy="13" r="9.5" fill="none" stroke="var(--muted2)" stroke-width="1.5"/>' +
+    '</svg>';
+}
+
+/* The illustration if one has been generated, the drawn figure if not. The
+   fallback is the whole design: the page is useful today and gets better one
+   file at a time, rather than being broken until all five exist. */
+function lookVisual(o, id){
+  var src = IMG[id];
+  if(!src){
+    return figure(o.layers || []);
+  }
+  /* No width/height attributes: the build does not read image headers, so any
+     pair it wrote would be a guess, and a wrong one reserves the wrong box and
+     shifts the layout on load. The plate holds a fixed 3:4 instead — the ratio
+     the prompt asks for — and object-fit contains anything that is not. */
+  return '<div class="lk-plate"><img class="lk-img" src="' + esc(src) + '" alt="' +
+    esc(o.occasion + ": " + (o.layers || []).map(function(x){ return x.item; }).join(", ")) +
+    '" loading="lazy" decoding="async"></div>';
+}
+
+/* The prompt, shown only while the image is still missing. Copying it is the
+   next action at that point, so it is a button rather than a block of text to
+   select by hand. */
+function promptBlock(o, id, style){
+  if(IMG[id] || !o.imagePrompt || !style) return "";
+  var full = [style.prefix, style.figure, o.imagePrompt, style.suffix]
+    .filter(Boolean).join(" ");
+  return fold("Image prompt — not generated yet",
+    '<div class="pr"><p class="pr-t">' + esc(full) + '</p>' +
+    '<button type="button" class="pr-c" data-prompt="' + esc(full) + '">Copy prompt</button>' +
+    '<p class="pr-h">Generate it, then save the file as <b>' + esc(id) +
+    '.png</b> in <b>hub/style/img/</b> and re-run the build. It replaces the drawing on its own.</p></div>');
+}
+
+function looksCard(l){
+  if(!l || !l.items || !l.items.length) return "";
+  var style = l.imageStyle;
+  var items = l.items.map(function(o){
+    var id = slug(o.occasion);
+    var rows = (o.layers || []).map(function(x){
+      return '<div class="lk-row">' +
+        '<span class="sw-dot" style="background:' + esc(x.hex) + '"></span>' +
+        '<span class="lk-part">' + esc(x.part) + '</span>' +
+        '<span class="lk-item">' + esc(x.item) + '</span></div>';
+    }).join("");
+    return '<div class="look">' +
+      '<div class="lk-head"><div class="lk-when">' + esc(o.occasion) + '</div>' +
+      (o.when ? '<div class="lk-sub">' + esc(o.when) + '</div>' : '') + '</div>' +
+      '<div class="lk-body">' + lookVisual(o, id) +
+      '<div class="lk-rows">' + rows + '</div></div>' +
+      (o.note ? '<div class="lk-note">' + esc(o.note) + '</div>' : '') +
+      promptBlock(o, id, style) +
+      '</div>';
+  }).join("");
+
+  var missing = l.items.filter(function(o){ return !IMG[slug(o.occasion)]; }).length;
+  var intro = missing === 0
+    ? 'Five assemblies. Every colour comes from the palette above.'
+    : 'Five assemblies. ' + missing + ' of 5 still show the drawn placeholder — ' +
+      'each one carries the prompt that replaces it.';
+
+  return head('Looks', intro) + items +
+    fold("Where these came from", l.note ? '<div class="note">' + esc(l.note) + '</div>' : "");
 }
 
 function silhouetteCard(s){
@@ -588,6 +772,7 @@ function renderStage(){
     ["Direction",  directionCard(p.direction)],
     ["Hair",       hairCard(p.hair)],
     ["Palette",    paletteCard(p.palette)],
+    ["Looks",      looksCard(p.looks)],
     ["Silhouette", silhouetteCard(p.silhouette)],
     ["Buy next",   buyNextCard(p.buyNext)],
     ["Wardrobe",   seasonalWardrobeCard(p.seasonalWardrobe)],
@@ -608,6 +793,38 @@ function renderStage(){
   }).join("");
 }
 
+/* Delegated, so it survives every re-render on a person switch. Clipboard is
+   async and blocked outside a secure context, so the textarea path stays as
+   the fallback rather than leaving the button doing nothing. */
+document.getElementById("stage").addEventListener("click", function(ev){
+  var b = ev.target.closest ? ev.target.closest(".pr-c") : null;
+  if(!b) return;
+  var text = b.getAttribute("data-prompt") || "";
+  /* When the clipboard is refused — an insecure context, or a webview that
+     withholds the permission — select the prompt itself. That leaves the
+     phone's own copy handle over the right text, which is something a person
+     can act on; a button that reports failure and does nothing is not. */
+  function done(ok){
+    b.textContent = ok ? "Copied" : "Selected — copy it";
+    if(!ok){
+      var p = b.parentNode.querySelector(".pr-t");
+      if(p && window.getSelection && document.createRange){
+        var r = document.createRange();
+        r.selectNodeContents(p);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }
+    }
+    setTimeout(function(){ b.textContent = "Copy prompt"; }, 2600);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
+    return;
+  }
+  done(false);
+});
+
 PW.mountRail();
 PW.mountSwitcher(document.getElementById("switcher"));
 PW.mountTabs("style", "../");
@@ -622,6 +839,7 @@ renderStage();
 """
 
 html = html.replace("__DATA__", data_json)\
+        .replace("__IMAGES__", json.dumps(IMAGES, ensure_ascii=False))\
         .replace("__CSSV__", ASSET_V["css"]).replace("__JSV__", ASSET_V["js"])
 
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
