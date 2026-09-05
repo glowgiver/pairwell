@@ -34,6 +34,7 @@ PAGES = [
     os.path.join("hair", "index.html"),
     os.path.join("workout", "index.html"),
     os.path.join("kitchen", "index.html"),
+    os.path.join("style", "index.html"),
 ]
 
 # app.js is hand-written rather than emitted, but it is the file every page

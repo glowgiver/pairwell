@@ -1,6 +1,6 @@
 # Pairwell — architecture notes
 
-A private PWA for Philipp & Eunice. Four tools: Skincare, Hair, Workout, Kitchen.
+A private PWA for Philipp & Eunice. Five tools: Skincare, Hair, Workout, Kitchen, Style.
 
 **Live:** https://glowgiver.github.io/pairwell/ · repo `glowgiver/pairwell` (public)
 
@@ -41,13 +41,16 @@ pairwell/
 │   ├── routines.json      skincare (both people, two different shapes) + hair
 │   ├── kitchen.json       standards + Asian Base Block + energyFactors
 │   ├── foods.json         58 ingredients, per 100 g — so recipes hold no macros
-│   └── recipes.json       dishes as amounts only; macros derived, never typed
+│   ├── recipes.json       dishes as amounts only; macros derived, never typed
+│   └── style.json         color type, wardrobe, brands, sizes — Philipp only so far
 │
 ├── scripts/
-│   ├── build_hub_page.py        all four sources → the Today screen
+│   ├── build_hub_page.py        all four day-based sources → the Today screen
 │   ├── build_workout_page.py    training.json + exercises.json → workout page
 │   ├── build_routines_page.py   routines.json → skincare + hair pages
 │   ├── build_kitchen_page.py    kitchen.json → splitter + method
+│   ├── build_style_page.py      style.json → style page (reference, no day logic)
+│   ├── build_sw.py              stamps hub/sw.js with the pages' own asset hashes
 │   ├── recompute_macros.py      derives kitchen macros; holds no data itself
 │   ├── read_inbox.py            inbox/*.md → recipes.json, blocking on unknowns
 │   ├── adapt_recipe.py          fits a found recipe to the mirror-meal target
@@ -78,7 +81,7 @@ pairwell/
     ├── app.css            the one palette — pages must not redefine tokens
     ├── app.js             the one person model (PW.get / PW.set / mountSwitcher)
     ├── manifest.json · sw.js · icons/
-    └── skincare/ · hair/ · workout/ · kitchen/   all generated
+    └── skincare/ · hair/ · workout/ · kitchen/ · style/   all generated
 ```
 
 ## Person handling
@@ -118,7 +121,8 @@ daily; advisory ones live in the disclosure.
 ## Style
 
 Tokens in `hub/app.css`, **two themes**. Accents: `--skin` teal, `--hair`
-violet, `--train` blue, `--food` orange; `--philipp` blue, `--eunice` violet.
+violet, `--train` blue, `--food` orange, `--style` rose; `--philipp` blue,
+`--eunice` violet.
 
 The themes invert rather than merely darken: dark mode uses pale accents
 carrying dark ink, light mode uses deep accents carrying near-white ink.
@@ -333,6 +337,11 @@ postcodes, workplaces, or route descriptions. Personal routines and targets are
 fine; anything that could locate a person is not. This was cleaned up once
 already — see the "Generalise locating detail" commit.
 
+`data/style.json` is transcribed from `Personal/12_Notizen/01_Style/*.md`, a
+folder outside this repo. One file in that folder, `Appearance.md`, names real
+people and must never be transcribed into `style.json` or anywhere else in
+this project — it was checked once and deliberately excluded.
+
 ## Deploying
 
 `main` holds the project. The site is served from the **`gh-pages` branch**,
@@ -343,7 +352,9 @@ python3 scripts/build_hub_page.py       # Today screen
 python3 scripts/build_routines_page.py  # skincare + hair
 python3 scripts/build_workout_page.py
 python3 scripts/build_kitchen_page.py
-# bump `const CACHE = "hub-vX"` in hub/sw.js
+python3 scripts/build_style_page.py
+python3 scripts/build_sw.py             # re-stamps sw.js's own app.css/app.js hashes
+# bump `const CACHE = "hub-vX"` in hub/sw.js, add any new page to SHELL
 git add -A && git commit -m "..."
 git push
 git subtree push --prefix hub origin gh-pages

@@ -1,0 +1,177 @@
+{
+  "_source": "Personal/12_Notizen/01_Style/*.md — transcribed 2026-09-05.",
+  "_excluded": "Appearance.md from the same folder is deliberately never transcribed here or anywhere in this repo: it names real people and must never enter a public project.",
+  "_gaps": [
+    "Color_Combination.md and Autumn_Type_Color_Palette_and_Style.md were written as two separate personal-color-analysis notes and were never reconciled — the first only ever recorded a 'Winter' season type, the second is titled 'Autumn Type'. Both are kept verbatim under their own heading rather than guessing which one is current.",
+    "Outfit_Planner.md has content for Monday only; the rest of the week was empty in the source."
+  ],
+  "philipp": {
+    "colorAnalysis": {
+      "type": "Winter",
+      "note": "From Color_Combination.md. Describes the Winter season type generically (its own diagnostic traits), not confirmed here as Philipp's own type — see _gaps.",
+      "traits": "Extreme contrast between skin, hair and eyes. Common among Southern Europeans, Asians, and people with black skin.",
+      "skin": "Porcelain-like, cool in lighter skin, slightly olive in darker skin",
+      "tan": "None or only slight in lighter skin, fast tanning in darker skin",
+      "hair": "Dark brown to blue-black; grey hair shows strong contrast against the skin",
+      "browsLashes": "Dark brown to blue-black",
+      "eyes": "Intense blue, green, cool grey, or dark brown to almost black",
+      "colors": [
+        "Apple green", "Leaf green", "Bottle green", "Sun yellow", "Dark green",
+        "Lemon yellow", "Cherry red", "Ruby", "Light to dark purple", "Raspberry",
+        "Fuchsia", "Ice pink", "Gentian blue", "Royal/Caribbean blue", "Black",
+        "White", "Dark bittersweet-chocolate brown", "Pink", "Navy"
+      ],
+      "avoid": "No orange, no blue-violet other than the listed purples, no washed-out violet tones"
+    },
+    "seasonalWardrobe": {
+      "note": "From Autumn_Type_Color_Palette_and_Style.md — a baseline palette plus one capsule per calendar season, not per color-analysis type.",
+      "paletteNote": "Warm, earthy tones: olive green, rust red, mustard yellow, chocolate brown, copper, terracotta, petrol, camel.",
+      "styleNote": "Natural fabrics — wool, cotton, leather — suit this palette well. Avoid bright, cool colors; stay muted and warm.",
+      "seasons": [
+        {
+          "season": "Spring",
+          "heading": "Light Fabrics and Warm Shades",
+          "tops": "Light shirts or polo shirts in apricot, coral, or warm beige",
+          "outerwear": "Lightweight transitional jackets in olive green or camel",
+          "bottoms": "Chinos in sand or khaki",
+          "shoes": "Loafers or light leather shoes in brown or cognac tones"
+        },
+        {
+          "season": "Summer",
+          "heading": "Breezy Clothing in Natural Colors",
+          "tops": "Linen shirts or T-shirts in warm white, terracotta, or mustard yellow",
+          "bottoms": "Shorts in olive green or beige",
+          "accessories": "Straw hats or sunglasses with brown lenses",
+          "shoes": "Sandals or espadrilles in natural tones"
+        },
+        {
+          "season": "Autumn",
+          "heading": "Layering with Warm Colors",
+          "tops": "Sweaters or cardigans in rust red, dark green, or chocolate brown",
+          "outerwear": "Transitional jackets or coats in camel or olive green",
+          "bottoms": "Jeans or corduroy pants in dark brown or mustard yellow",
+          "shoes": "Ankle boots or boots in brown or cognac tones"
+        },
+        {
+          "season": "Winter",
+          "heading": "Warm Fabrics and Deep Tones",
+          "tops": "Turtleneck sweaters or flannel shirts in dark green, burgundy, or petrol",
+          "outerwear": "Wool coats or parkas in chocolate brown or dark olive",
+          "bottoms": "Thermal pants or jeans in dark brown or black",
+          "shoes": "Lined boots in dark brown tones"
+        }
+      ]
+    },
+    "brands": [
+      { "name": "Charles Tyrwhitt", "category": "Shirts" },
+      { "name": "Suitsupply", "category": "Suits" },
+      { "name": "Eterna", "category": "Silk ties" },
+      { "name": "Uniqlo", "category": "Sweaters" },
+      { "name": "Burberry", "category": null },
+      { "name": "Shoepassion", "category": "Men's shoes" },
+      { "name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit" },
+      { "name": "Adidas", "category": "Basketball socks" },
+      { "name": "Levi's", "category": "Jeans — Denim 511 Slim" },
+      { "name": "Villeroy und Boch", "category": "Porcelain (not clothing)" }
+    ],
+    "size": {
+      "collar": "38 cm",
+      "armLength": "83 cm",
+      "shoulder": "46 cm",
+      "chest": "96 cm",
+      "waist": "87 cm",
+      "hip": "105 cm",
+      "sleeveLength": "61 cm",
+      "shirtLength": "67 cm",
+      "notes": [
+        "Extra Slim Fit — Tyrwhitt 38 business shirt, casual size S",
+        "31/32 Regular Fit — Boss Orange chino",
+        "Shoes: 26 cm foot = EU 42.6–43.3 at Adidas, EU 43 at Nike",
+        "Shoepassion size 8"
+      ]
+    },
+    "chinoPlan": {
+      "goal": "End goal: capsule wardrobe entirely in Ralph Lauren (the collector's preppy signature brand)",
+      "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium/end goal)",
+      "fit": "Slim Fit + Mid-Rise — balances a longer torso and a small stomach, elongates the legs, gives a clean preppy line",
+      "purchases": [
+        {
+          "brand": "Dockers",
+          "model": "Ultimate Chino Slim Fit",
+          "colors": "Navy, Grey, Beige",
+          "priceNew": "€40–50",
+          "whereNew": "Dockers DE, Zalando, Amazon.de",
+          "secondHandSearch": "\"Dockers Ultimate Chino Slim 32/32\", \"Dockers Chino W32\"",
+          "status": "Planned"
+        },
+        {
+          "brand": "Suitsupply",
+          "model": "Brescia Slim Fit Chino",
+          "colors": "Khaki (sand), Navy, Grey",
+          "priceNew": "~€119",
+          "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)",
+          "secondHandSearch": "\"Suitsupply Brescia 32/32\", \"Suitsupply Chino Slim\"",
+          "status": "Planned"
+        },
+        {
+          "brand": "Ralph Lauren",
+          "model": "Slim Fit Stretch Chino",
+          "colors": "Classic Khaki, Navy, Grey, White",
+          "priceNew": "€120–150 (outlet/Vinted often €80–100)",
+          "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
+          "secondHandSearch": "\"Ralph Lauren Chino Slim 32/32\", \"Polo Ralph Lauren Flat Front\"",
+          "status": "End goal"
+        }
+      ],
+      "roadmap": [
+        {
+          "phase": "Phase 1 — Now",
+          "item": "Dockers Ultimate Chino Slim Fit",
+          "colors": "Navy or Grey",
+          "purpose": "Everyday, school, robust daily chino",
+          "status": "Planned"
+        },
+        {
+          "phase": "Phase 1 — Now",
+          "item": "Suitsupply Brescia Slim Chino",
+          "colors": "Khaki (sand) or Navy",
+          "purpose": "Smart casual, better fit for proportion",
+          "status": "Planned"
+        },
+        {
+          "phase": "Phase 2 — 1–2 years",
+          "item": "Ralph Lauren Slim Fit Stretch Chino",
+          "colors": "Classic Khaki + Navy",
+          "purpose": "Prestige, parent-teacher evenings, events",
+          "status": "Planned"
+        },
+        {
+          "phase": "Phase 3 — End goal",
+          "item": "Ralph Lauren Slim Fit Stretch Chino",
+          "colors": "Grey, White (summer), possibly Olive",
+          "purpose": "Complete the preppy capsule, collector's goal",
+          "status": "End goal"
+        }
+      ]
+    },
+    "outfitPlanner": {
+      "days": [
+        {
+          "day": "Monday",
+          "top": "White chunky sweater",
+          "bottom": "90s-style light denim jeans",
+          "shoes": "Loafers",
+          "accessories": "Gold small hoop earrings",
+          "outerwear": "Trench coat"
+        },
+        { "day": "Tuesday" },
+        { "day": "Wednesday" },
+        { "day": "Thursday" },
+        { "day": "Friday" },
+        { "day": "Saturday" },
+        { "day": "Sunday" }
+      ]
+    }
+  },
+  "eunice": null
+}

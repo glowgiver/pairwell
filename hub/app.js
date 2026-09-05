@@ -114,7 +114,7 @@
     paintRail(get());
   }
 
-  /* Four modules, each keeping its own accent so you know where you are.
+  /* Five modules, each keeping its own accent so you know where you are.
      Icons match the ones the hub already used. */
   var TABS = [
     /* Home earns a tab because the top-bar link scrolls away with the page,
@@ -129,7 +129,9 @@
     { id: "workout", label: "Workout", href: "workout/", accent: "var(--train)",
       path: '<path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/>' },
     { id: "kitchen", label: "Kitchen", href: "kitchen/", accent: "var(--food)",
-      path: '<path d="M5 4v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V4"/><path d="M7 13v7"/><path d="M17 20V4c-1.7.8-2.5 2.7-2.5 5s.8 3.8 2.5 4"/>' }
+      path: '<path d="M5 4v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V4"/><path d="M7 13v7"/><path d="M17 20V4c-1.7.8-2.5 2.7-2.5 5s.8 3.8 2.5 4"/>' },
+    { id: "style", label: "Style", href: "style/", accent: "var(--style)",
+      path: '<path d="M8 4h8l2 3-4 2 1 11H7l1-11-4-2Z"/><path d="M9 4a3 3 0 0 0 6 0"/>' }
   ];
 
   /* `current` is the module id, or null on the hub. `base` is the prefix that
