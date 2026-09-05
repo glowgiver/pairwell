@@ -276,7 +276,24 @@
         "glycolic": "The Ordinary Glycolic Acid 7% Toning Solution",
         "niacinamide": "The Ordinary Niacinamide 10% + Zinc 1%"
       },
-      "timeline": "Adapalene needs patience — meaningful texture and pore results from week 12+. Weeks 1–8 show little by design."
+      "timeline": "Adapalene needs patience — meaningful texture and pore results from week 12+. Weeks 1–8 show little by design.",
+      "weeklyTreatments": [
+        {
+          "id": "nailcare",
+          "title": "Nail care",
+          "day": "Wed",
+          "cadence": "Weekly · Wednesdays",
+          "everyDays": 7,
+          "everyDaysMax": 9
+        }
+      ],
+      "nailCareProducts": {
+        "cuticleStick": "Tweezerman Cuticle Stick — loosen/clean cuticles before pushing back",
+        "clippers": "Wilkinson Sword Manicure Nail Clippers / Toenail Clippers with Nail Catcher",
+        "file": "Zwilling Glas-Nagelfeile, doppelseitig, feine Körnung — shape after clipping",
+        "cuticlePusher": "Tweezerman Cuticle Pusher — push back after softening, never cut cuticles",
+        "handCream": "Balea (dm) Hand Cream Urea — finish, both hands"
+      }
     },
     "eunice": {
       "_source": "Hamburg Seasonal Skincare Masterplan (.docx), added 2026-08-29",
