@@ -1,7 +1,7 @@
 /* Pairwell service worker.
    Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v68";
+const CACHE = "hub-v70";
 
 const SHELL = [
   "./",
