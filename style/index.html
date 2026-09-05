@@ -33,9 +33,39 @@
     border-radius:14px;background:var(--surface)}
   .empty strong{color:var(--text)}
 
-  .ref-card{margin-bottom:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+  /* Jump bar. Ten cards is roughly seven screens, and the two things looked up
+     most often in a shop — Size and Brands — sit at the bottom because the
+     reading order is by importance, not by how often you need it. Rather than
+     fight that, this gives every card a one-tap address. It scrolls
+     horizontally and is built from the cards actually rendered, so it cannot
+     drift out of step with them. */
+  .jump{
+    display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;
+    margin:0 -16px 18px;padding:2px 16px 6px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .jump::-webkit-scrollbar{display:none}
+  .jump a{
+    flex:none;display:inline-flex;align-items:center;min-height:var(--tap);
+    padding:0 14px;border-radius:22px;text-decoration:none;
+    background:var(--surface);border:1px solid var(--line);
+    font-family:var(--f-data);font-size:15px;color:var(--muted);
+  }
+  .jump a:active{background:var(--surface-2);color:var(--text)}
+  .jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* The top bar is sticky, so an anchor that lands flush at the viewport top
+     lands underneath it. Its height is min-height var(--tap) plus 8px of
+     padding either side. */
+  .ref-card{
+    margin-bottom:16px;border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;background:var(--surface);
+    scroll-margin-top:calc(var(--tap) + 26px);
+  }
   .ref-head{padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-  .ref-title{font-size:18px;font-weight:700}
+  /* A real h2, not a styled div: this page is ten sections of reference text
+     and without headings it has no outline to navigate by at all. */
+  .ref-title{font-size:18px;font-weight:700;margin:0;letter-spacing:-.01em}
   .ref-intro{font-family:var(--f-read);font-size:14.5px;color:var(--muted);margin-top:4px;line-height:1.55}
   .ref-body{padding:4px 16px}
   /* Stacked first. Several values here are full paragraphs, and a fixed label
@@ -87,12 +117,9 @@
     font-family:var(--f-data);font-size:12.5px;font-weight:700;letter-spacing:.09em;
     text-transform:uppercase;color:var(--muted2);padding:12px 16px 0;
   }
-  /* One level below .sw-label — the two branches of an unresolved question,
-     which are subordinate to it rather than siblings of Core and Avoid. */
-  .sw-sub{
-    font-family:var(--f-data);font-size:13px;font-weight:600;
-    color:var(--accent);padding:10px 16px 0;
-  }
+  /* .sw-sub lived here for the two branches of the unresolved undertone
+     question. The question is answered, there are no branches, and a rule
+     nothing uses is worse than no rule. */
 
   /* Silhouette rules — the rule reads as a heading, the reason underneath it. */
   .rule{padding:12px 16px;border-bottom:1px solid var(--line)}
@@ -129,10 +156,49 @@
     color:var(--muted);line-height:1.55}
   .rev p strong{color:var(--text)}
 
+  /* Progressive disclosure, same shape the skincare page already uses. What
+     goes in here is the read-once justification — why a recommendation was
+     changed, how well supported it is. Real reference content never folds:
+     hiding a colour or a measurement behind a tap would defeat the page. */
+  details.fold{border-top:1px solid var(--line);background:var(--surface-2)}
+  details.fold summary{
+    min-height:var(--tap);display:flex;align-items:center;gap:9px;
+    padding:11px 16px;cursor:pointer;list-style:none;
+    font-family:var(--f-data);font-size:15px;font-weight:600;color:var(--muted);
+  }
+  details.fold summary::-webkit-details-marker{display:none}
+  details.fold summary::after{
+    content:"";margin-left:auto;width:8px;height:8px;flex:none;
+    border-right:2px solid var(--muted2);border-bottom:2px solid var(--muted2);
+    transform:rotate(45deg);transition:transform .18s ease;
+  }
+  details.fold[open] summary{color:var(--text)}
+  details.fold[open] summary::after{transform:rotate(-135deg)}
+  details.fold summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  details.fold .rev{border-top:none;padding-top:0}
+  details.fold .note{border-top:none}
+
+  /* An intro paragraph belonging to a .sw-label section. Was an inline style
+     repeated at three call sites. */
+  .sect-note{font-family:var(--f-read);font-size:14.5px;color:var(--muted);
+    line-height:1.55;padding:2px 16px 4px}
+
   /* Seasons — one sub-card per calendar season, inside the wardrobe card. */
   .season{padding:13px 16px;border-bottom:1px solid var(--line)}
   .season:last-child{border-bottom:none}
-  .season-h{font-size:15.5px;font-weight:700;display:flex;align-items:baseline;gap:8px}
+  /* Style is the only module with no notion of "today", which is why it is
+     absent from the Today screen. The wardrobe is the one place a date does
+     mean something, so the current season is marked — cheap, and it turns
+     four blocks of text into one answer plus three for reference. */
+  .season.now{background:var(--surface-2)}
+  .season-h{font-size:15.5px;font-weight:700;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .season-h .now-pill{
+    /* 13px, the secondary floor. The .pi-status pill nearby is 12px and
+       predates the rule; new markup holds it. */
+    font-family:var(--f-data);font-size:13px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 8px;border-radius:20px;
+    background:var(--accent);color:var(--bg);
+  }
   .season-h .heading{font-family:var(--f-read);font-style:italic;font-weight:400;font-size:13.5px;color:var(--muted2)}
   .season dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}
   .season dt{font-family:var(--f-data);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2);white-space:nowrap}
@@ -166,6 +232,10 @@
   .outfitrow dd{margin:0;font-family:var(--f-read);font-size:14.5px;color:var(--text)}
   .outfitrow .or-empty{font-family:var(--f-read);font-size:14px;font-style:italic;color:var(--muted2);margin-top:4px}
 
+  /* Deliberately no scroll-behavior:smooth. This page is around fifteen
+     screens tall, so animating a jump from the index to Size is a couple of
+     seconds of blur on the way to somewhere you already chose. A jump link
+     should jump; the browser's Back button restores the previous position. */
   @media (prefers-reduced-motion:reduce){ * { transition:none !important } }
 </style>
 </head>
@@ -179,11 +249,11 @@
 <h1>Style</h1>
 <p class="sub">Direction, palette, silhouette, sizes — a lookup, not a checklist.</p>
 
-<div id="stage"></div>
+<main id="stage"></main>
 
 <script src="../app.js?v=3f8263a7"></script>
 <script>
-const S = {"_source": "Personal/12_Notizen/01_Style/*.md — transcribed 2026-09-05.", "_revised": "2026-09-05, same day: the transcription was faithful but the notes were stale. The two color-analysis files contradicted each other, the chino plan prescribed a Western-preppy slim cut that works against the stated goal, and nothing in the folder said what the target register actually is. This file now carries both layers and says which is which: fields marked as facts (size, brands) are still transcription; direction, palette, silhouette, hair and buyNext are a styling judgement made against photographs, and can be argued with.", "_excluded": "Appearance.md from the same folder is deliberately never transcribed here or anywhere in this repo: it names real people and must never enter a public project.", "_gaps": ["OPEN TEST — undertone. Hold something gold and then something silver, palm-sized or larger, directly under the chin. Daylight at a window, all lamps off, exposure locked. Watch the skin under the jaw, not the metal: gold better = Dark Autumn, silver better = Dark Winter, no clear winner = neutral, in which case `core` is the whole palette. Until then `palette.conditional` stays unresolved. Nothing on `buyNext` depends on the answer as long as charcoal is taken over camel and cream.", "The wardrobe direction is written against photographs, not a fitting. Anything about how a specific garment actually falls on him is unverified until something is tried on.", "Outfit_Planner.md carried one entry, on Monday: white chunky sweater, 90s light denim, loafers, gold small hoop earrings, trench coat. It is kept here rather than in his planner because the earrings and the chunky-knit-plus-trench combination read as someone else's outfit — possibly Eunice's, possibly saved inspiration. Nothing is lost; it just should not stand as Philipp's Monday until he confirms it.", "Trouser model names shift every season. The chino plan holds the brands and the cut; the specific SKUs in the original note are already partly superseded and should be re-checked in store rather than trusted here."], "philipp": {"direction": {"register": "Deep, structured, unbranded", "thesis": "Hair-led, silhouette-second, logo-never. Most of the effect is settled at the head before a garment is touched; the clothes then hold a vertical, tonal column with a defined shoulder. Nothing here depends on being thin — it depends on line.", "builtFrom": "Three facts about him, not a look: colouring that is Dark and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the palette, the trouser cut, and how far the styling may mature. Everything else follows from them.", "onTheOriginalFraming": "This was first written in Korean-actor vocabulary, because that is what was asked for. Almost none of it actually depended on that — the palette comes from his colouring, the cut from his measurements, the hair from his face shape. The label was dropped on request; the substance did not change.", "ageRead": "Reads early-to-mid 30s in photographs, not 43: full hairline, even skin tone, no deep static lines. The clothes are currently the oldest thing in the picture. That widens the range rather than narrowing it — the limiter is context (school, parent evenings, Germany), not the birth year, and over-mature styling would hand back years the face has not lost.", "notThis": {"register": "Costume", "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."}, "referencesNote": "These are visual shorthand, not a destination. They are useful because their colouring and build sit close to his, so what works on them transfers directly — not because the goal is to look Korean.", "references": [{"name": "Gong Yoo", "why": "Closest thing to a template: structured ease, volume in the hair, tonal and quiet."}, {"name": "Hyun Bin", "why": "Same age bracket, and the coat-over-knit silhouette is near-exactly the target."}, {"name": "Park Seo-joon", "why": "For the younger read the face actually supports — relaxed tailoring, nothing costume about it."}], "readOfCurrentPhotos": "Four photographs, four sets of functional clothing: sport tee, polo, sport tee, printed sweatshirt. Not a taste problem — a control problem. Nothing in the set is a chosen silhouette. What already works: the gum-sole Sambas, and navy, which appears in three of four and flatters in all three. What works against him: the printed sweatshirt (busy, boxy, adds volume exactly where the training is removing it) and visible athletic branding outside the gym."}, "hair": {"priority": "The single biggest lever — roughly 60% of the effect is decided before any garment is chosen. Hair either rounds the face or lengthens it, and nothing worn below the collar can undo that.", "current": "Short, flat on top, growing forward, no taper at the sides and no volume at the crown. It rounds the face and takes height away.", "cut": "Two-block — 7–10 cm on top, sides tapered rather than shaved. If the name does not land at the barber, ask for length and volume on top with the sides tapered short but not clipped.", "shape": "Soft side sweep or a loose middle part, with lift at the crown", "color": "One step softer than the current hard black: dark brown with a warm undertone", "product": "Matte clay, not gel. Blow-dry lift from underneath first — glossy is a decade out of date.", "why": "Vertical lift lengthens the face and gives the jaw its line back. Hard black next to skin raises contrast and sharpens every irregularity; shaved sides would read harder than intended and add years the face has not earned."}, "palette": {"type": "Dark — deep and high-contrast. Undertone open, leaning warm.", "confidence": "Depth and contrast: established. Undertone: about 60/40 toward warm, which is a leaning and not a diagnosis. Splitting Dark Autumn from Dark Winter needs a controlled gold-versus-silver comparison held at the face, and none of the photographs so far carries one.", "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it. This is the half that decides most of the wardrobe, and it is settled.", "open": "Warm versus cool. The two candidates are Dark Autumn and Dark Winter. Both are Dark seasons and share most of their palette, which is why this stays open without blocking anything: see `core` for what holds either way.", "rule": "Low contrast within an outfit, deep tones throughout. Depth is the rule that carries; the undertone only decides the edges.", "core": [{"name": "Navy", "hex": "#1F2A44"}, {"name": "Charcoal", "hex": "#3A3F47"}, {"name": "Black", "hex": "#16181C"}, {"name": "Forest", "hex": "#2E4535"}, {"name": "Deep olive", "hex": "#4A503A"}, {"name": "Burgundy", "hex": "#6B2233"}], "conditional": {"note": "These depend on the open undertone question. Buy from `core` until it is settled; these are the two ways the edges could go.", "ifWarm": [{"name": "Camel", "hex": "#A8825A"}, {"name": "Chocolate", "hex": "#4A3728"}, {"name": "Rust", "hex": "#9C4A2A"}, {"name": "Cream", "hex": "#EFE7D8"}], "ifCool": [{"name": "Emerald", "hex": "#0F5C4A"}, {"name": "Sapphire", "hex": "#1B3F7A"}, {"name": "True white", "hex": "#FFFFFF"}, {"name": "Deep berry", "hex": "#7A1140"}]}, "avoid": [{"name": "Fuchsia", "hex": "#E4409B", "why": "Out for both — too light and too bright against this depth"}, {"name": "Apple green", "hex": "#8DC63F", "why": "Same reason: brightness, not undertone"}, {"name": "Lemon yellow", "hex": "#F2E85C", "why": "Light and bright — disappears next to near-black hair"}, {"name": "Ice pink", "hex": "#F5D3DE", "why": "Pale and washed — the opposite of a Dark palette"}, {"name": "Mid grey", "hex": "#9AA0A8", "why": "Not wrong, just inert — mid tones flatten a high-contrast face. Go darker."}]}, "silhouette": {"rules": [{"rule": "Straight leg, mid-to-high rise", "why": "Hip 105 cm over waist 80 cm is a 25 cm drop. A slim cut pulls at the seat and advertises exactly the ratio the training is working on; straight falls clear of the hip and lengthens the leg."}, {"rule": "Defined shoulder line", "why": "The taper is being built in the gym. Outerwear with a real shoulder seam — overshirt, coat, unstructured blazer — anticipates it instead of waiting for it."}, {"rule": "Tonal column, top to bottom", "why": "One depth of colour head to foot reads as height. Splitting light-over-dark cuts the body in half at the waist, which is the one place not to draw a line."}, {"rule": "Outerwear to the knee, single-breasted", "why": "A long unbroken vertical is the most reliable lengthening device there is. Double-breasted adds width across the chest and works against it."}, {"rule": "No visible branding outside the gym", "why": "Sport logos say 'on the way to train'. The clothes should not be doing that when the destination is a classroom."}, {"rule": "Relaxed, never skinny — and never baggy", "why": "Easy through the leg, clean at the line. Tight reads dated and fights the hip; oversized reads borrowed and loses the shoulder the whole silhouette is built on."}]}, "buyNext": [{"item": "Overshirt / shirt jacket", "colors": "Charcoal or deep olive", "why": "Replaces the printed sweatshirt outright. The slight shoulder structure does work a sweatshirt physically cannot, and it goes over anything already in the wardrobe."}, {"item": "Fine-gauge merino knit, crew or mock neck", "colors": "Navy, charcoal", "why": "The base layer the whole tonal column is built on. Uniqlo is already on the brand list and their merino is exactly the right weight."}, {"item": "Straight-leg trousers, mid-to-high rise", "colors": "Charcoal — safe whichever way the undertone goes. Cream only once it is settled warm.", "why": "The actual silhouette change. This is the piece that does more than the other four combined."}, {"item": "Single-breasted coat, knee length", "colors": "Charcoal — safe either way. Camel only once the undertone is settled warm.", "why": "The signature garment of the reference set, and it works unchanged from a school corridor to an evening out."}, {"item": "One clean leather shoe beside the Sambas", "colors": "Dark brown", "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8."}], "seasonalWardrobe": {"note": "Rewritten 2026-09-05 into the target register. The original was generic Autumn-type advice; this is the same four-season structure with the resolved palette and the straight-leg correction applied.", "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, and a defined shoulder on whatever is outermost.", "seasons": [{"season": "Spring", "heading": "Light layers, one tone", "tops": "Fine merino or cotton knit in navy or cream, worn under rather than alone", "outerwear": "Overshirt or unlined coach jacket in deep olive or charcoal", "bottoms": "Straight chinos in cream or stone", "shoes": "Sambas, or a dark brown derby when the day needs it"}, {"season": "Summer", "heading": "Cut, not exposure", "tops": "Boxy-but-clean linen or linen-blend shirt in cream or slate blue, short sleeve with a proper shoulder seam", "bottoms": "Straight trousers in stone, or wide-leg shorts to just above the knee — not sport shorts", "accessories": "Dark tortoise or brown-lens sunglasses", "shoes": "Clean white leather sneaker or a woven loafer"}, {"season": "Autumn", "heading": "The strongest season for this palette", "tops": "Merino crew or mock neck in chocolate, forest or burgundy", "outerwear": "Overshirt layered under a camel or charcoal coat", "bottoms": "Straight trousers in charcoal, or dark denim with no fading", "shoes": "Dark brown chelsea or derby"}, {"season": "Winter", "heading": "Long lines, deep tones", "tops": "Heavier knit in navy or charcoal, mock or turtleneck", "outerwear": "Knee-length single-breasted wool coat, charcoal or camel", "bottoms": "Straight wool-blend trousers in charcoal or black", "shoes": "Lined dark brown boot"}]}, "chinoPlan": {"goal": "End goal: capsule wardrobe largely in Ralph Lauren — collector's brand, kept because it means something to him, not because the styling requires it", "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium)", "fit": "Straight leg, mid-to-high rise. Ask for the straight or relaxed cut by fit, not by model name.", "revision": {"date": "2026-09-05", "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Brands and the Ralph Lauren end goal stand.", "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. Only the cut changed."}, "purchases": [{"brand": "Dockers", "model": "Ultimate Chino — straight fit (not the slim the original note listed)", "colors": "Charcoal, Navy, Stone", "priceNew": "€40–50", "whereNew": "Dockers DE, Zalando, Amazon.de", "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"", "status": "Planned"}, {"brand": "Suitsupply", "model": "Ask for the wider chino cut in store — Brescia is their slim block", "colors": "Stone, Navy, Charcoal", "priceNew": "~€119", "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)", "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in the listing photos, not the model name", "status": "Planned"}, {"brand": "Ralph Lauren", "model": "Stretch Chino — straight or relaxed, not the slim fit", "colors": "Classic Khaki, Navy, Charcoal, Cream", "priceNew": "€120–150 (outlet/Vinted often €80–100)", "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)", "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"", "status": "End goal"}], "roadmap": [{"phase": "Phase 1 — Now", "item": "Dockers Ultimate Chino, straight", "colors": "Charcoal or Navy", "purpose": "Everyday, school — the cheapest way to test whether the straight cut reads better on him before spending real money", "status": "Planned"}, {"phase": "Phase 2 — Once the cut is confirmed", "item": "Suitsupply chino, wider block", "colors": "Stone or Navy", "purpose": "Smart casual, and the first one where the fabric shows", "status": "Planned"}, {"phase": "Phase 3 — 1–2 years", "item": "Ralph Lauren Stretch Chino, straight", "colors": "Classic Khaki + Navy", "purpose": "Prestige, parent evenings, events", "status": "Planned"}, {"phase": "Phase 4 — End goal", "item": "Ralph Lauren Stretch Chino, straight", "colors": "Charcoal, Cream, possibly Olive", "purpose": "Complete the capsule", "status": "End goal"}]}, "brands": [{"name": "Charles Tyrwhitt", "category": "Shirts", "note": "Stands — collar 38, extra slim fit already established"}, {"name": "Suitsupply", "category": "Suits, chinos", "note": "Stands for tailoring; take the wider chino block, not Brescia"}, {"name": "Uniqlo", "category": "Knitwear", "note": "Now the most important name on this list — the merino line is the tonal base layer"}, {"name": "Eterna", "category": "Silk ties"}, {"name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the dark brown derby or chelsea comes from here"}, {"name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. The branded sport tees stay in the gym."}, {"name": "Levi's", "category": "Jeans — Denim 511 Slim", "note": "511 is a slim cut; the straight-leg correction applies here too when it is replaced"}, {"name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit", "note": "Superseded by the fit revision"}, {"name": "Burberry", "category": null}, {"name": "Villeroy und Boch", "category": "Porcelain (not clothing)"}], "size": {"_note": "Transcribed facts, unrevised. The waist figure was corrected on 2026-09-05: the source lists Bauch 87 and Taille 80 separately, and the first transcription kept only the 87.", "collar": "38 cm", "shoulder": "46 cm", "chest": "96 cm", "belly": "87 cm", "waist": "80 cm", "hip": "105 cm", "armLength": "83 cm", "sleeveLength": "61 cm", "shirtLength": "67 cm", "notes": ["Extra Slim Fit — Tyrwhitt 38 business shirt, casual size S", "31/32 Regular Fit — Boss Orange chino", "Shoes: 26 cm foot = EU 42.6–43.3 at Adidas, EU 43 at Nike", "Shoepassion size 8", "Waist 80 to hip 105 is a 25 cm drop — the single measurement that decides the trouser cut"]}, "outfitPlanner": {"note": "Empty on purpose. The one entry the source carried is parked in _gaps until it is confirmed as his.", "days": [{"day": "Monday"}, {"day": "Tuesday"}, {"day": "Wednesday"}, {"day": "Thursday"}, {"day": "Friday"}, {"day": "Saturday"}, {"day": "Sunday"}]}}, "eunice": null};
+const S = {"philipp": {"direction": {"register": "Deep, structured, unbranded", "thesis": "Hair-led, silhouette-second, logo-never. Most of the effect is settled at the head before a garment is touched; the clothes then hold a vertical, tonal column with a defined shoulder. Nothing here depends on being thin — it depends on line.", "builtFrom": "Three facts about him, not a look: colouring that is Dark and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the palette, the trouser cut, and how far the styling may mature. Everything else follows from them.", "onTheOriginalFraming": "This was first written in Korean-actor vocabulary, because that is what was asked for. Almost none of it actually depended on that — the palette comes from his colouring, the cut from his measurements, the hair from his face shape. The label was dropped on request; the substance did not change.", "ageRead": "Reads early-to-mid 30s in photographs, not 43: full hairline, even skin tone, no deep static lines. The clothes are currently the oldest thing in the picture. That widens the range rather than narrowing it — the limiter is context (school, parent evenings, Germany), not the birth year, and over-mature styling would hand back years the face has not lost.", "notThis": {"register": "Costume", "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."}, "referencesNote": "These are visual shorthand, not a destination. They are useful because their colouring and build sit close to his, so what works on them transfers directly — not because the goal is to look Korean.", "references": [{"name": "Gong Yoo", "why": "Closest thing to a template: structured ease, volume in the hair, tonal and quiet."}, {"name": "Hyun Bin", "why": "Same age bracket, and the coat-over-knit silhouette is near-exactly the target."}, {"name": "Park Seo-joon", "why": "For the younger read the face actually supports — relaxed tailoring, nothing costume about it."}], "readOfCurrentPhotos": "Four photographs, four sets of functional clothing: sport tee, polo, sport tee, printed sweatshirt. Not a taste problem — a control problem. Nothing in the set is a chosen silhouette. What already works: the gum-sole Sambas, and navy, which appears in three of four and flatters in all three. What works against him: the printed sweatshirt (busy, boxy, adds volume exactly where the training is removing it) and visible athletic branding outside the gym."}, "hair": {"priority": "The single biggest lever — roughly 60% of the effect is decided before any garment is chosen. Hair either rounds the face or lengthens it, and nothing worn below the collar can undo that.", "current": "Short, flat on top, growing forward, no taper at the sides and no volume at the crown. It rounds the face and takes height away.", "cut": "Two-block — 7–10 cm on top, sides tapered rather than shaved. If the name does not land at the barber, ask for length and volume on top with the sides tapered short but not clipped.", "shape": "Soft side sweep or a loose middle part, with lift at the crown", "color": "Leave it. Near-black is a Dark Winter's own colour and the high contrast against the skin is the asset. If it is ever touched, a cool dark brown — ash or espresso, never caramel or warm brown.", "product": "Matte clay, not gel. Blow-dry lift from underneath first — glossy is a decade out of date.", "why": "Vertical lift lengthens the face and gives the jaw its line back; shaved sides would read harder than intended and add years the face has not earned. The colour advice here used to say the opposite — soften the black to a warm brown — and the undertone test overturned it. That recommendation was warm-season reasoning applied to cool skin, and it was the one thing in this file genuinely riding on the answer. The cut is unaffected: it comes from face shape, not colouring."}, "palette": {"type": "Dark Winter — deep, high-contrast, cool", "confidence": "Settled, both halves. Depth and contrast were never in doubt; the undertone was, and the gold-versus-silver test answered it on 2026-09-05 — silver clearly better, gold a definite no. That is the one comparison photographs cannot make, which is why this file spent a day refusing to guess it. It is now the strongest-supported claim in here, and it is his own read rather than an inference from a picture.", "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it.", "resolved": "Cool. Silver at the face reads clean; gold pulls yellow into the skin. Dark Winter, not Dark Autumn — so the deep colours stay, the warm neutrals go, and the contrast that a softer season would have tried to tone down is the thing to lean into instead.", "rule": "Deep tones throughout, and let the contrast stand. Black is a real neutral here, mid tones are not, and every neutral in the wardrobe should be cool: charcoal and true white, never stone and cream.", "metal": "Silver, steel, white gold, gunmetal. This is the direct output of the test rather than a separate opinion, and it is the cheapest rule in the file to follow: watch, belt buckle, glasses frames, any ring. Gold sits at the wrist and the face, which is exactly where a wrong metal shows.", "core": [{"name": "Black", "hex": "#16181C"}, {"name": "Navy", "hex": "#1F2A44"}, {"name": "Charcoal", "hex": "#3A3F47"}, {"name": "True white", "hex": "#FFFFFF"}, {"name": "Forest", "hex": "#2E4535"}, {"name": "Burgundy", "hex": "#6B2233"}], "accent": {"note": "Unlocked by the test. These were the cool half of the old conditional block; they are now simply part of the palette, and they are where colour is allowed to happen in an otherwise very dark wardrobe.", "colors": [{"name": "Emerald", "hex": "#0F5C4A"}, {"name": "Sapphire", "hex": "#1B3F7A"}, {"name": "Deep berry", "hex": "#7A1140"}, {"name": "Icy blue", "hex": "#BFD4E8"}]}, "ruledOut": {"note": "Taken away by the test. Not wrong on anyone — wrong next to cool skin, where each of these turns the face sallow rather than the garment bad.", "colors": [{"name": "Camel", "hex": "#A8825A", "why": "The coat colour the plan used to hedge on. Charcoal takes the job."}, {"name": "Cream", "hex": "#EFE7D8", "why": "Replaced by true white, which does the same job cool."}, {"name": "Stone / khaki", "hex": "#C2B49A", "why": "The default chino colour, and the reason the roadmap changed. Navy and charcoal instead."}, {"name": "Chocolate", "hex": "#4A3728", "why": "Warm brown near the face is the exact mismatch the test found."}, {"name": "Rust", "hex": "#9C4A2A", "why": "Autumn's signature and the clearest single tell of the wrong season."}, {"name": "Deep olive", "hex": "#4A503A", "why": "The one colour that moved out of core. Olive is a warm neutral; forest does the same work cool."}]}, "avoid": [{"name": "Fuchsia", "hex": "#E4409B", "why": "Too light and too bright against this depth — this was never an undertone question"}, {"name": "Apple green", "hex": "#8DC63F", "why": "Same reason: brightness. Cool it further and it is still wrong."}, {"name": "Lemon yellow", "hex": "#F2E85C", "why": "Light and bright — disappears next to near-black hair"}, {"name": "Ice pink", "hex": "#F5D3DE", "why": "Pale and washed — the opposite of a Dark palette"}, {"name": "Mid grey", "hex": "#9AA0A8", "why": "Not wrong, just inert — mid tones flatten a high-contrast face. Go darker."}]}, "silhouette": {"rules": [{"rule": "Straight leg, mid-to-high rise", "why": "Hip 105 cm over waist 80 cm is a 25 cm drop. A slim cut pulls at the seat and advertises exactly the ratio the training is working on; straight falls clear of the hip and lengthens the leg."}, {"rule": "Defined shoulder line", "why": "The taper is being built in the gym. Outerwear with a real shoulder seam — overshirt, coat, unstructured blazer — anticipates it instead of waiting for it."}, {"rule": "Tonal column, top to bottom", "why": "One depth of colour head to foot reads as height. Splitting light-over-dark cuts the body in half at the waist, which is the one place not to draw a line."}, {"rule": "Outerwear to the knee, single-breasted", "why": "A long unbroken vertical is the most reliable lengthening device there is. Double-breasted adds width across the chest and works against it."}, {"rule": "No visible branding outside the gym", "why": "Sport logos say 'on the way to train'. The clothes should not be doing that when the destination is a classroom."}, {"rule": "Relaxed, never skinny — and never baggy", "why": "Easy through the leg, clean at the line. Tight reads dated and fights the hip; oversized reads borrowed and loses the shoulder the whole silhouette is built on."}]}, "buyNext": [{"item": "Overshirt / shirt jacket", "colors": "Charcoal or forest — forest replaces the deep olive this used to say", "why": "Replaces the printed sweatshirt outright. The slight shoulder structure does work a sweatshirt physically cannot, and it goes over anything already in the wardrobe."}, {"item": "Fine-gauge merino knit, crew or mock neck", "colors": "Navy, charcoal", "why": "The base layer the whole tonal column is built on. Uniqlo is already on the brand list and their merino is exactly the right weight."}, {"item": "Straight-leg trousers, mid-to-high rise", "colors": "Charcoal first, navy second. Not stone, not cream — those were the hedge and the test removed them.", "why": "The actual silhouette change. This is the piece that does more than the other four combined."}, {"item": "Single-breasted coat, knee length", "colors": "Charcoal, or navy. Camel is out — that hedge is now decided against it.", "why": "The signature garment of the reference set, and it works unchanged from a school corridor to an evening out."}, {"item": "One clean leather shoe beside the Sambas", "colors": "Black, or espresso if a softer option is wanted — never tan or cognac", "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8. This one changed with the test: brown was the default answer, black is the Dark Winter answer, and it also happens to be the shoe that goes with a charcoal coat and charcoal trousers."}], "seasonalWardrobe": {"note": "Rewritten 2026-09-05 into the target register, then corrected the same day when the undertone test came back cool. The original was generic Autumn-type advice and the first rewrite still carried its neutrals — cream, stone, camel, chocolate, tortoise, dark brown. All of them are gone. The four-season structure, the straight-leg correction and the tonal-column rule are unchanged.", "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, a defined shoulder on whatever is outermost, and every neutral cool — charcoal and true white doing the work stone and cream used to.", "seasons": [{"season": "Spring", "heading": "Light layers, one tone", "tops": "Fine merino or cotton knit in navy or true white, worn under rather than alone", "outerwear": "Overshirt or unlined coach jacket in forest or charcoal", "bottoms": "Straight chinos in charcoal or navy", "shoes": "Sambas, or a black derby when the day needs it"}, {"season": "Summer", "heading": "Cut, not exposure", "tops": "Boxy-but-clean linen or linen-blend shirt in true white or sapphire, short sleeve with a proper shoulder seam", "bottoms": "Straight trousers in charcoal or navy, or wide-leg shorts to just above the knee — not sport shorts", "accessories": "Sunglasses in black or dark grey with a grey lens. Tortoise is a warm frame and sits at the face, which is the one place the undertone actually matters.", "shoes": "Clean white leather sneaker or a black loafer"}, {"season": "Autumn", "heading": "Deep tones, before the coats come out", "tops": "Merino crew or mock neck in forest, burgundy or deep berry", "outerwear": "Overshirt layered under a charcoal or navy coat", "bottoms": "Straight trousers in charcoal, or dark denim with no fading", "shoes": "Black chelsea or derby"}, {"season": "Winter", "heading": "The strongest season for this palette", "tops": "Heavier knit in navy, charcoal or emerald, mock or turtleneck", "outerwear": "Knee-length single-breasted wool coat in charcoal or black", "bottoms": "Straight wool-blend trousers in charcoal or black", "shoes": "Lined black boot"}]}, "chinoPlan": {"goal": "End goal: capsule wardrobe largely in Ralph Lauren — collector's brand, kept because it means something to him, not because the styling requires it", "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium)", "fit": "Straight leg, mid-to-high rise. Ask for the straight or relaxed cut by fit, not by model name.", "revision": {"date": "2026-09-05", "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Colours corrected the same day, after the undertone test: stone and Classic Khaki out, navy and charcoal in. Brands and the Ralph Lauren end goal stand.", "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. The colour change rests on the gold-versus-silver test, and it costs something real: khaki is Ralph Lauren's signature and the reason half the catalogue looks the way it does. It is still the wrong neutral for cool skin, and their navy and charcoal are the same trouser."}, "purchases": [{"brand": "Dockers", "model": "Ultimate Chino — straight fit (not the slim the original note listed)", "colors": "Charcoal, Navy, Black", "priceNew": "€40–50", "whereNew": "Dockers DE, Zalando, Amazon.de", "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"", "status": "Planned"}, {"brand": "Suitsupply", "model": "Ask for the wider chino cut in store — Brescia is their slim block", "colors": "Navy, Charcoal, Black", "priceNew": "~€119", "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)", "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in the listing photos, not the model name", "status": "Planned"}, {"brand": "Ralph Lauren", "model": "Stretch Chino — straight or relaxed, not the slim fit", "colors": "Navy, Charcoal, Black. Not Classic Khaki — their signature colour is the one this palette cannot take.", "priceNew": "€120–150 (outlet/Vinted often €80–100)", "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)", "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"", "status": "End goal"}], "roadmap": [{"phase": "Phase 1 — Now", "item": "Dockers Ultimate Chino, straight", "colors": "Charcoal or Navy", "purpose": "Everyday, school — the cheapest way to test whether the straight cut reads better on him before spending real money", "status": "Planned"}, {"phase": "Phase 2 — Once the cut is confirmed", "item": "Suitsupply chino, wider block", "colors": "Navy or Charcoal", "purpose": "Smart casual, and the first one where the fabric shows", "status": "Planned"}, {"phase": "Phase 3 — 1–2 years", "item": "Ralph Lauren Stretch Chino, straight", "colors": "Navy + Charcoal", "purpose": "Prestige, parent evenings, events", "status": "Planned"}, {"phase": "Phase 4 — End goal", "item": "Ralph Lauren Stretch Chino, straight", "colors": "Black, Charcoal, possibly Forest", "purpose": "Complete the capsule", "status": "End goal"}]}, "brands": [{"name": "Charles Tyrwhitt", "category": "Shirts", "note": "Stands — collar 38, extra slim fit already established"}, {"name": "Suitsupply", "category": "Suits, chinos", "note": "Stands for tailoring; take the wider chino block, not Brescia"}, {"name": "Uniqlo", "category": "Knitwear", "note": "Now the most important name on this list — the merino line is the tonal base layer"}, {"name": "Eterna", "category": "Silk ties"}, {"name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the black derby or chelsea comes from here. Was dark brown until the undertone test."}, {"name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. The branded sport tees stay in the gym."}, {"name": "Levi's", "category": "Jeans — Denim 511 Slim", "note": "511 is a slim cut; the straight-leg correction applies here too when it is replaced"}, {"name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit", "note": "Superseded by the fit revision"}, {"name": "Burberry", "category": null}, {"name": "Villeroy und Boch", "category": "Porcelain (not clothing)"}], "size": {"collar": "38 cm", "shoulder": "46 cm", "chest": "96 cm", "belly": "87 cm", "waist": "80 cm", "hip": "105 cm", "armLength": "83 cm", "sleeveLength": "61 cm", "shirtLength": "67 cm", "notes": ["Extra Slim Fit — Tyrwhitt 38 business shirt, casual size S", "31/32 Regular Fit — Boss Orange chino", "Shoes: 26 cm foot = EU 42.6–43.3 at Adidas, EU 43 at Nike", "Shoepassion size 8", "Waist 80 to hip 105 is a 25 cm drop — the single measurement that decides the trouser cut"]}, "outfitPlanner": {"note": "Empty on purpose. The source carried a single day, and it reads as someone else's outfit — it is held back in the repo notes until he confirms it is his.", "days": [{"day": "Monday"}, {"day": "Tuesday"}, {"day": "Wednesday"}, {"day": "Thursday"}, {"day": "Friday"}, {"day": "Saturday"}, {"day": "Sunday"}]}}, "eunice": null};
 
 function esc(s){
   return String(s == null ? "" : s)
@@ -194,6 +264,27 @@ function esc(s){
 function person(){ return PW.get(); }
 function profile(){ return S[person()]; }
 
+/* Card functions return a card's INSIDE — head plus body. renderStage wraps
+   each one in its <section> and derives the anchor id from the nav label, so
+   the jump bar and the cards cannot disagree about what a section is called
+   or whether it exists. Both arguments are HTML and are escaped by callers,
+   because most titles are a literal joined to an escaped value. */
+function head(title, intro){
+  return '<div class="ref-head"><h2 class="ref-title">' + title + '</h2>' +
+    (intro ? '<div class="ref-intro">' + intro + '</div>' : '') + '</div>';
+}
+
+/* For the read-once material: why something was changed, how well supported a
+   call is. Never for a colour, a measurement or a rule. */
+function fold(label, inner){
+  if(!inner) return "";
+  return '<details class="fold"><summary>' + esc(label) + '</summary>' + inner + '</details>';
+}
+
+function slug(s){
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 /* The frame everything else is read through, so it comes first. */
 function directionCard(d){
   if(!d) return "";
@@ -202,10 +293,8 @@ function directionCard(d){
       '<div class="rp-w">' + esc(r.why) + '</div></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Direction — ' + esc(d.register) + '</div>' +
-    (d.thesis ? '<div class="ref-intro">' + esc(d.thesis) + '</div>' : '') +
-    '</div><div class="ref-body">' +
+  return head('Direction — ' + esc(d.register), d.thesis ? esc(d.thesis) : "") +
+    '<div class="ref-body">' +
     (d.builtFrom ? '<div class="ref-item"><div class="ref-item-k">Built from</div>' +
       '<div class="ref-item-v">' + esc(d.builtFrom) + '</div></div>' : '') +
     (d.ageRead ? '<div class="ref-item"><div class="ref-item-k">Age read</div>' +
@@ -215,17 +304,19 @@ function directionCard(d){
     '</div>' +
     (refs
       ? '<div class="sw-label">Reference</div>' +
-        (d.referencesNote ? '<div class="rule-w" style="padding:0 16px 6px">' + esc(d.referencesNote) + '</div>' : '') +
+        (d.referencesNote ? '<div class="sect-note">' + esc(d.referencesNote) + '</div>' : '') +
         refs
       : '') +
-    (d.onTheOriginalFraming
-      ? '<div class="rev"><div class="rev-t">On the framing</div><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
-      : '') +
+    /* "Not this" stays open — it is a rule about what to avoid, which is
+       lookup content. The note about how this file came to be written is
+       not, and folds. */
     (d.notThis
       ? '<div class="rev"><div class="rev-t">Not this — ' + esc(d.notThis.register) + '</div>' +
         '<p>' + esc(d.notThis.why) + '</p></div>'
       : '') +
-    '</div>';
+    fold("How this was framed", d.onTheOriginalFraming
+      ? '<div class="rev"><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
+      : "");
 }
 
 /* Its own card rather than a line in Direction, because it is the one change
@@ -240,12 +331,12 @@ function hairCard(h){
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Hair — the biggest lever</div>' +
-    (h.priority ? '<div class="ref-intro">' + esc(h.priority) + '</div>' : '') +
-    '</div><div class="ref-body">' + rows + '</div>' +
-    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '') +
-    '</div>';
+  return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "") +
+    '<div class="ref-body">' + rows + '</div>' +
+    /* The reasoning stays open here on purpose: this card asks him to go to a
+       barber and say something specific, and the why is what makes that
+       worth doing. */
+    (h.why ? '<div class="note">' + esc(h.why) + '</div>' : '');
 }
 
 function swatches(list, withWhy){
@@ -261,34 +352,36 @@ function swatches(list, withWhy){
 function paletteCard(p){
   if(!p) return "";
 
-  /* Split deliberately: what is settled sits above what is still a coin toss,
-     and the conditional block says outright that it is unresolved rather than
-     presenting two half-palettes as if either were the answer. */
-  var cond = "";
-  if(p.conditional){
-    var c = p.conditional;
-    cond = '<div class="sw-label">Depends on the undertone</div>' +
-      (c.note ? '<div class="rule-w" style="padding:0 16px 4px">' + esc(c.note) + '</div>' : '') +
-      (c.ifWarm ? '<div class="sw-sub">If warm — Dark Autumn</div>' + swatches(c.ifWarm, false) : '') +
-      (c.ifCool ? '<div class="sw-sub">If cool — Dark Winter</div>' + swatches(c.ifCool, false) : '');
+  /* The undertone used to be an open question and this card used to say so,
+     showing two half-palettes side by side under "if warm" / "if cool". The
+     gold-versus-silver test settled it cool, so the shape changed with the
+     answer: one palette, then the colours the answer took away. Keeping the
+     ruled-out list visible is the point — camel and stone are what he would
+     otherwise reach for, so the card has to say why they are gone, not just
+     omit them. */
+  function group(g, label, withWhy){
+    if(!g || !g.colors) return "";
+    return '<div class="sw-label">' + esc(label) + '</div>' +
+      (g.note ? '<div class="sect-note">' + esc(g.note) + '</div>' : '') +
+      swatches(g.colors, withWhy);
   }
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Palette — ' + esc(p.type) + '</div>' +
-    (p.rule ? '<div class="ref-intro">' + esc(p.rule) + '</div>' : '') +
-    '</div><div class="ref-body">' +
-    (p.established ? '<div class="ref-item"><div class="ref-item-k">Settled</div>' +
+  return head('Palette — ' + esc(p.type), p.rule ? esc(p.rule) : "") +
+    '<div class="ref-body">' +
+    (p.established ? '<div class="ref-item"><div class="ref-item-k">Colouring</div>' +
       '<div class="ref-item-v">' + esc(p.established) + '</div></div>' : '') +
-    (p.open ? '<div class="ref-item"><div class="ref-item-k">Still open</div>' +
-      '<div class="ref-item-v">' + esc(p.open) + '</div></div>' : '') +
+    (p.resolved ? '<div class="ref-item"><div class="ref-item-k">Undertone</div>' +
+      '<div class="ref-item-v">' + esc(p.resolved) + '</div></div>' : '') +
+    (p.metal ? '<div class="ref-item"><div class="ref-item-k">Metal</div>' +
+      '<div class="ref-item-v">' + esc(p.metal) + '</div></div>' : '') +
     '</div>' +
-    (p.core ? '<div class="sw-label">Core — safe either way</div>' + swatches(p.core, false) : '') +
-    cond +
-    (p.avoid ? '<div class="sw-label">Avoid</div>' + swatches(p.avoid, true) : '') +
-    (p.confidence
-      ? '<div class="rev"><div class="rev-t">Confidence</div><p>' + esc(p.confidence) + '</p></div>'
-      : '') +
-    '</div>';
+    (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
+    group(p.accent, "Accents", false) +
+    group(p.ruledOut, "Ruled out by the undertone test", true) +
+    (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
+    fold("How solid is this?", p.confidence
+      ? '<div class="rev"><p>' + esc(p.confidence) + '</p></div>'
+      : "");
 }
 
 function silhouetteCard(s){
@@ -297,10 +390,10 @@ function silhouetteCard(s){
     return '<div class="rule"><div class="rule-r">' + esc(r.rule) + '</div>' +
       '<div class="rule-w">' + esc(r.why) + '</div></div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Silhouette</div>' +
-    '<div class="ref-intro">Six rules. They do more work than any single garment.</div>' +
-    '</div>' + rules + '</div>';
+  /* The count came from counting the rules, so it is counted rather than
+     written down — the sentence used to say "six" and the array is data. */
+  return head('Silhouette', s.rules.length +
+    ' rules. They do more work than any single garment.') + rules;
 }
 
 function buyNextCard(list){
@@ -312,10 +405,16 @@ function buyNextCard(list){
       (b.why ? '<div class="p">' + esc(b.why) + '</div>' : '') +
       '</div></li>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Buy next</div>' +
-    '<div class="ref-intro">In this order. The order is the advice.</div>' +
-    '</div><ul class="buy">' + items + '</ul></div>';
+  return head('Buy next', 'In this order. The order is the advice.') +
+    '<ol class="buy">' + items + '</ol>';
+}
+
+/* Meteorological seasons, northern hemisphere — the boundaries a wardrobe
+   actually follows. Astronomical dates would put the first three weeks of
+   September in Summer, which is not what anyone wears. */
+function currentSeason(){
+  return ["Winter","Winter","Spring","Spring","Spring","Summer",
+          "Summer","Summer","Autumn","Autumn","Autumn","Winter"][new Date().getMonth()];
 }
 
 function seasonalWardrobeCard(w){
@@ -324,22 +423,23 @@ function seasonalWardrobeCard(w){
     ["tops", "Tops"], ["outerwear", "Outerwear"], ["bottoms", "Bottoms"],
     ["shoes", "Shoes"], ["accessories", "Accessories"]
   ];
+  var now = currentSeason();
   var seasons = (w.seasons || []).map(function(s){
+    var here = s.season === now;
     var dl = FIELDS.filter(function(f){ return s[f[0]]; }).map(function(f){
       return '<dt>' + esc(f[1]) + '</dt><dd>' + esc(s[f[0]]) + '</dd>';
     }).join("");
-    return '<div class="season"><div class="season-h">' + esc(s.season) +
+    return '<div class="season' + (here ? ' now' : '') + '"><div class="season-h">' +
+      esc(s.season) +
+      (here ? '<span class="now-pill">Now</span>' : '') +
       (s.heading ? '<span class="heading">' + esc(s.heading) + '</span>' : '') +
       '</div><dl>' + dl + '</dl></div>';
   }).join("");
 
-  return '<div class="ref-card"><div class="ref-head">' +
-    '<div class="ref-title">Seasonal wardrobe</div>' +
-    (w.paletteNote ? '<div class="ref-intro">' + esc(w.paletteNote) + '</div>' : '') +
-    '</div>' + seasons +
+  return head('Seasonal wardrobe', w.paletteNote ? esc(w.paletteNote) : "") +
+    seasons +
     (w.styleNote ? '<div class="note">' + esc(w.styleNote) + '</div>' : '') +
-    (w.note ? '<div class="note">' + esc(w.note) + '</div>' : '') +
-    '</div>';
+    fold("What changed here", w.note ? '<div class="note">' + esc(w.note) + '</div>' : "");
 }
 
 function brandsCard(brands){
@@ -349,7 +449,7 @@ function brandsCard(brands){
       (b.note ? '<div class="rule-w">' + esc(b.note) + '</div>' : '') + '</div>' +
       (b.category ? '<span class="bc">' + esc(b.category) + '</span>' : '') + '</div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Brands</div></div>' + rows + '</div>';
+  return head('Brands', 'Where the sizes are already known.') + rows;
 }
 
 function sizeCard(sz){
@@ -367,8 +467,8 @@ function sizeCard(sz){
   var notes = (sz.notes || []).map(function(n){
     return '<div class="note">' + esc(n) + '</div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Size</div></div>' +
-    '<div class="ref-body">' + rows + '</div>' + notes + '</div>';
+  return head('Size', 'The one card that gets opened in a shop.') +
+    '<div class="ref-body">' + rows + '</div>' + notes;
 }
 
 function chinoPlanCard(p){
@@ -391,19 +491,21 @@ function chinoPlanCard(p){
       '</div>';
   }).join("");
 
+  /* The change itself is one line and stays visible; the paragraph arguing
+     for it is what folds. Moved below the plan too — it used to sit between
+     the heading and the fit, so the first thing this card said was a note
+     about its own edit history. */
   var rev = p.revision
-    ? '<div class="rev"><div class="rev-t">Revised ' + esc(p.revision.date) + '</div>' +
-      '<p><strong>' + esc(p.revision.change) + '</strong></p>' +
-      '<p>' + esc(p.revision.why) + '</p></div>'
+    ? fold("Revised " + p.revision.date,
+        '<div class="rev"><p><strong>' + esc(p.revision.change) + '</strong></p>' +
+        '<p>' + esc(p.revision.why) + '</p></div>')
     : "";
 
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Chino plan</div>' +
-    '<div class="ref-intro">' + esc(p.goal) + '</div></div>' +
-    rev +
+  return head('Chino plan', esc(p.goal)) +
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
-    '</div>' + purchases + roadmap + '</div>';
+    '</div>' + purchases + roadmap + rev;
 }
 
 function outfitPlannerCard(op){
@@ -422,9 +524,7 @@ function outfitPlannerCard(op){
     return '<div class="outfitrow"><div class="or-day">' + esc(d.day) + '</div>' +
       '<div class="or-body">' + body + '</div></div>';
   }).join("");
-  return '<div class="ref-card"><div class="ref-head"><div class="ref-title">Outfit planner</div>' +
-    (op.note ? '<div class="ref-intro">' + esc(op.note) + '</div>' : '') +
-    '</div>' + rows + '</div>';
+  return head('Outfit planner', op.note ? esc(op.note) : "") + rows;
 }
 
 function renderStage(){
@@ -440,18 +540,31 @@ function renderStage(){
 
   /* Ordered by how much each one changes, not by how the source notes were
      filed: direction frames everything, hair outranks any garment, palette and
-     silhouette are the rules, and only then the things you actually buy. */
-  stage.innerHTML =
-    directionCard(p.direction) +
-    hairCard(p.hair) +
-    paletteCard(p.palette) +
-    silhouetteCard(p.silhouette) +
-    buyNextCard(p.buyNext) +
-    seasonalWardrobeCard(p.seasonalWardrobe) +
-    chinoPlanCard(p.chinoPlan) +
-    brandsCard(p.brands) +
-    sizeCard(p.size) +
-    outfitPlannerCard(p.outfitPlanner);
+     silhouette are the rules, and only then the things you actually buy.
+     The jump bar is what makes that order affordable — reading order stays
+     by importance, and Size is still one tap away. */
+  var CARDS = [
+    ["Direction",  directionCard(p.direction)],
+    ["Hair",       hairCard(p.hair)],
+    ["Palette",    paletteCard(p.palette)],
+    ["Silhouette", silhouetteCard(p.silhouette)],
+    ["Buy next",   buyNextCard(p.buyNext)],
+    ["Wardrobe",   seasonalWardrobeCard(p.seasonalWardrobe)],
+    ["Chinos",     chinoPlanCard(p.chinoPlan)],
+    ["Brands",     brandsCard(p.brands)],
+    ["Size",       sizeCard(p.size)],
+    ["Planner",    outfitPlannerCard(p.outfitPlanner)]
+  ].filter(function(c){ return c[1]; });
+
+  var jump = CARDS.length > 1
+    ? '<nav class="jump" aria-label="Jump to section">' + CARDS.map(function(c){
+        return '<a href="#' + slug(c[0]) + '">' + esc(c[0]) + '</a>';
+      }).join("") + '</nav>'
+    : "";
+
+  stage.innerHTML = jump + CARDS.map(function(c){
+    return '<section class="ref-card" id="' + slug(c[0]) + '">' + c[1] + '</section>';
+  }).join("");
 }
 
 PW.mountRail();
