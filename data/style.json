@@ -10,28 +10,34 @@
   ],
   "philipp": {
     "direction": {
-      "register": "Deep, structured, unbranded",
-      "thesis": "Hair-led, silhouette-second, logo-never. Most of the effect is settled at the head before a garment is touched; the clothes then hold a vertical, tonal column with a defined shoulder. Nothing here depends on being thin — it depends on line.",
-      "builtFrom": "Three facts about him, not a look: colouring that is Dark and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the palette, the trouser cut, and how far the styling may mature. Everything else follows from them.",
-      "onTheOriginalFraming": "This was first written in Korean-actor vocabulary, because that is what was asked for. Almost none of it actually depended on that — the palette comes from his colouring, the cut from his measurements, the hair from his face shape. The label was dropped on request; the substance did not change.",
+      "register": "Modern preppy, elevated — mature, not collegiate",
+      "thesis": "The wardrobe he was already buying toward (Ralph Lauren, Suitsupply, Charles Tyrwhitt) stops being an exception and becomes the actual plan: tailored coats and knitwear over a collared shirt, chinos with a clean line, camel and khaki back in alongside the cool core. Preppy's usual signals — bright polos, popped collars, varsity branding — are exactly the collegiate register this avoids; the 2026 version of this look is described everywhere as sophisticated and mature rather than campus, and that is the half being kept.",
+      "builtFrom": "Three facts about him, not a look: colouring that is Dark Winter and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the trouser cut and how far the styling may mature regardless of register; the palette itself is cool by test, with camel and khaki confirmed back in on his own report on 2026-09-06.",
+      "onTheOriginalFraming": "This has been rewritten twice, and both edits are worth keeping visible rather than smoothing over. First written in Korean-actor vocabulary because that was asked for, then generalised — the palette, cut and hair never actually depended on the label, only the reference photos did. Then, on 2026-09-06, the register itself changed: from quiet, dark minimalism to modern preppy, and Gong Yoo, Hyun Bin and Park Seo-joon were genuinely accurate references for the old register specifically, not for this one. Gong Yoo got a second look before being dropped: as a person he is described as versatile — suits to streetwear, no preppy label — and the one look with real preppy DNA, the Goblin/Kim Shin cardigan-over-crewneck sweater set, belongs to a wealthy-immortal costume rather than to his own documented style. A fictional character's wardrobe is a thinner basis for a real style reference than an actor's own red-carpet choices, so it didn't survive the fuller look. Two separate corrections, two separate reasons: one about vocabulary, one about which wardrobe was actually wanted.",
       "ageRead": "Reads early-to-mid 30s in photographs, not 43: full hairline, even skin tone, no deep static lines. The clothes are currently the oldest thing in the picture. That widens the range rather than narrowing it — the limiter is context (school, parent evenings, Germany), not the birth year, and over-mature styling would hand back years the face has not lost.",
-      "notThis": {
-        "register": "Costume",
-        "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."
-      },
-      "referencesNote": "These are visual shorthand, not a destination. They are useful because their colouring and build sit close to his, so what works on them transfers directly — not because the goal is to look Korean.",
+      "notThis": [
+        {
+          "register": "Costume",
+          "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."
+        },
+        {
+          "register": "Collegiate preppy",
+          "why": "Bright polos, popped collars, varsity jackets, baseball caps, graphic knitwear — the campus version of this register, and the thing '2026 modern preppy' is explicitly defined against in the coverage that named it. It would read as costume on a 43-year-old for the same reason the idol register would: borrowed youth rather than his own."
+        }
+      ],
+      "referencesNote": "Two searches for an adult, non-idol Asian figure specifically labelled 'preppy' came back close to empty — that label attaches almost mostly to K-pop idols doing the collegiate version. Byeon Woo Seok is the one exception actually sourced for it. Beckham and Reynolds are who the same coverage names when it isn't restricted to Asian figures at all — both are repeatedly cited by name for exactly this register, mature and tailored rather than campus. Neither shares his colouring or build, but the palette is already settled from his own colouring and the metal/fabric test, not from a reference photo, so that stopped being the job a reference had to do. What they're for now is silhouette and attitude only: tailored-but-relaxed, not costume, not campus.",
       "references": [
         {
-          "name": "Gong Yoo",
-          "why": "Closest thing to a template: structured ease, volume in the hair, tonal and quiet."
+          "name": "Byeon Woo Seok",
+          "why": "Actor, not idol; Prada ambassador; documented in cable-knit-over-collared-shirt layering — the core preppy combination, executed adult rather than campus. Age and build read close to his own."
         },
         {
-          "name": "Hyun Bin",
-          "why": "Same age bracket, and the coat-over-knit silhouette is near-exactly the target."
+          "name": "David Beckham",
+          "why": "Named directly in 2026 coverage of the trend: 'blending traditional tailoring with casual, sporty elements'. Mature, not collegiate, and the sportswear-into-tailoring move matches a man who trains regularly."
         },
         {
-          "name": "Park Seo-joon",
-          "why": "For the younger read the face actually supports — relaxed tailoring, nothing costume about it."
+          "name": "Ryan Reynolds",
+          "why": "Named in the same coverage: 'clean, polished ensembles with a touch of whimsy'. The whimsy is the one thing to leave behind — the register wanted here is quieter than his press-tour persona — but the clean, tailored-casual base is exactly it."
         }
       ],
       "readOfCurrentPhotos": "Four photographs, four sets of functional clothing: sport tee, polo, sport tee, printed sweatshirt. Not a taste problem — a control problem. Nothing in the set is a chosen silhouette. What already works: the gum-sole Sambas, and navy, which appears in three of four and flatters in all three. What works against him: the printed sweatshirt (busy, boxy, adds volume exactly where the training is removing it) and visible athletic branding outside the gym."
@@ -47,11 +53,11 @@
     },
     "palette": {
       "type": "Dark Winter — deep, high-contrast, cool",
-      "confidence": "Settled, both halves. Depth and contrast were never in doubt; the undertone was, and the gold-versus-silver test answered it on 2026-09-05 — silver clearly better, gold a definite no. That is the one comparison photographs cannot make, which is why this file spent a day refusing to guess it. It is now the strongest-supported claim in here, and it is his own read rather than an inference from a picture.",
+      "confidence": "Settled for metal, not for every fabric. Depth and contrast were never in doubt. The gold-versus-silver test (2026-09-05) is the strongest-supported claim in here for metal specifically — reflective gold at the jaw is a definite no, silver reads clean — and that rule is not in question. What was overreached was extending it to every warm-toned fabric: on 2026-09-06 he reported his own camel coat and khaki both suit him, which a metal test cannot actually rule out. A polished gold ring returns raw, saturated warmth straight onto the skin; a matte wool coat is muted and sits further from the face, and depth/muting can outweigh hue in a way a mirror shows and a metal swatch cannot. So: metal is a closed question, cool only. Fabric neutrals are open beyond the deep core — camel and khaki are back in, on his word, and nothing else warm has been tested.",
       "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it.",
-      "resolved": "Cool. Silver at the face reads clean; gold pulls yellow into the skin. Dark Winter, not Dark Autumn — so the deep colours stay, the warm neutrals go, and the contrast that a softer season would have tried to tone down is the thing to lean into instead.",
-      "rule": "Deep tones throughout, and let the contrast stand. Black is a real neutral here, mid tones are not, and every neutral in the wardrobe should be cool: charcoal and true white, never stone and cream.",
-      "metal": "Silver, steel, white gold, gunmetal. This is the direct output of the test rather than a separate opinion, and it is the cheapest rule in the file to follow: watch, belt buckle, glasses frames, any ring. Gold sits at the wrist and the face, which is exactly where a wrong metal shows.",
+      "resolved": "Cool for metal: silver at the face reads clean, gold pulls yellow into the skin. Dark Winter depth and contrast stand regardless. Fabric is less absolute than metal — see `warmNeutrals` below for the two colours his own mirror has already settled.",
+      "rule": "Deep tones throughout, and let the contrast stand. Black is a real neutral here, mid tones are not. Charcoal and true white are the cool default; camel and khaki are allowed too, on his own report — see `warmNeutrals`.",
+      "metal": "Silver, steel, white gold, gunmetal. This is the direct output of the test rather than a separate opinion, and it is the cheapest rule in the file to follow: watch, belt buckle, glasses frames, any ring. Gold sits at the wrist and the face, which is exactly where a wrong metal shows. This rule is about metal only — it does not extend to camel or khaki fabric, see `warmNeutrals`.",
       "core": [
         { "name": "Black", "hex": "#16181C" },
         { "name": "Navy", "hex": "#1F2A44" },
@@ -69,12 +75,18 @@
           { "name": "Icy blue", "hex": "#BFD4E8" }
         ]
       },
-      "ruledOut": {
-        "note": "Taken away by the test. Not wrong on anyone — wrong next to cool skin, where each of these turns the face sallow rather than the garment bad.",
+      "warmNeutrals": {
+        "note": "Reopened 2026-09-06. The metal test ruled out gold and, by extrapolation, every warm-toned fabric — but a fabric was never actually tested, and he reported that his own camel coat and khaki both suit him. Metal stays cool-only, settled; these two are back on his word, not on a retest. Nothing else warm has been asked about — this is a two-item list, not a reopening of the whole ruled-out group.",
         "colors": [
-          { "name": "Camel", "hex": "#A8825A", "why": "The coat colour the plan used to hedge on. Charcoal takes the job." },
+          { "name": "Camel", "hex": "#A8825A", "why": "His own coat, confirmed 2026-09-06 as something that suits him despite the metal test." },
+          { "name": "Khaki", "hex": "#C2B49A", "why": "Confirmed alongside camel, same day, same basis — his own report." }
+        ]
+      },
+      "ruledOut": {
+        "note": "Taken away by the metal test and not yet re-examined for fabric. Not wrong on anyone — wrong next to cool skin, where each of these turns the face sallow rather than the garment bad. Camel and khaki were here too until 2026-09-06; see `warmNeutrals`.",
+        "colors": [
           { "name": "Cream", "hex": "#EFE7D8", "why": "Replaced by true white, which does the same job cool." },
-          { "name": "Stone / khaki", "hex": "#C2B49A", "why": "The default chino colour, and the reason the roadmap changed. Navy and charcoal instead." },
+          { "name": "Stone", "hex": "#C7BFAE", "why": "Untested — khaki was confirmed, stone was not asked about." },
           { "name": "Chocolate", "hex": "#4A3728", "why": "Warm brown near the face is the exact mismatch the test found." },
           { "name": "Rust", "hex": "#9C4A2A", "why": "Autumn's signature and the clearest single tell of the wrong season." },
           { "name": "Deep olive", "hex": "#4A503A", "why": "The one colour that moved out of core. Olive is a warm neutral; forest does the same work cool." }
@@ -93,8 +105,14 @@
       "imageStyle": {
         "adaptedFrom": "The Teaching Hub house style — 'black and white graphic novel illustration, bold clean ink lines, no grey gradients, white background, no text, no labels, no captions'. Reused so the two projects look like they come from the same hand.",
         "deviation": "One deliberate change: colour is allowed. On a wardrobe page the colour IS the content — a navy knit under a charcoal overshirt is the whole point — and a black-and-white plate would remove exactly the thing the reader came for. So: ink linework as in Teaching Hub, but garments filled flat in the palette hexes, with no rendering, no gradients and no fabric texture.",
-        "prefix": "Full-length fashion-plate illustration in a graphic novel style. Bold clean black ink outlines of even weight, no cross-hatching, no shading, no grey gradients. Garments filled with flat solid colour exactly as specified, no texture and no fabric rendering. Plain white background, no scenery, no props, no shadow on the ground. No text, no labels, no captions, no logos, no visible branding of any kind.",
-        "figure": "The same man in all five images so they read as one series: early-30s East Asian man, slim athletic build, near-black hair with length and volume on top and tapered sides, calm neutral expression, standing straight and facing the viewer, arms relaxed at his sides, full body visible from head to shoes.",
+        "correction": {
+          "date": "2026-09-06",
+          "problem": "The first two renders (school-day, parent-evening) came back reading as modern preppy / dark academia — glossy K-webtoon shading and doe-eyed rendering rather than the graphic-novel ink asked for, a flapped topstitched chest pocket, a button-down collar, and trousers with a visible break at the shoe. None of that was written into the prompt; the generator defaulted to the dominant house style for 'handsome young Asian man' illustrations, which is exactly that look. The palette and garments were correct — the rendering and a few unstated details were not.",
+          "fix": "prefix and figure below now say explicitly what they used to leave to chance: matte flat ink, no glossy or anime/webtoon shading, no doe-eyed romance-comic rendering, matte textured hair rather than a glossy side part, no decorative top-stitching or flapped pockets, no crease-break at the shoe. The parent-evening shirt keeps its collar — a plain spread collar is exactly right under an open coat — but loses the button-down oxford collar (the version with buttons at the points), which is the specific detail that read Ivy. This is not a new direction — it is the one already written in `direction` and `hair`, enforced in the prompt instead of assumed.",
+          "existingImages": "school-day.png and parent-evening.png predate this fix and were not regenerated — that is a real cost, not a rounding error, and worth redoing only if the drift bothers him enough to spend the effort again."
+        },
+        "prefix": "Full-length fashion-plate illustration in a graphic novel style — flat matte ink, like a European or American adult graphic novel, not an anime or webtoon romance comic. Bold clean black ink outlines of even weight, no cross-hatching, no soft cel-shading, no grey gradients, no glossy highlights anywhere including on hair and skin. Garments filled with flat solid colour exactly as specified, no texture and no fabric rendering. Plain white background, no scenery, no props, no shadow on the ground. No text, no labels, no captions, no logos, no visible branding, no decorative top-stitching, no flapped or patterned pockets — keep every garment plain and unornamented.",
+        "figure": "The same man in all five images so they read as one series: early-30s East Asian man, slim athletic build, mature and quiet rather than boyish or doe-eyed, calm neutral expression with no smile. Near-black hair with length and volume on top and tapered sides, matte and textured with natural separation — not glossy, not a slicked or glassy side part. Standing straight and facing the viewer, arms relaxed at his sides, full body visible from head to shoes. Trousers fall in one continuous straight line with no crease and no break at the shoe.",
         "suffix": "Portrait orientation, roughly 3:4. The whole figure must fit inside the frame with clear margin above the head and below the shoes.",
         "howToUse": "Concatenate prefix + figure + the look's own `imagePrompt` + suffix, generate, and drop the file into hub/style/img/ named after the occasion slug — school-day.png, parent-evening.png, weekend.png, evening-out.png, colour-carefully.png. The build picks it up on the next run and replaces the drawn placeholder; .png, .jpg and .webp are all accepted.",
         "background": "A transparent background is better than white if the generator can do it, because the page has a dark theme as well as a light one. If it cannot, white is fine — the build puts the image on its own white plate so it looks deliberate in both themes rather than like a bug."
@@ -116,7 +134,7 @@
           "occasion": "Parent evening",
           "when": "When the room has other adults in it and the clothes are read once, quickly",
           "note": "The only look with real contrast, and it is at the collar where it flatters. The coat does the work; nothing else is trying.",
-          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a crisp pure white shirt (#FFFFFF) buttoned to the collar with no tie, straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
+          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a plain pure white shirt (#FFFFFF) with a spread collar and no tie — a plain collar, not a button-down oxford collar, and no visible collar buttons — straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal knee-length coat", "hex": "#3A3F47" },
             { "part": "Top", "item": "True white shirt", "hex": "#FFFFFF" },
@@ -203,12 +221,12 @@
       },
       {
         "item": "Straight-leg trousers, mid-to-high rise",
-        "colors": "Charcoal first, navy second. Not stone, not cream — those were the hedge and the test removed them.",
+        "colors": "Charcoal, navy, or khaki — khaki confirmed 2026-09-06. Not stone, not cream — untested, stay out for now.",
         "why": "The actual silhouette change. This is the piece that does more than the other four combined."
       },
       {
         "item": "Single-breasted coat, knee length",
-        "colors": "Charcoal, or navy. Camel is out — that hedge is now decided against it.",
+        "colors": "Camel or charcoal. Camel confirmed 2026-09-06 — it's the coat he already owns and already wears well.",
         "why": "The signature garment of the reference set, and it works unchanged from a school corridor to an evening out."
       },
       {
@@ -218,15 +236,15 @@
       }
     ],
     "seasonalWardrobe": {
-      "note": "Rewritten 2026-09-05 into the target register, then corrected the same day when the undertone test came back cool. The original was generic Autumn-type advice and the first rewrite still carried its neutrals — cream, stone, camel, chocolate, tortoise, dark brown. All of them are gone. The four-season structure, the straight-leg correction and the tonal-column rule are unchanged.",
-      "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, a defined shoulder on whatever is outermost, and every neutral cool — charcoal and true white doing the work stone and cream used to.",
+      "note": "Rewritten 2026-09-05 into the target register, then corrected the same day when the undertone test came back cool — cream, stone, camel, chocolate, tortoise and dark brown all removed. Camel and khaki came back on 2026-09-06 on his own report; cream, stone, chocolate, tortoise and dark brown are still out, untested. The four-season structure, the straight-leg correction and the tonal-column rule are unchanged throughout.",
+      "styleNote": "Natural fabrics — wool, cotton, leather. The rule that carries every season: one depth of colour throughout, a defined shoulder on whatever is outermost. Neutrals default cool — charcoal and true white — with camel and khaki confirmed as the two exceptions.",
       "seasons": [
         {
           "season": "Spring",
           "heading": "Light layers, one tone",
           "tops": "Fine merino or cotton knit in navy or true white, worn under rather than alone",
           "outerwear": "Overshirt or unlined coach jacket in forest or charcoal",
-          "bottoms": "Straight chinos in charcoal or navy",
+          "bottoms": "Straight chinos in khaki, charcoal or navy",
           "shoes": "Sambas, or a black derby when the day needs it"
         },
         {
@@ -241,7 +259,7 @@
           "season": "Autumn",
           "heading": "Deep tones, before the coats come out",
           "tops": "Merino crew or mock neck in forest, burgundy or deep berry",
-          "outerwear": "Overshirt layered under a charcoal or navy coat",
+          "outerwear": "Overshirt layered under a camel or charcoal coat",
           "bottoms": "Straight trousers in charcoal, or dark denim with no fading",
           "shoes": "Black chelsea or derby"
         },
@@ -249,26 +267,26 @@
           "season": "Winter",
           "heading": "The strongest season for this palette",
           "tops": "Heavier knit in navy, charcoal or emerald, mock or turtleneck",
-          "outerwear": "Knee-length single-breasted wool coat in charcoal or black",
+          "outerwear": "Knee-length single-breasted wool coat in camel or charcoal",
           "bottoms": "Straight wool-blend trousers in charcoal or black",
           "shoes": "Lined black boot"
         }
       ]
     },
     "chinoPlan": {
-      "goal": "End goal: capsule wardrobe largely in Ralph Lauren — collector's brand, kept because it means something to him, not because the styling requires it",
+      "goal": "End goal: capsule wardrobe largely in Ralph Lauren. This used to be framed as a collector's habit tolerated despite the styling, back when the register was quiet minimalism. Under modern preppy it is the opposite — Ralph Lauren is close to the definitive brand for this register, so wanting it and the styling actually agreeing is the correction, not a coincidence.",
       "midGoal": "Interim: a pragmatic mix — Dockers (budget), Suitsupply (midrange), Ralph Lauren (premium)",
       "fit": "Straight leg, mid-to-high rise. Ask for the straight or relaxed cut by fit, not by model name.",
       "revision": {
         "date": "2026-09-05",
-        "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise. Colours corrected the same day, after the undertone test: stone and Classic Khaki out, navy and charcoal in. Brands and the Ralph Lauren end goal stand.",
-        "why": "The original prescription came from preppy convention and was justified in the note as balancing a longer torso and a small stomach. Against a 25 cm waist-to-hip drop it does the opposite: slim pulls at the seat and shortens the leg line. This is the one correction in the file that rests on a measurement rather than on taste. The colour change rests on the gold-versus-silver test, and it costs something real: khaki is Ralph Lauren's signature and the reason half the catalogue looks the way it does. It is still the wrong neutral for cool skin, and their navy and charcoal are the same trouser."
+        "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise, 2026-09-05. Colours followed the metal test the same day — stone and Classic Khaki out — then Khaki came back in on 2026-09-06 when he confirmed it suits him; stone stays out, untested. Brands and the Ralph Lauren end goal stand throughout.",
+        "why": "The fit change rests on a measurement — a 25 cm waist-to-hip drop, where a slim cut pulls at the seat and shortens the leg line — and stands regardless of colour. The colour history is worth keeping honest: the gold-versus-silver test ruled out gold jewellery, and that got extended to every warm fabric including Ralph Lauren's own Classic Khaki, the reason half their catalogue looks the way it does. That extension didn't survive contact with his own coat and his own trousers. Khaki chino is back; stone remains untested and stays out until it is."
       },
       "purchases": [
         {
           "brand": "Dockers",
           "model": "Ultimate Chino — straight fit (not the slim the original note listed)",
-          "colors": "Charcoal, Navy, Black",
+          "colors": "Khaki, Charcoal, Navy",
           "priceNew": "€40–50",
           "whereNew": "Dockers DE, Zalando, Amazon.de",
           "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"",
@@ -286,7 +304,7 @@
         {
           "brand": "Ralph Lauren",
           "model": "Stretch Chino — straight or relaxed, not the slim fit",
-          "colors": "Navy, Charcoal, Black. Not Classic Khaki — their signature colour is the one this palette cannot take.",
+          "colors": "Classic Khaki, Navy, Charcoal — Khaki back in 2026-09-06.",
           "priceNew": "€120–150 (outlet/Vinted often €80–100)",
           "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
           "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"",
@@ -297,7 +315,7 @@
         {
           "phase": "Phase 1 — Now",
           "item": "Dockers Ultimate Chino, straight",
-          "colors": "Charcoal or Navy",
+          "colors": "Khaki, Charcoal or Navy",
           "purpose": "Everyday, school — the cheapest way to test whether the straight cut reads better on him before spending real money",
           "status": "Planned"
         },
@@ -311,14 +329,14 @@
         {
           "phase": "Phase 3 — 1–2 years",
           "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Navy + Charcoal",
+          "colors": "Classic Khaki + Navy",
           "purpose": "Prestige, parent evenings, events",
           "status": "Planned"
         },
         {
           "phase": "Phase 4 — End goal",
           "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Black, Charcoal, possibly Forest",
+          "colors": "Classic Khaki, Charcoal, possibly Forest",
           "purpose": "Complete the capsule",
           "status": "End goal"
         }

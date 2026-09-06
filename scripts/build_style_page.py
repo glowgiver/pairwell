@@ -431,10 +431,13 @@ function directionCard(d){
       : '') +
     /* "Not this" stays open — it is a rule about what to avoid, which is
        lookup content. The note about how this file came to be written is
-       not, and folds. */
+       not, and folds. Accepts one object or a list, because there is now
+       more than one thing this register is explicitly not. */
     (d.notThis
-      ? '<div class="rev"><div class="rev-t">Not this — ' + esc(d.notThis.register) + '</div>' +
-        '<p>' + esc(d.notThis.why) + '</p></div>'
+      ? (Array.isArray(d.notThis) ? d.notThis : [d.notThis]).map(function(n){
+          return '<div class="rev"><div class="rev-t">Not this — ' + esc(n.register) + '</div>' +
+            '<p>' + esc(n.why) + '</p></div>';
+        }).join("")
       : '') +
     fold("How this was framed", d.onTheOriginalFraming
       ? '<div class="rev"><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
@@ -500,7 +503,8 @@ function paletteCard(p){
       '<div class="ref-item-v">' + esc(p.metal) + '</div></div></div>' : '') +
     (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
     group(p.accent, "Accents", false) +
-    group(p.ruledOut, "Ruled out by the undertone test", true) +
+    group(p.warmNeutrals, "Warm neutrals — his call, not the metal test's", true) +
+    group(p.ruledOut, "Ruled out by the metal test", true) +
     (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
     fold("Why this palette", (evidence ? '<div class="ref-body">' + evidence + '</div>' : "") +
       (p.confidence ? '<div class="rev"><div class="rev-t">Confidence</div><p>' +
@@ -605,8 +609,16 @@ function looksCard(l){
     : 'Five assemblies. ' + missing + ' of 5 still show the drawn placeholder — ' +
       'each one carries the prompt that replaces it.';
 
+  var c = style && style.correction;
+  var correction = c
+    ? '<div class="rev"><div class="rev-t">Style corrected ' + esc(c.date) + '</div>' +
+      '<p><strong>' + esc(c.problem) + '</strong></p>' +
+      '<p>' + esc(c.fix) + '</p>' +
+      (c.existingImages ? '<p>' + esc(c.existingImages) + '</p>' : '') + '</div>'
+    : "";
+
   return head('Looks', intro) + items +
-    fold("Where these came from", l.note ? '<div class="note">' + esc(l.note) + '</div>' : "");
+    fold("Where these came from", (l.note ? '<div class="note">' + esc(l.note) + '</div>' : "") + correction);
 }
 
 function silhouetteCard(s){
