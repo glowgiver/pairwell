@@ -680,6 +680,11 @@ __CSS__
   .card.today ol.steps .t.treat-step{color:var(--hair)}
   .todaydone{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 14px;border-top:1px solid var(--line)}
   .todaydone .dobtn{margin-left:0;flex:1 1 auto}
+  /* A treatment this session deliberately skips — it still shows "due" in
+     the Schedule card below (its own clock never moved), so silence here
+     would read as the page having forgotten it rather than as a choice. */
+  .skipnote{padding:11px 18px 14px;border-top:1px solid var(--line);
+    font-family:var(--f-read);font-size:14px;color:var(--muted);line-height:1.5}
   .todaybody{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
   .tline{font-size:15.5px;line-height:1.45;color:var(--muted)}
   .tline b{color:var(--text);font-weight:600}
@@ -755,6 +760,18 @@ function markDone(id){
             String(d.getMonth()+1).padStart(2,"0") + "-" +
             String(d.getDate()).padStart(2,"0");
   try{ localStorage.setItem(doneKey(id), iso); }catch(e){}
+  /* A treatment that supersedes another (skipsIfDue) does that other one's
+     job too, not just today's — chelating pulls out the same calcium and
+     magnesium the citric rinse would have dissolved. Leaving citric's own
+     date untouched would show it "overdue" the very next day, which is the
+     wrong answer to "does hair need de-scaling again" one day after it was
+     just done by the deeper treatment. So marking chelating done resets
+     whatever it stands in for too. */
+  (R.hair.scheduled || []).forEach(function(t){
+    if(t.skipsIfDue && t.skipsIfDue.indexOf(id) !== -1){
+      try{ localStorage.setItem(doneKey(t.id), iso); }catch(e){}
+    }
+  });
 }
 function clearDone(id){ try{ localStorage.removeItem(doneKey(id)); }catch(e){} }
 
@@ -790,9 +807,28 @@ function isDue(t){
 function showerSequence(who){
   var h = R.hair;
   var base = h.everyShower.steps;
-  var due = h.scheduled.filter(function(t){
+  var candidates = h.scheduled.filter(function(t){
     return (t.who === "both" || t.who === who) && isDue(t);
-  }).sort(function(a, b){ return (a.rank || 0) - (b.rank || 0); });
+  });
+  var dueIds = candidates.map(function(t){ return t.id; });
+
+  /* skipsIfDue: a deeper treatment can make a lighter one redundant for this
+     one session — chelating already does citric's job by a different route.
+     The lighter treatment's own clock is untouched (it isn't marked done),
+     so it is simply due again at the next wash; only this session skips it. */
+  var skipped = candidates.filter(function(t){
+    return t.skipsIfDue && t.skipsIfDue.some(function(id){ return dueIds.indexOf(id) !== -1; });
+  }).map(function(t){
+    var coveredBy = t.skipsIfDue.filter(function(id){ return dueIds.indexOf(id) !== -1; })
+      .map(function(id){
+        var m = h.scheduled.filter(function(x){ return x.id === id; })[0];
+        return m ? m.title : id;
+      });
+    return { treat: t, coveredBy: coveredBy };
+  });
+  var skippedIds = skipped.map(function(s){ return s.treat.id; });
+  var due = candidates.filter(function(t){ return skippedIds.indexOf(t.id) === -1; })
+    .sort(function(a, b){ return (a.rank || 0) - (b.rank || 0); });
 
   var out = [];
   base.forEach(function(s, i){
@@ -809,7 +845,7 @@ function showerSequence(who){
       out.push({ step: t.title, how: t.recipe, treat: t });
     });
   });
-  return { steps: out, due: due };
+  return { steps: out, due: due, skipped: skipped };
 }
 
 /* "wash plus X and Y and Z" read badly, and it was wrong about chelating,
@@ -920,6 +956,15 @@ function renderStage(){
           return '<button type="button" class="dobtn" data-done="' + esc(t.id) + '">' +
                  esc(t.title) + ' done</button>';
         }).join("") + '</div>'
+      : '') +
+    /* A treatment skipped for today must say so here, not just vanish —
+       it still shows "due" in the Schedule list below, since its own clock
+       never moved, and that would otherwise read as the page forgetting it. */
+    (seq.skipped.length
+      ? '<div class="skipnote">' + seq.skipped.map(function(s){
+          return esc(s.treat.title) + ' skipped today — ' +
+                 esc(s.coveredBy.join(", ")) + ' already covers it this session.';
+        }).join(" ") + '</div>'
       : '') +
     '</div>';
 
