@@ -13,19 +13,14 @@
       "register": "Modern preppy, elevated — mature, not collegiate",
       "thesis": "The wardrobe he was already buying toward (Ralph Lauren, Suitsupply, Charles Tyrwhitt) stops being an exception and becomes the actual plan: tailored coats and knitwear over a collared shirt, chinos with a clean line, camel and khaki back in alongside the cool core. Preppy's usual signals — bright polos, popped collars, varsity branding — are exactly the collegiate register this avoids; the 2026 version of this look is described everywhere as sophisticated and mature rather than campus, and that is the half being kept.",
       "builtFrom": "Three facts about him, not a look: colouring that is Dark Winter and high-contrast, a 25 cm waist-to-hip drop, and a face that reads a decade younger than the passport. Those decide the trouser cut and how far the styling may mature regardless of register; the palette itself is cool by test, with camel and khaki confirmed back in on his own report on 2026-09-06.",
-      "onTheOriginalFraming": "This has been rewritten twice, and both edits are worth keeping visible rather than smoothing over. First written in Korean-actor vocabulary because that was asked for, then generalised — the palette, cut and hair never actually depended on the label, only the reference photos did. Then, on 2026-09-06, the register itself changed: from quiet, dark minimalism to modern preppy, and Gong Yoo, Hyun Bin and Park Seo-joon were genuinely accurate references for the old register specifically, not for this one. Gong Yoo got a second look before being dropped: as a person he is described as versatile — suits to streetwear, no preppy label — and the one look with real preppy DNA, the Goblin/Kim Shin cardigan-over-crewneck sweater set, belongs to a wealthy-immortal costume rather than to his own documented style. A fictional character's wardrobe is a thinner basis for a real style reference than an actor's own red-carpet choices, so it didn't survive the fuller look. Two separate corrections, two separate reasons: one about vocabulary, one about which wardrobe was actually wanted.",
+      "_history": "Full record, repo-only — stripped from the built page, kept here because the project's own rule is to print disagreements rather than smooth them over, just not at the cost of the page's own readability. Rewritten twice. First written in Korean-actor vocabulary because that was asked for, then generalised — the palette, cut and hair never actually depended on the label, only the reference photos did. Then, on 2026-09-06, the register itself changed: from quiet, dark minimalism to modern preppy, and Gong Yoo, Hyun Bin and Park Seo-joon were genuinely accurate references for the old register specifically, not for this one. Gong Yoo got a second look before being dropped: as a person he is described as versatile — suits to streetwear, no preppy label — and the one look with real preppy DNA, the Goblin/Kim Shin cardigan-over-crewneck sweater set, belongs to a wealthy-immortal costume rather than to his own documented style. A fictional character's wardrobe is a thinner basis for a real style reference than an actor's own red-carpet choices, so it didn't survive the fuller look. Separately: two searches for an adult, non-idol Asian figure specifically labelled 'preppy' came back close to empty — the label attaches almost only to K-pop idols doing the collegiate version. Byeon Woo Seok was the one sourced exception; Beckham and Reynolds are who the same 2026 coverage names once the search isn't restricted to Asian figures.",
+      "onTheOriginalFraming": "Written first in Korean-actor vocabulary, then generalised — the palette, cut and hair depend on his own measurements and colouring, not the label. The register itself changed again on 2026-09-06, quiet minimalism to modern preppy; the old references matched the old register, not this one.",
       "ageRead": "Reads early-to-mid 30s in photographs, not 43: full hairline, even skin tone, no deep static lines. The clothes are currently the oldest thing in the picture. That widens the range rather than narrowing it — the limiter is context (school, parent evenings, Germany), not the birth year, and over-mature styling would hand back years the face has not lost.",
       "notThis": [
-        {
-          "register": "Costume",
-          "why": "Sheer fabric, embellishment, stage pieces — the idol register the Anson Lo photo pointed at. That is stage costume rather than a wardrobe, and it reads as costume in the room where most of these clothes are actually worn."
-        },
-        {
-          "register": "Collegiate preppy",
-          "why": "Bright polos, popped collars, varsity jackets, baseball caps, graphic knitwear — the campus version of this register, and the thing '2026 modern preppy' is explicitly defined against in the coverage that named it. It would read as costume on a 43-year-old for the same reason the idol register would: borrowed youth rather than his own."
-        }
+        { "register": "Costume", "why": "Sheer fabric, embellishment, stage pieces — the idol register." },
+        { "register": "Collegiate preppy", "why": "Bright polos, popped collars, varsity, baseball caps — the campus version this register avoids." }
       ],
-      "referencesNote": "Two searches for an adult, non-idol Asian figure specifically labelled 'preppy' came back close to empty — that label attaches almost mostly to K-pop idols doing the collegiate version. Byeon Woo Seok is the one exception actually sourced for it. Beckham and Reynolds are who the same coverage names when it isn't restricted to Asian figures at all — both are repeatedly cited by name for exactly this register, mature and tailored rather than campus. Neither shares his colouring or build, but the palette is already settled from his own colouring and the metal/fabric test, not from a reference photo, so that stopped being the job a reference had to do. What they're for now is silhouette and attitude only: tailored-but-relaxed, not costume, not campus.",
+      "referencesNote": "Byeon Woo Seok is sourced for the garment specifics; Beckham and Reynolds for silhouette and attitude only. Colour is already settled from his own skin and the metal test, not from a reference photo.",
       "references": [
         {
           "name": "Byeon Woo Seok",
@@ -57,7 +52,7 @@
       "established": "Near-black hair, dark brown eyes, light-to-medium skin, high hair-to-skin contrast. Deep colours hold across every lighting seen so far — black and navy both sit at the face without draining it.",
       "resolved": "Cool for metal: silver at the face reads clean, gold pulls yellow into the skin. Dark Winter depth and contrast stand regardless. Fabric is less absolute than metal — see `warmNeutrals` below for the two colours his own mirror has already settled.",
       "rule": "Deep tones throughout, and let the contrast stand. Black is a real neutral here, mid tones are not. Charcoal and true white are the cool default; camel and khaki are allowed too, on his own report — see `warmNeutrals`.",
-      "metal": "Silver, steel, white gold, gunmetal. This is the direct output of the test rather than a separate opinion, and it is the cheapest rule in the file to follow: watch, belt buckle, glasses frames, any ring. Gold sits at the wrist and the face, which is exactly where a wrong metal shows. This rule is about metal only — it does not extend to camel or khaki fabric, see `warmNeutrals`.",
+      "metal": "Silver, steel, white gold, gunmetal — not gold. Watch, belt buckle, glasses frames, any ring. Metal only; doesn't extend to camel or khaki fabric.",
       "core": [
         { "name": "Black", "hex": "#16181C" },
         { "name": "Navy", "hex": "#1F2A44" },
@@ -67,7 +62,7 @@
         { "name": "Burgundy", "hex": "#6B2233" }
       ],
       "accent": {
-        "note": "Unlocked by the test. These were the cool half of the old conditional block; they are now simply part of the palette, and they are where colour is allowed to happen in an otherwise very dark wardrobe.",
+        "note": "Where colour is allowed in an otherwise dark wardrobe.",
         "colors": [
           { "name": "Emerald", "hex": "#0F5C4A" },
           { "name": "Sapphire", "hex": "#1B3F7A" },
@@ -76,20 +71,20 @@
         ]
       },
       "warmNeutrals": {
-        "note": "Reopened 2026-09-06. The metal test ruled out gold and, by extrapolation, every warm-toned fabric — but a fabric was never actually tested, and he reported that his own camel coat and khaki both suit him. Metal stays cool-only, settled; these two are back on his word, not on a retest. Nothing else warm has been asked about — this is a two-item list, not a reopening of the whole ruled-out group.",
+        "note": "Confirmed on his own word, 2026-09-06 — not a metal-test result.",
         "colors": [
-          { "name": "Camel", "hex": "#A8825A", "why": "His own coat, confirmed 2026-09-06 as something that suits him despite the metal test." },
-          { "name": "Khaki", "hex": "#C2B49A", "why": "Confirmed alongside camel, same day, same basis — his own report." }
+          { "name": "Camel", "hex": "#A8825A", "why": "His own coat." },
+          { "name": "Khaki", "hex": "#C2B49A", "why": "Confirmed same day." }
         ]
       },
       "ruledOut": {
-        "note": "Taken away by the metal test and not yet re-examined for fabric. Not wrong on anyone — wrong next to cool skin, where each of these turns the face sallow rather than the garment bad. Camel and khaki were here too until 2026-09-06; see `warmNeutrals`.",
+        "note": "Untested for fabric, not wrong on anyone — just wrong next to cool skin.",
         "colors": [
-          { "name": "Cream", "hex": "#EFE7D8", "why": "Replaced by true white, which does the same job cool." },
-          { "name": "Stone", "hex": "#C7BFAE", "why": "Untested — khaki was confirmed, stone was not asked about." },
-          { "name": "Chocolate", "hex": "#4A3728", "why": "Warm brown near the face is the exact mismatch the test found." },
-          { "name": "Rust", "hex": "#9C4A2A", "why": "Autumn's signature and the clearest single tell of the wrong season." },
-          { "name": "Deep olive", "hex": "#4A503A", "why": "The one colour that moved out of core. Olive is a warm neutral; forest does the same work cool." }
+          { "name": "Cream", "hex": "#EFE7D8", "why": "True white does this cool." },
+          { "name": "Stone", "hex": "#C7BFAE", "why": "Untested, unlike khaki." },
+          { "name": "Chocolate", "hex": "#4A3728", "why": "Warm brown at the face." },
+          { "name": "Rust", "hex": "#9C4A2A", "why": "Autumn's signature." },
+          { "name": "Deep olive", "hex": "#4A503A", "why": "Forest does this cool." }
         ]
       },
       "avoid": [
@@ -282,61 +277,45 @@
         "change": "Fit corrected from Slim Fit + Mid-Rise to Straight + Mid-High-Rise, 2026-09-05. Colours followed the metal test the same day — stone and Classic Khaki out — then Khaki came back in on 2026-09-06 when he confirmed it suits him; stone stays out, untested. Brands and the Ralph Lauren end goal stand throughout.",
         "why": "The fit change rests on a measurement — a 25 cm waist-to-hip drop, where a slim cut pulls at the seat and shortens the leg line — and stands regardless of colour. The colour history is worth keeping honest: the gold-versus-silver test ruled out gold jewellery, and that got extended to every warm fabric including Ralph Lauren's own Classic Khaki, the reason half their catalogue looks the way it does. That extension didn't survive contact with his own coat and his own trousers. Khaki chino is back; stone remains untested and stays out until it is."
       },
-      "purchases": [
-        {
-          "brand": "Dockers",
-          "model": "Ultimate Chino — straight fit (not the slim the original note listed)",
-          "colors": "Khaki, Charcoal, Navy",
-          "priceNew": "€40–50",
-          "whereNew": "Dockers DE, Zalando, Amazon.de",
-          "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\", \"Dockers Chino W32\"",
-          "status": "Planned"
-        },
-        {
-          "brand": "Suitsupply",
-          "model": "Ask for the wider chino cut in store — Brescia is their slim block",
-          "colors": "Navy, Charcoal, Black",
-          "priceNew": "~€119",
-          "whereNew": "Suitsupply DE (stores: Berlin, Frankfurt, Munich)",
-          "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in the listing photos, not the model name",
-          "status": "Planned"
-        },
-        {
-          "brand": "Ralph Lauren",
-          "model": "Stretch Chino — straight or relaxed, not the slim fit",
-          "colors": "Classic Khaki, Navy, Charcoal — Khaki back in 2026-09-06.",
-          "priceNew": "€120–150 (outlet/Vinted often €80–100)",
-          "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
-          "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"",
-          "status": "End goal"
-        }
-      ],
       "roadmap": [
         {
           "phase": "Phase 1 — Now",
-          "item": "Dockers Ultimate Chino, straight",
-          "colors": "Khaki, Charcoal or Navy",
-          "purpose": "Everyday, school — the cheapest way to test whether the straight cut reads better on him before spending real money",
+          "brand": "Dockers",
+          "model": "Ultimate Chino, straight",
+          "colors": "Khaki, Charcoal, Navy",
+          "priceNew": "€40–50",
+          "whereNew": "Dockers DE, Zalando, Amazon.de",
+          "secondHandSearch": "\"Dockers Ultimate Chino straight 32/32\"",
+          "purpose": "Everyday, school — the cheapest way to test the straight cut before spending real money",
           "status": "Planned"
         },
         {
           "phase": "Phase 2 — Once the cut is confirmed",
-          "item": "Suitsupply chino, wider block",
-          "colors": "Navy or Charcoal",
-          "purpose": "Smart casual, and the first one where the fabric shows",
+          "brand": "Suitsupply",
+          "model": "Wider chino block in store — Brescia is their slim one",
+          "colors": "Navy, Charcoal, Black",
+          "priceNew": "~€119",
+          "whereNew": "Suitsupply DE (Berlin, Frankfurt, Munich)",
+          "secondHandSearch": "\"Suitsupply chino 32/32\" — check the cut in photos, not the model name",
+          "purpose": "Smart casual, first one where the fabric shows",
           "status": "Planned"
         },
         {
           "phase": "Phase 3 — 1–2 years",
-          "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Classic Khaki + Navy",
+          "brand": "Ralph Lauren",
+          "model": "Stretch Chino, straight or relaxed",
+          "colors": "Classic Khaki, Navy",
+          "priceNew": "€120–150 (outlet/Vinted often €80–100)",
+          "whereNew": "Ralph Lauren DE, Zalando, outlets (Ingolstadt, Roermond)",
+          "secondHandSearch": "\"Polo Ralph Lauren chino straight 32/32\"",
           "purpose": "Prestige, parent evenings, events",
           "status": "Planned"
         },
         {
           "phase": "Phase 4 — End goal",
-          "item": "Ralph Lauren Stretch Chino, straight",
-          "colors": "Classic Khaki, Charcoal, possibly Forest",
+          "brand": "Ralph Lauren",
+          "model": "Stretch Chino, straight — same range as Phase 3",
+          "colors": "Charcoal, possibly Forest",
           "purpose": "Complete the capsule",
           "status": "End goal"
         }

@@ -335,6 +335,10 @@ html = """<!DOCTYPE html>
     background:var(--surface-2);color:var(--accent);white-space:nowrap}
   .plan-item .pi-detail{font-family:var(--f-read);font-size:14px;color:var(--muted);margin-top:4px;line-height:1.5}
   .plan-item .pi-detail b{color:var(--text);font-weight:600}
+  /* The second-hand search string — real but the least-often-needed line,
+     only relevant once he is actually on Vinted. Smaller and dimmer keeps it
+     present without competing with brand/colour/price for the eye. */
+  .plan-item .pi-detail.pi-muted{font-size:13px;color:var(--muted2);font-style:italic}
 
   /* Outfit planner */
   .outfitrow{padding:12px 16px;border-bottom:1px solid var(--line)}
@@ -710,21 +714,21 @@ function sizeCard(sz){
 
 function chinoPlanCard(p){
   if(!p) return "";
-  var purchases = (p.purchases || []).map(function(x){
-    return '<div class="plan-item"><div class="pi-head">' +
-      '<span class="pi-name">' + esc(x.brand) + ' — ' + esc(x.model) + '</span>' +
-      (x.status ? '<span class="pi-status">' + esc(x.status) + '</span>' : '') + '</div>' +
-      '<div class="pi-detail"><b>Colors:</b> ' + esc(x.colors) + '</div>' +
-      (x.priceNew ? '<div class="pi-detail"><b>Price:</b> ' + esc(x.priceNew) + ' · ' + esc(x.whereNew) + '</div>' : '') +
-      (x.secondHandSearch ? '<div class="pi-detail"><b>Second-hand:</b> ' + esc(x.secondHandSearch) + '</div>' : '') +
-      '</div>';
-  }).join("");
-  var roadmap = (p.roadmap || []).map(function(x){
+  /* One row per phase, not one row per phase AND one per brand. Those used
+     to be two separate arrays — purchases and roadmap — and rendered back to
+     back with no label between them, so the same three brands scrolled past
+     twice under different headings. Ralph Lauren spanning two phases is real
+     information (it is bought twice, at different points); the duplication
+     was not. */
+  var rows = (p.roadmap || []).map(function(x){
     return '<div class="plan-item"><div class="pi-head">' +
       '<span class="pi-name">' + esc(x.phase) + '</span>' +
       (x.status ? '<span class="pi-status">' + esc(x.status) + '</span>' : '') + '</div>' +
-      '<div class="pi-detail"><b>' + esc(x.item) + '</b> — ' + esc(x.colors) + '</div>' +
+      '<div class="pi-detail"><b>' + esc(x.brand) + '</b> — ' + esc(x.model) + '</div>' +
+      '<div class="pi-detail">' + esc(x.colors) + '</div>' +
+      (x.priceNew ? '<div class="pi-detail">' + esc(x.priceNew) + ' · ' + esc(x.whereNew) + '</div>' : '') +
       (x.purpose ? '<div class="pi-detail">' + esc(x.purpose) + '</div>' : '') +
+      (x.secondHandSearch ? '<div class="pi-detail pi-muted">' + esc(x.secondHandSearch) + '</div>' : '') +
       '</div>';
   }).join("");
 
@@ -742,7 +746,7 @@ function chinoPlanCard(p){
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
-    '</div>' + purchases + roadmap + rev;
+    '</div>' + rows + rev;
 }
 
 function outfitPlannerCard(op){
