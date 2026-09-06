@@ -104,15 +104,15 @@
     "looks": {
       "note": "Added 2026-09-05 because the page could describe a wardrobe but not show one. Every colour here comes from `palette.core` or `palette.accent` — these are assemblies, not new decisions, and if the palette changes these have to change with it. Five is deliberate: enough to cover the week he actually has, few enough that each one is a real outfit rather than a combination generator.",
       "imageStyle": {
-        "adaptedFrom": "The Teaching Hub house style — 'black and white graphic novel illustration, bold clean ink lines, no grey gradients, white background, no text, no labels, no captions'. Reused so the two projects look like they come from the same hand.",
-        "deviation": "One deliberate change: colour is allowed. On a wardrobe page the colour IS the content — a navy knit under a charcoal overshirt is the whole point — and a black-and-white plate would remove exactly the thing the reader came for. So: ink linework as in Teaching Hub, but garments filled flat in the palette hexes, with no rendering, no gradients and no fabric texture.",
+        "adaptedFrom": "Originally the Teaching Hub house style verbatim — 'black and white graphic novel illustration, bold clean ink lines, no grey gradients'. Moved further on 2026-09-06: 'graphic novel' as a phrase kept pulling image generators toward glossy webtoon/manhwa romance-comic rendering regardless of the negative instructions stacked against it — confirmed when a generated School day image came back with soft gradient shading and an invented chest pocket despite both being explicitly excluded. The prompt now anchors on 'fashion technical flat / croquis', a real, well-represented illustration genre that is inherently flat and unornamented, rather than fighting a genre (graphic novel) whose dominant training association is the opposite of what this page needs.",
+        "deviation": "Colour is still the one deliberate addition on top of the reference genre: a fashion croquis is normally colourless, but on a wardrobe page the colour IS the content — a navy knit under a charcoal overshirt is the whole point — so garments are filled flat in the palette hexes instead.",
         "correction": {
           "date": "2026-09-06",
           "problem": "The first two renders (school-day, parent-evening) came back reading as modern preppy / dark academia — glossy K-webtoon shading and doe-eyed rendering rather than the graphic-novel ink asked for, a flapped topstitched chest pocket, a button-down collar, and trousers with a visible break at the shoe. None of that was written into the prompt; the generator defaulted to the dominant house style for 'handsome young Asian man' illustrations, which is exactly that look. The palette and garments were correct — the rendering and a few unstated details were not.",
           "fix": "prefix and figure below now say explicitly what they used to leave to chance: matte flat ink, no glossy or anime/webtoon shading, no doe-eyed romance-comic rendering, matte textured hair rather than a glossy side part, no decorative top-stitching or flapped pockets, no crease-break at the shoe. The parent-evening shirt keeps its collar — a plain spread collar is exactly right under an open coat — but loses the button-down oxford collar (the version with buttons at the points), which is the specific detail that read Ivy. This is not a new direction — it is the one already written in `direction` and `hair`, enforced in the prompt instead of assumed.",
           "existingImages": "school-day.png and parent-evening.png predate this fix and were not regenerated — that is a real cost, not a rounding error, and worth redoing only if the drift bothers him enough to spend the effort again."
         },
-        "prefix": "Full-length fashion-plate illustration in a graphic novel style — flat matte ink, like a European or American adult graphic novel, not an anime or webtoon romance comic. Bold clean black ink outlines of even weight, no cross-hatching, no soft cel-shading, no grey gradients, no glossy highlights anywhere including on hair and skin. Garments filled with flat solid colour exactly as specified, no texture and no fabric rendering. Plain white background, no scenery, no props, no shadow on the ground. No text, no labels, no captions, no logos, no visible branding, no decorative top-stitching, no flapped or patterned pockets — keep every garment plain and unornamented.",
+        "prefix": "A fashion technical flat sketch — a designer's croquis, the plain reference drawing used in clothing design to show a garment on a figure with no artistic rendering. Flat matte black ink outlines of even weight on plain solid colour fills, exactly like a Uniqlo or Muji style guide diagram, not a character illustration, not a graphic novel panel, not anime or webtoon art. No cross-hatching, no soft cel-shading, no grey gradients, no glossy highlights anywhere, on hair or skin or fabric. No fabric texture, no wrinkles, no rendering of any kind — every garment is a single flat shape. Every garment is plain and unornamented: no pockets, no flaps, no stitching detail, no seams drawn in, no visible branding. Plain white background, no scenery, no props, no shadow on the ground. No text, no labels, no captions, no logos.",
         "figure": "The same man in all five images so they read as one series: early-30s East Asian man, slim athletic build, mature and quiet rather than boyish or doe-eyed, calm neutral expression with no smile. Near-black hair with length and volume on top and tapered sides, matte and textured with natural separation — not glossy, not a slicked or glassy side part. Standing straight and facing the viewer, arms relaxed at his sides, full body visible from head to shoes. Trousers fall in one continuous straight line with no crease and no break at the shoe.",
         "suffix": "Portrait orientation, roughly 3:4. The whole figure must fit inside the frame with clear margin above the head and below the shoes.",
         "howToUse": "Concatenate prefix + figure + the look's own `imagePrompt` + suffix, generate, and drop the file into hub/style/img/ named after the occasion slug — school-day.png, parent-evening.png, weekend.png, evening-out.png, colour-carefully.png. The build picks it up on the next run and replaces the drawn placeholder; .png, .jpg and .webp are all accepted.",
@@ -122,23 +122,25 @@
         {
           "occasion": "School day",
           "when": "The default, and the one worth getting right — it is most of the week",
-          "note": "Tonal from collar to shoe, one shoulder seam on the outside. Nothing here needs ironing on a Tuesday morning.",
-          "imagePrompt": "He wears an open charcoal grey overshirt (#3A3F47) with a defined shoulder seam, worn over a navy blue fine-gauge merino crew neck knit (#1F2A44), straight-leg charcoal grey trousers (#3A3F47) that fall clear of the hip and break once at the ankle, and black leather chelsea boots (#16181C). The overshirt hangs open and straight, forming one unbroken vertical line down each side.",
+          "note": "Confirmed 2026-09-06: a real collar for work, not a crew neck — the knit is what he wears off-duty with his wife, not what belongs at school. On cold days the merino crew goes back in, but layered over the shirt, under the overshirt — the collar still shows, so the rule holds either way. Tonal from collar to shoe, one shoulder seam on the outside. Nothing here needs ironing on a Tuesday morning.",
+          "imagePrompt": "He wears a plain open charcoal grey overshirt (#3A3F47) with a defined shoulder seam and no chest pocket, over a white cotton shirt (#FFFFFF) with a plain point collar visible at the neck, buttoned without a tie. Straight-leg charcoal grey trousers (#3A3F47) that fall clear of the hip in one continuous line with no crease and no break at the ankle, and black leather chelsea boots (#16181C). The overshirt hangs open and straight, forming one unbroken vertical line down each side.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal overshirt", "hex": "#3A3F47" },
-            { "part": "Top", "item": "Navy merino crew", "hex": "#1F2A44" },
+            { "part": "Top", "item": "White collared shirt", "hex": "#FFFFFF" },
             { "part": "Bottom", "item": "Charcoal straight trousers", "hex": "#3A3F47" },
-            { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" }
+            { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" },
+            { "part": "Cold add-on", "item": "Navy merino crew, between shirt and overshirt", "hex": "#1F2A44" }
           ]
         },
         {
           "occasion": "Parent evening",
           "when": "When the room has other adults in it and the clothes are read once, quickly",
-          "note": "The only look with real contrast, and it is at the collar where it flatters. The coat does the work; nothing else is trying.",
-          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a plain pure white shirt (#FFFFFF) with a spread collar and no tie — a plain collar, not a button-down oxford collar, and no visible collar buttons — straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
+          "note": "Confirmed 2026-09-06: no tie here didn't sit right with him — a parent evening reads as a room to be dressed for, not just a coat to be seen in. The tie is what changes; the coat still does most of the work.",
+          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a plain pure white shirt (#FFFFFF) with a spread collar — a plain collar, not a button-down oxford collar — and a tie in a palette colour (navy or burgundy, plain or a narrow stripe, no bright pattern), straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal knee-length coat", "hex": "#3A3F47" },
             { "part": "Top", "item": "True white shirt", "hex": "#FFFFFF" },
+            { "part": "Neckwear", "item": "Tie — navy or burgundy, plain or narrow stripe", "hex": "#1F2A44" },
             { "part": "Bottom", "item": "Navy straight trousers", "hex": "#1F2A44" },
             { "part": "Shoes", "item": "Black derby", "hex": "#16181C" }
           ]
@@ -159,7 +161,7 @@
           "occasion": "Evening out",
           "when": "Dinner, a bar, anywhere with low light",
           "note": "Black on black on black, broken only by the coat being a shade lighter. This is the look the high contrast in his colouring was made for.",
-          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) reaching just below the knee, over a black fine-gauge mock neck knit (#16181C), straight-leg black trousers (#16181C), and black leather chelsea boots (#16181C). Almost entirely black from the neck down, with the coat one clear shade lighter so the silhouette still separates from the layers beneath it.",
+          "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) reaching just below the knee, over a black fine-gauge mock neck knit (#16181C) with a visibly ribbed stand collar and ribbed cuffs, straight-leg black trousers (#16181C), and black leather chelsea boots (#16181C). Almost entirely black from the neck down, with the coat one clear shade lighter so the silhouette still separates from the layers beneath it.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal coat", "hex": "#3A3F47" },
             { "part": "Top", "item": "Black mock neck", "hex": "#16181C" },
@@ -171,12 +173,25 @@
           "occasion": "Colour, carefully",
           "when": "When the whole week has been navy and charcoal",
           "note": "One accent, at the top, with everything under it quiet. Emerald is a Dark Winter colour rather than a bright one, so it reads as depth and not as a statement.",
-          "imagePrompt": "He wears an open navy blue overshirt (#1F2A44) over a deep emerald green fine-gauge merino crew neck knit (#0F5C4A), straight-leg charcoal grey trousers (#3A3F47), and black leather chelsea boots (#16181C). The emerald is deep and saturated rather than bright or minty, and it is the only colour in the image that draws the eye.",
+          "imagePrompt": "He wears an open navy blue overshirt (#1F2A44) over a deep emerald green fine-gauge merino crew neck knit (#0F5C4A) with a visibly ribbed neckline and ribbed cuffs, straight-leg charcoal grey trousers (#3A3F47), and black leather chelsea boots (#16181C). The emerald is deep and saturated rather than bright or minty, and it is the only colour in the image that draws the eye.",
           "layers": [
             { "part": "Outerwear", "item": "Navy overshirt", "hex": "#1F2A44" },
             { "part": "Top", "item": "Emerald merino crew", "hex": "#0F5C4A" },
             { "part": "Bottom", "item": "Charcoal straight trousers", "hex": "#3A3F47" },
             { "part": "Shoes", "item": "Black chelsea", "hex": "#16181C" }
+          ]
+        },
+        {
+          "occasion": "Blazer and sneakers",
+          "when": "Smart, but not fully formal — a combination he already wears",
+          "note": "Confirmed 2026-09-06 as something he actually wears, and it turns out to be close to the purest expression of the register: 2026 coverage of modern preppy names this exact move by name — a tailored jacket with a sneaker in place of an Oxford shoe. The tie and jacket say effort; the sneaker says he chose it rather than the dress code choosing it for him.",
+          "imagePrompt": "He wears a charcoal grey sport coat (#3A3F47) with a defined shoulder, open, over a white dress shirt (#FFFFFF) with a plain collar and a tie in a palette colour — navy or burgundy, plain or a narrow stripe, no bright pattern. Straight-leg khaki chino trousers (#C2B49A). Clean white leather sneakers in a low-top terrace-shoe style, not a bulky performance trainer. The jacket and tie read dressed; the sneaker is the deliberate, chosen contrast.",
+          "layers": [
+            { "part": "Outerwear", "item": "Charcoal sport coat", "hex": "#3A3F47" },
+            { "part": "Top", "item": "White dress shirt", "hex": "#FFFFFF" },
+            { "part": "Neckwear", "item": "Tie — navy or burgundy, plain or narrow stripe", "hex": "#1F2A44" },
+            { "part": "Bottom", "item": "Khaki chino", "hex": "#C2B49A" },
+            { "part": "Shoes", "item": "White Adidas Barreda", "hex": "#E9E7E2" }
           ]
         }
       ]
@@ -200,8 +215,8 @@
           "why": "A long unbroken vertical is the most reliable lengthening device there is. Double-breasted adds width across the chest and works against it."
         },
         {
-          "rule": "No visible branding outside the gym",
-          "why": "Sport logos say 'on the way to train'. The clothes should not be doing that when the destination is a classroom."
+          "rule": "No visible athletic branding outside the gym — heritage fashion branding is a different thing",
+          "why": "Sport logos say 'on the way to train'; the clothes should not be doing that when the destination is a classroom. That was never a rule against branding as such — a Ralph Lauren pony is a heritage signifier central to this exact register, not a sport logo, and modern preppy is built partly around wearing it visibly. Adidas terrace sneakers (Samba, Barreda) sit in between and were already allowed on their own terms: the branding is subtle by design, not because branding got a pass."
         },
         {
           "rule": "Relaxed, never skinny — and never baggy",
@@ -216,9 +231,9 @@
         "why": "Replaces the printed sweatshirt outright. The slight shoulder structure does work a sweatshirt physically cannot, and it goes over anything already in the wardrobe."
       },
       {
-        "item": "Fine-gauge merino knit, crew or mock neck",
-        "colors": "Navy, charcoal",
-        "why": "The base layer the whole tonal column is built on. Uniqlo is already on the brand list and their merino is exactly the right weight."
+        "item": "White collared shirt (two or three)",
+        "colors": "White",
+        "why": "Confirmed 2026-09-06 as the actual work base — a crew neck doesn't belong at school for him, whatever it does off-duty. Charles Tyrwhitt is already on the brand list at the right collar size."
       },
       {
         "item": "Straight-leg trousers, mid-to-high rise",
@@ -234,6 +249,11 @@
         "item": "One clean leather shoe beside the Sambas",
         "colors": "Black, or espresso if a softer option is wanted — never tan or cognac",
         "why": "Derby or chelsea. Shoepassion is already on the list and the size is already known — 8. This one changed with the test: brown was the default answer, black is the Dark Winter answer, and it also happens to be the shoe that goes with a charcoal coat and charcoal trousers."
+      },
+      {
+        "item": "Fine-gauge merino knit, crew or mock neck",
+        "colors": "Navy, charcoal",
+        "why": "Off-duty now, not the work base — this is the sweater for weekends with his wife, or for layering over the shirt under the overshirt on a cold school day. Uniqlo is already on the brand list and their merino is exactly the right weight."
       }
     ],
     "seasonalWardrobe": {
@@ -333,7 +353,7 @@
       { "name": "Uniqlo", "category": "Knitwear", "note": "Now the most important name on this list — the merino line is the tonal base layer" },
       { "name": "Eterna", "category": "Silk ties" },
       { "name": "Shoepassion", "category": "Men's shoes", "note": "Size 8 — the black derby or chelsea comes from here. Was dark brown until the undertone test." },
-      { "name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. The branded sport tees stay in the gym." },
+      { "name": "Adidas", "category": "Sneakers, socks", "note": "Sambas stay. White Barreda added — same terrace-shoe family, dressier T-toe suede/leather build, Adidas's answer to the Nike Killshot. White is the core-safe colour; the branded sport tees stay in the gym." },
       { "name": "Levi's", "category": "Jeans — Denim 511 Slim", "note": "511 is a slim cut; the straight-leg correction applies here too when it is replaced" },
       { "name": "Banana Republic", "category": "Chino — 31/32 Mason Athletic Fit", "note": "Superseded by the fit revision" },
       { "name": "Burberry", "category": null },

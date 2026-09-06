@@ -647,10 +647,14 @@ function looksCard(l){
       '</div>';
   }).join("");
 
+  /* Counted rather than written down — the intro used to say "Five" as a
+     literal word, which silently went stale the moment a sixth look was
+     added and nobody remembered to edit this sentence too. */
+  var total = l.items.length;
   var missing = l.items.filter(function(o){ return !IMG[slug(o.occasion)]; }).length;
   var intro = missing === 0
-    ? 'Five assemblies. Every colour comes from the palette above.'
-    : 'Five assemblies. ' + missing + ' of 5 still show the drawn placeholder — ' +
+    ? total + ' assemblies. Every colour comes from the palette above.'
+    : total + ' assemblies. ' + missing + ' of ' + total + ' still show the drawn placeholder — ' +
       'each one carries the prompt that replaces it.';
 
   var c = style && style.correction;
