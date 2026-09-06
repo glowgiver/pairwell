@@ -39,9 +39,15 @@
     },
     "hair": {
       "priority": "The single biggest lever — roughly 60% of the effect is decided before any garment is chosen. Hair either rounds the face or lengthens it, and nothing worn below the collar can undo that.",
+      "caption": "Two-block cut — length and lift on top, tapered sides, matte not glossy. Near-black stays.",
+      "imageStyle": {
+        "prefix": "Close-up portrait illustration in a graphic novel style — flat matte ink like a European or American adult graphic novel, not anime or webtoon. Bold clean black ink outlines of even weight, no cross-hatching, no soft cel-shading, no gradients, no glossy highlights on the hair or skin. Head and shoulders only, three-quarter angle. Plain white background, no scenery, no props. No text, no labels, no captions, no logos.",
+        "figure": "Early-30s East Asian man, mature and quiet, calm expression, no smile. Near-black hair in a two-block cut: noticeable length and volume on top, swept softly to one side with lift at the crown, sides tapered short but not shaved or clipped — matte and textured throughout, never glossy or wet-look. Wearing a plain navy crew-neck knit, no visible branding.",
+        "suffix": "Portrait orientation, roughly 3:4, head and shoulders filling most of the frame with a small margin."
+      },
       "current": "Short, flat on top, growing forward, no taper at the sides and no volume at the crown. It rounds the face and takes height away.",
       "cut": "Two-block — 7–10 cm on top, sides tapered rather than shaved. If the name does not land at the barber, ask for length and volume on top with the sides tapered short but not clipped.",
-      "shape": "Soft side sweep or a loose middle part, with lift at the crown",
+      "shape": "Side sweep with lift at the crown — the classic preppy part, and it does more for his face shape than the alternative. Not a middle part: that reads closer to K-drama/idol styling than to this register, and without a real perm it tends to sit flat over a normal hairline rather than lengthening it the way a side sweep does.",
       "color": "Leave it. Near-black is a Dark Winter's own colour and the high contrast against the skin is the asset. If it is ever touched, a cool dark brown — ash or espresso, never caramel or warm brown.",
       "product": "Matte clay, not gel. Blow-dry lift from underneath first — glossy is a decade out of date.",
       "why": "Vertical lift lengthens the face and gives the jaw its line back; shaved sides would read harder than intended and add years the face has not earned. The colour advice here used to say the opposite — soften the black to a warm brown — and the undertone test overturned it. That recommendation was warm-season reasoning applied to cool skin, and it was the one thing in this file genuinely riding on the answer. The cut is unaffected: it comes from face shape, not colouring."

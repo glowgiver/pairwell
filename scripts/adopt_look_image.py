@@ -42,8 +42,14 @@ DOWNLOADS = os.path.expanduser("~/Downloads")
 EXT = (".png", ".jpg", ".jpeg", ".webp")
 
 
-def looks():
-    """[(slug, occasion, existing filename or None)] for every look."""
+def targets():
+    """[(slug, label, existing filename or None)] for every image the Style
+    page can show — the five looks, plus hair, plus whatever else in the file
+    grows an `imageStyle`. Adding a sixth look or a second illustrated field
+    needs no change here: anything with `imageStyle` is picked up on its own,
+    the same way build_style_page.py finds files by scanning the folder
+    rather than by a hardcoded list.
+    """
     data = json.load(open(DATA, encoding="utf-8"))
     out = []
     have = {}
@@ -58,6 +64,8 @@ def looks():
         for o in (p.get("looks") or {}).get("items", []):
             s = slug(o["occasion"])
             out.append((s, o["occasion"], have.get(s)))
+        if isinstance(p.get("hair"), dict) and p["hair"].get("imageStyle"):
+            out.append(("hair", "Hair", have.get("hair")))
     return out
 
 
@@ -76,8 +84,8 @@ def newest_download():
 
 
 def status():
-    rows = looks()
-    print("Look                 File                        State")
+    rows = targets()
+    print("Item                 File                        State")
     print("-" * 66)
     for s, occ, have in rows:
         print("%-20s %-27s %s" % (occ[:20], (have or s + ".png"),
@@ -129,10 +137,10 @@ def main():
         status()
         return 0
 
-    rows = looks()
+    rows = targets()
     match = [r for r in rows if r[0] == a.look]
     if not match:
-        print("No look called %r." % a.look)
+        print("No look or image called %r." % a.look)
         print("Known: %s" % ", ".join(r[0] for r in rows))
         return 1
     s, occasion, have = match[0]
@@ -167,11 +175,11 @@ def main():
     if n:
         print("sw.js cache bumped to hub-v%d" % n)
 
-    left = [r[1] for r in looks() if not r[2]]
+    left = [r[1] for r in targets() if not r[2]]
     print()
     # " · " rather than ", ": one of the occasions is "Colour, carefully",
     # and a comma-separated list containing a comma reads as six items.
-    print("Still drawn: %s" % (" · ".join(left) if left else "none — all five are illustrated"))
+    print("Still drawn: %s" % (" · ".join(left) if left else "none — everything is illustrated"))
     print("Deploy: git add -A && git commit && git push && "
           "git subtree push --prefix hub origin gh-pages")
     return 0

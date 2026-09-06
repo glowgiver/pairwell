@@ -201,6 +201,11 @@ html = """<!DOCTYPE html>
   /* The drawing is fixed-width so five of them line up down the page; a
      figure that resized per card would read as five different people. */
   .fig{width:82px;height:150px;flex:none}
+  /* Head-and-shoulders crop for the hair card, matching .lk-plate's own
+     96px/3:4 so the placeholder and the real photo swap without a jump. */
+  .fig-head{width:96px;height:128px}
+  .hair-cap{flex:1;min-width:0;font-family:var(--f-read);font-size:15px;
+    color:var(--text);line-height:1.5;align-self:center}
   .lk-rows{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
   .lk-row{display:grid;grid-template-columns:20px 74px 1fr;gap:8px;align-items:baseline}
   .lk-row .sw-dot{align-self:center}
@@ -450,18 +455,53 @@ function directionCard(d){
 
 /* Its own card rather than a line in Direction, because it is the one change
    that outranks every garment on the page. */
+/* A simplified head-and-shoulders placeholder, same bargain as the Looks
+   figures: flat shapes in the same visual language until a real
+   illustration exists at hub/style/img/hair.png. Circle for the head,
+   an asymmetric cap for the two-block cut this card is actually about —
+   volume swept to one side rather than a centred, symmetric silhouette. */
+function hairFigure(){
+  return '<svg class="fig fig-head" viewBox="0 0 96 128" aria-hidden="true">' +
+    '<path d="M18 106c4-14 16-22 30-22s26 8 30 22v14H18z" fill="#1F2A44"/>' +
+    '<path d="M40 74h16v18h-16z" fill="none" stroke="var(--muted2)" stroke-width="1.5"/>' +
+    '<circle cx="48" cy="48" r="26" fill="none" stroke="var(--muted2)" stroke-width="1.5"/>' +
+    '<path d="M22 42c1-16 12-26 26-26s25 10 26 26c-5-5-10-6-15-4-3-9-9-13-11-13s-8 4-11 13c-5-2-10-1-15 4z" fill="#16181C"/>' +
+    '</svg>';
+}
+
+function hairVisual(){
+  var src = IMG.hair;
+  if(!src) return hairFigure();
+  return '<div class="lk-plate"><img class="lk-img" src="' + esc(src) +
+    '" alt="Two-block haircut, matte and lifted" loading="lazy" decoding="async"></div>';
+}
+
+function hairPromptBlock(h){
+  if(IMG.hair || !h.imageStyle) return "";
+  var s = h.imageStyle;
+  var full = [s.prefix, s.figure, s.suffix].filter(Boolean).join(" ");
+  return fold("Image prompt — not generated yet",
+    '<div class="pr"><p class="pr-t">' + esc(full) + '</p>' +
+    '<button type="button" class="pr-c" data-prompt="' + esc(full) + '">Copy prompt</button>' +
+    '<p class="pr-h">Generate it, then save the file as <b>hair.png</b> in <b>hub/style/img/</b> and re-run the build. It replaces the drawing on its own.</p></div>');
+}
+
 function hairCard(h){
   if(!h) return "";
   var rows = [
-    ["Now", h.current], ["Cut", h.cut], ["Shape", h.shape],
-    ["Color", h.color], ["Product", h.product]
+    ["Cut", h.cut], ["Shape", h.shape], ["Color", h.color],
+    ["Product", h.product], ["Now", h.current]
   ].filter(function(r){ return r[1]; }).map(function(r){
     return '<div class="ref-item"><div class="ref-item-k">' + esc(r[0]) + '</div>' +
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
   return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "") +
-    '<div class="ref-body">' + rows + '</div>' +
+    '<div class="lk-body">' + hairVisual() +
+      '<div class="hair-cap">' + esc(h.caption || "") + '</div>' +
+    '</div>' +
+    hairPromptBlock(h) +
+    fold("Details", rows ? '<div class="ref-body">' + rows + '</div>' : "") +
     fold("Why", h.why ? '<div class="note">' + esc(h.why) + '</div>' : "");
 }
 
