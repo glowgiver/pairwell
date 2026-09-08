@@ -1,7 +1,7 @@
 /* Pairwell service worker.
    Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v86";
+const CACHE = "hub-v87";
 
 const SHELL = [
   "./",
@@ -24,7 +24,7 @@ const SHELL = [
      the one place this page is used. Empty until the first one is generated. */
   // <style-img>
   "./style/img/evening-out.png?v=37b940c9",
-  "./style/img/hair.png?v=bc570665",
+  "./style/img/hair.jpg?v=16c813dd",
   "./style/img/parent-evening.png?v=106c8679",
   "./style/img/school-day.png?v=a634dd2e",
   "./style/img/weekend.png?v=43c2ad95",
