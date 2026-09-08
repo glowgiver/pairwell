@@ -359,17 +359,6 @@ html = """<!DOCTYPE html>
      present without competing with brand/colour/price for the eye. */
   .plan-item .pi-detail.pi-muted{font-size:13px;color:var(--muted2);font-style:italic}
 
-  /* Outfit planner */
-  .outfitrow{padding:12px 16px;border-bottom:1px solid var(--line)}
-  .outfitrow:last-child{border-bottom:none}
-  .outfitrow .or-day{font-family:var(--f-data);font-size:13px;font-weight:700;
-    text-transform:uppercase;letter-spacing:.05em;color:var(--accent)}
-  .outfitrow .or-body{margin-top:5px}
-  .outfitrow dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
-  .outfitrow dt{font-family:var(--f-data);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted2)}
-  .outfitrow dd{margin:0;font-family:var(--f-read);font-size:14.5px;color:var(--text)}
-  .outfitrow .or-empty{font-family:var(--f-read);font-size:14px;font-style:italic;color:var(--muted2);margin-top:4px}
-
   /* Deliberately no scroll-behavior:smooth. This page is around fifteen
      screens tall, so animating a jump from the index to Size is a couple of
      seconds of blur on the way to somewhere you already chose. A jump link
@@ -562,6 +551,7 @@ function paletteCard(p){
     (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
     group(p.accent, "Accents", false) +
     group(p.warmNeutrals, "Warm neutrals — his call, not the metal test's", true) +
+    group(p.unconfirmed, "Unconfirmed — cool, but not yet worn enough to say", true) +
     group(p.ruledOut, "Ruled out by the metal test", true) +
     (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
     fold("Why this palette", (evidence ? '<div class="ref-body">' + evidence + '</div>' : "") +
@@ -811,25 +801,6 @@ function chinoPlanCard(p){
     '</div>' + rows + rev;
 }
 
-function outfitPlannerCard(op){
-  if(!op || !op.days) return "";
-  var FIELDS = [
-    ["top", "Top"], ["bottom", "Bottom"], ["shoes", "Shoes"],
-    ["accessories", "Accessories"], ["outerwear", "Outerwear"]
-  ];
-  var rows = op.days.map(function(d){
-    var filled = FIELDS.filter(function(f){ return d[f[0]]; });
-    var body = filled.length
-      ? '<dl>' + filled.map(function(f){
-          return '<dt>' + esc(f[1]) + '</dt><dd>' + esc(d[f[0]]) + '</dd>';
-        }).join("") + '</dl>'
-      : '<div class="or-empty">Not planned yet</div>';
-    return '<div class="outfitrow"><div class="or-day">' + esc(d.day) + '</div>' +
-      '<div class="or-body">' + body + '</div></div>';
-  }).join("");
-  return head('Outfit planner', op.note ? esc(op.note) : "") + rows;
-}
-
 function renderStage(){
   var stage = document.getElementById("stage");
   var p = profile();
@@ -856,8 +827,7 @@ function renderStage(){
     ["Wardrobe",   seasonalWardrobeCard(p.seasonalWardrobe)],
     ["Chinos",     chinoPlanCard(p.chinoPlan)],
     ["Brands",     brandsCard(p.brands)],
-    ["Size",       sizeCard(p.size)],
-    ["Planner",    outfitPlannerCard(p.outfitPlanner)]
+    ["Size",       sizeCard(p.size)]
   ].filter(function(c){ return c[1]; });
 
   var jump = CARDS.length > 1
