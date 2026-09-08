@@ -492,7 +492,7 @@ function hairPromptBlock(h){
 function hairCard(h){
   if(!h) return "";
   var rows = [
-    ["Cut", h.cut], ["Shape", h.shape], ["Color", h.color],
+    ["Cut", h.cut], ["Ask for it in German", h.barberDE], ["Shape", h.shape], ["Color", h.color],
     ["Product", h.product], ["Now", h.current]
   ].filter(function(r){ return r[1]; }).map(function(r){
     return '<div class="ref-item"><div class="ref-item-k">' + esc(r[0]) + '</div>' +
