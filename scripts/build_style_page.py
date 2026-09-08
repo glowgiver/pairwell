@@ -473,7 +473,7 @@ function hairVisual(){
   var src = IMG.hair;
   if(!src) return hairFigure();
   return '<div class="lk-plate"><img class="lk-img" src="' + esc(src) +
-    '" alt="Two-block haircut, matte and lifted" loading="lazy" decoding="async"></div>';
+    '" alt="Taper haircut, matte and lifted" loading="lazy" decoding="async"></div>';
 }
 
 function hairPromptBlock(h){
