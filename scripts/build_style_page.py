@@ -214,6 +214,20 @@ html = """<!DOCTYPE html>
   .lk-item{font-family:var(--f-read);font-size:14.5px;color:var(--text);line-height:1.4}
   .lk-note{font-family:var(--f-read);font-size:14px;color:var(--muted);
     margin-top:10px;line-height:1.55}
+  /* A plain link out to a real photo of the combination, not an embed —
+     same reasoning as the workout page's demo links: no runtime fetch, and
+     copyright stays with whoever took the photo. */
+  .lk-ref{
+    display:inline-flex;align-items:center;gap:7px;margin-top:10px;
+    min-height:var(--tap);padding:0 14px;border-radius:11px;
+    border:1px solid var(--line);background:var(--surface-2);
+    color:var(--accent);text-decoration:none;
+    font-family:var(--f-ui);font-size:14px;font-weight:600;
+  }
+  .lk-ref svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round}
+  .lk-ref:active{background:var(--accent);color:var(--bg)}
+  .lk-ref:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   /* The generated illustration sits on its own white plate. The house style
      asks for a white background, and a white rectangle floating on a dark
      card reads as a bug — a plate with a border and a radius reads as a
@@ -643,6 +657,10 @@ function looksCard(l){
       '<div class="lk-body">' + lookVisual(o, id) +
       '<div class="lk-rows">' + rows + '</div></div>' +
       (o.note ? '<div class="lk-note">' + esc(o.note) + '</div>' : '') +
+      (o.reference ? '<a class="lk-ref" href="' + esc(o.reference.url) +
+        '" target="_blank" rel="noopener noreferrer">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>' +
+        esc(o.reference.label || 'See a real example') + '</a>' : '') +
       promptBlock(o, id, style) +
       '</div>';
   }).join("");

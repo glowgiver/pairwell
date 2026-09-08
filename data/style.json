@@ -123,6 +123,7 @@
           "occasion": "School day",
           "when": "The default, and the one worth getting right — it is most of the week",
           "note": "Confirmed 2026-09-06: a real collar for work, not a crew neck — the knit is what he wears off-duty with his wife, not what belongs at school. On cold days the merino crew goes back in, but layered over the shirt, under the overshirt — the collar still shows, so the rule holds either way. Tonal from collar to shoe, one shoulder seam on the outside. Nothing here needs ironing on a Tuesday morning.",
+          "reference": { "label": "Real chelsea-boot outfits, this register", "url": "https://lookastic.com/men/black-chelsea-boots/looks" },
           "imagePrompt": "He wears a plain open charcoal grey overshirt (#3A3F47) with a defined shoulder seam and no chest pocket, over a white cotton shirt (#FFFFFF) with a plain point collar visible at the neck, buttoned without a tie. Straight-leg charcoal grey trousers (#3A3F47) that fall clear of the hip in one continuous line with no crease and no break at the ankle, and black leather chelsea boots (#16181C). The overshirt hangs open and straight, forming one unbroken vertical line down each side.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal overshirt", "hex": "#3A3F47" },
@@ -136,6 +137,7 @@
           "occasion": "Parent evening",
           "when": "When the room has other adults in it and the clothes are read once, quickly",
           "note": "Confirmed 2026-09-06: no tie here didn't sit right with him — a parent evening reads as a room to be dressed for, not just a coat to be seen in. The tie is what changes; the coat still does most of the work.",
+          "reference": { "label": "Ryan Reynolds, this exact combination", "url": "https://lookastic.com/men/looks/navy-overcoat-white-dress-shirt-black-dress-pants/18343" },
           "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) that reaches just below the knee, over a plain pure white shirt (#FFFFFF) with a spread collar — a plain collar, not a button-down oxford collar — and a tie in a palette colour (navy or burgundy, plain or a narrow stripe, no bright pattern), straight-leg navy blue trousers (#1F2A44), and black leather derby shoes (#16181C). The coat is single-breasted with a narrow lapel and hangs open in one long straight vertical line.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal knee-length coat", "hex": "#3A3F47" },
@@ -149,6 +151,7 @@
           "occasion": "Weekend",
           "when": "Errands, coffee, the park",
           "note": "The Sambas stay. They are the one thing in the current photographs that already works, and shoes sit far enough from the face that the palette rule is not doing much down there.",
+          "reference": { "label": "Real Samba outfit ideas", "url": "https://meninspire.com/samba-outfit-men/" },
           "imagePrompt": "He wears an open dark forest green overshirt (#2E4535) over a plain pure white t-shirt (#FFFFFF), straight-leg dark indigo denim jeans (#23314A) in a deep even wash with no fading and no distressing, and low-profile white leather sneakers with a gum sole (#E9E7E2) and three plain stripes. Relaxed but not loose; the jeans are straight through the leg, never skinny and never baggy.",
           "layers": [
             { "part": "Outerwear", "item": "Forest overshirt", "hex": "#2E4535" },
@@ -161,6 +164,7 @@
           "occasion": "Evening out",
           "when": "Dinner, a bar, anywhere with low light",
           "note": "Black on black on black, broken only by the coat being a shade lighter. This is the look the high contrast in his colouring was made for.",
+          "reference": { "label": "Real mock-neck outfits, this register", "url": "https://lookastic.com/men/black-mock-neck-sweater/looks" },
           "imagePrompt": "He wears an open single-breasted charcoal grey wool coat (#3A3F47) reaching just below the knee, over a black fine-gauge mock neck knit (#16181C) with a visibly ribbed stand collar and ribbed cuffs, straight-leg black trousers (#16181C), and black leather chelsea boots (#16181C). Almost entirely black from the neck down, with the coat one clear shade lighter so the silhouette still separates from the layers beneath it.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal coat", "hex": "#3A3F47" },
@@ -173,6 +177,7 @@
           "occasion": "Colour, carefully",
           "when": "When the whole week has been navy and charcoal",
           "note": "One accent, at the top, with everything under it quiet. Emerald is a Dark Winter colour rather than a bright one, so it reads as depth and not as a statement.",
+          "reference": { "label": "Real dark-green sweater outfits", "url": "https://lookastic.com/men/dark-green-sweater/looks" },
           "imagePrompt": "He wears an open navy blue overshirt (#1F2A44) over a deep emerald green fine-gauge merino crew neck knit (#0F5C4A) with a visibly ribbed neckline and ribbed cuffs, straight-leg charcoal grey trousers (#3A3F47), and black leather chelsea boots (#16181C). The emerald is deep and saturated rather than bright or minty, and it is the only colour in the image that draws the eye.",
           "layers": [
             { "part": "Outerwear", "item": "Navy overshirt", "hex": "#1F2A44" },
@@ -185,6 +190,7 @@
           "occasion": "Blazer and sneakers",
           "when": "Smart, but not fully formal — a combination he already wears",
           "note": "Confirmed 2026-09-06 as something he actually wears, and it turns out to be close to the purest expression of the register: 2026 coverage of modern preppy names this exact move by name — a tailored jacket with a sneaker in place of an Oxford shoe. The tie and jacket say effort; the sneaker says he chose it rather than the dress code choosing it for him.",
+          "reference": { "label": "Real blazer + white-sneaker outfits", "url": "https://lookastic.com/men/white-sneakers/how-to-wear-with/khaki-chinos" },
           "imagePrompt": "He wears a charcoal grey sport coat (#3A3F47) with a defined shoulder, open, over a white dress shirt (#FFFFFF) with a plain collar and a tie in a palette colour — navy or burgundy, plain or a narrow stripe, no bright pattern. Straight-leg khaki chino trousers (#C2B49A). Clean white leather sneakers in a low-top terrace-shoe style, not a bulky performance trainer. The jacket and tie read dressed; the sneaker is the deliberate, chosen contrast.",
           "layers": [
             { "part": "Outerwear", "item": "Charcoal sport coat", "hex": "#3A3F47" },
