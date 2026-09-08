@@ -1,7 +1,7 @@
 /* Pairwell service worker.
    Update rule: bump CACHE whenever files have changed. */
 
-const CACHE = "hub-v85";
+const CACHE = "hub-v86";
 
 const SHELL = [
   "./",
@@ -23,12 +23,11 @@ const SHELL = [
      but "first view" means online, and an outfit you cannot see in a shop is
      the one place this page is used. Empty until the first one is generated. */
   // <style-img>
-  "./style/img/colour-carefully.png?v=ae8d964f",
-  "./style/img/evening-out.png?v=fa3e3c23",
-  "./style/img/hair.png?v=99506f05",
-  "./style/img/parent-evening.png?v=3672c952",
-  "./style/img/school-day.png?v=ee3148e9",
-  "./style/img/weekend.png?v=9bb1c8f5",
+  "./style/img/evening-out.png?v=37b940c9",
+  "./style/img/hair.png?v=bc570665",
+  "./style/img/parent-evening.png?v=106c8679",
+  "./style/img/school-day.png?v=a634dd2e",
+  "./style/img/weekend.png?v=43c2ad95",
   // </style-img>
 ];
 
