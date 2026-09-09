@@ -138,6 +138,11 @@ html = """<!DOCTYPE html>
      and without headings it has no outline to navigate by at all. */
   .ref-title{font-size:18px;font-weight:700;margin:0;letter-spacing:-.01em}
   .ref-intro{font-family:var(--f-read);font-size:14.5px;color:var(--muted);margin-top:4px;line-height:1.55}
+  /* Sub-content inside a section keeps its intro line but loses its heading,
+     so the intro has to carry its own padding — it is no longer sitting
+     inside .ref-head. */
+  .ref-intro.bare{margin:0;padding:12px 16px 2px}
+  details.fold .ref-intro.bare{padding-top:10px}
   .ref-body{padding:4px 16px}
   /* Stacked first. Several values here are full paragraphs, and a fixed label
      column on a 375px screen leaves them about 215px wide — a text ribbon.
@@ -374,7 +379,7 @@ html = """<!DOCTYPE html>
 </div>
 
 <h1>Style</h1>
-<p class="sub">Direction, palette, silhouette, sizes — a lookup, not a checklist.</p>
+<p class="sub">What to wear, what to buy, what to tell the barber.</p>
 
 <main id="stage"></main>
 
@@ -399,7 +404,12 @@ function profile(){ return S[person()]; }
    the jump bar and the cards cannot disagree about what a section is called
    or whether it exists. Both arguments are HTML and are escaped by callers,
    because most titles are a literal joined to an escaped value. */
-function head(title, intro){
+/* `bare` drops the card's own heading but keeps its intro line, for the cards
+   that are now sub-content inside one of the four sections. The intro is often
+   the rule itself — palette's is the palette rule — so it cannot go with the
+   title. */
+function head(title, intro, bare){
+  if(bare) return intro ? '<div class="ref-intro bare">' + intro + '</div>' : '';
   return '<div class="ref-head"><h2 class="ref-title">' + title + '</h2>' +
     (intro ? '<div class="ref-intro">' + intro + '</div>' : '') + '</div>';
 }
@@ -416,7 +426,7 @@ function slug(s){
 }
 
 /* The frame everything else is read through, so it comes first. */
-function directionCard(d){
+function directionCard(d, bare){
   if(!d) return "";
   var refs = (d.references || []).map(function(r){
     return '<div class="refperson"><div class="rp-n">' + esc(r.name) + '</div>' +
@@ -434,7 +444,7 @@ function directionCard(d){
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
-  return head('Direction — ' + esc(d.register), d.thesis ? esc(d.thesis) : "") +
+  return head('Direction — ' + esc(d.register), d.thesis ? esc(d.thesis) : "", bare) +
     fold("What this is built on", reasoning ? '<div class="ref-body">' + reasoning + '</div>' : "") +
     (refs
       ? '<div class="sw-label">Reference</div>' +
@@ -486,7 +496,7 @@ function hairPromptBlock(h){
     '<p class="pr-h">Generate it, then save the file as <b>hair.png</b> in <b>hub/style/img/</b> and re-run the build. It replaces the drawing on its own.</p></div>');
 }
 
-function hairCard(h){
+function hairCard(h, bare){
   if(!h) return "";
   var rows = [
     ["Cut", h.cut], ["Ask for it in German", h.barberDE], ["Shape", h.shape], ["Color", h.color],
@@ -496,7 +506,7 @@ function hairCard(h){
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
-  return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "") +
+  return head('Hair — the biggest lever', h.priority ? esc(h.priority) : "", bare) +
     '<div class="lk-body">' + hairVisual() +
       '<div class="hair-cap">' + esc(h.caption || "") + '</div>' +
     '</div>' +
@@ -515,7 +525,7 @@ function swatches(list, withWhy){
   }).join("") + '</div>';
 }
 
-function paletteCard(p){
+function paletteCard(p, bare){
   if(!p) return "";
 
   /* The undertone used to be an open question and this card used to say so,
@@ -542,7 +552,7 @@ function paletteCard(p){
       '<div class="ref-item-v">' + esc(r[1]) + '</div></div>';
   }).join("");
 
-  return head('Palette — ' + esc(p.type), p.rule ? esc(p.rule) : "") +
+  return head('Palette — ' + esc(p.type), p.rule ? esc(p.rule) : "", bare) +
     (p.metal ? '<div class="ref-body"><div class="ref-item"><div class="ref-item-k">Metal</div>' +
       '<div class="ref-item-v">' + esc(p.metal) + '</div></div></div>' : '') +
     (p.core ? '<div class="sw-label">Core</div>' + swatches(p.core, false) : '') +
@@ -625,7 +635,7 @@ function promptBlock(o, id, style){
     '.png</b> in <b>hub/style/img/</b> and re-run the build. It replaces the drawing on its own.</p></div>');
 }
 
-function looksCard(l){
+function looksCard(l, bare){
   if(!l || !l.items || !l.items.length) return "";
   var style = l.imageStyle;
   var items = l.items.map(function(o){
@@ -660,10 +670,10 @@ function looksCard(l){
     : total + ' assemblies. ' + missing + ' of ' + total + ' still show the drawn placeholder — ' +
       'each one carries the prompt that replaces it.';
 
-  return head('Looks', intro) + items;
+  return head('Looks', intro, bare) + items;
 }
 
-function silhouetteCard(s){
+function silhouetteCard(s, bare){
   if(!s || !s.rules) return "";
   var rules = s.rules.map(function(r){
     return '<div class="rule"><div class="rule-r">' + esc(r.rule) + '</div>' +
@@ -672,10 +682,10 @@ function silhouetteCard(s){
   /* The count came from counting the rules, so it is counted rather than
      written down — the sentence used to say "six" and the array is data. */
   return head('Silhouette', s.rules.length +
-    ' rules. They do more work than any single garment.') + rules;
+    ' rules. They do more work than any single garment.', bare) + rules;
 }
 
-function buyNextCard(list){
+function buyNextCard(list, bare){
   if(!list || !list.length) return "";
   var items = list.map(function(b, i){
     return '<li><span class="n">' + (i + 1) + '</span><div>' +
@@ -684,7 +694,7 @@ function buyNextCard(list){
       (b.why ? '<div class="p">' + esc(b.why) + '</div>' : '') +
       '</div></li>';
   }).join("");
-  return head('Buy next', 'In this order. The order is the advice.') +
+  return head('Buy next', 'In this order. The order is the advice.', bare) +
     '<ol class="buy">' + items + '</ol>';
 }
 
@@ -696,7 +706,7 @@ function currentSeason(){
           "Summer","Summer","Autumn","Autumn","Autumn","Winter"][new Date().getMonth()];
 }
 
-function seasonalWardrobeCard(w){
+function seasonalWardrobeCard(w, bare){
   if(!w) return "";
   var FIELDS = [
     ["tops", "Tops"], ["outerwear", "Outerwear"], ["bottoms", "Bottoms"],
@@ -715,23 +725,23 @@ function seasonalWardrobeCard(w){
       '</div><dl>' + dl + '</dl></div>';
   }).join("");
 
-  return head('Seasonal wardrobe', w.paletteNote ? esc(w.paletteNote) : "") +
+  return head('Seasonal wardrobe', w.paletteNote ? esc(w.paletteNote) : "", bare) +
     seasons +
     (w.styleNote ? '<div class="note">' + esc(w.styleNote) + '</div>' : '') +
     fold("What changed here", w.note ? '<div class="note">' + esc(w.note) + '</div>' : "");
 }
 
-function brandsCard(brands){
+function brandsCard(brands, bare){
   if(!brands || !brands.length) return "";
   var rows = brands.map(function(b){
     return '<div class="brandrow"><div><span class="bn">' + esc(b.name) + '</span>' +
       (b.note ? '<div class="rule-w">' + esc(b.note) + '</div>' : '') + '</div>' +
       (b.category ? '<span class="bc">' + esc(b.category) + '</span>' : '') + '</div>';
   }).join("");
-  return head('Brands', 'Where the sizes are already known.') + rows;
+  return head('Brands', 'Where the sizes are already known.', bare) + rows;
 }
 
-function sizeCard(sz){
+function sizeCard(sz, bare){
   if(!sz) return "";
   var FIELDS = [
     ["collar", "Collar"], ["shoulder", "Shoulder"], ["chest", "Chest"],
@@ -746,11 +756,11 @@ function sizeCard(sz){
   var notes = (sz.notes || []).map(function(n){
     return '<div class="note">' + esc(n) + '</div>';
   }).join("");
-  return head('Size', 'The one card that gets opened in a shop.') +
+  return head('Size', 'The numbers, for when something has to be tried on.', bare) +
     '<div class="ref-body">' + rows + '</div>' + notes;
 }
 
-function chinoPlanCard(p){
+function chinoPlanCard(p, bare){
   if(!p) return "";
   /* One row per phase, not one row per phase AND one per brand. Those used
      to be two separate arrays — purchases and roadmap — and rendered back to
@@ -770,7 +780,7 @@ function chinoPlanCard(p){
       '</div>';
   }).join("");
 
-  return head('Chino plan', esc(p.goal)) +
+  return head('Chino plan', esc(p.goal), bare) +
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
@@ -788,32 +798,45 @@ function renderStage(){
     return;
   }
 
-  /* Ordered by how much each one changes, not by how the source notes were
-     filed: direction frames everything, hair outranks any garment, palette and
-     silhouette are the rules, and only then the things you actually buy.
-     The jump bar is what makes that order affordable — reading order stays
-     by importance, and Size is still one tap away. */
-  var CARDS = [
-    ["Direction",  directionCard(p.direction)],
-    ["Hair",       hairCard(p.hair)],
-    ["Palette",    paletteCard(p.palette)],
-    ["Looks",      looksCard(p.looks)],
-    ["Silhouette", silhouetteCard(p.silhouette)],
-    ["Buy next",   buyNextCard(p.buyNext)],
-    ["Wardrobe",   seasonalWardrobeCard(p.seasonalWardrobe)],
-    ["Chinos",     chinoPlanCard(p.chinoPlan)],
-    ["Brands",     brandsCard(p.brands)],
-    ["Size",       sizeCard(p.size)]
+  /* Three questions, not ten chapters.
+
+     This page used to be ten peer cards in order of importance, which is how
+     the source notes were filed and not how the page is used: 57 phone
+     screens with the folds shut, and no answer to anything until you had read
+     your way to it. Every other module here opens with the answer — tonight's
+     four steps, today's session, what we cook — and this one opened with an
+     essay about him.
+
+     It gets opened for exactly three reasons: getting dressed, standing in a
+     shop, sitting in a barber's chair. So those are the sections, and the
+     reasoning that produced them is read-once material that belongs in a
+     drawer at the bottom rather than in the reading path. */
+  var SECTIONS = [
+    ["Wear", looksCard(p.looks, true)],
+
+    ["Hair", hairCard(p.hair, true)],
+
+    ["Buy", buyNextCard(p.buyNext, true) +
+            fold("Colours", paletteCard(p.palette, true)) +
+            fold("Cut", silhouetteCard(p.silhouette, true)) +
+            fold("Sizes", sizeCard(p.size, true)) +
+            fold("Brands", brandsCard(p.brands, true)) +
+            fold("Chinos", chinoPlanCard(p.chinoPlan, true))],
+
+    ["Background", fold("Direction", directionCard(p.direction, true)) +
+                   fold("Seasonal wardrobe", seasonalWardrobeCard(p.seasonalWardrobe, true))]
   ].filter(function(c){ return c[1]; });
 
-  var jump = CARDS.length > 1
-    ? '<nav class="jump" aria-label="Jump to section">' + CARDS.map(function(c){
+  var jump = SECTIONS.length > 1
+    ? '<nav class="jump" aria-label="Jump to section">' + SECTIONS.map(function(c){
         return '<a href="#' + slug(c[0]) + '">' + esc(c[0]) + '</a>';
       }).join("") + '</nav>'
     : "";
 
-  stage.innerHTML = jump + CARDS.map(function(c){
-    return '<section class="ref-card" id="' + slug(c[0]) + '">' + c[1] + '</section>';
+  stage.innerHTML = jump + SECTIONS.map(function(c){
+    return '<section class="ref-card" id="' + slug(c[0]) + '">' +
+      '<div class="ref-head"><h2 class="ref-title">' + esc(c[0]) + '</h2></div>' +
+      c[1] + '</section>';
   }).join("");
 }
 
