@@ -573,19 +573,23 @@ function el(tag, cls, html){
   return e;
 }
 
-/* Sessions available to the current person at the current location:
-   their own, plus the Sunday session they train together. "Together" is a
-   session, not a third person — it belongs in both their weeks. */
+/* Sessions available to the current person at the current location: the ones
+   they train together, then their own. "Together" is a session, not a third
+   person — it belongs in both their weeks.
+
+   Shared comes first because at home the only per-person session left is
+   Optional Extras, which is explicitly unscheduled — leading with it put the
+   least important card in front of Friday's actual session. */
 function sessionsFor(loc, who){
   var atLoc = T.sessions[loc] || {};
   var out = [];
-  var own = atLoc[who] || {};
-  Object.keys(own).forEach(function(k){
-    out.push({ key: who + ":" + k, data: own[k], together: false });
-  });
   var shared = atLoc.shared || {};
   Object.keys(shared).forEach(function(k){
     out.push({ key: "shared:" + k, data: shared[k], together: true });
+  });
+  var own = atLoc[who] || {};
+  Object.keys(own).forEach(function(k){
+    out.push({ key: who + ":" + k, data: own[k], together: false });
   });
   return out;
 }
