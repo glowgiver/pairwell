@@ -297,10 +297,11 @@
     },
     "home": {
       "philipp": {
-        "push": {
-          "title": "Push + Taper",
-          "day": "Home · Push",
-          "focus": "Bodylastics — cable feel at home",
+        "fullBody": {
+          "title": "Full Body",
+          "day": "Home — no fixed day, whenever Gym/Rayofi isn't available",
+          "focus": "side delt · lat · chest · back · rear delt · legs maintenance",
+          "note": "Bodylastics equivalent of the Gym Full Body session, for when the gym or Rayofi aren't an option. Same trims as the gym version, for the same reason: face pull, RDL/hamstrings, biceps curl and the kneeling crunch dropped to keep it under an hour.",
           "exercises": [
             {
               "name": "Band Lateral Raise (cross-body)",
@@ -317,20 +318,6 @@
               "cue": "Stand on the band with the opposite foot so it crosses the body — that keeps the tension at the bottom the way the cable does. Lead with the elbow."
             },
             {
-              "name": "Band Chest Press",
-              "ref": "gym: Cable Chest Press",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 4,
-              "reps": "10-12",
-              "extras": {
-                "load": "Red (L3) + Green (L2)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward. Feels almost identical to the cable. More tubes = more resistance."
-            },
-            {
               "name": "Band Lat Pulldown (kneeling)",
               "ref": "gym: Lat Pulldown",
               "focus": "a",
@@ -345,11 +332,53 @@
               "cue": "Anchor the band at the very top of the door. Kneeling, wide grip, pull the elbows down and out towards the ribs, squeeze the lats."
             },
             {
-              "name": "Band Triceps Pushdown",
-              "ref": "gym: Triceps Pushdown",
+              "name": "Band Chest Press",
+              "ref": "gym: Cable Chest Press",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Red (L3) + Green (L2)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward. Feels almost identical to the cable."
+            },
+            {
+              "name": "Band Seated Row (low anchor)",
+              "ref": "gym: Cable Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Blue (L4) + Black (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Low anchor, or looped around both feet. Sit upright, pull to the belly, shoulder blades together."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "gym: Rear Delt Fly",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Green (L2)",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "No anchor: band in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
+            },
+            {
+              "name": "Band Triceps Pushdown",
+              "ref": "gym: Triceps Pushdown",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
               "reps": "12-15",
               "extras": {
                 "load": "Red (L3)",
@@ -373,20 +402,6 @@
               "cue": "Maintenance. Stand on the tube, handles at the shoulders, high reps, light. Just hold."
             },
             {
-              "name": "Band Kneeling Crunch",
-              "ref": "gym: Cable Crunch",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Blue (L4)",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Anchor the band high, kneeling, fold the ribs towards the hips, hands fixed at the ears."
-            },
-            {
               "name": "Hollow Hold",
               "ref": "gym: Hollow Hold",
               "focus": "c",
@@ -397,112 +412,6 @@
                 "rest": "45s"
               },
               "cue": "Lower back flat, arms long. Build up to 40s."
-            }
-          ],
-          "durationMin": 45
-        },
-        "pull": {
-          "title": "Pull + Posture",
-          "day": "Home · Pull",
-          "focus": "Bodylastics — pulling + posture",
-          "exercises": [
-            {
-              "name": "Band Lateral Raise (cross-body)",
-              "ref": "gym: Cable Lat Raise",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Yellow (L1)",
-                "rir": "RIR 2",
-                "rest": "60s"
-              },
-              "cue": "Second side-delt hit. Opposite foot on the band for tension at the bottom, lead with the elbow."
-            },
-            {
-              "name": "Band Lat Pulldown (kneeling)",
-              "ref": "gym: Lat Pulldown",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Blue (L4) + Black (L5)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Anchor the band high, kneeling, wide, elbows down and out — replaces the pull-up, no bar needed."
-            },
-            {
-              "name": "Band Seated Row (low anchor)",
-              "ref": "gym: Cable Row",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10-12",
-              "extras": {
-                "load": "Blue (L4) + Black (L5)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Low anchor, or looped around both feet. Sit upright, pull to the belly, shoulder blades together."
-            },
-            {
-              "name": "Band Rear Delt Pull-Apart",
-              "ref": "gym: Rear Delt Fly",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 1",
-                "rest": "60s"
-              },
-              "cue": "No anchor: band in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
-            },
-            {
-              "name": "Band Face Pull (mid anchor)",
-              "ref": "gym: Face Pull",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 1",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Anchor at head height, pull to the forehead, elbows high and wide, rotate externally."
-            },
-            {
-              "name": "Band RDL (bilateral)",
-              "ref": "gym: Hamstring Curl",
-              "focus": "g",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "Blue (L4) folded",
-                "rir": "RIR 3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. Carabiners into one handle, stand on the loop, hinge back with a soft knee, 3s down, squeeze the glutes."
-            },
-            {
-              "name": "Band Biceps Curl",
-              "ref": "gym: Cable Curl",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Stand on the band, elbows fixed, curl up, squeeze, slow on the way down."
             }
           ],
           "durationMin": 45
@@ -583,17 +492,18 @@
         }
       },
       "eunice": {
-        "solo": {
-          "title": "Lower + Push",
-          "day": "Home · Lower",
-          "focus": "Bodylastics — glute focus",
+        "fullBody": {
+          "title": "Full Body",
+          "day": "Home — no fixed day, whenever eGym/Rayofi isn't available",
+          "focus": "glutes · legs · lat · back · shoulder · rear delt maintenance",
+          "note": "Bodylastics equivalent for when eGym or Rayofi aren't an option. Same trims as the other Full Body sessions: adductor squeeze, the separate triceps pushdown and biceps curl dropped to keep it under an hour.",
           "exercises": [
             {
               "name": "Band Hip Thrust",
               "ref": "gym: Hip Thrust",
               "focus": "g",
               "tier": "primary",
-              "sets": 4,
+              "sets": 3,
               "reps": "15",
               "extras": {
                 "load": "Blue (L4) folded",
@@ -617,25 +527,11 @@
               "cue": "Stand on the tube, feet wider, handles at the shoulders, 3s down. Inner thigh plus glutes."
             },
             {
-              "name": "Band Adductor Squeeze (lying)",
-              "ref": "gym: Adductor",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15-20",
-              "extras": {
-                "load": "light band",
-                "rir": "RIR 1-2",
-                "rest": "45s"
-              },
-              "cue": "Band around the ankles, on your back, legs apart, squeeze together for 3s, open under control for 2s. Burns fast."
-            },
-            {
               "name": "Band RDL (bilateral)",
               "ref": "gym: Leg Curl",
               "focus": "g",
               "tier": "primary",
-              "sets": 3,
+              "sets": 2,
               "reps": "12-15",
               "extras": {
                 "load": "Blue (L4) folded",
@@ -644,53 +540,6 @@
               },
               "cue": "Back of the leg. Carabiners into one handle, stand on it, soft knee, 3s hinging back, squeeze the glutes."
             },
-            {
-              "name": "Push-Up (knee or standard)",
-              "ref": "gym: Chest Press",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "10-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. Knee version to regress, 3s down. Chest and triceps in one."
-            },
-            {
-              "name": "Band Triceps Pushdown",
-              "ref": "gym: Triceps Machine",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "12-15",
-              "extras": {
-                "load": "Yellow (L1)",
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. High anchor, elbows fixed, press down until straight."
-            },
-            {
-              "name": "Dead Bug",
-              "ref": "gym: Ab Machine",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "10/side",
-              "extras": {
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
-            }
-          ],
-          "durationMin": 45
-        },
-        "pull": {
-          "title": "Upper + Glutes",
-          "day": "Home · Upper",
-          "focus": "Bodylastics — back + glutes",
-          "exercises": [
             {
               "name": "Band Lateral Raise (cross-body)",
               "ref": "gym: Cable Lat Raise",
@@ -724,7 +573,7 @@
               "ref": "gym: Cable Row",
               "focus": "a",
               "tier": "primary",
-              "sets": 3,
+              "sets": 2,
               "reps": "10-12",
               "extras": {
                 "load": "Green (L2)",
@@ -734,53 +583,38 @@
               "cue": "Around both feet or a low anchor, upright, to the belly, shoulder blades together."
             },
             {
-              "name": "Band Hip Thrust",
-              "ref": "gym: Hip Thrust",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "Blue (L4) folded",
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Glutes twice a week. Tube over the hips, squeeze 2s at the top."
-            },
-            {
               "name": "Band Rear Delt Pull-Apart",
               "ref": "gym: Rear Delt + Face Pull",
               "focus": "a",
-              "tier": "primary",
-              "sets": 3,
+              "tier": "maint",
+              "sets": 2,
               "reps": "15-20",
               "extras": {
                 "load": "Green (L2)",
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "cue": "Band in both hands in front, pull apart to the chest, lead with the little fingers. A defined back."
+              "cue": "Band in both hands in front, pull apart to the chest, lead with the little fingers."
             },
             {
-              "name": "Band Biceps Curl",
-              "ref": "gym: Cable Curl",
+              "name": "Push-Up (knee or standard)",
+              "ref": "gym: Chest Press",
               "focus": "a",
               "tier": "maint",
               "sets": 2,
-              "reps": "15",
+              "reps": "10-15",
               "extras": {
-                "load": "Green (L2)",
                 "rir": "RIR 2-3",
-                "rest": "45s"
+                "rest": "60s"
               },
-              "cue": "Maintenance. Stand on the band, elbows fixed, slow on the way down."
+              "cue": "Maintenance. Knee version to regress, 3s down. Chest and triceps in one."
             },
             {
               "name": "Dead Bug",
-              "ref": "gym: Cable Crunch",
+              "ref": "gym: Ab Machine",
               "focus": "c",
               "tier": "maint",
-              "sets": 3,
+              "sets": 2,
               "reps": "10/side",
               "extras": {
                 "rest": "45s"
@@ -788,7 +622,7 @@
               "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
             }
           ],
-          "durationMin": 50
+          "durationMin": 48
         },
         "optional": {
           "title": "Optional Extras",
@@ -979,10 +813,11 @@
     },
     "travel": {
       "philipp": {
-        "push": {
-          "title": "Push + Taper",
-          "day": "Travel · Push",
-          "focus": "tubes + door anchor only",
+        "fullBody": {
+          "title": "Full Body",
+          "day": "Travel — no fixed day, tubes + door anchor only",
+          "focus": "side delt · lat · chest · back · rear delt · legs maintenance",
+          "note": "Tubes-only equivalent of the Gym Full Body session, for travel. Same trims as the gym version: face pull, single-leg RDL, biceps curl and the kneeling crunch dropped to keep it under an hour.",
           "exercises": [
             {
               "name": "Cross-Body Band Lateral Raise",
@@ -999,20 +834,6 @@
               "cue": "Opposite foot on the tube for tension at the bottom, like the cable. Too heavy? Move the foot closer to the middle. Lead with the elbow."
             },
             {
-              "name": "Band Chest Press (high-to-low)",
-              "ref": "upper chest",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 4,
-              "reps": "10-12",
-              "extras": {
-                "load": "Black (L5)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Anchor high, away from the door, press forward and downward. The angle hits the upper chest automatically."
-            },
-            {
               "name": "Band Lat Pulldown (kneeling)",
               "ref": "lat width",
               "focus": "a",
@@ -1027,11 +848,53 @@
               "cue": "Anchor the tube as high as possible, kneeling, wide, elbows down and out. Your only vertical pull."
             },
             {
-              "name": "Band Overhead Triceps Extension",
-              "ref": "arm detail",
+              "name": "Band Chest Press (high-to-low)",
+              "ref": "upper chest",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Black (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor high, away from the door, press forward and downward. The angle hits the upper chest automatically."
+            },
+            {
+              "name": "Seated Band Row",
+              "ref": "upper back",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "load": "Blue (L4) + Black (L5)",
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Sit on the floor, tube around both feet, upright, pull to the belly, shoulder blades together, no swing."
+            },
+            {
+              "name": "Band Rear Delt Pull-Apart",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "Green (L2)",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "No anchor: tube in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
+            },
+            {
+              "name": "Band Overhead Triceps Extension",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
               "reps": "10-12",
               "extras": {
                 "load": "Red (L3)",
@@ -1055,20 +918,6 @@
               "cue": "Maintenance. Stand on the tube, handles at the shoulders, high reps, light."
             },
             {
-              "name": "Kneeling Band Crunch",
-              "ref": "waist",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Blue (L4)",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Anchor the tube high, kneeling, fold the ribs towards the hips, hands fixed at the ears."
-            },
-            {
               "name": "Hollow Body Hold",
               "ref": "waist detail",
               "focus": "c",
@@ -1082,126 +931,21 @@
             }
           ],
           "durationMin": 40
-        },
-        "pull": {
-          "title": "Pull + Posture",
-          "day": "Travel · Pull",
-          "focus": "tubes + door anchor only",
-          "exercises": [
-            {
-              "name": "Cross-Body Band Lateral Raise",
-              "ref": "taper #1",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Yellow (L1)",
-                "rir": "RIR 2",
-                "rest": "60s"
-              },
-              "cue": "Second side-delt hit. Opposite foot on the tube, lead with the elbow. Too heavy? Move the foot closer to the middle."
-            },
-            {
-              "name": "Band Lat Pulldown (kneeling)",
-              "ref": "lat width",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "Blue (L4) + Black (L5)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Anchor high, kneeling, wide, elbows down and out — replaces the pull-up."
-            },
-            {
-              "name": "Seated Band Row",
-              "ref": "upper back",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10-12",
-              "extras": {
-                "load": "Blue (L4) + Black (L5)",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Sit on the floor, tube around both feet, upright, pull to the belly, shoulder blades together, no swing."
-            },
-            {
-              "name": "Band Rear Delt Pull-Apart",
-              "ref": "rear delt",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 1",
-                "rest": "60s"
-              },
-              "cue": "No anchor: tube in both hands in front, arms straight, pull apart to the chest, lead with the little fingers."
-            },
-            {
-              "name": "Band Face Pull",
-              "ref": "shoulder health",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 1",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Anchor the tube at head height, pull to the forehead, elbows high and wide, rotate externally."
-            },
-            {
-              "name": "Band Single-Leg RDL",
-              "ref": "hamstrings",
-              "focus": "g",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "12/side",
-              "extras": {
-                "load": "Blue (L4)",
-                "rir": "RIR 3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. One foot on the tube, handle in the opposite hand, hinge in with a soft knee, 3s down."
-            },
-            {
-              "name": "Band Biceps Curl",
-              "ref": "arm detail",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "Green (L2)",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Stand on the tube, elbows fixed, curl up, slow on the way down."
-            }
-          ],
-          "durationMin": 40
         }
       },
       "eunice": {
-        "solo": {
-          "title": "Lower + Push",
-          "day": "Travel · Lower",
-          "focus": "tubes + door anchor only",
+        "fullBody": {
+          "title": "Full Body",
+          "day": "Travel — no fixed day, tubes + door anchor only",
+          "focus": "glutes · legs · lat · back · shoulder · rear delt maintenance",
+          "note": "Tubes-only equivalent for travel. Same trims as the other Full Body sessions: the lateral lunge, the separate triceps extension and biceps curl dropped to keep it under an hour.",
           "exercises": [
             {
               "name": "Band Hip Thrust",
               "ref": "glutes #1",
               "focus": "g",
               "tier": "primary",
-              "sets": 4,
+              "sets": 3,
               "reps": "15",
               "extras": {
                 "load": "Blue (L4) folded",
@@ -1225,24 +969,11 @@
               "cue": "Stand on the tube, feet wide, handles at the shoulders, 3s down, knees tracking over the toes."
             },
             {
-              "name": "Lateral Lunge (tempo)",
-              "ref": "inner thigh",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10/side",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "45s"
-              },
-              "cue": "Step wide to the side, sit into the hip, other leg straight, back to the middle. Slow — inner thigh plus glute."
-            },
-            {
               "name": "Band Single-Leg RDL",
               "ref": "hamstrings",
               "focus": "g",
               "tier": "primary",
-              "sets": 3,
+              "sets": 2,
               "reps": "12/side",
               "extras": {
                 "load": "Blue (L4)",
@@ -1251,53 +982,6 @@
               },
               "cue": "One foot on the tube, opposite hand on the handle, soft knee, 3s down, squeeze the glute."
             },
-            {
-              "name": "Push-Up (knee or standard)",
-              "ref": "chest",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "10-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. Knee version to regress, 3s down."
-            },
-            {
-              "name": "Band Overhead Triceps Extension",
-              "ref": "arm detail",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "12-15",
-              "extras": {
-                "load": "Yellow (L1)",
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. Anchor the tube high, elbows high and forward, extend upward."
-            },
-            {
-              "name": "Dead Bug",
-              "ref": "core",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "10/side",
-              "extras": {
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
-            }
-          ],
-          "durationMin": 40
-        },
-        "pull": {
-          "title": "Upper + Glutes",
-          "day": "Travel · Upper",
-          "focus": "tubes + door anchor only",
-          "exercises": [
             {
               "name": "Cross-Body Band Lateral Raise",
               "ref": "shoulder",
@@ -1331,7 +1015,7 @@
               "ref": "upper back",
               "focus": "a",
               "tier": "primary",
-              "sets": 3,
+              "sets": 2,
               "reps": "10-12",
               "extras": {
                 "load": "Green (L2)",
@@ -1341,25 +1025,11 @@
               "cue": "Tube around both feet, upright, to the belly, shoulder blades together."
             },
             {
-              "name": "Band Hip Thrust",
-              "ref": "glutes 2x",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "Blue (L4) folded",
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "Tube over the hips, squeeze 2s."
-            },
-            {
               "name": "Band Rear Delt Pull-Apart",
               "ref": "rear delt",
               "focus": "a",
-              "tier": "primary",
-              "sets": 3,
+              "tier": "maint",
+              "sets": 2,
               "reps": "15-20",
               "extras": {
                 "load": "Green (L2)",
@@ -1369,33 +1039,32 @@
               "cue": "Tube in both hands in front, apart to the chest, lead with the little fingers."
             },
             {
-              "name": "Band Biceps Curl",
-              "ref": "arm detail",
+              "name": "Push-Up (knee or standard)",
+              "ref": "chest",
               "focus": "a",
               "tier": "maint",
               "sets": 2,
-              "reps": "15",
+              "reps": "10-15",
               "extras": {
-                "load": "Green (L2)",
                 "rir": "RIR 2-3",
-                "rest": "45s"
+                "rest": "60s"
               },
-              "cue": "Maintenance. Stand on the tube, elbows fixed, slow on the way down."
+              "cue": "Maintenance. Knee version to regress, 3s down."
             },
             {
               "name": "Dead Bug",
               "ref": "core",
               "focus": "c",
               "tier": "maint",
-              "sets": 3,
+              "sets": 2,
               "reps": "10/side",
               "extras": {
                 "rest": "45s"
               },
-              "cue": "Maintenance. Lower back flat, opposite arm and leg."
+              "cue": "Maintenance. Lower back flat, opposite arm and leg, breathe out as you extend."
             }
           ],
-          "durationMin": 40
+          "durationMin": 42
         }
       },
       "shared": {
