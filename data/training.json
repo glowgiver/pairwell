@@ -1,7 +1,7 @@
 {
   "_source": "workout_hub.html — full re-translation of all cues, 2026-08-29",
   "_supersedes": "earlier training.json draft — this is the authoritative extraction",
-  "_measured": "Gym loads dated 2026-08-29 were read off the machines, not estimated: cable row 42.5 kg P / 27 kg E, face pull 12.5 kg P / 5 kg E, rear delt fly 6.8 kg P, biceps curl 5 kg P / 2.5 kg E. Everything else in this file is still the number the plan was written with. The glute drive machine turned out not to exist at this gym on the same day. Confirmed in the gym the same evening: Eunice did the hip thrusts with a sandbag or a dumbbell across the hips, which is why the sessions name that setup rather than the machine.",
+  "_measured": "Loads come from the MacroFactor workout log export (2026-09-09), which records weight, reps and RIR per set for the sessions of 2026-08-05, 08-07, 08-22 and 08-25. That export supersedes the earlier note claiming these were read off the machines on 2026-08-29: those numbers disagreed with what he actually logged, and two of them were plainly swapped — the plan had row 42.5 / pulldown 21.25 where the log has row ~22 / pulldown ~40, and 21.25 x 2 = 42.5. Rear delt fly was 6.8 in the plan against 16-20 logged. Lateral raise at 5 kg/arm is the one value both sources agreed on.\n\nCaveats kept deliberately: the logged weight is the stack selection, not the force at the handle, so it does not convert to a Rayofi setting. Where a logged set fell short of the prescribed rep range — pulldown at 11 reps for a 12-15 target, rear delt at 11 for a 15 target — the load here is the logged one and will need coming down slightly to hit the range at RIR 2. Chest press, triceps pushdown, hip thrust and leg press have no entry in this export window and keep their earlier numbers, unverified.",
   "meta": {
     "title": "Workout Hub · Philipp & Eunice · 2026",
     "edition": "Lean Athletic Edition",
@@ -170,7 +170,7 @@
               "sets": 3,
               "reps": "12-15",
               "extras": {
-                "load": "21.25 kg",
+                "load": "35 kg",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -198,7 +198,7 @@
               "sets": 3,
               "reps": "10-12",
               "extras": {
-                "load": "42.5 kg",
+                "load": "22.5 kg",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
@@ -212,7 +212,7 @@
               "sets": 2,
               "reps": "15",
               "extras": {
-                "load": "6.8 kg",
+                "load": "16 kg",
                 "rir": "RIR 1",
                 "rest": "60s"
               },
@@ -301,7 +301,7 @@
           "title": "Full Body — Rayofi",
           "day": "Home · rain stand-in for Tue/Wed or Sun",
           "focus": "the gym Full Body, run on the Rayofi instead",
-          "note": "Your gym days are Tue (Wed on conference weeks) and Sun. This is the same Full Body session for the days the weather stops the trip. Leg press becomes a squat and the row goes one-armed; otherwise the same nine movements in the same order. If Eunice is rained out the same day you take turns on the one unit — her list is her own.",
+          "note": "Your gym days are Tue (Wed on conference weeks) and Sun. This is the same Full Body session for the days the weather stops the trip. Leg press becomes a squat and the row goes one-armed; otherwise the same nine movements in the same order. If Eunice is rained out the same day you take turns on the one unit — her list is her own. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -312,7 +312,8 @@
               "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "5 kg · start"
               },
               "cue": "Fresh first — the taper driver. Lead with the elbow to shoulder height, constant tension, then switch sides."
             },
@@ -325,7 +326,8 @@
               "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2",
-                "rest": "90s"
+                "rest": "90s",
+                "load": "20 kg · start"
               },
               "cue": "Anchor high, kneel, pull the elbow down and out, squeeze the lat. Only one Rayofi, so this is one arm at a time — both sides make one set."
             },
@@ -338,7 +340,8 @@
               "reps": "10-12",
               "extras": {
                 "rir": "RIR 2",
-                "rest": "90s"
+                "rest": "90s",
+                "load": "12 kg · start"
               },
               "cue": "Anchor low behind you, stand away from the anchor, press forward and slightly down in front of the chest."
             },
@@ -351,7 +354,8 @@
               "reps": "10-12/side",
               "extras": {
                 "rir": "RIR 2",
-                "rest": "90s"
+                "rest": "90s",
+                "load": "12 kg · start"
               },
               "cue": "Upright, pull the elbow to the ribs, shoulder blades together, no swing. Only one Rayofi, so this is one arm at a time — both sides make one set."
             },
@@ -364,7 +368,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 1",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "12 kg · start"
               },
               "cue": "Both handles on the one cable — arms almost straight, apart to the chest, lead with the little fingers."
             },
@@ -377,7 +382,8 @@
               "reps": "12-15",
               "extras": {
                 "rir": "RIR 1-2",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "15 kg · start"
               },
               "cue": "Anchor high, elbows fixed at your sides, press down until straight, brief squeeze."
             },
@@ -390,7 +396,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "20 kg · start"
               },
               "cue": "Maintenance — hold, don't build. Cable over the hips, shoulders supported, full extension, 1s at the top."
             },
@@ -403,7 +410,8 @@
               "reps": "20",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "20 kg · start"
               },
               "cue": "Maintenance, standing in for the leg press. Handles at the shoulders, high reps, light. Just hold the legs."
             },
@@ -426,7 +434,7 @@
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
           "focus": "taper accessories · shoulder health · low fatigue cost",
-          "note": "Not scheduled and not required — for the mornings you have free alone, outside Tue/Wed, Fri and Sun. Deliberately light (RIR 3, short) so it never eats into recovery for those three: mostly what Full Body leaves out for time, plus a little more of your #1 taper driver. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these.",
+          "note": "Not scheduled and not required — for the mornings you have free alone, outside Tue/Wed, Fri and Sun. Deliberately light (RIR 3, short) so it never eats into recovery for those three: mostly what Full Body leaves out for time, plus a little more of your #1 taper driver. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -437,7 +445,8 @@
               "reps": "15/side",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "5 kg · start"
               },
               "cue": "Optional top-up on the #1 taper driver — only if the morning is actually free, not a make-up session. One handle, switch sides between sets."
             },
@@ -450,7 +459,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "10 kg · start"
               },
               "cue": "Trimmed from Full Body for time. Both handles on the one cable — elbows high and wide, hands past the ears, the counterpart to all the pressing."
             },
@@ -463,7 +473,8 @@
               "reps": "15/side",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "7 kg · start"
               },
               "cue": "Trimmed from Full Body for time. One handle, elbow fixed, slow on the way down, switch sides."
             },
@@ -476,7 +487,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "10 kg · start"
               },
               "cue": "Trimmed from Full Body for time. Ankle strap on, cable anchored low behind you, curl the heel towards the glute."
             },
@@ -489,7 +501,8 @@
               "reps": "12-15",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "20 kg · start"
               },
               "cue": "Trimmed from Full Body for time. Anchor high, kneeling, fold the ribs towards the hips."
             }
@@ -502,7 +515,7 @@
           "title": "Full Body — Rayofi",
           "day": "Home · rain stand-in for Monday",
           "focus": "glutes first, then back and shoulder — the eGym circuit's job, by hand",
-          "note": "Your gym day is Monday, on the eGym. eGym picks its own resistance and can't be copied at home, so this is the manual equivalent for the Mondays the weather stops the trip: glutes first because that is the priority, then the back and shoulder work that frames the waist. If Philipp is rained out the same day you take turns on the one unit.",
+          "note": "Your gym day is Monday, on the eGym. eGym picks its own resistance and can't be copied at home, so this is the manual equivalent for the Mondays the weather stops the trip: glutes first because that is the priority, then the back and shoulder work that frames the waist. If Philipp is rained out the same day you take turns on the one unit. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Hip Thrust",
@@ -512,7 +525,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "75s"
+                "rest": "75s",
+                "load": "15 kg · start"
               },
               "cue": "First — glutes are the priority. Cable over the hips, shoulders supported, squeeze 2s at the top."
             },
@@ -524,7 +538,8 @@
               "reps": "12-15",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "75s"
+                "rest": "75s",
+                "load": "12 kg · start"
               },
               "cue": "Feet wider than shoulders, knees tracking out, 3s down. Inner thigh plus glutes."
             },
@@ -536,7 +551,8 @@
               "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "5 kg · start"
               },
               "cue": "Ankle strap on, cable anchored low behind you, curl the heel towards the glute, controlled back."
             },
@@ -548,7 +564,8 @@
               "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "2.5 kg · start"
               },
               "cue": "The shoulder that makes the waist look narrower. Lead with the elbow, then switch sides."
             },
@@ -560,7 +577,8 @@
               "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "90s"
+                "rest": "90s",
+                "load": "10 kg · start"
               },
               "cue": "Anchor high, pull the elbow down and out, shoulder blade down. Only one Rayofi, so this is one arm at a time — both sides make one set."
             },
@@ -572,7 +590,8 @@
               "reps": "10-12/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "75s"
+                "rest": "75s",
+                "load": "8 kg · start"
               },
               "cue": "Upright, elbow to the ribs, shoulder blades together. Only one Rayofi, so this is one arm at a time — both sides make one set."
             },
@@ -584,7 +603,8 @@
               "reps": "15-20",
               "extras": {
                 "rir": "RIR 1-2",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "5 kg · start"
               },
               "cue": "Both handles on the one cable — apart to the chest, lead with the little fingers."
             },
@@ -618,7 +638,7 @@
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
           "focus": "glute accessories · shoulder health · low fatigue cost",
-          "note": "Not scheduled and not required — for the mornings you have free alone, outside Monday and Friday. Deliberately light (RIR 2-3, short) so it never eats into recovery for those two: a little more glute volume, plus the accessories Friday runs light on. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these.",
+          "note": "Not scheduled and not required — for the mornings you have free alone, outside Monday and Friday. Deliberately light (RIR 2-3, short) so it never eats into recovery for those two: a little more glute volume, plus the accessories Friday runs light on. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Hip Thrust",
@@ -629,7 +649,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "60s"
+                "rest": "60s",
+                "load": "15 kg · start"
               },
               "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session."
             },
@@ -642,7 +663,8 @@
               "reps": "15/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "5 kg · start"
               },
               "cue": "Ankle strap on, cable anchored low, kick straight back and squeeze — not swung."
             },
@@ -655,7 +677,8 @@
               "reps": "15",
               "extras": {
                 "rir": "RIR 3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "5 kg · start"
               },
               "cue": "Both handles on the one cable — elbows high and wide, hands past the ears, the counterpart to all the pressing."
             },
@@ -668,7 +691,8 @@
               "reps": "15/side",
               "extras": {
                 "rir": "RIR 2-3",
-                "rest": "45s"
+                "rest": "45s",
+                "load": "3 kg · start"
               },
               "cue": "One handle, elbow fixed, slow on the way down, switch sides."
             },
@@ -693,7 +717,7 @@
           "title": "Shared Session",
           "day": "Friday · together",
           "focus": "same exercises · Rayofi · alternating",
-          "note": "One Rayofi, one exercise at a time: his set, her set, his set is her rest. Only one unit, so anything that is a wide-bar two-hand pull at the gym — lat pulldown, row — is one arm at a time here, alternating sides within the set, and the rep counts below are per side. The rear delt pull-apart is the exception: that is what the second handle is for, both hands on the one cable. Loads are placeholders. The Rayofi tops out around 30 kg, well under the gym cable loads, so fill in real numbers after the first session instead of carrying gym or band numbers across.",
+          "note": "One Rayofi, one exercise at a time: his set, her set, his set is her rest. Only one unit, so anything that is a wide-bar two-hand pull at the gym — lat pulldown, row — is one arm at a time here, alternating sides within the set, and the rep counts below are per side. The rear delt pull-apart is the exception: that is what the second handle is for, both hands on the one cable. The Rayofi tops out around 30 kg, well under the gym cable loads, so fill in real numbers after the first session instead of carrying gym or band numbers across. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -705,8 +729,8 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "5 kg · start",
+              "euniceLoad": "2.5 kg · start",
               "cue": "Already one-arm even at the gym cable tower. Lead with the elbow to shoulder height, constant tension, then switch sides.",
               "shared": true
             },
@@ -719,8 +743,8 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "20 kg · start",
+              "euniceLoad": "10 kg · start",
               "cue": "One handle, one Rayofi — anchor high via the door anchor, kneel, pull one elbow down and out, squeeze the lat, then switch sides. Both sides count as one set.",
               "shared": true
             },
@@ -733,8 +757,8 @@
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "12 kg · start",
+              "euniceLoad": "8 kg · start",
               "cue": "One handle — sit facing the anchor, pull one elbow to the ribs, no swing, switch sides. Both sides count as one set.",
               "shared": true
             },
@@ -748,8 +772,8 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Not yet tested — maintenance",
-              "euniceLoad": "Not yet tested — primary",
+              "philippLoad": "20 kg · start · maintenance",
+              "euniceLoad": "15 kg · start · primary",
               "cue": "Cable anchored low, shoulders supported, squeeze 2s at the top.",
               "shared": true
             },
@@ -763,8 +787,8 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "12 kg · start",
+              "euniceLoad": "5 kg · start",
               "cue": "Handle in each hand (the second handle is for this), apart to the chest, lead with the little fingers.",
               "shared": true
             },
@@ -777,8 +801,8 @@
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "7 kg · start",
+              "euniceLoad": "3 kg · start",
               "cue": "One handle. Elbow fixed at your side, slow on the way down, then switch sides.",
               "shared": true
             },
@@ -807,7 +831,7 @@
           "title": "Full Body",
           "day": "Travel · together",
           "focus": "same exercises · own resistance · swap during rest",
-          "note": "The only session while traveling — always this one, always both of you. The Rayofi is the whole kit: it weighs under a kilo and anchors to a door, so nothing else needs packing. Same exercises, each dialling their own resistance; one works while the other rests, so the rest period is the swap. One unit means the pulls go one arm at a time.",
+          "note": "The only session while traveling — always this one, always both of you. The Rayofi is the whole kit: it weighs under a kilo and anchors to a door, so nothing else needs packing. Same exercises, each dialling their own resistance; one works while the other rests, so the rest period is the swap. One unit means the pulls go one arm at a time. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -819,8 +843,8 @@
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "5 kg · start",
+              "euniceLoad": "2.5 kg · start",
               "cue": "Lead with the elbow to shoulder height, constant tension, then switch sides.",
               "shared": true
             },
@@ -833,8 +857,8 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "20 kg · start",
+              "euniceLoad": "10 kg · start",
               "cue": "Anchor high on the door, kneel, elbow down and out, squeeze the lat. Only one Rayofi, so this is one arm at a time — both sides make one set.",
               "shared": true
             },
@@ -847,8 +871,8 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "12 kg · start",
+              "euniceLoad": "6 kg · start",
               "cue": "Anchor low behind you, stand away from the door, press forward and up.",
               "shared": true
             },
@@ -861,8 +885,8 @@
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "12 kg · start",
+              "euniceLoad": "8 kg · start",
               "cue": "Upright, elbow to the ribs, shoulder blades together, no swing. Only one Rayofi, so this is one arm at a time — both sides make one set.",
               "shared": true
             },
@@ -876,8 +900,8 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "20 kg · start",
+              "euniceLoad": "15 kg · start",
               "cue": "Cable over the hips, shoulders supported, squeeze 2s at the top. Her primary, his maintenance — same station, different intent.",
               "shared": true
             },
@@ -891,8 +915,8 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "12 kg · start",
+              "euniceLoad": "5 kg · start",
               "cue": "Both handles on the one cable — apart to the chest, lead with the little fingers.",
               "shared": true
             },
@@ -906,8 +930,8 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "20 kg · start",
+              "euniceLoad": "12 kg · start",
               "cue": "Handles at the shoulders, 3s down. Light for him, the leg work for her.",
               "shared": true
             },
@@ -920,8 +944,8 @@
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Not yet tested",
-              "euniceLoad": "Not yet tested",
+              "philippLoad": "Hollow Hold + Flutter",
+              "euniceLoad": "Dead Bug 10/side",
               "cue": "Core finisher — no equipment, each of you your own variant, lower back flat.",
               "shared": true
             }
@@ -981,8 +1005,9 @@
     "jointGymSessions": "Training together at one station was never the problem; he said it worked. What failed was the old Friday plan, which gave them five shared exercises and then split into different tails, so they started together and had to separate halfway. A joint session works if the list is genuinely identical.",
     "homeIsPerPerson": "Home is not a shared session. Each of them does their own session there when the weather stops the gym trip; Friday's Rayofi session is the only genuinely shared one at home. If both are rained out the same day they take turns on the one unit.",
     "travelIsShared": "Travel is the opposite — always one shared session, both of them, same exercises, swapping during rest, because there is only one Rayofi to pack.",
-    "oneRayofi": "They own exactly one Rayofi Go-Tone Pro. Anything that would be a wide-bar two-hand pull at the gym goes one arm at a time, with per-side rep counts; the rear delt pull-apart is the exception, which is what the second cable handle is for. Loads stay 'Not yet tested' until they have used it — his gym row is 42.5 kg, above the device's 30 kg ceiling, so nothing transfers.",
+    "oneRayofi": "They own exactly one Rayofi Go-Tone Pro. Anything that would be a wide-bar two-hand pull at the gym goes one arm at a time, with per-side rep counts; the rear delt pull-apart is the exception, which is what the second cable handle is for. When both train at once they take turns and the rest period is the swap. Every load is marked '· start' because none of them has been measured on the device — see rayofiStartingLoads for where each number came from. The 30 kg ceiling only realistically bites on his one-arm lat pulldown.",
     "eunicesMonday": "eGym, always, and recorded as a single line rather than a station list: the machines pick and progress their own resistance, so there is nothing here to plan a load or a set count for. Reconstructing it as individual exercises would be invention.",
-    "conferenceWeeks": "His Tuesday gym day moves to Wednesday on conference weeks. Nothing else shifts."
+    "conferenceWeeks": "His Tuesday gym day moves to Wednesday on conference weeks. Nothing else shifts.",
+    "rayofiStartingLoads": "Now written into the sessions rather than kept here, because a number he cannot see while standing at the device is no use. Philipp's are derived from his MacroFactor workout log (Aug 2026 cable sets): lateral raise 5 kg transfers directly since it was already logged single-arm; row and pulldown are roughly 55% of his two-handed loads; face pull 10 kg and crunch 20 kg transfer near enough; biceps curl 7 kg is half of the 15 kg he did two-armed on a straight bar. Eunice has no workout export, so hers are conservative guesses to climb from, not derived. Everything is marked '· start' and should be replaced with real numbers after the first session. The stack figures they came from are not force at the handle, which is what the Rayofi reads."
   }
 }
