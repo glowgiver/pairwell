@@ -47,8 +47,9 @@
       },
       {
         "day": "Tue",
-        "what": "Gym · Push",
-        "type": "training"
+        "what": "Gym · Full Body",
+        "type": "training",
+        "note": "Moves to Wed on conference weeks — same session, no other change."
       },
       {
         "day": "Wed",
@@ -62,7 +63,7 @@
       },
       {
         "day": "Fri",
-        "what": "Gym · with Eunice",
+        "what": "Rayofi · with Eunice",
         "type": "training"
       },
       {
@@ -72,7 +73,7 @@
       },
       {
         "day": "Sun",
-        "what": "Together",
+        "what": "Gym · Full Body",
         "type": "training"
       }
     ],
@@ -99,7 +100,7 @@
       },
       {
         "day": "Fri",
-        "what": "Gym · with Philipp",
+        "what": "Rayofi · with Philipp",
         "type": "training"
       },
       {
@@ -109,14 +110,14 @@
       },
       {
         "day": "Sun",
-        "what": "Together",
-        "type": "training"
+        "what": "Rest",
+        "type": "rest"
       }
     ]
   },
   "locationNotes": {
     "gym": "Holmes Place · cable tower + machines. All primary exercises run on the cable tower — constant tension, exact progression.",
-    "home": "Bodylastics tubes + door anchor. Bands mimic the cable tower 1:1. More resistance = bundle another tube. Height = anchor high/mid/low. Constant tension = stand farther from the door.",
+    "home": "Bodylastics tubes + door anchor. Bands mimic the cable tower 1:1. More resistance = bundle another tube. Height = anchor high/mid/low. Constant tension = stand farther from the door. Friday's shared session and the optional extras use the Rayofi Go-Tone instead, not bands: motor-controlled digital resistance, 3-30 kg, dialled in rather than picked by tube colour, with concentric and eccentric control built in. It anchors to a doorframe, a chair or pole, or your own foot depending on the exercise, and ships with one quick-attach handle — the second handle (already bought) is for two-handed moves like the rear delt pull-apart. Rayofi's own manual doesn't spell out anchor height or setup per exercise beyond that it takes 'a few seconds' — it defers to their instructional videos, worth watching once for each new movement rather than guessing.",
     "travel": "Tubes only + door anchor. Everything with Bodylastics + door anchor, no dumbbells needed. Tempo 3-0-1 and standing farther from anchor substitute for more weight."
   },
   "equipmentByLocation": {
@@ -129,7 +130,8 @@
     "home": [
       "Bodylastics tubes",
       "door anchor high/low",
-      "ankle strap"
+      "ankle strap",
+      "Rayofi Go-Tone (Friday shared session)"
     ],
     "travel": [
       "3+ tubes",
@@ -140,10 +142,11 @@
   "sessions": {
     "gym": {
       "philipp": {
-        "push": {
-          "title": "Push + Taper",
-          "day": "Tuesday",
-          "focus": "side delt · chest · lat · triceps",
+        "fullBody": {
+          "title": "Full Body",
+          "day": "Tue (Wed on conference weeks) & Sun",
+          "focus": "side delt · lat · chest · back · rear delt · legs + core maintenance",
+          "note": "Same session on both gym days — this is what replaced the Push/Pull split when the weekly rhythm changed to two solo gym visits plus Friday's shared Rayofi session at home. Trimmed to 9 exercises to keep it around an hour: face pull, biceps curl, hamstring curl and the cable crunch dropped out to make room. Add any of them back in if 55-60 minutes leaves room.",
           "exercises": [
             {
               "name": "Cable Lateral Raise",
@@ -160,20 +163,6 @@
               "cue": "Fresh first — the most important move for the look. Constant tension at the bottom, where a dumbbell would give you none. Arm slightly bent, lead with the elbow to shoulder height. Goal: a clean 15, then 6 kg."
             },
             {
-              "name": "Cable Chest Press (high-to-low)",
-              "ref": "upper chest",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 4,
-              "reps": "10-12",
-              "extras": {
-                "load": "10 kg/arm",
-                "rir": "RIR 2",
-                "rest": "90s"
-              },
-              "cue": "Anchor high, stand away from the tower, press forward and downward in front of the chest. The downward angle hits the upper chest automatically — the athletic line under the collarbone. 4 sets, because chest is your second focus."
-            },
-            {
               "name": "Wide Lat Pulldown",
               "ref": "lat width → taper",
               "focus": "a",
@@ -185,97 +174,21 @@
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Second most important taper muscle after the side delt — which is why it is in both sessions. Pull the bar to the upper chest, feel the lats, controlled on the way back."
+              "cue": "Second most important taper muscle after the side delt. Pull the bar to the upper chest, feel the lats, controlled on the way back. Replaces the pull-up you cut — that would have thickened the upper traps and shortened the neckline."
             },
             {
-              "name": "Triceps Pushdown (Rope)",
-              "ref": "arm definition",
+              "name": "Cable Chest Press (high-to-low)",
+              "ref": "upper chest",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "10-12",
               "extras": {
-                "load": "17.5 kg",
-                "rir": "RIR 1-2",
-                "rest": "60s"
-              },
-              "cue": "Was completely buried in the old plan — now a fixture. Elbows fixed at your sides, pull the rope apart at the bottom, brief hold. A defined arm, not mass."
-            },
-            {
-              "name": "Leg Press (light)",
-              "ref": "leg proportion",
-              "focus": "g",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "20",
-              "extras": {
-                "load": "~70 kg",
-                "rir": "RIR 3",
-                "rest": "60s"
-              },
-              "cue": "Maintenance — hold, don't build. High reps, light weight, never progress. Keeps the legs lean and defined without making them thicker."
-            },
-            {
-              "name": "Cable Crunch",
-              "ref": "waist",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "25 kg",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Fold the ribs towards the hips like a jackknife, hands fixed at the ears. Slow on the way back — that is the eccentric load."
-            },
-            {
-              "name": "Hollow Hold",
-              "ref": "waist detail",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "30s",
-              "extras": {
-                "rest": "45s"
-              },
-              "cue": "Lower back flat on the floor, arms long. Builds the deep abdominal tension that visually tightens the waist."
-            }
-          ],
-          "durationMin": 50
-        },
-        "pull": {
-          "title": "Pull + Posture",
-          "day": "Friday · with Eunice",
-          "focus": "side delt · lat · back · rear delt",
-          "exercises": [
-            {
-              "name": "Cable Lateral Raise",
-              "ref": "taper driver #1",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "5 kg/arm",
-                "rir": "RIR 2",
-                "rest": "60s"
-              },
-              "cue": "Second side-delt hit of the week. Exactly like Tuesday — constant tension, lead with the elbow. Six side-delt sets a week is the core of the taper."
-            },
-            {
-              "name": "Wide Lat Pulldown",
-              "ref": "lat width",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "21.25 kg",
+                "load": "10 kg/arm",
                 "rir": "RIR 2",
                 "rest": "90s"
               },
-              "cue": "Second lat hit of the week. Replaces the pull-up you cut — that would have thickened the upper traps and shortened the neckline. The pulldown builds width without that drawback."
+              "cue": "Anchor high, stand away from the tower, press forward and downward in front of the chest. The downward angle hits the upper chest automatically — the athletic line under the collarbone."
             },
             {
               "name": "Cable Row (neutral)",
@@ -292,6 +205,34 @@
               "cue": "Sit upright, handle to the belly, elbows close to the body, shoulder blades together. Builds posture without thickening the neck — stay moderate, don't heave."
             },
             {
+              "name": "Rear Delt Fly (Cable)",
+              "ref": "rear delt",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "load": "6.8 kg",
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together."
+            },
+            {
+              "name": "Triceps Pushdown (Rope)",
+              "ref": "arm definition",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "load": "17.5 kg",
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Elbows fixed at your sides, pull the rope apart at the bottom, brief hold. A defined arm, not mass."
+            },
+            {
               "name": "Hip Thrust (Dumbbell or Sandbag)",
               "ref": "posterior chain",
               "focus": "g",
@@ -302,278 +243,55 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance — hold, don't build. Her station, her setup: shoulders against the bench, the weight across the hips. Two sets while she does her three. Hip extension is what the seated curl at the end does not cover, and it is what keeps the back of the leg working as a unit."
+              "cue": "Maintenance — hold, don't build. Shoulders against a bench, the weight across the hips, full hip extension, 1s hold at the top."
             },
             {
-              "name": "Rear Delt Fly (Cable)",
-              "ref": "rear delt",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "6.8 kg",
-                "rir": "RIR 1",
-                "rest": "60s"
-              },
-              "cue": "Gives the shoulder depth and the 3D look without mass. Arms almost straight, lead with the little fingers, squeeze the rear delts together."
-            },
-            {
-              "name": "Cable Face Pull",
-              "ref": "shoulder health",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "12.5 kg",
-                "rir": "RIR 1",
-                "rest": "45s"
-              },
-              "cue": "Maintenance — the counterpart to all the pressing. External rotation keeps the shoulder healthy. Elbows high and wide, hands past the ears. Pair it with the fly the way Eunice does: rounds 1 and 2 fly straight into face pull, round 3 fly only. Same station, same three rounds, so you both leave together."
-            },
-            {
-              "name": "Cable Biceps Curl",
-              "ref": "arm detail",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "5 kg",
-                "rir": "RIR 2",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Elbows fixed, constant tension, brief squeeze at the top. Covers what the pulldown and row don't fully reach."
-            },
-            {
-              "name": "Seated Hamstring Curl",
-              "ref": "hamstrings",
+              "name": "Leg Press (light)",
+              "ref": "leg proportion",
               "focus": "g",
               "tier": "maint",
               "sets": 2,
-              "reps": "15",
+              "reps": "20",
               "extras": {
-                "load": "50 kg",
+                "load": "~70 kg",
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "cue": "Maintenance. Holds the back of the leg — important for posture and for how trousers sit. Controlled, no swing.",
-              "solo": "Eunice is on the cable crunch"
+              "cue": "Maintenance — hold, don't build. High reps, light weight, never progress. Keeps the legs lean and defined without making them thicker."
+            },
+            {
+              "name": "Hollow Hold",
+              "ref": "waist detail",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "Lower back flat on the floor, arms long. Builds the deep abdominal tension that visually tightens the waist."
             }
           ],
-          "durationMin": 55,
-          "partner": "Eunice",
-          "note": "Friday with Eunice, one station at a time: his set, her set. Her set is his rest — about a minute, whatever the card says. The pulldown and the row want 90s, so let one extra turn go by on those two. Shared all the way to the last exercise."
+          "durationMin": 58
         }
       },
       "eunice": {
         "solo": {
-          "title": "Lower + Push",
+          "title": "eGym",
           "day": "Monday · solo",
-          "focus": "fixed machines only — no setup, no cable",
-          "note": "Monday alone in the gym. Deliberately machines only: fixed path, nothing can go wrong, no spotting needed. Cable exercises happen Friday with Philipp.",
+          "focus": "full body — eGym sets the resistance",
+          "note": "Always eGym on Mondays. The machines pick and adjust resistance themselves, so there's nothing to plan a load, set count or RIR for here.",
           "exercises": [
             {
-              "name": "Hip Thrust (Dumbbell or Sandbag)",
-              "ref": "priority #1",
+              "name": "eGym",
               "focus": "g",
               "tier": "primary",
-              "sets": 4,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "90s"
-              },
-              "cue": "Fresh first — your top exercise. There is no glute drive machine at this gym, so: shoulders against a bench, dumbbell or sandbag across the hips, feet flat and close. Full hip extension, 1s hold at the top, squeeze hard. 4 sets, because glutes are the goal. The muscle that makes the Hwasa look."
-            },
-            {
-              "name": "Leg Press (wide + high)",
-              "ref": "quads + glutes + inner thigh",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "90s"
-              },
-              "cue": "Feet wide and high on the platform, knees out — inner thigh plus glutes. Shapes the front of the leg."
-            },
-            {
-              "name": "Adductor Machine",
-              "ref": "inner thigh",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15-20",
-              "extras": {
-                "rir": "RIR 1-2",
-                "rest": "60s"
-              },
-              "cue": "Squeeze the pads together slowly (3s in), controlled on the way back. The best inner-thigh exercise there is."
-            },
-            {
-              "name": "Seated Leg Curl",
-              "ref": "hamstrings",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "75s"
-              },
-              "cue": "Back of the leg — the counterpart to the leg press. Pull the heels under the seat, squeeze, controlled return."
-            },
-            {
-              "name": "Chest Press Machine",
-              "ref": "chest",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "10-12",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "75s"
-              },
-              "cue": "Maintenance. Sit down, handles at chest height, press forward, controlled return. Fixed path, nothing to set up."
-            },
-            {
-              "name": "Triceps Machine",
-              "ref": "arm detail",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 1-2",
-                "rest": "60s"
-              },
-              "cue": "Maintenance. The machine instead of the cable rope — simpler on your own. Back of the upper arm, the 'underarm' area."
-            },
-            {
-              "name": "Ab Machine",
-              "ref": "core",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Fixed ab machine with a weight stack — fold under control, slow on the way back."
+              "sets": 1,
+              "reps": "full body",
+              "cue": "Whatever the eGym circuit is that day — machine-guided, full body."
             }
           ],
-          "durationMin": 50
-        },
-        "pull": {
-          "title": "Upper + Glutes",
-          "day": "Friday · with Philipp",
-          "focus": "cable tower — alternating sets with Philipp",
-          "note": "Friday with Philipp, one station at a time: her set, his set. His set is her rest — about a minute, whatever the card says. The pulldown and the row want 90s, so let one extra turn go by on those two. Shared all the way to the last exercise.",
-          "exercises": [
-            {
-              "name": "Cable Lateral Raise",
-              "ref": "shoulder-hip relation",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "2.5 kg/arm",
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "cue": "New for you. An emphasised shoulder makes the waist look narrower — exactly the Hwasa effect. Lead with the elbow to shoulder height."
-            },
-            {
-              "name": "Wide Lat Pulldown",
-              "ref": "back width",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "load": "25 kg",
-                "rir": "RIR 2-3",
-                "rest": "90s"
-              },
-              "cue": "Bar to the upper chest, squeeze the lats. The back width that makes the waist look smaller."
-            },
-            {
-              "name": "Cable Row (neutral)",
-              "ref": "upper back",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10-12",
-              "extras": {
-                "load": "27 kg",
-                "rir": "RIR 2-3",
-                "rest": "75s"
-              },
-              "cue": "Sit upright, pull to the belly, shoulder blades together. Posture plus the defined back look."
-            },
-            {
-              "name": "Hip Thrust (Dumbbell or Sandbag)",
-              "ref": "glutes 2x/week",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "75s"
-              },
-              "cue": "Glutes again — twice a week is what drives growth. Bench under the shoulders, the dumbbell or sandbag across the hips, and a folded towel under it, or the hip bones take the load instead of the glutes. Philipp does 2 maintenance sets at this station. A dumbbell runs out of weight long before your glutes do, so progress in this order: reps up to 15, then a 2-second squeeze at the top, then feet elevated, then one leg at a time. Reach for something heavier last, not first."
-            },
-            {
-              "name": "Rear Delt + Face Pull",
-              "ref": "rear delt",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "load": "5 kg",
-                "rir": "RIR 1-2",
-                "rest": "60s"
-              },
-              "cue": "New — this was missing entirely. Rear delt fly straight into a face pull. Rear shoulder, posture and shoulder health in one."
-            },
-            {
-              "name": "Cable Biceps Curl",
-              "ref": "arm detail",
-              "focus": "a",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "load": "2.5 kg",
-                "rir": "RIR 2-3",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Elbows fixed at your sides, curl up and squeeze, slow on the way down. Toned comes from control, not weight."
-            },
-            {
-              "name": "Cable Crunch",
-              "ref": "core",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "45s"
-              },
-              "cue": "Maintenance. Kneeling, fold the ribs towards the hips, hands fixed at the ears, slow on the way back.",
-              "solo": "Philipp is on the leg curl"
-            }
-          ],
-          "durationMin": 55,
-          "partner": "Philipp"
+          "durationMin": 30
         }
       }
     },
@@ -788,6 +506,80 @@
             }
           ],
           "durationMin": 45
+        },
+        "optional": {
+          "title": "Optional Extras",
+          "day": "Any free solo morning — not scheduled",
+          "focus": "taper accessories · shoulder health · low fatigue cost",
+          "note": "Not part of the weekly rhythm and not required — this is for the mornings you and Eunice each sometimes have free alone, when neither of the three fixed sessions applies. Deliberately light (RIR 3, short) so it never competes with recovery for Tue/Wed, Fri or Sun: mostly what got trimmed from Full Body for time, plus a bit more of your #1 taper driver. Skip it whenever the morning doesn't happen — nothing downstream depends on it. Loads not yet set — the Rayofi is untested for these.",
+          "exercises": [
+            {
+              "name": "Rayofi Lateral Raise (one arm)",
+              "ref": "extra taper volume",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15/side",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Optional top-up on the #1 taper driver — only if the morning is actually free, not a make-up session. One handle, switch sides between sets."
+            },
+            {
+              "name": "Rayofi Face Pull",
+              "ref": "shoulder health",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "45s"
+              },
+              "cue": "Trimmed from Full Body for time. Both handles on the one cable — elbows high and wide, hands past the ears, the counterpart to all the pressing."
+            },
+            {
+              "name": "Rayofi Biceps Curl (one arm)",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15/side",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "45s"
+              },
+              "cue": "Trimmed from Full Body for time. One handle, elbow fixed, slow on the way down, switch sides."
+            },
+            {
+              "name": "Rayofi Ankle-Strap Hamstring Curl",
+              "ref": "hamstrings",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Trimmed from Full Body for time. Ankle strap on, cable anchored low behind you, curl the heel towards the glute."
+            },
+            {
+              "name": "Rayofi Kneeling Crunch",
+              "ref": "waist",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "45s"
+              },
+              "cue": "Trimmed from Full Body for time. Anchor high, kneeling, fold the ribs towards the hips."
+            }
+          ],
+          "durationMin": 20
         }
       },
       "eunice": {
@@ -997,60 +789,133 @@
             }
           ],
           "durationMin": 50
+        },
+        "optional": {
+          "title": "Optional Extras",
+          "day": "Any free solo morning — not scheduled",
+          "focus": "glute accessories · shoulder health · low fatigue cost",
+          "note": "Not part of the weekly rhythm and not required — this is for the mornings you and Philipp each sometimes have free alone, when neither of the three fixed sessions applies. Deliberately light (RIR 2-3, short) so it never competes with recovery for Monday or Friday: a bit more glute volume plus a couple of the accessories Friday's shared session runs light on. Skip it whenever the morning doesn't happen — nothing downstream depends on it. Loads not yet set — the Rayofi is untested for these.",
+          "exercises": [
+            {
+              "name": "Rayofi Hip Thrust",
+              "ref": "extra glute volume",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session."
+            },
+            {
+              "name": "Rayofi Ankle-Strap Glute Kickback",
+              "ref": "glute isolation",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "Ankle strap on, cable anchored low, kick straight back and squeeze — not swung."
+            },
+            {
+              "name": "Rayofi Face Pull",
+              "ref": "shoulder health",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "45s"
+              },
+              "cue": "Both handles on the one cable — elbows high and wide, hands past the ears, the counterpart to all the pressing."
+            },
+            {
+              "name": "Rayofi Biceps Curl (one arm)",
+              "ref": "arm detail",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "45s"
+              },
+              "cue": "One handle, elbow fixed, slow on the way down, switch sides."
+            },
+            {
+              "name": "Hollow Hold / Dead Bug",
+              "ref": "core",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "No equipment needed — lower back flat, your usual variant."
+            }
+          ],
+          "durationMin": 18
         }
       },
       "shared": {
-        "sun": {
+        "fri": {
           "title": "Shared Session",
-          "day": "Sunday · together",
-          "focus": "same exercises · own tubes · alternating",
-          "note": "Sunday together at home. Both do the same exercises simultaneously — Philipp the stronger tubes, Eunice the lighter. If at the gym instead: same plan, cable tower instead of bands.",
+          "day": "Friday · together",
+          "focus": "same exercises · Rayofi · alternating",
+          "note": "Friday together at home on the Rayofi — moved here from Sunday so Eunice always gets a rest day before her Monday gym session, and so Philipp's own Sunday gym visit isn't stacked right against it either. One Rayofi, one exercise at a time: his set, her set, his set is her rest. Only one unit, so anything that was a wide-bar two-hand pull at the gym (lat pulldown, row) is one arm at a time here on the single handle, alternating sides within the set — the rep counts below are per side. The lateral raise and curl were already effectively single-arm even at the gym. The rear delt pull-apart is the one exception: that's what the second handle is actually for, both hands on the one cable at once. Loads below are placeholders — the Rayofi tops out around 30 kg, well under some of the gym cable loads (Philipp's row is 42.5 kg there). Fill in real numbers after the first real session instead of guessing them from gym or band loads, which don't transfer.",
           "exercises": [
             {
-              "name": "Band Lateral Raise (cross-body)",
+              "name": "Rayofi Lateral Raise (cross-body, one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Yellow (L1)",
-              "euniceLoad": "Yellow (L1), less tension",
-              "cue": "Opposite foot on the band, lead with the elbow to shoulder height.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Already one-arm even at the gym cable tower. Lead with the elbow to shoulder height, constant tension, then switch sides.",
               "shared": true
             },
             {
-              "name": "Band Lat Pulldown (kneeling)",
+              "name": "Rayofi Lat Pulldown (kneeling, one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "12-15/side",
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Anchor the band high, pull the elbows down and out, squeeze the lats.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "One handle, one Rayofi — anchor high via the door anchor, kneel, pull one elbow down and out, squeeze the lat, then switch sides. Both sides count as one set.",
               "shared": true
             },
             {
-              "name": "Band Seated Row",
+              "name": "Rayofi Seated Row (one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "10-12",
+              "reps": "10-12/side",
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Around both feet, sit upright, pull to the belly, no swing.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "One handle — sit facing the anchor, pull one elbow to the ribs, no swing, switch sides. Both sides count as one set.",
               "shared": true
             },
             {
-              "name": "Band Hip Thrust",
+              "name": "Rayofi Hip Thrust",
               "focus": "g",
               "tier": "primary",
               "sets": 3,
@@ -1059,13 +924,13 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Blue (L4) folded · maintenance",
-              "euniceLoad": "Blue (L4) folded · primary",
-              "cue": "Tube over the hips, shoulders supported, squeeze 2s at the top.",
+              "philippLoad": "Not yet tested — maintenance",
+              "euniceLoad": "Not yet tested — primary",
+              "cue": "Cable anchored low, shoulders supported, squeeze 2s at the top.",
               "shared": true
             },
             {
-              "name": "Band Rear Delt Pull-Apart",
+              "name": "Rayofi Rear Delt Pull-Apart",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
@@ -1074,23 +939,23 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Green (L2)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Band in both hands in front, apart to the chest, lead with the little fingers.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Handle in each hand (the second handle is for this), apart to the chest, lead with the little fingers.",
               "shared": true
             },
             {
-              "name": "Band Biceps Curl",
+              "name": "Rayofi Biceps Curl (one arm)",
               "focus": "a",
               "tier": "maint",
               "sets": 2,
-              "reps": "15",
+              "reps": "15/side",
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Red (L3)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Stand on the band, elbows fixed, slow on the way down.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "One handle. Elbow fixed at your side, slow on the way down, then switch sides.",
               "shared": true
             },
             {
@@ -1104,7 +969,7 @@
               },
               "philippLoad": "Hollow Hold + Flutter",
               "euniceLoad": "Dead Bug 10/side",
-              "cue": "Core finisher — each of you your own variant, lower back flat.",
+              "cue": "Core finisher — no equipment, each of you your own variant, lower back flat.",
               "shared": true
             }
           ],
@@ -1673,7 +1538,7 @@
       "method": "double progression",
       "primaryRule": "start low in rep range (e.g. 12), climb over weeks to 15 across all sets, then raise load and drop back to 12. Side delt target: clean 15 → 6kg. Pulldown/row/chest: +2.5kg when all sets hit top of range. RIR 2 non-negotiable in a deficit.",
       "maintenanceRule": "2 sets, same weight as last time, RIR 3, never progress — one number, no decision",
-      "missedSessionRule": "never two in a row. One missed session is life, two is a pattern. Sunday shared session is the safety net — minimum 1x/week structurally guaranteed.",
+      "missedSessionRule": "never two in a row. One missed session is life, two is a pattern. Friday's shared Rayofi session is the safety net — minimum 1x/week structurally guaranteed.",
       "deload": "every 6-8 weeks, 1 light week at ~60%. In a deficit, err earlier — cortisol is the enemy of muscle retention."
     },
     "eunice": {
