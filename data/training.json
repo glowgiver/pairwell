@@ -117,8 +117,8 @@
   },
   "locationNotes": {
     "gym": "Holmes Place · cable tower + machines. All primary exercises run on the cable tower — constant tension, exact progression.",
-    "home": "Bodylastics tubes + door anchor for the bands session: more resistance = bundle another tube, height = anchor high/mid/low, constant tension = stand farther from the door. Friday and the optional extras run on the Rayofi Go-Tone instead — motor-controlled resistance from 3 to 30 kg, dialled in rather than picked by tube colour, anchored to a doorframe, a chair, or your own foot. One quick-attach handle ships with it; the second is for two-handed moves. Rayofi's manual gives no anchor height per exercise — their videos do, worth watching once per new movement.",
-    "travel": "Tubes only + door anchor. Everything with Bodylastics + door anchor, no dumbbells needed. Tempo 3-0-1 and standing farther from anchor substitute for more weight."
+    "home": "Everything at home runs on the Rayofi Go-Tone Pro: motor-controlled resistance from 3 to 30 kg, dialled in rather than stacked, anchored to a doorframe, a chair, or your own foot. One quick-attach handle ships with it; the second is for the two-handed moves. There is only one unit, so anything that would be a wide-bar two-hand pull at the gym goes one arm at a time here, and the rep counts say so. Rayofi's manual gives no anchor height per exercise — their videos do, worth watching once per new movement.",
+    "travel": "The Rayofi Go-Tone Pro is the entire travel kit — under a kilo, anchors to any door. Same one-unit rules as at home: the pulls go one arm at a time, and the second handle covers the two-handed moves."
   },
   "equipmentByLocation": {
     "gym": [
@@ -128,15 +128,15 @@
       "leg press"
     ],
     "home": [
-      "Bodylastics tubes",
-      "door anchor high/low",
+      "Rayofi Go-Tone Pro",
+      "door anchor",
       "ankle strap",
-      "Rayofi Go-Tone"
+      "second cable handle"
     ],
     "travel": [
-      "3+ tubes",
+      "Rayofi Go-Tone Pro",
       "door anchor",
-      "tempo 3-0-1"
+      "second cable handle"
     ]
   },
   "sessions": {
@@ -297,6 +297,131 @@
     },
     "home": {
       "philipp": {
+        "rain": {
+          "title": "Full Body — Rayofi",
+          "day": "Home · replaces a rained-out gym day",
+          "focus": "the gym Full Body, run on the Rayofi instead",
+          "note": "Same session as the gym Full Body, done at home when the weather stops the trip. Leg press becomes a squat and the cable row goes one-armed, otherwise it is the same nine movements in the same order. If Eunice is rained out the same day you take turns on the one unit — her list is her own, not this one.",
+          "exercises": [
+            {
+              "name": "Rayofi Lateral Raise (one arm)",
+              "ref": "gym: Cable Lateral Raise",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15/side",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "60s"
+              },
+              "cue": "Fresh first — the taper driver. Lead with the elbow to shoulder height, constant tension, then switch sides."
+            },
+            {
+              "name": "Rayofi Lat Pulldown (kneeling, one arm)",
+              "ref": "gym: Wide Lat Pulldown",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15/side",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor high, kneel, pull the elbow down and out, squeeze the lat. Only one Rayofi, so this is one arm at a time — both sides make one set."
+            },
+            {
+              "name": "Rayofi Chest Press",
+              "ref": "gym: Cable Chest Press",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Anchor low behind you, stand away from the anchor, press forward and slightly down in front of the chest."
+            },
+            {
+              "name": "Rayofi Row (one arm)",
+              "ref": "gym: Cable Row",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "10-12/side",
+              "extras": {
+                "rir": "RIR 2",
+                "rest": "90s"
+              },
+              "cue": "Upright, pull the elbow to the ribs, shoulder blades together, no swing. Only one Rayofi, so this is one arm at a time — both sides make one set."
+            },
+            {
+              "name": "Rayofi Rear Delt Pull-Apart",
+              "ref": "gym: Rear Delt Fly",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 1",
+                "rest": "60s"
+              },
+              "cue": "Both handles on the one cable — arms almost straight, apart to the chest, lead with the little fingers."
+            },
+            {
+              "name": "Rayofi Triceps Pushdown",
+              "ref": "gym: Triceps Pushdown",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "60s"
+              },
+              "cue": "Anchor high, elbows fixed at your sides, press down until straight, brief squeeze."
+            },
+            {
+              "name": "Rayofi Hip Thrust",
+              "ref": "gym: Hip Thrust",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance — hold, don't build. Cable over the hips, shoulders supported, full extension, 1s at the top."
+            },
+            {
+              "name": "Rayofi Squat (light)",
+              "ref": "gym: Leg Press",
+              "focus": "g",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "20",
+              "extras": {
+                "rir": "RIR 3",
+                "rest": "60s"
+              },
+              "cue": "Maintenance, standing in for the leg press. Handles at the shoulders, high reps, light. Just hold the legs."
+            },
+            {
+              "name": "Hollow Hold",
+              "ref": "gym: Hollow Hold",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 3,
+              "reps": "30s",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "No equipment. Lower back flat on the floor, arms long."
+            }
+          ],
+          "durationMin": 55
+        },
         "optional": {
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
@@ -373,6 +498,122 @@
         }
       },
       "eunice": {
+        "rain": {
+          "title": "Full Body — Rayofi",
+          "day": "Home · replaces a rained-out eGym Monday",
+          "focus": "glutes first, then back and shoulder — the eGym circuit's job, by hand",
+          "note": "For the Mondays the weather stops the gym trip. eGym picks its own resistance and can't be copied at home, so this is the manual equivalent: glutes first because that is the priority, then the back and shoulder work that frames the waist. If Philipp is rained out the same day you take turns on the one unit.",
+          "exercises": [
+            {
+              "name": "Rayofi Hip Thrust",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "First — glutes are the priority. Cable over the hips, shoulders supported, squeeze 2s at the top."
+            },
+            {
+              "name": "Rayofi Squat (wide)",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Feet wider than shoulders, knees tracking out, 3s down. Inner thigh plus glutes."
+            },
+            {
+              "name": "Rayofi Ankle-Strap Hamstring Curl",
+              "focus": "g",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "12-15/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "Ankle strap on, cable anchored low behind you, curl the heel towards the glute, controlled back."
+            },
+            {
+              "name": "Rayofi Lateral Raise (one arm)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "The shoulder that makes the waist look narrower. Lead with the elbow, then switch sides."
+            },
+            {
+              "name": "Rayofi Lat Pulldown (kneeling, one arm)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 3,
+              "reps": "12-15/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "90s"
+              },
+              "cue": "Anchor high, pull the elbow down and out, shoulder blade down. Only one Rayofi, so this is one arm at a time — both sides make one set."
+            },
+            {
+              "name": "Rayofi Row (one arm)",
+              "focus": "a",
+              "tier": "primary",
+              "sets": 2,
+              "reps": "10-12/side",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "75s"
+              },
+              "cue": "Upright, elbow to the ribs, shoulder blades together. Only one Rayofi, so this is one arm at a time — both sides make one set."
+            },
+            {
+              "name": "Rayofi Rear Delt Pull-Apart",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "15-20",
+              "extras": {
+                "rir": "RIR 1-2",
+                "rest": "45s"
+              },
+              "cue": "Both handles on the one cable — apart to the chest, lead with the little fingers."
+            },
+            {
+              "name": "Push-Up (knee or standard)",
+              "focus": "a",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10-15",
+              "extras": {
+                "rir": "RIR 2-3",
+                "rest": "60s"
+              },
+              "cue": "No equipment. Knee version to regress, 3s down. Chest and triceps in one."
+            },
+            {
+              "name": "Dead Bug",
+              "focus": "c",
+              "tier": "maint",
+              "sets": 2,
+              "reps": "10/side",
+              "extras": {
+                "rest": "45s"
+              },
+              "cue": "No equipment. Lower back flat, opposite arm and leg, breathe out as you extend."
+            }
+          ],
+          "durationMin": 50
+        },
         "optional": {
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
@@ -448,131 +689,6 @@
         }
       },
       "shared": {
-        "bands": {
-          "title": "Full Body — Bands",
-          "day": "Home · together — when the weather kills the gym trip",
-          "focus": "same exercises · own tube strength · swap during rest",
-          "note": "For the days the weather is bad enough that neither of you is going to the gym, so you both train at home instead. Same exercises, each on their own tube strength, one works while the other rests. Friday's Rayofi session is the scheduled one at home; this is the stand-in for a missed gym day, on the Bodylastics kit.",
-          "exercises": [
-            {
-              "name": "Band Lateral Raise (cross-body)",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rir": "RIR 2",
-                "rest": "60s"
-              },
-              "philippLoad": "Yellow (L1)",
-              "euniceLoad": "Yellow (L1), less tension",
-              "cue": "Opposite foot on the band so it crosses the body — that keeps tension at the bottom. Lead with the elbow to shoulder height.",
-              "shared": true
-            },
-            {
-              "name": "Band Lat Pulldown (kneeling)",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "12-15",
-              "extras": {
-                "rest": "90s"
-              },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Anchor the band at the very top of the door, kneeling, wide, elbows down and out, squeeze the lats.",
-              "shared": true
-            },
-            {
-              "name": "Band Chest Press",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10-12",
-              "extras": {
-                "rest": "90s"
-              },
-              "philippLoad": "Red (L3) + Green (L2)",
-              "euniceLoad": "Yellow (L1)",
-              "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward.",
-              "shared": true
-            },
-            {
-              "name": "Band Seated Row",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "10-12",
-              "extras": {
-                "rest": "75s"
-              },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Low anchor or band around both feet. Sit upright, pull to the belly, shoulder blades together, no swing.",
-              "shared": true
-            },
-            {
-              "name": "Band Hip Thrust",
-              "focus": "g",
-              "tier": "primary",
-              "sets": 3,
-              "reps": "15",
-              "extras": {
-                "rir": "RIR 2-3",
-                "rest": "60s"
-              },
-              "philippLoad": "Blue (L4) folded · maintenance",
-              "euniceLoad": "Blue (L4) folded · primary",
-              "cue": "Band over the hips, shoulders supported, squeeze 2s at the top. Her primary, his maintenance — same station, different intent.",
-              "shared": true
-            },
-            {
-              "name": "Band Rear Delt Pull-Apart",
-              "focus": "a",
-              "tier": "primary",
-              "sets": 2,
-              "reps": "15",
-              "extras": {
-                "rir": "RIR 1-2",
-                "rest": "45s"
-              },
-              "philippLoad": "Green (L2)",
-              "euniceLoad": "Green (L2)",
-              "cue": "No anchor: band in both hands in front, arms straight, pull apart to the chest, lead with the little fingers.",
-              "shared": true
-            },
-            {
-              "name": "Band Squat (light)",
-              "focus": "g",
-              "tier": "maint",
-              "sets": 2,
-              "reps": "15-20",
-              "extras": {
-                "rir": "RIR 3",
-                "rest": "60s"
-              },
-              "philippLoad": "Blue (L4) · maintenance",
-              "euniceLoad": "Blue (L4) · wide stance",
-              "cue": "Stand on the band, handles at the shoulders, 3s down. Light for him, the leg work for her.",
-              "shared": true
-            },
-            {
-              "name": "Hollow Hold / Dead Bug",
-              "focus": "c",
-              "tier": "maint",
-              "sets": 3,
-              "reps": "30s",
-              "extras": {
-                "rest": "45s"
-              },
-              "philippLoad": "Hollow Hold + Flutter",
-              "euniceLoad": "Dead Bug 10/side",
-              "cue": "Core finisher — no equipment, each of you your own variant, lower back flat.",
-              "shared": true
-            }
-          ],
-          "durationMin": 45
-        },
         "fri": {
           "title": "Shared Session",
           "day": "Friday · together",
@@ -580,7 +696,7 @@
           "note": "One Rayofi, one exercise at a time: his set, her set, his set is her rest. Only one unit, so anything that is a wide-bar two-hand pull at the gym — lat pulldown, row — is one arm at a time here, alternating sides within the set, and the rep counts below are per side. The rear delt pull-apart is the exception: that is what the second handle is for, both hands on the one cable. Loads are placeholders. The Rayofi tops out around 30 kg, well under the gym cable loads, so fill in real numbers after the first session instead of carrying gym or band numbers across.",
           "exercises": [
             {
-              "name": "Rayofi Lateral Raise (cross-body, one arm)",
+              "name": "Rayofi Lateral Raise (one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
@@ -609,7 +725,7 @@
               "shared": true
             },
             {
-              "name": "Rayofi Seated Row (one arm)",
+              "name": "Rayofi Row (one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
@@ -690,40 +806,40 @@
         "fullBody": {
           "title": "Full Body",
           "day": "Travel · together",
-          "focus": "same exercises · own tube strength · swap during rest",
-          "note": "The only session while traveling — always this one, always both of you. Same exercises, each on their own tube strength; one works while the other rests, so the rest period is the swap.",
+          "focus": "same exercises · own resistance · swap during rest",
+          "note": "The only session while traveling — always this one, always both of you. The Rayofi is the whole kit: it weighs under a kilo and anchors to a door, so nothing else needs packing. Same exercises, each dialling their own resistance; one works while the other rests, so the rest period is the swap. One unit means the pulls go one arm at a time.",
           "exercises": [
             {
-              "name": "Band Lateral Raise (cross-body)",
+              "name": "Rayofi Lateral Raise (one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "12-15/side",
               "extras": {
                 "rir": "RIR 2",
                 "rest": "60s"
               },
-              "philippLoad": "Yellow (L1)",
-              "euniceLoad": "Yellow (L1), less tension",
-              "cue": "Opposite foot on the tube so it crosses the body — that keeps tension at the bottom. Lead with the elbow to shoulder height.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Lead with the elbow to shoulder height, constant tension, then switch sides.",
               "shared": true
             },
             {
-              "name": "Band Lat Pulldown (kneeling)",
+              "name": "Rayofi Lat Pulldown (kneeling, one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "12-15/side",
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Anchor the tube at the very top of the door, kneeling, wide, elbows down and out, squeeze the lats.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Anchor high on the door, kneel, elbow down and out, squeeze the lat. Only one Rayofi, so this is one arm at a time — both sides make one set.",
               "shared": true
             },
             {
-              "name": "Band Chest Press",
+              "name": "Rayofi Chest Press",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
@@ -731,27 +847,27 @@
               "extras": {
                 "rest": "90s"
               },
-              "philippLoad": "Red (L3) + Green (L2)",
-              "euniceLoad": "Yellow (L1)",
-              "cue": "Anchor low behind you, stand away from the door, handles at chest height, press forward and upward.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Anchor low behind you, stand away from the door, press forward and up.",
               "shared": true
             },
             {
-              "name": "Band Seated Row",
+              "name": "Rayofi Row (one arm)",
               "focus": "a",
               "tier": "primary",
               "sets": 3,
-              "reps": "10-12",
+              "reps": "10-12/side",
               "extras": {
                 "rest": "75s"
               },
-              "philippLoad": "Blue (L4) + Black (L5)",
-              "euniceLoad": "Green (L2)",
-              "cue": "Low anchor or tube around both feet. Sit upright, pull to the belly, shoulder blades together, no swing.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Upright, elbow to the ribs, shoulder blades together, no swing. Only one Rayofi, so this is one arm at a time — both sides make one set.",
               "shared": true
             },
             {
-              "name": "Band Hip Thrust",
+              "name": "Rayofi Hip Thrust",
               "focus": "g",
               "tier": "primary",
               "sets": 3,
@@ -760,13 +876,13 @@
                 "rir": "RIR 2-3",
                 "rest": "60s"
               },
-              "philippLoad": "Blue (L4) folded · maintenance",
-              "euniceLoad": "Blue (L4) folded · primary",
-              "cue": "Tube over the hips, shoulders supported, squeeze 2s at the top. Her primary, his maintenance — same station, different intent.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Cable over the hips, shoulders supported, squeeze 2s at the top. Her primary, his maintenance — same station, different intent.",
               "shared": true
             },
             {
-              "name": "Band Rear Delt Pull-Apart",
+              "name": "Rayofi Rear Delt Pull-Apart",
               "focus": "a",
               "tier": "primary",
               "sets": 2,
@@ -775,13 +891,13 @@
                 "rir": "RIR 1-2",
                 "rest": "45s"
               },
-              "philippLoad": "Green (L2)",
-              "euniceLoad": "Green (L2)",
-              "cue": "No anchor: tube in both hands in front, arms straight, pull apart to the chest, lead with the little fingers.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Both handles on the one cable — apart to the chest, lead with the little fingers.",
               "shared": true
             },
             {
-              "name": "Band Squat (light)",
+              "name": "Rayofi Squat (light)",
               "focus": "g",
               "tier": "maint",
               "sets": 2,
@@ -790,9 +906,9 @@
                 "rir": "RIR 3",
                 "rest": "60s"
               },
-              "philippLoad": "Blue (L4) · maintenance",
-              "euniceLoad": "Blue (L4) · wide stance",
-              "cue": "Stand on the tube, handles at the shoulders, 3s down. Light for him, the leg work for her.",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
+              "cue": "Handles at the shoulders, 3s down. Light for him, the leg work for her.",
               "shared": true
             },
             {
@@ -804,8 +920,8 @@
               "extras": {
                 "rest": "45s"
               },
-              "philippLoad": "Hollow Hold + Flutter",
-              "euniceLoad": "Dead Bug 10/side",
+              "philippLoad": "Not yet tested",
+              "euniceLoad": "Not yet tested",
               "cue": "Core finisher — no equipment, each of you your own variant, lower back flat.",
               "shared": true
             }
