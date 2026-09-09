@@ -1322,6 +1322,312 @@
         "gym/philipp/pull",
         "gym/eunice/pull"
       ]
+    },
+    "rayofi-lateral-raise": {
+      "id": "rayofi-lateral-raise",
+      "name": "Rayofi Lateral Raise (one arm)",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "side delts"
+      ],
+      "cue": "Already one-arm even at the gym cable tower. Lead with the elbow to shoulder height, constant tension, then switch sides.",
+      "video": {
+        "id": "4ZhE0dGO0oo",
+        "url": "https://www.youtube.com/watch?v=4ZhE0dGO0oo",
+        "title": "Rayofi Go-Tone Pro | Lateral raise",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/rain",
+        "home/philipp/optional",
+        "home/eunice/rain",
+        "home/shared/fri",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-lat-pulldown": {
+      "id": "rayofi-lat-pulldown",
+      "name": "Rayofi Lat Pulldown (kneeling, one arm)",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "lats"
+      ],
+      "cue": "One handle, one Rayofi — anchor high, pull one elbow down and out, squeeze the lat, then switch sides.",
+      "video": {
+        "id": "8nPmSKF-ssI",
+        "url": "https://www.youtube.com/watch?v=8nPmSKF-ssI",
+        "title": "Rayofi Go-Tone Pro | wide grip seated lat pull down",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/rain",
+        "home/eunice/rain",
+        "home/shared/fri",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-row": {
+      "id": "rayofi-row",
+      "name": "Rayofi Row (one arm)",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "upper back",
+        "lats"
+      ],
+      "cue": "One handle — pull one elbow to the ribs, no swing, then switch sides.",
+      "video": {
+        "id": "wNF_bqilP1Q",
+        "url": "https://www.youtube.com/watch?v=wNF_bqilP1Q",
+        "title": "Rayofi Go-Tone Pro | Bent over row door attachment",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/rain",
+        "home/eunice/rain",
+        "home/shared/fri",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-rear-delt-pull-apart": {
+      "id": "rayofi-rear-delt-pull-apart",
+      "name": "Rayofi Rear Delt Pull-Apart",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts"
+      ],
+      "cue": "Both handles on the one cable — apart to the chest, lead with the little fingers.",
+      "video": {
+        "id": "huMVRIWpg7s",
+        "url": "https://www.youtube.com/watch?v=huMVRIWpg7s",
+        "title": "Rayofi Go-Tone Pro | Rear delts fly",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/rain",
+        "home/shared/fri",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-chest-press": {
+      "id": "rayofi-chest-press",
+      "name": "Rayofi Chest Press",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "chest"
+      ],
+      "cue": "Anchor low behind you, press forward and slightly down in front of the chest.",
+      "video": {
+        "id": "Fhje3IVKnoM",
+        "url": "https://www.youtube.com/watch?v=Fhje3IVKnoM",
+        "title": "Rayofi Go-Tone Pro | Chest press midle single machine",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/rain",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-face-pull": {
+      "id": "rayofi-face-pull",
+      "name": "Rayofi Face Pull",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "rear delts",
+        "upper back"
+      ],
+      "cue": "Both handles on the one cable — elbows high and wide, hands past the ears.",
+      "video": {
+        "id": "MMf4U_CXMns",
+        "url": "https://www.youtube.com/watch?v=MMf4U_CXMns",
+        "title": "Rayofi Go-Tone Pro | Facepull with 3 attachments",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/optional",
+        "home/eunice/optional"
+      ]
+    },
+    "rayofi-biceps-curl": {
+      "id": "rayofi-biceps-curl",
+      "name": "Rayofi Biceps Curl (one arm)",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "a",
+      "muscles": [
+        "biceps"
+      ],
+      "cue": "One handle, elbow fixed, slow on the way down, then switch sides.",
+      "video": {
+        "id": "_PWfOo6R-lg",
+        "url": "https://www.youtube.com/watch?v=_PWfOo6R-lg",
+        "title": "Rayofi Go-Tone Pro | Cross body curl",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/optional",
+        "home/eunice/optional"
+      ]
+    },
+    "rayofi-hip-thrust": {
+      "id": "rayofi-hip-thrust",
+      "name": "Rayofi Hip Thrust",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes",
+        "hamstrings"
+      ],
+      "cue": "Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode for this device, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, cable strap across your hips, knees bent. Drive the hips up to a straight line from knee to shoulder, squeeze at the top, lower under control.",
+      "_gap": "No Rayofi or ChiliTri short exists for this movement. Setup above is not video-verified but is not a guess either: foot-anchoring is one of the Rayofi's three documented anchor modes, and it is the exact technique the retired Bodylastics hip thrust already used — tube under the foot, bodyweight as the anchor. Rejected outright: a generic banded demo video, since bands are fully retired and showing different equipment costs more attention than it saves.",
+      "_usedIn": [
+        "home/philipp/rain",
+        "home/eunice/rain",
+        "home/eunice/optional",
+        "home/shared/fri",
+        "travel/shared/fullBody"
+      ]
+    },
+    "rayofi-squat": {
+      "id": "rayofi-squat",
+      "name": "Rayofi Squat (wide)",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "quads",
+        "glutes"
+      ],
+      "cue": "Feet wider than shoulders, knees tracking out, 3s down.",
+      "video": {
+        "id": "PTEB53W5nZ8",
+        "url": "https://www.youtube.com/watch?v=PTEB53W5nZ8",
+        "title": "Rayofi Go-Tone Pro | squat presses",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/eunice/rain"
+      ]
+    },
+    "rayofi-ankle-strap-hamstring-curl": {
+      "id": "rayofi-ankle-strap-hamstring-curl",
+      "name": "Rayofi Ankle-Strap Hamstring Curl",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "hamstrings"
+      ],
+      "cue": "Ankle strap on, cable anchored low behind you, curl the heel towards the glute, controlled back.",
+      "video": {
+        "id": "HTO2aPgL4Og",
+        "url": "https://www.youtube.com/watch?v=HTO2aPgL4Og",
+        "title": "Rayofi Go-Tone Pro | Hamstring curl",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/philipp/optional",
+        "home/eunice/rain"
+      ]
+    },
+    "rayofi-ankle-strap-glute-kickback": {
+      "id": "rayofi-ankle-strap-glute-kickback",
+      "name": "Rayofi Ankle-Strap Glute Kickback",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "g",
+      "muscles": [
+        "glutes"
+      ],
+      "cue": "Ankle strap on, cable anchored low, kick straight back and squeeze — not swung.",
+      "video": {
+        "id": "E5LYNVZP-4k",
+        "url": "https://www.youtube.com/watch?v=E5LYNVZP-4k",
+        "title": "Rayofi Go-Tone Pro | Glute kickback",
+        "channel": "Rayofi Sports",
+        "verified": "2026-09-09"
+      },
+      "_usedIn": [
+        "home/eunice/optional"
+      ]
+    },
+    "rayofi-kneeling-crunch": {
+      "id": "rayofi-kneeling-crunch",
+      "name": "Rayofi Kneeling Crunch",
+      "equipment": "Rayofi Go-Tone Pro",
+      "locations": [
+        "home",
+        "travel"
+      ],
+      "focus": "c",
+      "muscles": [
+        "abs"
+      ],
+      "cue": "Anchor high, kneeling, fold the ribs towards the hips.",
+      "_usedIn": [
+        "home/philipp/optional"
+      ],
+      "video": {
+        "id": "OSlCqWjBP5g",
+        "url": "https://www.youtube.com/watch?v=OSlCqWjBP5g",
+        "title": "Cable Crunch using the Rayofi Go-Tone Portable Gym",
+        "channel": "ChiliTri Coaching",
+        "verified": "2026-09-09"
+      }
     }
   }
 }

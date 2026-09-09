@@ -384,7 +384,7 @@
                 "rest": "60s",
                 "load": "20 kg · start"
               },
-              "cue": "Maintenance — hold, don't build. Cable over the hips, shoulders supported, full extension, 1s at the top."
+              "cue": "Maintenance — hold, don't build. Setup: the Rayofi under one foot, flat on the floor — this is one of its own confirmed anchor modes, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, the cable strap across your hips, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, squeeze 1s at the top, lower under control."
             }
           ],
           "durationMin": 38
@@ -487,7 +487,7 @@
                 "rest": "75s",
                 "load": "15 kg · start"
               },
-              "cue": "First — glutes are the priority. Cable over the hips, shoulders supported, squeeze 2s at the top."
+              "cue": "First — glutes are the priority. Setup: the Rayofi under one foot, flat on the floor — this is one of its own confirmed anchor modes, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, the cable strap across your hips, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, squeeze 2s at the top, lower under control."
             },
             {
               "name": "Rayofi Squat (wide)",
@@ -586,7 +586,7 @@
                 "rest": "60s",
                 "load": "15 kg · start"
               },
-              "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session."
+              "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session. Setup: the Rayofi under one foot, flat on the floor — this is one of its own confirmed anchor modes, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, the cable strap across your hips, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, squeeze 2s at the top, lower under control."
             },
             {
               "name": "Rayofi Ankle-Strap Glute Kickback",
@@ -679,7 +679,7 @@
               },
               "philippLoad": "— he skips this one",
               "euniceLoad": "15 kg · start · primary",
-              "cue": "Hers alone. Glutes are her priority and his plan holds the legs rather than building them, so while she works her three sets he does the rear delt pull-apart beside her — no anchor needed, nobody waits. He still gets hip extension on Tue and Sun at the gym.",
+              "cue": "Hers alone. Glutes are her priority and his plan holds the legs rather than building them, so while she works her three sets he does the rear delt pull-apart beside her — no anchor needed, nobody waits. He still gets hip extension on Tue and Sun at the gym. Setup: the Rayofi under one foot, flat on the floor — this is one of its own confirmed anchor modes, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, the cable strap across your hips, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, squeeze 2s at the top, lower under control.",
               "shared": true
             },
             {
@@ -778,7 +778,7 @@
               },
               "philippLoad": "20 kg · start",
               "euniceLoad": "15 kg · start",
-              "cue": "Cable over the hips, shoulders supported, squeeze 2s at the top. Her primary, his maintenance — same station, different intent.",
+              "cue": "Her primary, his maintenance — same station, different intent. Setup: the Rayofi under one foot, flat on the floor — this is one of its own confirmed anchor modes, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, the cable strap across your hips, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, squeeze 2s at the top, lower under control.",
               "shared": true
             },
             {
@@ -886,6 +886,7 @@
     "rayofiStartingLoads": "Now written into the sessions rather than kept here, because a number he cannot see while standing at the device is no use. Philipp's are derived from his MacroFactor workout log (Aug 2026 cable sets): lateral raise 5 kg transfers directly since it was already logged single-arm; row and pulldown are roughly 55% of his two-handed loads; face pull 10 kg and crunch 20 kg transfer near enough; biceps curl 7 kg is half of the 15 kg he did two-armed on a straight bar. Eunice has no workout export, so hers are conservative guesses to climb from, not derived. Everything is marked '· start' and should be replaced with real numbers after the first session. The stack figures they came from are not force at the handle, which is what the Rayofi reads.",
     "sessionLength": "First real Rayofi session ran 70 minutes and four exercises still went undone, against a 45-60 minute target. Cause was the single-arm work: three exercises at three sets a side is 18 of the 32 bouts, and the implied pattern was left, rest, right, rest. Two fixes, no volume cut. Sides now run back to back with one rest after the pair, which removes about twelve minutes and actually gives each arm more recovery, not less. And the order is grouped by anchor height rather than by muscle priority, because on a single unit each re-anchor costs what walking to the next station costs at a gym — roughly three anchor changes now instead of seven. Realistic result is 50-55 minutes, not the 44 first estimated: that figure undercounted the rests on the single-arm sets. A second Rayofi would allow genuinely two-handed pulls, but on one motor both hands share the same 30 kg, so going two-handed would halve the load per arm exactly where he is closest to the ceiling.",
     "timePoorDesign": "Cut on 2026-09-09 after the first real Rayofi session ran 70 minutes against a 45-60 target and four exercises went undone anyway — he had already voted with his feet on which ones were expendable. The rule applied: at two or three sessions a week the maintenance tier is what gets bought back as time. Triceps and the light squat go because the chest press and the gym leg press already cover them; core holds go because they are the one thing that genuinely can be done outside a session. What survives is the four taper drivers, one press, one posterior movement. Anything that needs no anchor now runs inside another exercise's rest rather than owning a slot. Each session also names its own minimum — the first two or three exercises — so a collapsed week still produces the part that matters instead of nothing.",
-    "fridayPairing": "The shared session is not a compromise: four of the five exercises are primary for both of them, because a wider shoulder and a broader back serve his taper and her shoulder-to-hip ratio equally. The hip thrust was the one asymmetry, originally solved by dose — her three heavy sets against his two light maintenance ones. Changed 2026-09-09 to drop his entirely: he gets hip extension at the gym twice a week anyway, glute mass works against the taper, and the minutes were being spent waiting. He now does the rear delt pull-apart during her hip thrusts and she does hers during his pulls — it needs no anchor, so it never occupies the device or a slot of its own."
+    "fridayPairing": "The shared session is not a compromise: four of the five exercises are primary for both of them, because a wider shoulder and a broader back serve his taper and her shoulder-to-hip ratio equally. The hip thrust was the one asymmetry, originally solved by dose — her three heavy sets against his two light maintenance ones. Changed 2026-09-09 to drop his entirely: he gets hip extension at the gym twice a week anyway, glute mass works against the taper, and the minutes were being spent waiting. He now does the rear delt pull-apart during her hip thrusts and she does hers during his pulls — it needs no anchor, so it never occupies the device or a slot of its own.",
+    "hipThrustNoVideo": "No Rayofi or ChiliTri short demonstrates a hip thrust as of 2026-09-09, and a generic banded demo was considered and rejected — bands are fully retired, and a video of the wrong equipment costs more attention than it saves for someone who needs the setup to match exactly what is in front of them. First attempt at writing the setup by hand (2026-09-09) was itself wrong: it described a generic band hip thrust — 'anchor low, behind you' — without checking whether that geometry makes sense for this specific device, and he caught it. Corrected using what is actually confirmed about the Rayofi: foot-anchoring is one of its three documented anchor modes (door, chair/pole, foot), and the retired Bodylastics hip thrust already used exactly this technique — tube under the foot, bodyweight as the anchor, strap over the hips. The Rayofi does the same job the tube did, so the same setup carries across. Not video-verified, but mechanically sound rather than guessed."
   }
 }
