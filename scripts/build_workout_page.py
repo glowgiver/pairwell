@@ -6,7 +6,29 @@ LIB_PATH = os.path.join(BASE, "..", "data", "exercises.json")
 OUT_PATH = os.path.join(BASE, "..", "hub", "workout", "index.html")
 
 data = json.load(open(DATA_PATH, encoding="utf-8"))
-data_json = json.dumps(data, ensure_ascii=False)
+
+
+def strip_private(node):
+    """Drop every key starting with "_" before the data is inlined.
+
+    Same rule build_style_page.py already applies: a leading underscore keeps a
+    key in the repo and out of the page. training.json carries _source,
+    _supersedes, _measured and _gaps, plus the reasoning behind each session —
+    notes worth keeping beside the data and worth nothing inside a page that
+    never displays them, where they only add weight to every load.
+
+    Checked before adding, because the filter is not safe to copy blindly:
+    build_hub_page.py reads `prof._phase`, so the same strip there would blank
+    a field the Today screen depends on. This builder reads no underscored key.
+    """
+    if isinstance(node, dict):
+        return {k: strip_private(v) for k, v in node.items() if not k.startswith("_")}
+    if isinstance(node, list):
+        return [strip_private(v) for v in node]
+    return node
+
+
+data_json = json.dumps(strip_private(data), ensure_ascii=False)
 
 # Demo links live in the exercise library. Sessions still carry their own
 # exercise objects, so match on name (and on the aliases the library records

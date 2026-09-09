@@ -975,5 +975,14 @@
     "No warm-up anywhere in this file — zero sessions describe one. The gym Full Body opens on a lateral raise and reaches a 42.5 kg row by the fourth exercise, which wants a ramp set. Adding one is a training decision, not a data fix.",
     "Eunice's Monday is recorded as 'eGym' with no station list, because the machines pick and progress the resistance themselves. Nothing about that session is trackable here, by design.",
     "build_workout_page.py inlines this file without stripping _-prefixed keys, so these notes ship inside the public page even though nothing renders them — the same leak CLAUDE.md documents for four of the five builders."
-  ]
+  ],
+  "_why": {
+    "fullBodyNotSplit": "At 2-3 sessions a week a push/pull split hits each muscle roughly once, which is the worst of both worlds. That is the whole reason the split was dropped in September 2026 — not that the old sessions were badly written.",
+    "jointGymSessions": "Training together at one station was never the problem; he said it worked. What failed was the old Friday plan, which gave them five shared exercises and then split into different tails, so they started together and had to separate halfway. A joint session works if the list is genuinely identical.",
+    "homeIsPerPerson": "Home is not a shared session. Each of them does their own session there when the weather stops the gym trip; Friday's Rayofi session is the only genuinely shared one at home. If both are rained out the same day they take turns on the one unit.",
+    "travelIsShared": "Travel is the opposite — always one shared session, both of them, same exercises, swapping during rest, because there is only one Rayofi to pack.",
+    "oneRayofi": "They own exactly one Rayofi Go-Tone Pro. Anything that would be a wide-bar two-hand pull at the gym goes one arm at a time, with per-side rep counts; the rear delt pull-apart is the exception, which is what the second cable handle is for. Loads stay 'Not yet tested' until they have used it — his gym row is 42.5 kg, above the device's 30 kg ceiling, so nothing transfers.",
+    "eunicesMonday": "eGym, always, and recorded as a single line rather than a station list: the machines pick and progress their own resistance, so there is nothing here to plan a load or a set count for. Reconstructing it as individual exercises would be invention.",
+    "conferenceWeeks": "His Tuesday gym day moves to Wednesday on conference weeks. Nothing else shifts."
+  }
 }
