@@ -450,10 +450,7 @@ function directionCard(d){
           return '<div class="rev"><div class="rev-t">Not this — ' + esc(n.register) + '</div>' +
             '<p>' + esc(n.why) + '</p></div>';
         }).join("")
-      : '') +
-    fold("How this was framed", d.onTheOriginalFraming
-      ? '<div class="rev"><p>' + esc(d.onTheOriginalFraming) + '</p></div>'
-      : "");
+      : '');
 }
 
 /* Its own card rather than a line in Direction, because it is the one change
@@ -554,9 +551,7 @@ function paletteCard(p){
     group(p.unconfirmed, "Unconfirmed — cool, but not yet worn enough to say", true) +
     group(p.ruledOut, "Ruled out by the metal test", true) +
     (p.avoid ? '<div class="sw-label">Avoid — wrong at any undertone</div>' + swatches(p.avoid, true) : '') +
-    fold("Why this palette", (evidence ? '<div class="ref-body">' + evidence + '</div>' : "") +
-      (p.confidence ? '<div class="rev"><div class="rev-t">Confidence</div><p>' +
-        esc(p.confidence) + '</p></div>' : ""));
+    fold("Why this palette", evidence ? '<div class="ref-body">' + evidence + '</div>' : "");
 }
 
 /* The page could describe a wardrobe but not show one, and "a lot of text and
@@ -665,16 +660,7 @@ function looksCard(l){
     : total + ' assemblies. ' + missing + ' of ' + total + ' still show the drawn placeholder — ' +
       'each one carries the prompt that replaces it.';
 
-  var c = style && style.correction;
-  var correction = c
-    ? '<div class="rev"><div class="rev-t">Style corrected ' + esc(c.date) + '</div>' +
-      '<p><strong>' + esc(c.problem) + '</strong></p>' +
-      '<p>' + esc(c.fix) + '</p>' +
-      (c.existingImages ? '<p>' + esc(c.existingImages) + '</p>' : '') + '</div>'
-    : "";
-
-  return head('Looks', intro) + items +
-    fold("Where these came from", (l.note ? '<div class="note">' + esc(l.note) + '</div>' : "") + correction);
+  return head('Looks', intro) + items;
 }
 
 function silhouetteCard(s){
@@ -784,21 +770,11 @@ function chinoPlanCard(p){
       '</div>';
   }).join("");
 
-  /* The change itself is one line and stays visible; the paragraph arguing
-     for it is what folds. Moved below the plan too — it used to sit between
-     the heading and the fit, so the first thing this card said was a note
-     about its own edit history. */
-  var rev = p.revision
-    ? fold("Revised " + p.revision.date,
-        '<div class="rev"><p><strong>' + esc(p.revision.change) + '</strong></p>' +
-        '<p>' + esc(p.revision.why) + '</p></div>')
-    : "";
-
   return head('Chino plan', esc(p.goal)) +
     '<div class="ref-body">' +
     (p.midGoal ? '<div class="ref-item"><div class="ref-item-k">Interim</div><div class="ref-item-v">' + esc(p.midGoal) + '</div></div>' : "") +
     (p.fit ? '<div class="ref-item"><div class="ref-item-k">Fit</div><div class="ref-item-v">' + esc(p.fit) + '</div></div>' : "") +
-    '</div>' + rows + rev;
+    '</div>' + rows;
 }
 
 function renderStage(){
