@@ -299,9 +299,9 @@
       "philipp": {
         "rain": {
           "title": "Full Body — Rayofi",
-          "day": "Home · replaces a rained-out gym day",
+          "day": "Home · rain stand-in for Tue/Wed or Sun",
           "focus": "the gym Full Body, run on the Rayofi instead",
-          "note": "Same session as the gym Full Body, done at home when the weather stops the trip. Leg press becomes a squat and the cable row goes one-armed, otherwise it is the same nine movements in the same order. If Eunice is rained out the same day you take turns on the one unit — her list is her own, not this one.",
+          "note": "Your gym days are Tue (Wed on conference weeks) and Sun. This is the same Full Body session for the days the weather stops the trip. Leg press becomes a squat and the row goes one-armed; otherwise the same nine movements in the same order. If Eunice is rained out the same day you take turns on the one unit — her list is her own.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -500,9 +500,9 @@
       "eunice": {
         "rain": {
           "title": "Full Body — Rayofi",
-          "day": "Home · replaces a rained-out eGym Monday",
+          "day": "Home · rain stand-in for Monday",
           "focus": "glutes first, then back and shoulder — the eGym circuit's job, by hand",
-          "note": "For the Mondays the weather stops the gym trip. eGym picks its own resistance and can't be copied at home, so this is the manual equivalent: glutes first because that is the priority, then the back and shoulder work that frames the waist. If Philipp is rained out the same day you take turns on the one unit.",
+          "note": "Your gym day is Monday, on the eGym. eGym picks its own resistance and can't be copied at home, so this is the manual equivalent for the Mondays the weather stops the trip: glutes first because that is the priority, then the back and shoulder work that frames the waist. If Philipp is rained out the same day you take turns on the one unit.",
           "exercises": [
             {
               "name": "Rayofi Hip Thrust",

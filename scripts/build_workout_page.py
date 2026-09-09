@@ -460,10 +460,12 @@ function resolveTodayLocation(){
 
 function person(){ return PW.get(); }
 
+/* Second line is the kit, not the place. Home and travel both read Rayofi
+   because they are the same single unit — the bands it replaced are gone. */
 var LOC_LABEL = {
   gym: ["Gym","Cables"],
-  home: ["Home","Bands"],
-  travel: ["Travel","Tubes"],
+  home: ["Home","Rayofi"],
+  travel: ["Travel","Rayofi"],
   guide: ["Guide","Week"]
 };
 
