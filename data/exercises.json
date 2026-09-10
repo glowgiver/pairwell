@@ -1521,15 +1521,22 @@
         "glutes",
         "hamstrings"
       ],
-      "cue": "Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode for this device, your bodyweight holds it, no door or chair needed. Lie back, shoulders on a low bench or the floor, cable strap across your hips, knees bent. Drive the hips up to a straight line from knee to shoulder, squeeze at the top, lower under control.",
-      "_gap": "No Rayofi or ChiliTri short exists for this movement. Setup above is not video-verified but is not a guess either: foot-anchoring is one of the Rayofi's three documented anchor modes, and it is the exact technique the retired Bodylastics hip thrust already used — tube under the foot, bodyweight as the anchor. Rejected outright: a generic banded demo video, since bands are fully retired and showing different equipment costs more attention than it saves.",
+      "cue": "Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze at the top, lower under control.",
+      "_gap": "Video found 2026-09-10, a repost of the same home-gym clip already used to verify the cue (sololevelinghomegym's cable hip thrust, reposted under a different channel name). It shows the same setup this cue describes: foot-anchored cable, handle held in both hands against the hip crease, no dedicated belt. Not Rayofi or ChiliTri's own content, but the technique matches exactly, so it stands in as the demo.",
       "_usedIn": [
         "home/philipp/rain",
         "home/eunice/rain",
         "home/eunice/optional",
         "home/shared/fri",
         "travel/shared/fullBody"
-      ]
+      ],
+      "video": {
+        "id": "00Wov5CQuvw",
+        "url": "https://www.youtube.com/shorts/00Wov5CQuvw",
+        "title": "This Hip Thrust Alternative Hits Glutes Harder",
+        "channel": "modernmentor6456",
+        "verified": "2026-09-10"
+      }
     },
     "rayofi-squat": {
       "id": "rayofi-squat",
