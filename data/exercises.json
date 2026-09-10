@@ -1521,8 +1521,8 @@
         "glutes",
         "hamstrings"
       ],
-      "cue": "Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent. Drive the hips to a straight line from knee to shoulder, squeeze at the top, lower under control.",
-      "_gap": "Video found 2026-09-10, a repost of the same home-gym clip already used to verify the cue (sololevelinghomegym's cable hip thrust, reposted under a different channel name). It shows the same setup this cue describes: foot-anchored cable, handle held in both hands against the hip crease, no dedicated belt. Not Rayofi or ChiliTri's own content, but the technique matches exactly, so it stands in as the demo.",
+      "cue": "Demo video shows a standing variant — this one is done lying back. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent. Drive the hips to a straight line from knee to shoulder, squeeze at the top, lower under control.",
+      "_gap": "No Rayofi or ChiliTri short exists for this exact movement. Rejected as exact matches: a generic banded demo video (bands are fully retired); a dedicated hip-belt description (not owned); the ankle strap looped around the hip (wrong size). A reposted clip found 2026-09-10 (same home gym, same grip — hands at the hip) looked like a match at a glance but is a standing hip-hinge/pull-through, not this supine movement — its own caption says 'Standing Hip Thrust Variant.' Kept anyway as a loose reference, per him, since he also trains at home without a proper gym setup — the cue says explicitly where it diverges so it isn't followed as if it were an exact demo. Setup above needs no attachment: hold the handle in both hands, press it into the hip crease. Foot-anchoring is one of the Rayofi's three documented anchor modes and is the same technique the retired Bodylastics hip thrust used.",
       "_usedIn": [
         "home/philipp/rain",
         "home/eunice/rain",
@@ -1535,7 +1535,8 @@
         "url": "https://www.youtube.com/shorts/00Wov5CQuvw",
         "title": "This Hip Thrust Alternative Hits Glutes Harder",
         "channel": "modernmentor6456",
-        "verified": "2026-09-10"
+        "verified": "2026-09-10",
+        "note": "Loose reference only — shows a standing hip-hinge variant, not this supine setup."
       }
     },
     "rayofi-squat": {
