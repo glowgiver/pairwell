@@ -117,7 +117,7 @@
   },
   "locationNotes": {
     "gym": "Holmes Place · cable tower + machines. All primary exercises run on the cable tower — constant tension, exact progression.",
-    "home": "Everything at home runs on the Rayofi Go-Tone Pro: motor-controlled resistance from 3 to 30 kg, dialled in rather than stacked, anchored to a doorframe, a chair, or your own foot. One quick-attach handle ships with it; the second is for the two-handed moves. There is only one unit, so anything that would be a wide-bar two-hand pull at the gym goes one arm at a time here, and the rep counts say so. Rayofi's manual gives no anchor height per exercise — their videos do, worth watching once per new movement.",
+    "home": "Everything at home runs on the Rayofi Go-Tone Pro: one unit, 3-30 kg, anchors to a doorframe, chair, or your own foot. One unit means pulls go one arm at a time.",
     "travel": "The Rayofi Go-Tone Pro is the entire travel kit — under a kilo, anchors to any door. Same one-unit rules as at home: the pulls go one arm at a time, and the second handle covers the two-handed moves."
   },
   "equipmentByLocation": {
@@ -301,7 +301,7 @@
           "title": "Full Body — Rayofi",
           "day": "Home · rain stand-in for Tue/Wed or Sun",
           "focus": "side delt · lat · upper back · chest · glutes",
-          "note": "Your gym days are Tue (Wed on conference weeks) and Sun; this is the home version for the days the weather stops the trip. Six exercises, not nine: the triceps pushdown, the light squat and the hollow hold came out because the press already loads the triceps, the gym leg press and the walking already cover the legs, and a core hold does not need a slot in a session you are short of time for. What is left is the four taper drivers, the chest press and one posterior movement. Order is grouped by anchor height, and the rear delt pull-apart needs no anchor at all, so it runs inside the row's rest. If even this is too much, the first three are the session — everything after them is a bonus. Loads are starting positions from your own logged cable sets.",
+          "note": "Home stand-in for your Tue/Sun gym day. Six exercises — first three are the session if you're short on time, the rest is bonus.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -384,7 +384,7 @@
                 "rest": "60s",
                 "load": "20 kg · start"
               },
-              "cue": "Maintenance — hold, don't build. Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze 1s at the top, lower under control."
+              "cue": "Maintenance — hold, don't build. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent, other foot flat. Drive the hips to a straight line from knee to shoulder, squeeze 1s at the top, lower under control."
             }
           ],
           "durationMin": 38
@@ -393,7 +393,7 @@
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
           "focus": "taper accessories · shoulder health · low fatigue cost",
-          "note": "Not scheduled and not required — for the mornings you have free alone, outside Tue/Wed, Fri and Sun. Deliberately light (RIR 3, short) so it never eats into recovery for those three: mostly what Full Body leaves out for time, plus a little more of your #1 taper driver. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
+          "note": "Optional — for a free morning outside Tue/Wed, Fri and Sun. Light and short so it never eats into recovery. Skip freely; nothing depends on it.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -474,7 +474,7 @@
           "title": "Full Body — Rayofi",
           "day": "Home · rain stand-in for Monday",
           "focus": "glutes first, then back and shoulder",
-          "note": "Your gym day is Monday on the eGym, which sets its own resistance and cannot be copied at home — this is the manual version for the days the weather stops the trip. Seven exercises, not nine: the rear delt fly and the dead bug came out, because the row and the pulldown already work the back of the shoulder and a core hold is the easiest thing to do outside a session. Glutes stay first because that is the priority, then it is grouped by anchor height to save re-anchoring the one unit. The push-up needs no equipment, so it runs inside the row's rest. If time collapses, the hip thrust and the pulldown are the session. Loads are deliberately low starting points — there is no workout export for you — so climb from them.",
+          "note": "Home stand-in for your Monday eGym day. Seven exercises, glutes first. Short on time? Hip thrust and pulldown are the session.",
           "exercises": [
             {
               "name": "Rayofi Hip Thrust",
@@ -487,7 +487,7 @@
                 "rest": "75s",
                 "load": "15 kg · start"
               },
-              "cue": "First — glutes are the priority. Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze 2s at the top, lower under control."
+              "cue": "First — glutes are the priority. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent, other foot flat. Drive the hips to a straight line from knee to shoulder, squeeze 2s at the top, lower under control."
             },
             {
               "name": "Rayofi Squat (wide)",
@@ -572,7 +572,7 @@
           "title": "Optional Extras",
           "day": "Any free solo morning — not scheduled",
           "focus": "glute accessories · shoulder health · low fatigue cost",
-          "note": "Not scheduled and not required — for the mornings you have free alone, outside Monday and Friday. Deliberately light (RIR 2-3, short) so it never eats into recovery for those two: a little more glute volume, plus the accessories Friday runs light on. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.",
+          "note": "Optional — for a free morning outside Monday and Friday. Light and short so it never eats into recovery. Skip freely; nothing depends on it.",
           "exercises": [
             {
               "name": "Rayofi Hip Thrust",
@@ -586,7 +586,7 @@
                 "rest": "60s",
                 "load": "15 kg · start"
               },
-              "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session. Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze 2s at the top, lower under control."
+              "cue": "Optional top-up on your #1 exercise — only if the morning is actually free, not a make-up session. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent, other foot flat. Drive the hips to a straight line from knee to shoulder, squeeze 2s at the top, lower under control."
             },
             {
               "name": "Rayofi Ankle-Strap Glute Kickback",
@@ -651,7 +651,7 @@
           "title": "Shared Session",
           "day": "Friday · together",
           "focus": "same exercises · own resistance · swap during rest",
-          "note": "Five exercises, and nobody stands still. One Rayofi, one exercise at a time: his set, her set, his set is her rest. Two things break that pattern on purpose — the hip thrust is hers alone (her priority, and his plan holds the legs rather than builds them), and the rear delt pull-apart needs no anchor, so each of you does it while the other is on the device. Everything that is a wide-bar two-hand pull at the gym is one arm at a time here, sides back to back, rep counts per side. Loads are starting positions, not measured on the device — his from his own logged cable sets, hers deliberately low because there is no export for her.",
+          "note": "Five exercises, one Rayofi — you take turns, so one person's set is the other's rest. Hip thrust is hers alone; rear delt pull-apart needs no anchor, so it runs alongside.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -679,7 +679,7 @@
               },
               "philippLoad": "— he skips this one",
               "euniceLoad": "15 kg · start · primary",
-              "cue": "Hers alone. Glutes are her priority and his plan holds the legs rather than building them, so while she works her three sets he does the rear delt pull-apart beside her — no anchor needed, nobody waits. He still gets hip extension on Tue and Sun at the gym. Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze 2s at the top, lower under control.",
+              "cue": "Hers alone. Glutes are her priority and his plan holds the legs rather than building them, so while she works her three sets he does the rear delt pull-apart beside her — no anchor needed, nobody waits. He still gets hip extension on Tue and Sun at the gym. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent, other foot flat. Drive the hips to a straight line from knee to shoulder, squeeze 2s at the top, lower under control.",
               "shared": true
             },
             {
@@ -735,7 +735,7 @@
           "title": "Full Body",
           "day": "Travel · together",
           "focus": "same exercises · own resistance · swap during rest",
-          "note": "Six exercises, both of you, one unit — the light squat and the core finisher came out, since a hotel week is the wrong place to spend minutes on maintenance work. The Rayofi is the whole kit: under a kilo, anchors to any door. Same exercises for both, each dialling their own resistance; one works while the other rests, so the rest period is the swap. Pulls go one arm at a time, sides back to back.",
+          "note": "Six exercises, one Rayofi, both of you — same exercises, each dialling their own resistance, swapping through rest.",
           "exercises": [
             {
               "name": "Rayofi Lateral Raise (one arm)",
@@ -778,7 +778,7 @@
               },
               "philippLoad": "20 kg · start",
               "euniceLoad": "15 kg · start",
-              "cue": "Her primary, his maintenance — same station, different intent. Setup: the Rayofi under one foot, flat on the floor — a confirmed anchor mode, your bodyweight holds it, no door or chair needed. Hold the handle in both hands and press it into your hip crease — not the ankle strap, that is sized for an ankle, not a waist. Lie back, shoulders on a low bench or the floor, knees bent, other foot flat too. Drive the hips up to a straight line from knee to shoulder, holding the handle against your hips the whole way, squeeze 2s at the top, lower under control.",
+              "cue": "Her primary, his maintenance — same station, different intent. Rayofi under one foot, flat on the floor. Hold the handle in both hands, pressed into your hip crease. Shoulders on a low bench or the floor, knees bent, other foot flat. Drive the hips to a straight line from knee to shoulder, squeeze 2s at the top, lower under control.",
               "shared": true
             },
             {
@@ -887,6 +887,8 @@
     "sessionLength": "First real Rayofi session ran 70 minutes and four exercises still went undone, against a 45-60 minute target. Cause was the single-arm work: three exercises at three sets a side is 18 of the 32 bouts, and the implied pattern was left, rest, right, rest. Two fixes, no volume cut. Sides now run back to back with one rest after the pair, which removes about twelve minutes and actually gives each arm more recovery, not less. And the order is grouped by anchor height rather than by muscle priority, because on a single unit each re-anchor costs what walking to the next station costs at a gym — roughly three anchor changes now instead of seven. Realistic result is 50-55 minutes, not the 44 first estimated: that figure undercounted the rests on the single-arm sets. A second Rayofi would allow genuinely two-handed pulls, but on one motor both hands share the same 30 kg, so going two-handed would halve the load per arm exactly where he is closest to the ceiling.",
     "timePoorDesign": "Cut on 2026-09-09 after the first real Rayofi session ran 70 minutes against a 45-60 target and four exercises went undone anyway — he had already voted with his feet on which ones were expendable. The rule applied: at two or three sessions a week the maintenance tier is what gets bought back as time. Triceps and the light squat go because the chest press and the gym leg press already cover them; core holds go because they are the one thing that genuinely can be done outside a session. What survives is the four taper drivers, one press, one posterior movement. Anything that needs no anchor now runs inside another exercise's rest rather than owning a slot. Each session also names its own minimum — the first two or three exercises — so a collapsed week still produces the part that matters instead of nothing.",
     "fridayPairing": "The shared session is not a compromise: four of the five exercises are primary for both of them, because a wider shoulder and a broader back serve his taper and her shoulder-to-hip ratio equally. The hip thrust was the one asymmetry, originally solved by dose — her three heavy sets against his two light maintenance ones. Changed 2026-09-09 to drop his entirely: he gets hip extension at the gym twice a week anyway, glute mass works against the taper, and the minutes were being spent waiting. He now does the rear delt pull-apart during her hip thrusts and she does hers during his pulls — it needs no anchor, so it never occupies the device or a slot of its own.",
-    "hipThrustNoVideo": "No Rayofi or ChiliTri short demonstrates a hip thrust, and there is no Rayofi accessory confirmed to fit around a hip. Three wrong guesses on the way here, all caught by him: (1) a generic band hip thrust anchor description that didn't match this device's geometry; (2) 'the cable strap across your hips' — a dedicated hip belt he does not own; (3) the ankle strap 'looped across the hip crease' — the ankle strap is sized for an ankle, not a waist, and would not fit. Landed on the one setup that needs no assumption about strap sizing: hold the bare handle in both hands, press it into the hip crease. Foot-anchoring itself is a confirmed Rayofi anchor mode and is the same technique the retired Bodylastics hip thrust used. Equipment for this exercise is door anchor + bare handle only, per equipmentByLocation.home. On 2026-09-10 he found a demo video (a reposted home-gym clip, not Rayofi's own) showing exactly this setup — foot-anchored cable, handle held in both hands at the hip crease — confirming the cue independently rather than changing it. Recorded on exercises.json's rayofi-hip-thrust entry."
+    "hipThrustNoVideo": "No Rayofi or ChiliTri short demonstrates a hip thrust, and there is no Rayofi accessory confirmed to fit around a hip. Three wrong guesses on the way here, all caught by him: (1) a generic band hip thrust anchor description that didn't match this device's geometry; (2) 'the cable strap across your hips' — a dedicated hip belt he does not own; (3) the ankle strap 'looped across the hip crease' — the ankle strap is sized for an ankle, not a waist, and would not fit. Landed on the one setup that needs no assumption about strap sizing: hold the bare handle in both hands, press it into the hip crease. Foot-anchoring itself is a confirmed Rayofi anchor mode and is the same technique the retired Bodylastics hip thrust used. Equipment for this exercise is door anchor + bare handle only, per equipmentByLocation.home. On 2026-09-10 he found a demo video (a reposted home-gym clip, not Rayofi's own) showing exactly this setup — foot-anchored cable, handle held in both hands at the hip crease — confirming the cue independently rather than changing it. Recorded on exercises.json's rayofi-hip-thrust entry.",
+    "homeSessionNotes": "Full session-design rationale for the six long home/travel notes trimmed on 2026-09-10 (he called out the length against the gym notes' 1-2 sentences). Kept here, not shown in-app.\n\n[home.philipp.rain]\nYour gym days are Tue (Wed on conference weeks) and Sun; this is the home version for the days the weather stops the trip. Six exercises, not nine: the triceps pushdown, the light squat and the hollow hold came out because the press already loads the triceps, the gym leg press and the walking already cover the legs, and a core hold does not need a slot in a session you are short of time for. What is left is the four taper drivers, the chest press and one posterior movement. Order is grouped by anchor height, and the rear delt pull-apart needs no anchor at all, so it runs inside the row's rest. If even this is too much, the first three are the session — everything after them is a bonus. Loads are starting positions from your own logged cable sets.\n\n[home.philipp.optional]\nNot scheduled and not required — for the mornings you have free alone, outside Tue/Wed, Fri and Sun. Deliberately light (RIR 3, short) so it never eats into recovery for those three: mostly what Full Body leaves out for time, plus a little more of your #1 taper driver. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.\n\n[home.eunice.rain]\nYour gym day is Monday on the eGym, which sets its own resistance and cannot be copied at home — this is the manual version for the days the weather stops the trip. Seven exercises, not nine: the rear delt fly and the dead bug came out, because the row and the pulldown already work the back of the shoulder and a core hold is the easiest thing to do outside a session. Glutes stay first because that is the priority, then it is grouped by anchor height to save re-anchoring the one unit. The push-up needs no equipment, so it runs inside the row's rest. If time collapses, the hip thrust and the pulldown are the session. Loads are deliberately low starting points — there is no workout export for you — so climb from them.\n\n[home.eunice.optional]\nNot scheduled and not required — for the mornings you have free alone, outside Monday and Friday. Deliberately light (RIR 2-3, short) so it never eats into recovery for those two: a little more glute volume, plus the accessories Friday runs light on. Skip it whenever the morning doesn't happen; nothing downstream depends on it. Loads unset — the Rayofi is untested for these. Loads are starting positions, not measured on the device: his come from his own logged cable sets in August, hers are deliberately low because there is no workout export for her at all. Dial to whatever makes the prescribed reps land at the target RIR, then write the real number in.\n\n[home.shared.fri]\nFive exercises, and nobody stands still. One Rayofi, one exercise at a time: his set, her set, his set is her rest. Two things break that pattern on purpose — the hip thrust is hers alone (her priority, and his plan holds the legs rather than builds them), and the rear delt pull-apart needs no anchor, so each of you does it while the other is on the device. Everything that is a wide-bar two-hand pull at the gym is one arm at a time here, sides back to back, rep counts per side. Loads are starting positions, not measured on the device — his from his own logged cable sets, hers deliberately low because there is no export for her.\n\n[travel.shared.fullBody]\nSix exercises, both of you, one unit — the light squat and the core finisher came out, since a hotel week is the wrong place to spend minutes on maintenance work. The Rayofi is the whole kit: under a kilo, anchors to any door. Same exercises for both, each dialling their own resistance; one works while the other rests, so the rest period is the swap. Pulls go one arm at a time, sides back to back.",
+    "homeLocationNoteFull": "Full version of locationNotes.home before the 2026-09-10 trim (509 chars vs. gym's 122): Everything at home runs on the Rayofi Go-Tone Pro: motor-controlled resistance from 3 to 30 kg, dialled in rather than stacked, anchored to a doorframe, a chair, or your own foot. One quick-attach handle ships with it; the second is for the two-handed moves. There is only one unit, so anything that would be a wide-bar two-hand pull at the gym goes one arm at a time here, and the rep counts say so. Rayofi's manual gives no anchor height per exercise — their videos do, worth watching once per new movement."
   }
 }
