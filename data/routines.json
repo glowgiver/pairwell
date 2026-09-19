@@ -773,7 +773,10 @@
         "everyDays": 7,
         "afterStep": 2,
         "rank": 2,
-        "skipsIfDue": ["chelating"]
+        "skipsIfDue": [
+          "chelating"
+        ],
+        "inSequence": "Pour it over all your hair, leave 1–2 min, then rinse it out."
       },
       {
         "id": "chelating",
@@ -799,7 +802,8 @@
         "why": "Longer hair needs deeper conditioning to prevent split ends and manage tangling. Philipp's length does not need this layer.",
         "everyDays": 7,
         "afterStep": 2,
-        "rank": 1
+        "rank": 1,
+        "inSequence": "Leave on 5–10 min in the shower steam, then rinse it out."
       }
     ],
     "products": {

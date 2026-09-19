@@ -680,11 +680,19 @@ __CSS__
   .card.today ol.steps .t.treat-step{color:var(--hair)}
   .todaydone{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 14px;border-top:1px solid var(--line)}
   .todaydone .dobtn{margin-left:0;flex:1 1 auto}
-  /* A treatment this session deliberately skips — it still shows "due" in
-     the Schedule card below (its own clock never moved), so silence here
-     would read as the page having forgotten it rather than as a choice. */
-  .skipnote{padding:11px 18px 14px;border-top:1px solid var(--line);
-    font-family:var(--f-read);font-size:14px;color:var(--muted);line-height:1.5}
+  /* "What kind of wash is it?" — the choice is made by the person at the sink,
+     not inferred from a log they may never have filled in. */
+  .washbox{padding:14px 18px 6px;border-bottom:1px solid var(--line)}
+  .washlabel{font-family:var(--f-data);font-size:13px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted2);margin-bottom:8px}
+  .washbox .phases{margin-bottom:8px}
+  .washbox .phase{font-size:15px;padding:8px 4px}
+  .washbox .phase small{line-height:1.35}
+  .washhint{font-family:var(--f-read);font-size:15px;line-height:1.55;
+    color:var(--muted);margin:2px 0 10px}
+  .steptag{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:8px;
+    border:1px solid var(--hair);color:var(--hair);vertical-align:2px;
+    font-family:var(--f-data);font-size:13px;font-weight:600;letter-spacing:.04em}
   .todaybody{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
   .tline{font-size:15.5px;line-height:1.45;color:var(--muted)}
   .tline b{color:var(--text);font-weight:600}
@@ -792,78 +800,100 @@ function dueState(t){
   return { state:"soon", days:days, label:"In " + left + " day" + (left === 1 ? "" : "s") };
 }
 
-function isDue(t){
-  var st = dueState(t).state;
-  return st === "due" || st === "late" || st === "unknown";
+/* Today's wash as ONE sequence, for the wash you say you are doing.
+
+   This used to be inferred from "what is due", and with nothing logged yet
+   everything is due: the card opened on chelating plus the mask, and the
+   citric rinse was quietly dropped as "covered" — so the person who came
+   to find out where citric goes could not find it anywhere. The person at
+   the sink knows what kind of wash it is; the log only suggests a default.
+
+   Chelating REPLACES the shampoo and also does the citric rinse's job, so
+   choosing it leaves citric out. The mask is Eunice's and goes before the
+   citric rinse. Order comes from afterStep / replacesStep / rank. */
+var wash = { type: null, mask: null };
+var curType = "normal", curMask = false;
+
+function treatById(id){
+  return R.hair.scheduled.filter(function(t){ return t.id === id; })[0];
+}
+/* Only a logged date can make something "due" for the default; never-logged
+   is not evidence that today is the day. */
+function loggedDue(t){
+  var s = dueState(t).state;
+  return s === "due" || s === "late";
+}
+function defaultType(){
+  if(loggedDue(treatById("chelating"))) return "chelating";
+  if(loggedDue(treatById("citric-rinse"))) return "citric";
+  return "normal";
+}
+function defaultMask(who){
+  return who === "eunice" && loggedDue(treatById("deep-mask"));
 }
 
-/* Today's shower as ONE sequence.
-
-   The page used to print the four cards and leave you to merge three prose
-   "order" sentences while standing in the shower — wash, then mask, then
-   citric, but each of those sentences only described its own treatment.
-   Chelating replaces the shampoo rather than following it, which is the part
-   that is easiest to get wrong from prose alone. */
-function showerSequence(who){
+function buildSequence(who, type, mask){
   var h = R.hair;
-  var base = h.everyShower.steps;
-  var candidates = h.scheduled.filter(function(t){
-    return (t.who === "both" || t.who === who) && isDue(t);
-  });
-  var dueIds = candidates.map(function(t){ return t.id; });
-
-  /* skipsIfDue: a deeper treatment can make a lighter one redundant for this
-     one session — chelating already does citric's job by a different route.
-     The lighter treatment's own clock is untouched (it isn't marked done),
-     so it is simply due again at the next wash; only this session skips it. */
-  var skipped = candidates.filter(function(t){
-    return t.skipsIfDue && t.skipsIfDue.some(function(id){ return dueIds.indexOf(id) !== -1; });
-  }).map(function(t){
-    var coveredBy = t.skipsIfDue.filter(function(id){ return dueIds.indexOf(id) !== -1; })
-      .map(function(id){
-        var m = h.scheduled.filter(function(x){ return x.id === id; })[0];
-        return m ? m.title : id;
-      });
-    return { treat: t, coveredBy: coveredBy };
-  });
-  var skippedIds = skipped.map(function(s){ return s.treat.id; });
-  var due = candidates.filter(function(t){ return skippedIds.indexOf(t.id) === -1; })
+  var chosen = [];
+  if(type === "chelating") chosen.push("chelating");
+  if(type === "citric") chosen.push("citric-rinse");
+  if(mask && who === "eunice") chosen.push("deep-mask");
+  var due = chosen.map(treatById)
     .sort(function(a, b){ return (a.rank || 0) - (b.rank || 0); });
 
   var out = [];
-  base.forEach(function(s, i){
+  h.everyShower.steps.forEach(function(s, i){
     var n = i + 1;
     var replacing = due.filter(function(t){ return t.replacesStep === n; })[0];
     if(replacing){
       out.push({ step: replacing.title, how: replacing.recipe + " " + replacing.order,
                  treat: replacing });
     }else{
-      out.push({ step: s.step, how: s.how,
-                 extra: s.perPerson && s.perPerson[who] });
+      out.push({ step: s.step, how: s.how, extra: s.perPerson && s.perPerson[who] });
     }
     due.filter(function(t){ return t.afterStep === n; }).forEach(function(t){
-      out.push({ step: t.title, how: t.recipe, treat: t });
+      out.push({ step: t.title, how: t.recipe + (t.inSequence ? " " + t.inSequence : ""), treat: t });
     });
   });
-  return { steps: out, due: due, skipped: skipped };
+  return { steps: out, due: due };
 }
 
-/* "wash plus X and Y and Z" read badly, and it was wrong about chelating,
-   which replaces the shampoo rather than joining it. */
+function stateWord(t){
+  var s = dueState(t);
+  if(s.state === "done") return "done today";
+  if(s.state === "due" || s.state === "late") return "due";
+  if(s.state === "soon") return s.label.toLowerCase();
+  return "not logged";
+}
+
+function washHint(type, mask){
+  var t = {
+    normal:   "The four basic steps, nothing extra.",
+    citric:   "The citric rinse goes after you have rinsed the shampoo out, and before you towel off.",
+    chelating:"The chelating shampoo takes the place of your regular shampoo. Skip the citric rinse today — it already does that job."
+  }[type];
+  if(mask){
+    t += type === "chelating"
+      ? " Then the mask, then leave-in."
+      : " The mask goes before the citric rinse, never after." ;
+  }
+  return t;
+}
+
+/* "wash plus X and Y" read badly, and it was wrong about chelating, which
+   replaces the shampoo rather than joining it. */
 function listWords(a){
   if(a.length <= 1) return a[0] || "";
   return a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
 }
 function showerSummary(seq){
-  if(!seq.due.length) return "A normal wash \u2014 nothing extra due";
+  if(!seq.due.length) return "A normal wash — nothing extra";
   var swap = seq.due.filter(function(t){ return t.replacesStep; });
   var add  = seq.due.filter(function(t){ return !t.replacesStep; });
   var addWords = add.length
     ? "plus " + listWords(add.map(function(t){ return t.title.toLowerCase(); }))
     : "";
   if(swap.length){
-    /* Two clauses, not two list items — joining them with "and" produced
-       "instead of the usual shampoo and plus the mask". */
     var swapWords = listWords(swap.map(function(t){ return t.title.toLowerCase(); }));
     var head = swapWords.charAt(0).toUpperCase() + swapWords.slice(1) +
                " instead of the usual shampoo";
@@ -880,18 +910,6 @@ function renderStage(){
      "Why this protocol" instead of above the first step. */
   document.getElementById("sub").textContent =
     "Sulfate-free, conditioned, and rinsed clear of hard water.";
-
-  /* Every shower — four steps, with the amount that differs per person
-     shown only for whoever is currently selected. */
-  var wash = '<div class="card"><div class="card-head">' +
-    '<span class="k">Every shower</span></div>' +
-    stepList(h.everyShower.steps, function(s){
-      var extra = s.perPerson && s.perPerson[who];
-      return '<div class="t">' + esc(s.step) + '</div>' +
-             (s.how ? '<div class="h">' + esc(s.how) + '</div>' : '') +
-             (extra ? '<div class="p"><strong>' + esc(PW.PEOPLE[who].name) + '</strong> &middot; ' +
-                      esc(extra) + '</div>' : '');
-    }) + '</div>';
 
   /* Scheduled treatments. Ones that belong to the other person are shown
      greyed rather than hidden, so nobody wonders where they went. */
@@ -936,17 +954,47 @@ function renderStage(){
       }).join("") +
     '</div></details></div>';
 
-  /* Lead with the answer to the question the page exists to answer. Before
-     this it opened on frequencies and left the date arithmetic to the reader. */
-  var seq = showerSequence(who);
+  /* Lead with the answer to the question the page exists to answer: what do
+     I do at the sink today, in what order. The wash type is a choice with a
+     suggested default, so the citric rinse is always one tap away. */
+  curType = wash.type || defaultType();
+  curMask = wash.mask === null ? defaultMask(who) : wash.mask;
+  var seq = buildSequence(who, curType, curMask);
+
+  var kinds = [
+    { id: "normal",    label: "Normal",      t: null },
+    { id: "citric",    label: "Citric rinse", t: treatById("citric-rinse") },
+    { id: "chelating", label: "Chelating",    t: treatById("chelating") }
+  ];
+  var picker = '<div class="washlabel">What kind of wash today?</div>' +
+    '<div class="phases" role="group" aria-label="Kind of wash">' +
+    kinds.map(function(k){
+      return '<button type="button" class="phase" data-wash="' + k.id + '"' +
+        ' aria-pressed="' + (curType === k.id) + '">' + esc(k.label) +
+        '<small>' + (k.t ? esc(k.t.cadence.toLowerCase()) + '<br>' + esc(stateWord(k.t))
+                         : 'every wash') + '</small></button>';
+    }).join("") + '</div>';
+
+  var maskT = treatById("deep-mask");
+  var maskBtn = who === "eunice"
+    ? '<div class="phases"><button type="button" class="phase" data-mask="1"' +
+      ' aria-pressed="' + curMask + '">' + (curMask ? 'Deep mask: on' : 'Add deep mask') +
+      '<small>' + esc(maskT.cadence.toLowerCase()) + ' &middot; ' +
+      esc(stateWord(maskT)) + '</small></button></div>'
+    : '';
+
   var todayCard =
     '<div class="card today"><div class="card-head">' +
       '<span class="k">Today, in order</span>' +
       '<span class="meta">' + esc(PW.PEOPLE[who].name) + '</span>' +
       '<span class="focus">' + esc(showerSummary(seq)) + '</span>' +
     '</div>' +
+    '<div class="washbox">' + picker + maskBtn +
+      '<p class="washhint">' + esc(washHint(curType, curMask)) + '</p></div>' +
     stepList(seq.steps, function(x){
-      return '<div class="t' + (x.treat ? ' treat-step' : '') + '">' + esc(x.step) + '</div>' +
+      return '<div class="t' + (x.treat ? ' treat-step' : '') + '">' + esc(x.step) +
+               (x.treat ? '<span class="steptag">' + esc(x.treat.cadence) + '</span>' : '') +
+             '</div>' +
              (x.how ? '<div class="h">' + esc(x.how) + '</div>' : '') +
              (x.extra ? '<div class="p"><strong>' + esc(PW.PEOPLE[who].name) +
                         '</strong> &middot; ' + esc(x.extra) + '</div>' : '');
@@ -956,15 +1004,6 @@ function renderStage(){
           return '<button type="button" class="dobtn" data-done="' + esc(t.id) + '">' +
                  esc(t.title) + ' done</button>';
         }).join("") + '</div>'
-      : '') +
-    /* A treatment skipped for today must say so here, not just vanish —
-       it still shows "due" in the Schedule list below, since its own clock
-       never moved, and that would otherwise read as the page forgetting it. */
-    (seq.skipped.length
-      ? '<div class="skipnote">' + seq.skipped.map(function(s){
-          return esc(s.treat.title) + ' skipped today — ' +
-                 esc(s.coveredBy.join(", ")) + ' already covers it this session.';
-        }).join(" ") + '</div>'
       : '') +
     '</div>';
 
@@ -1041,16 +1080,22 @@ function renderStage(){
       '<div><div class="dk">Verify</div><div class="dv">' + esc(h.context.verify) + '</div></div>' +
     '</div></details>';
 
-  /* `wash` is the same four steps the sequence above already contains, so it
-     no longer ships — the sequence IS the wash, with today's extras folded in
-     where they belong. */
   stage.innerHTML = todayCard + sched + personal + details;
   wireDoneButtons();
 }
 
 function wireDoneButtons(){
+  document.querySelectorAll("[data-wash]").forEach(function(b){
+    b.addEventListener("click", function(){ wash.type = b.dataset.wash; renderStage(); });
+  });
+  document.querySelectorAll("[data-mask]").forEach(function(b){
+    b.addEventListener("click", function(){ wash.mask = !curMask; renderStage(); });
+  });
   document.querySelectorAll("[data-done]").forEach(function(b){
-    b.addEventListener("click", function(){ markDone(b.dataset.done); renderStage(); });
+    b.addEventListener("click", function(){
+      wash.type = curType; wash.mask = curMask;
+      markDone(b.dataset.done); renderStage();
+    });
   });
   document.querySelectorAll("[data-undone]").forEach(function(b){
     b.addEventListener("click", function(){ clearDone(b.dataset.undone); renderStage(); });
@@ -1062,7 +1107,7 @@ PW.mountSwitcher(document.getElementById("switcher"));
 /* This page shipped without a tab bar, so the only way off it was the back
    link at the top — which scrolls away. */
 PW.mountTabs("hair", "../");
-window.addEventListener("pw:person", renderStage);
+window.addEventListener("pw:person", function(){ wash = { type: null, mask: null }; renderStage(); });
 
 renderStage();
 </script>
