@@ -768,18 +768,6 @@ function markDone(id){
             String(d.getMonth()+1).padStart(2,"0") + "-" +
             String(d.getDate()).padStart(2,"0");
   try{ localStorage.setItem(doneKey(id), iso); }catch(e){}
-  /* A treatment that supersedes another (skipsIfDue) does that other one's
-     job too, not just today's — chelating pulls out the same calcium and
-     magnesium the citric rinse would have dissolved. Leaving citric's own
-     date untouched would show it "overdue" the very next day, which is the
-     wrong answer to "does hair need de-scaling again" one day after it was
-     just done by the deeper treatment. So marking chelating done resets
-     whatever it stands in for too. */
-  (R.hair.scheduled || []).forEach(function(t){
-    if(t.skipsIfDue && t.skipsIfDue.indexOf(id) !== -1){
-      try{ localStorage.setItem(doneKey(t.id), iso); }catch(e){}
-    }
-  });
 }
 function clearDone(id){ try{ localStorage.removeItem(doneKey(id)); }catch(e){} }
 
@@ -870,8 +858,12 @@ function washHint(type, mask){
   var t = {
     normal:   "The four basic steps, nothing extra.",
     citric:   "The citric rinse goes after you have rinsed the shampoo out, and before you towel off.",
-    chelating:"The chelating shampoo takes the place of your regular shampoo. Skip the citric rinse today — it already does that job."
+    chelating:"The chelating shampoo takes the place of your regular shampoo, and only every 2–3 weeks. It does not replace the weekly citric rinse — that keeps its own clock, it just never shares a wash with this one."
   }[type];
+  var ch = dueState(treatById("chelating"));
+  if(type === "chelating" && ch.state === "soon"){
+    t += " Last done " + ch.days + " days ago — too soon. Weekly dries the scalp and brings flakes back.";
+  }
   if(mask){
     t += type === "chelating"
       ? " Then the mask, then leave-in."

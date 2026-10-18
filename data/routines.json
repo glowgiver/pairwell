@@ -773,9 +773,6 @@
         "everyDays": 7,
         "afterStep": 2,
         "rank": 2,
-        "skipsIfDue": [
-          "chelating"
-        ],
         "inSequence": "Pour it over all your hair, leave 1–2 min, then rinse it out."
       },
       {
@@ -786,7 +783,7 @@
         "recipe": "Malibu C Hard Water Wellness — use in place of your regular shampoo.",
         "order": "Lather, leave on 3–5 min, rinse fully. Follow immediately with a deep conditioner or your leave-in — do not skip that.",
         "why": "EDTA binds calcium and magnesium ions inside the hair shaft and pulls them out when you rinse. Regular shampoo — even sulfate-free — physically cannot do this.",
-        "caution": "Strips moisture and protein if used too often. Every 2–3 weeks is enough; the weekly citric rinse handles maintenance in between.",
+        "caution": "Strips moisture and protein if used too often. Every 2–3 weeks at most — it is NOT a weekly stand-in for the citric rinse. The citric rinse keeps its own weekly clock; the two only never share the same wash.",
         "everyDays": 14,
         "everyDaysMax": 21,
         "replacesStep": 1,
@@ -962,12 +959,12 @@
       }
     ],
     "individualNotes": {
-      "philipp": "Morning scalp itch was traced to using a rinse-out conditioner as a leave-in — corrected. If it returns, check the citric rinse is not being overdone.",
+      "philipp": "Morning scalp itch was traced to using a rinse-out conditioner as a leave-in — corrected. Flaking came back when the chelating shampoo was used weekly in place of the citric rinse (2026-10): keep chelating to every 2–3 weeks and the citric rinse weekly. If itch returns, check the citric rinse is not being overdone.",
       "eunice": "Longer hair means more mineral surface area, so under-cleansing is the bigger risk. The weekly mask and the larger leave-in amount are hers alone."
     },
     "_cadenceNote": "everyDays is the numeric form of the cadence text, so the page can answer 'is it due today?' instead of leaving the date arithmetic to the reader. everyDaysMax, where present, is the far end of a range cadence — past it the treatment reads as late rather than merely due.",
     "_sequenceNote": "replacesStep / afterStep / rank say where a treatment lands in the everyShower list, so the page can build one numbered sequence for today. The prose in each `order` field still explains the treatment on its own; this is what lets three of them be read as a single shower. Chelating REPLACES the shampoo rather than following it. The mask goes before the citric rinse, which is what the mask's own order sentence already said.",
-    "_stackingNote": "Added 2026-09-06, revised same day. citric-rinse and chelating run on independent 7-day and 14-21-day clocks, so with both logged honestly they land on the same day roughly every second or third chelating cycle — the two cadences share a common multiple, this isn't rare. The page used to just merge whatever was due into one shower, which meant a chelating wash could get a citric rinse stacked on top of it. That's redundant, not additive: chelating's own `why` says EDTA pulls the calcium/magnesium out of the shaft directly, which is the exact job the citric rinse does by dissolving the surface film, and chelating's own `caution` already said 'the weekly citric rinse handles maintenance in between' — between chelating sessions, not during one. `skipsIfDue` on citric-rinse names chelating as the treatment that supersedes it for that session, and showerSequence() reads it to leave citric out of that day's sequence, with the reason shown on the page rather than citric just silently vanishing. The first version left citric's own clock untouched when chelating was logged, on the reasoning that citric genuinely wasn't performed. That produced a worse answer than it solved: the day after a chelating wash, citric would read 'overdue' even though the mineral film it targets was just removed by a different method. Since chelating does citric's underlying job, not merely a substitute for it, markDone() now resets any treatment a logged one supersedes via skipsIfDue — chelating done also marks citric done, same date. The relationship is one-directional: logging citric does not touch chelating, since citric's lighter, more frequent pass does not do chelating's deeper job in reverse."
+    "_stackingNote": "Added 2026-09-06, revised same day. citric-rinse and chelating run on independent 7-day and 14-21-day clocks, so with both logged honestly they land on the same day roughly every second or third chelating cycle — the two cadences share a common multiple, this isn't rare. The page used to just merge whatever was due into one shower, which meant a chelating wash could get a citric rinse stacked on top of it. That's redundant, not additive: chelating's own `why` says EDTA pulls the calcium/magnesium out of the shaft directly, which is the exact job the citric rinse does by dissolving the surface film, and chelating's own `caution` already said 'the weekly citric rinse handles maintenance in between' — between chelating sessions, not during one. `skipsIfDue` on citric-rinse names chelating as the treatment that supersedes it for that session, and showerSequence() reads it to leave citric out of that day's sequence, with the reason shown on the page rather than citric just silently vanishing. The first version left citric's own clock untouched when chelating was logged, on the reasoning that citric genuinely wasn't performed. That produced a worse answer than it solved: the day after a chelating wash, citric would read 'overdue' even though the mineral film it targets was just removed by a different method. Since chelating does citric's underlying job, not merely a substitute for it, markDone() now resets any treatment a logged one supersedes via skipsIfDue — chelating done also marks citric done, same date. The relationship is one-directional: logging citric does not touch chelating, since citric's lighter, more frequent pass does not do chelating's deeper job in reverse. REVISED 2026-10-18: the last two sentences above (chelating 'does citric's underlying job', so logging it resets citric's clock) were wrong in practice. Philipp used chelating weekly in place of citric and his dandruff returned. `skipsIfDue` is removed: chelating no longer resets or stands in for the citric rinse. The picker already makes the two mutually exclusive on a single wash, which is all that is left of the idea."
   },
   "_gaps": [
     "Philipp's current skincare phase is assumed to be week-9-plus; confirm on the page",
