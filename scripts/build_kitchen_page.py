@@ -118,6 +118,19 @@ def _base_shopping():
     }
 
 
+def _protein_boost():
+    """Whey, resolved to the one number the page needs: protein per gram.
+
+    The page reads it for the "if the day lands short" card. Derived from
+    foods.json like every other figure; nothing typed twice.
+    """
+    f = _foods.get("whey")
+    if not f:
+        return None
+    return {"name": f["name"],
+            "proteinPerG": round(f["per100g"]["proteinG"] / 100.0, 4)}
+
+
 def _dish_kinds():
     out = {}
     for r in _recipes:
@@ -146,6 +159,7 @@ data = {
     # Resolved here rather than in the page for the same reason foodNames exists:
     # the page gets the one number it needs, not the nutrition table it came from.
     "fineTuneFiber": _fine_tune_fiber(),
+    "proteinBoost": _protein_boost(),
 }
 data_json = json.dumps(data, ensure_ascii=False)
 
@@ -641,55 +655,6 @@ function g(v){
   return m ? "\u2264" + m[1] : String(v);
 }
 
-/* Every figure in the ledger is derived here rather than read from the
-   pre-computed budget fields in profiles.json. Those fields agree today; the
-   point is that they cannot silently stop agreeing. */
-function mealsOfDay(who){
-  var prof = D.profiles.people[who];
-  var t = prof.dailyTargets;
-  var mm = D.profiles.mirrorMeals;
-  var rows = [];
-
-  if(prof.fixedBreakfast){
-    var b = prof.fixedBreakfast;
-    rows.push({ label:"Breakfast", tag:"fixed", kcal:b.calories, p:b.proteinG,
-                fib:b.fiberG, fat:b.fatG, ing:b.ingredients });
-  }
-  /* Once a dish is actually picked in the planner below, the ledger uses its
-     real computed macros instead of the abstract mirror target — Baked Feta
-     Salmon really does carry 1.2 g fibre, not 14, and "left for snacks"
-     should know that, not just the idealised number. */
-  ["lunch","dinner"].forEach(function(k){
-    var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
-    var c = picked ? eatenBy(picked, who)
-                   : { kcal:mm[k].calories, p:mm[k].proteinG,
-                       fib:mm[k].fiberG, fat:mm[k].fatG };
-    var n = picked ? blocksFor(picked, who) : 0;
-    rows.push({ label:k.charAt(0).toUpperCase()+k.slice(1),
-                tag: picked ? (n ? "picked + " + n0(n) + " blk" : "picked") : "mirror",
-                kcal:c.kcal, p:c.p, fib:c.fib, fat:c.fat });
-  });
-  pickedSnacks(who).forEach(function(id){
-    var c = recipeById(id).computed;
-    rows.push({ label:recipeById(id).title, tag:"snack", kcal:c.calories, p:c.proteinG,
-                fib:c.fiberG, fat:c.fatG });
-  });
-
-  var used = rows.reduce(function(a,r){
-    a.kcal += r.kcal; a.p += r.p; a.fib += r.fib || 0;
-    return a;
-  }, {kcal:0, p:0, fib:0});
-
-  rows.push({
-    label: prof.fixedBreakfast ? "Left for snacks" : "Left for breakfast + snacks",
-    tag: "open", left: true,
-    kcal: t.calories - used.kcal,
-    p:    t.proteinG - used.p,
-    fib:  t.fiberG   - used.fib
-  });
-  return rows;
-}
-
 /* What the rest of the plate has to deliver once the carb base is on it.
    This is recipeChecks.proteinCheck made arithmetic instead of advisory. */
 function mealRemainder(){
@@ -697,8 +662,7 @@ function mealRemainder(){
   var pb = comp.perBlock;
   var m = D.profiles.mirrorMeals.lunch;
   /* Fat has no floor since 2026-08-30, so the blocks can already exceed what the
-     meal demands. Clamped at zero — a negative need would credit those calories
-     back and make the feasibility floor look lower than it is. */
+     meal demands. Clamped at zero so a negative need never reads as a credit. */
   var fatLo = parseFloat(String(m.fatG).split("-")[0]);
   return {
     blocks: blocks,
@@ -710,17 +674,6 @@ function mealRemainder(){
              fat:Math.max(0, fatLo - pb.fatG*blocks),
              fatMax:parseFloat(String(m.fatG).split("-").pop()) - pb.fatG*blocks }
   };
-}
-
-/* Can the target be hit at all? Price the macros it asks for at their own
-   energy content. If that floor is above the calories left, no choice of
-   ingredient rescues it — the target contradicts itself. */
-function feasibility(){
-  var r = mealRemainder();
-  var f = D.kitchen.energyFactors;
-  if(!f) return null;
-  var floor = r.need.p*f.proteinG + r.need.fat*f.fatG + r.need.fib*f.fiberG;
-  return { floor:floor, have:r.need.kcal, over:floor - r.need.kcal };
 }
 
 var base = D.kitchen.asianMacroBase;
@@ -762,104 +715,6 @@ function splitHTML(){
       '</div></div>';
   }
   return '<div class="split">' + half("p","Philipp") + half("e","Eunice") + '</div>';
-}
-
-function ledgerHTML(who){
-  var prof = D.profiles.people[who];
-  var rows = mealsOfDay(who);
-
-  var body = rows.map(function(r){
-    var short = r.left && r.fib != null && r.fib <= 2 ? " short" : "";
-    return '<div class="lrow' + (r.left ? ' left' : '') + '">' +
-      '<div class="lb">' + esc(r.label) + '</div>' +
-      '<div class="lv">' + n0(r.kcal) + ' kcal</div>' +
-      '<div class="ls"><span class="tag">' + esc(r.tag) + '</span>' +
-        '<span>P <b>' + g(r.p) + ' g</b></span>' +
-        (r.fib == null ? '' : '<span class="' + short.trim() + '">Fib <b>' +
-                              g(r.fib) + ' g</b></span>') +
-        (r.fat == null ? '' : '<span>F <b>' + g(r.fat) + ' g</b></span>') +
-      '</div></div>';
-  }).join("");
-
-  var t = prof.dailyTargets;
-  var card = '<div class="card"><div class="ch"><span class="k">' +
-    esc(PW.PEOPLE[who].name) + '\u2019s day</span>' +
-    '<span class="meta">' + n0(t.calories) + ' kcal &middot; ' + n0(t.proteinG) + ' g P</span>' +
-    '</div><div class="ledger">' + body + '</div></div>';
-
-  /* The last few grams. Only once lunch, dinner AND a snack are all picked is
-     the day actually specified — before that "left over" is just budget, not a
-     shortfall. Capped hard: psyllium is fine for a rounding error and wrong as
-     a replacement for a dish, and the cap is what keeps that line honest. */
-  /* The last few grams. Only once lunch, dinner AND a snack are all picked is
-     the day actually specified — before that "left over" is budget, not a
-     shortfall. Capped hard: psyllium is fine for a rounding error and wrong as
-     a replacement for a dish, and the cap is what keeps that line honest. */
-  var ft = D.fineTuneFiber;
-  var snacksDone = pickedSnacks(who).length === snackSlots(who);
-  if(ft && PLAN.lunch && PLAN.dinner && snacksDone){
-    var open = rows[rows.length - 1];
-    if(open.left && open.fib > 0.05){
-      var needG = open.fib / ft.fiberPerG;
-      if(needG <= ft.maxG){
-        card += '<div class="finetune"><b>' + g(needG) + ' g ' + esc(ft.name) + '</b> ' +
-                'schlie\u00dfen die letzten ' + g(open.fib) + ' g Ballaststoffe \u2014 ' +
-                esc(ft.note) + '.</div>';
-      } else {
-        card += '<div class="finetune warn">' + g(open.fib) + ' g Ballaststoffe fehlen \u2014 ' +
-                'das w\u00e4ren ' + g(needG) + ' g ' + esc(ft.name) + ', mehr als die ' +
-                ft.maxG + ' g, die hier erlaubt sind. Die L\u00fccke geh\u00f6rt ins Gericht, ' +
-                'nicht ins Pulver.</div>';
-      }
-    }
-  }
-
-  /* The ingredients only exist for whoever has a fixed breakfast. */
-  if(prof.fixedBreakfast){
-    card += '<details><summary>' + esc(PW.PEOPLE[who].name) +
-      '\u2019s breakfast, as built</summary><div class="dl">' +
-      prof.fixedBreakfast.ingredients.map(function(i){
-        return '<div><div class="dk">' + esc(i.item) + '</div>' +
-               '<div class="dv"><strong>' + esc(i.amount) + '</strong></div></div>';
-      }).join("") + '</div></details>';
-  }
-  return card;
-}
-
-function mealHTML(){
-  var r = mealRemainder();
-  var m = D.profiles.mirrorMeals.lunch;
-  return '<div class="card"><div class="ch"><span class="k">One mirror meal</span>' +
-    '<span class="meta">' + n0(m.calories) + ' kcal target</span>' +
-    '<span class="title">What the plate still needs</span></div>' +
-    '<div class="ledger">' +
-      '<div class="lrow"><div class="lb">' + n1(r.blocks) + ' Asian Base block' +
-        (r.blocks === 1 ? '' : 's') + '</div>' +
-        '<div class="lv">' + n0(r.from.kcal) + ' kcal</div>' +
-        '<div class="ls"><span class="tag">carb base</span>' +
-        '<span>P <b>' + n1(r.from.p) + ' g</b></span>' +
-        '<span>Fib <b>' + n1(r.from.fib) + ' g</b></span>' +
-        '<span>F <b>' + n1(r.from.fat) + ' g</b></span></div></div>' +
-      '<div class="lrow left"><div class="lb">Protein source + veg</div>' +
-        '<div class="lv">' + n0(r.need.kcal) + ' kcal</div>' +
-        '<div class="ls"><span class="tag">the rest</span>' +
-        '<span>P <b>' + n1(r.need.p) + ' g</b></span>' +
-        '<span>Fib <b>' + n1(r.need.fib) + ' g</b></span>' +
-        '<span>F <b>' + (r.need.fat > 0 ? n1(r.need.fat)
-                          : "\u2264" + n1(r.need.fatMax)) + ' g</b></span></div></div>' +
-    '</div></div>' + feasibilityHTML();
-}
-
-function feasibilityHTML(){
-  var f = feasibility();
-  if(!f || f.over <= 0) return "";
-  return '<div class="flag warn"><div class="ft">This target cannot be cooked</div><p>' +
-    'Those macros are worth ' + n0(f.floor) + ' kcal on their own \u2014 protein at 4, fat at 9, ' +
-    'fibre at 2 kcal per gram \u2014 but only ' + n0(f.have) + ' kcal are left for them. ' +
-    'That is ' + n0(f.over) + ' kcal over before any digestible carbohydrate comes along for ' +
-    'the ride, so no ingredient choice fixes it. Either the fibre per meal comes down or the ' +
-    'meal gets bigger.' +
-    '</p></div>';
 }
 
 /* Recipes whose `person` is null belong to both — that is what a mirror meal is. */
@@ -992,16 +847,6 @@ function takesBlocks(r){
   return r.slot === "mirror" && r.carb !== "own";
 }
 function blocksFor(r, who){ return takesBlocks(r) ? blockCount(who) : 0; }
-
-/* What `who` actually eats of this dish: the serving plus their own blocks.
-   Every reader that used to take `r.computed` straight has to come through
-   here now, because `computed` describes the dish alone and a plate is the
-   dish plus blocks. Missing one of them is what folded the whole dinner list
-   away after picking pho: the pair check was summing two dishes without their
-   carb and comparing that to two full plates. */
-function eatenBy(r, who){
-  return plateFor(r, blocksFor(r, who));
-}
 
 /* A plate = one serving of the dish + n blocks. */
 function plateFor(r, n){
@@ -1179,116 +1024,6 @@ function recipeById(id){
   return found;
 }
 
-/* Lower is better. Fibre-short and fat-over-ceiling are weighted heaviest
-   because those are the two macros a single dish genuinely misses here —
-   see the Pho Bo / Crispy Sweet Chili Chicken gaps. Protein shortfall matters;
-   a calorie miss is softest, appetite already varies day to day. */
-/* ---- does the DAY close? ------------------------------------------------
-   This used to ask whether lunch and dinner together reached two mirror
-   targets — 28 g of fibre out of two meals. That is not the question. The DAY
-   is what has to close, the afternoon tub is part of it, and a capped spoon of
-   husk is there for the last few grams. Judged as a pair, pho was rejected
-   against all eleven partners; judged as a day it closes comfortably, which is
-   what the kitchen actually produces.
-
-   Breakfast is fixed, lunch and dinner are these two, and the afternoon has
-   `slots` portions left to fill whatever remains. Returns the snack that does
-   the job best and what it leaves over. */
-function dayFit(lunchR, dinnerR, who){
-  who = who || PW.get();
-  var prof = D.profiles.people[who];
-  var t = prof.dailyTargets;
-  var kcal = t.calories, p = t.proteinG, fib = t.fiberG;
-
-  var bf = prof.fixedBreakfast;
-  if(bf){ kcal -= bf.calories; p -= bf.proteinG; fib -= bf.fiberG; }
-
-  var L = eatenBy(lunchR, who), Dn = eatenBy(dinnerR, who);
-  kcal -= L.kcal + Dn.kcal;
-  p    -= L.p    + Dn.p;
-  fib  -= L.fib  + Dn.fib;
-
-  var slots = snackSlots(who);
-  var ft = D.fineTuneFiber;
-  var best = null;
-
-  snackRecipes(who).forEach(function(r){
-    var c = r.computed;
-    var rk = kcal - c.calories * slots;
-    var rp = p    - c.proteinG * slots;
-    var rf = fib  - c.fiberG   * slots;
-    var husk = (ft && rf > 0) ? rf / ft.fiberPerG : 0;
-
-    /* Overshooting calories a little is not a failure — these targets are
-       1 kcal from contradicting themselves as it is. Being short on protein
-       is, and so is a fibre gap wider than the capped spoon. */
-    var tier = (rk < -60 || rp > 0.5 || !ft || husk > ft.maxG) ? 2
-             : (husk <= 0.5 ? 0 : 1);
-
-    var cand = { snack:r, tier:tier, husk:husk,
-                 leftKcal:rk, leftP:rp, leftFib:rf,
-                 score: tier * 100 + Math.max(husk, 0) + Math.abs(rk) / 300 };
-    if(!best || cand.score < best.score) best = cand;
-  });
-
-  if(!best){
-    best = { snack:null, tier: fib > 0.5 ? 2 : 0, husk:0,
-             leftKcal:kcal, leftP:p, leftFib:fib, score:0 };
-  }
-  best.afterMeals = { kcal:kcal, p:p, fib:fib };
-  best.slots = slots;
-  return best;
-}
-
-/* Thin names, so the slot rendering reads as it did. */
-function pairFit(a, b, who){ return dayFit(a, b, who); }
-function pairCloses(fit){ return fit.tier === 0; }
-
-/* Only decorates a candidate when picking it would actually CLOSE the day —
-   a found-recipe library is fibre-poor by nature, so on most picks every
-   single candidate falls short, and repeating a red warning nine times over
-   is noise, not information. Silence is the honest default; a green line is
-   the exception worth calling out. */
-/* leftX is what the target still wants. For protein and fibre that means
-   positive is a shortfall. For calories it is the opposite: unspent calories
-   are room, not a deficit, which is why they get their own words. */
-function shortOrSpare(v, unit){
-  if(v > 0.05)  return n1(v) + ' ' + unit + ' short';
-  if(v < -0.05) return n1(-v) + ' ' + unit + ' spare';
-  return 'the ' + unit + ' exactly';
-}
-function roomOrOver(v){
-  if(v > 0.5)  return n0(v) + ' kcal of room';
-  if(v < -0.5) return n0(-v) + ' kcal over';
-  return 'the calories exactly';
-}
-
-function pairCompareLine(otherR, r){
-  var f = dayFit(otherR, r, PW.get());
-  var name = f.snack ? esc(f.snack.title) : "the afternoon";
-  if(f.tier === 0){
-    return '<span class="dp-pair ok">\u2713 closes your day with ' + name + '</span>';
-  }
-  if(f.tier === 1){
-    return '<span class="dp-pair husk">closes with ' + name + ' plus ' +
-      g(f.husk) + ' g ' + esc(D.fineTuneFiber.name) + '</span>';
-  }
-  var why = [];
-  if(f.leftP > 0.5) why.push(n1(f.leftP) + " g protein short");
-  if(D.fineTuneFiber && f.husk > D.fineTuneFiber.maxG) why.push(n1(f.leftFib) + " g fibre short");
-  if(f.leftKcal < -60) why.push(n0(-f.leftKcal) + " kcal over");
-  return '<span class="dp-pair">' +
-    esc(why.length ? why.join(" \u00b7 ") : "does not close the day") + '</span>';
-}
-
-/* Three tiers, not two. The library now holds dishes that are deliberately
-   fibre-light — a pho stops being a pho if you fix its fibre by hand — so a
-   pair can also be one spoon of husk away from closing. That is a different
-   answer from "no", and folding it in with the failures would hide exactly the
-   dishes this household wants to eat. Protein and fat still have to be right:
-   powder only ever buys fibre. */
-function pairTier(fit){ return fit.tier; }
-
 /* A shape and a cuisine, so the picker can be scanned rather than read. Both
    are derived — the shape from the heaviest protein, the cuisine from the
    recipe's own field — so nothing here is typed twice.
@@ -1345,11 +1080,9 @@ function dishChip(r, opts){
         return (Math.round(days*10)/10) + (days === 1 ? ' day' : ' days') + ' for two';
       })()
     : r.servings + (r.servings === 1 ? ' serving' : ' servings');
-  /* Choosing dinner should be recognition, not a spreadsheet read. While you
-     are still deciding, a dish shows its name, its size and — once there is
-     something to pair it against — the verdict. The five macro figures are the
-     inputs to that verdict rather than the verdict itself, so they come back
-     the moment the dish is actually picked. */
+  /* Choosing dinner should be recognition, not a spreadsheet read: a dish
+     shows its name and size while you decide, and the five macro figures once
+     it is actually picked. */
   var full = n0(c.calories) + ' kcal &middot; ' + n1(c.proteinG) + ' g P &middot; ' +
              n1(c.fiberG) + ' g Fib &middot; ' + n1(c.fatG) + ' g F &middot; ' + tail;
   var brief = n0(c.calories) + ' kcal &middot; ' + tail;
@@ -1360,138 +1093,26 @@ function dishChip(r, opts){
       '<span class="dp-title">' + esc(r.title) + '</span></span>' +
     '<span class="dp-meta">' + cuisineTag(r) + carbTag(r) +
       (opts.picked ? full : brief) + '</span>' +
-    (opts.compareLine || '') +
-    (opts.badge ? '<span class="dp-badge">' + esc(opts.badge) + '</span>' : '') +
     '</button>';
 }
 
+/* A plain list. Lunch and dinner are the same for both of you, so there is
+   nothing to rank against — pick what you want to eat. */
 function slotHTML(slot){
   var list = mirrorRecipes();
   var label = slot.charAt(0).toUpperCase() + slot.slice(1);
-  var otherSlot = slot === "lunch" ? "dinner" : "lunch";
   var pickedId = PLAN[slot];
   if(pickedId && !recipeById(pickedId)){ pickedId = null; PLAN[slot] = null; savePlan(PLAN); }
 
   if(pickedId){
-    var picked = recipeById(pickedId);
     return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
-      dishChip(picked, {slot:slot, picked:true}) +
+      dishChip(recipeById(pickedId), {slot:slot, picked:true}) +
       '<button class="ps-change" data-slot="' + esc(slot) + '">change</button></div>';
   }
-
-  var otherId = PLAN[otherSlot];
-  var otherR = otherId ? recipeById(otherId) : null;
-  var scored = list.map(function(r){
-    return { r:r, fit: otherR ? pairFit(otherR, r) : null };
-  });
-
-  function chips(items, withBadge){
-    return items.map(function(x, i){
-      return dishChip(x.r, {
-        slot: slot,
-        badge: (withBadge && i === 0) ? "closest fit" : "",
-        compareLine: otherR ? pairCompareLine(otherR, x.r) : ""
-      });
-    }).join("");
-  }
-
-  /* Nothing picked in the other slot yet, so there is no pair to judge. */
-  if(!otherR){
-    return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
-      '<div class="ps-list">' + chips(scored, false) + '</div></div>';
-  }
-
-  scored.sort(function(a, b){ return a.fit.score - b.fit.score; });
-  var fits = scored.filter(function(x){ return pairTier(x.fit) === 0; });
-  var near = scored.filter(function(x){ return pairTier(x.fit) === 1; });
-  var no   = scored.filter(function(x){ return pairTier(x.fit) === 2; });
-
-  var body = "";
-  if(fits.length) body += '<div class="ps-list">' + chips(fits, true) + '</div>';
-  if(near.length){
-    body += '<div class="ps-tier">' +
-      (fits.length ? 'Or, with a spoon of husk' : 'One spoon of husk short') +
-      '</div><div class="ps-list">' + chips(near, !fits.length) + '</div>';
-  }
-  /* What cannot work is folded away rather than removed — but only when there
-     is something better on offer. Folding ALL of them left you looking at a
-     sentence and a closed disclosure with nothing to pick, which is how a
-     dish like pho made the dinner slot feel broken. When nothing qualifies,
-     the whole list stays open and ranked: you are choosing dinner either way,
-     and the app's job is to say what the gap costs, not to refuse. */
-  var anyGood = fits.length || near.length;
-  if(no.length && anyGood){
-    body += '<details class="ps-rest"><summary>' + no.length +
-      ' more that cannot close the day with ' + esc(otherR.title) +
-      '</summary><div class="ps-list">' + chips(no, false) + '</div></details>';
-  }
-  if(!anyGood){
-    body = '<p class="ps-note">No dinner here closes the day beside <b>' +
-      esc(otherR.title) + '</b> \u2014 not with the afternoon tub, not with a spoon ' +
-      'of husk on top. Pick what you want to eat; what each one falls short by ' +
-      'is named underneath it.</p>' +
-      '<div class="ps-list">' + chips(no, true) + '</div>';
-  }
-
-  return '<div class="planslot"><div class="ps-label">' + label +
-    ' <span class="ps-hint">&middot; ranked to fit ' + esc(otherR.title) + '</span>' +
-    '</div>' + body + '</div>';
-}
-
-/* What is actually left for a snack once breakfast (if fixed) and the
-   lunch/dinner picks (real macros if chosen, else the mirror target) are
-   accounted for. Deliberately ignores any snack already picked — this is
-   the budget to rank CANDIDATES against, not what remains after one. */
-function remainingBeforeSnack(who){
-  var prof = D.profiles.people[who];
-  var t = prof.dailyTargets;
-  var mm = D.profiles.mirrorMeals;
-  var kcal = t.calories, p = t.proteinG, fib = t.fiberG;
-  if(prof.fixedBreakfast){
-    kcal -= prof.fixedBreakfast.calories; p -= prof.fixedBreakfast.proteinG; fib -= prof.fixedBreakfast.fiberG;
-  }
-  ["lunch","dinner"].forEach(function(k){
-    var picked = PLAN[k] ? recipeById(PLAN[k]) : null;
-    var c = picked ? eatenBy(picked, who)
-                   : { kcal:mm[k].calories, p:mm[k].proteinG, fib:mm[k].fiberG };
-    kcal -= c.kcal; p -= c.p; fib -= c.fib;
-  });
-  /* Portions already chosen are spent, so the next one is ranked against what
-     is actually left rather than against the whole afternoon again. */
-  pickedSnacks(who).forEach(function(id){
-    var c = recipeById(id).computed;
-    kcal -= c.calories; p -= c.proteinG; fib -= c.fiberG;
-  });
-  return { kcal:kcal, p:p, fib:fib };
-}
-
-/* Lower is better. A snack that blows past the remaining calories is
-   penalised; one that still leaves protein or fibre short is penalised more
-   — those are the two the day structurally struggles with, same weighting
-   as pairFit above. */
-function snackFit(remaining, snack){
-  var c = snack.computed;
-  var kcalOver = Math.max(0, c.calories - Math.max(remaining.kcal, 0));
-  var pShort   = Math.max(0, remaining.p   - c.proteinG);
-  var fibShort = Math.max(0, remaining.fib - c.fiberG);
-  return kcalOver / Math.max(remaining.kcal, 1) * 1.0 +
-         pShort   / Math.max(remaining.p, 1)   * 1.5 +
-         fibShort / Math.max(remaining.fib, 1) * 1.5;
-}
-
-/* A single snack rarely closes what a whole meal left open — that is normal,
-   not a problem, so it stays silent by default. The one thing worth flagging
-   is a snack that overshoots the calories actually left. */
-function snackOvershoots(remaining, snack){
-  return (remaining.kcal - snack.computed.calories) < -100;
-}
-function snackCompareLine(remaining, snack){
-  var c = snack.computed;
-  var kcalLeft = remaining.kcal - c.calories, pLeft = remaining.p - c.proteinG,
-      fibLeft = remaining.fib - c.fiberG;
-  if(!snackOvershoots(remaining, snack)) return "";
-  return '<span class="dp-pair warn">⚠ over budget — leaves ' + n0(kcalLeft) +
-    ' kcal &middot; ' + n1(pLeft) + ' g P &middot; ' + n1(fibLeft) + ' g Fib</span>';
+  return '<div class="planslot"><div class="ps-label">' + label + '</div>' +
+    '<div class="ps-list">' + list.map(function(r){
+      return dishChip(r, {slot:slot});
+    }).join("") + '</div></div>';
 }
 
 function snackSlotHTML(){
@@ -1525,27 +1146,16 @@ function snackSlotHTML(){
     }
   }
 
-  /* One list at a time. Two ranked lists side by side is a decision too many,
-     and the second portion should be ranked against what the first one left. */
+  /* One list at a time, in the order the file has them. */
   if(nextOpen >= 0){
-    var remaining = remainingBeforeSnack(who);
-    var scored = snackRecipes(who).map(function(r){ return { r:r, s: snackFit(remaining, r) }; });
-    scored.sort(function(a,b){ return a.s - b.s; });
-    if(!scored.length){
-      out += '<div class="ps-portion"><div class="ps-label">' + label(nextOpen) + '</div>' +
-        '<div class="empty">No snack recipes ready yet.</div></div>';
-    }else{
-      out += '<div class="ps-portion"><div class="ps-label">' + label(nextOpen) +
-        ' <span class="ps-hint">&middot; ranked to fit ' + esc(PW.PEOPLE[who].name) +
-        '\u2019s remaining ' + n0(Math.max(remaining.kcal, 0)) + ' kcal</span></div>' +
-        '<div class="ps-list">' + scored.map(function(x, i){
-          return dishChip(x.r, {
-            slot: "snack:" + nextOpen,
-            badge: i === 0 ? "closest fit" : "",
-            compareLine: snackCompareLine(remaining, x.r)
-          });
-        }).join("") + '</div></div>';
-    }
+    var list = snackRecipes(who);
+    out += '<div class="ps-portion"><div class="ps-label">' + label(nextOpen) + '</div>' +
+      (list.length
+        ? '<div class="ps-list">' + list.map(function(r){
+            return dishChip(r, {slot: "snack:" + nextOpen});
+          }).join("") + '</div>'
+        : '<div class="empty">No snack recipes ready yet.</div>') +
+      '</div>';
   }
   return '<div class="planslot planslot-snack">' + out + '</div>';
 }
@@ -1573,49 +1183,21 @@ function shoppingBasis(){
   });
 
   return { lunch:lunch, dinner:dinner, snacks:snacks, totals:totals,
-           blocks:blocks, fit:pairFit(lunch, dinner) };
+           blocks:blocks };
 }
 
-/* Does this pair work? That is a planning question, so it lives with the
-   picker rather than with the shopping list. */
-function pairFlagsHTML(){
+/* Two dishes that do not last the same number of days is a cooking fact, so
+   it stays. Whether the pair "closes the day" is gone: everyone eats the same
+   plate, and the day is topped up by hand (see shortfallHTML). */
+function lengthFlagHTML(){
   var b = shoppingBasis();
   if(!b) return "";
-
   var lunchDays = b.lunch.servings/2, dinnerDays = b.dinner.servings/2;
-  var mismatch = lunchDays !== dinnerDays
-    ? '<div class="flag warn"><div class="ft">Different lengths</div><p>' +
-      esc(b.lunch.title) + ' makes ' + (Math.round(lunchDays*10)/10) + ' day(s) of lunch for two, ' +
-      esc(b.dinner.title) + ' makes ' + (Math.round(dinnerDays*10)/10) + ' day(s) of dinner. ' +
-      'Cook the shorter one again partway through, or scale the batch by hand.</p></div>'
-    : '';
-
-  var fit = b.fit;
-  var who = PW.get();
-  var closes = fit.tier === 0;
-  var head = fit.tier === 0 ? 'This closes ' + esc(PW.PEOPLE[who].name) + '\u2019s day'
-           : fit.tier === 1 ? 'Closes with a spoon of husk'
-           : 'This does not close ' + esc(PW.PEOPLE[who].name) + '\u2019s day';
-  var fitFlag = '<div class="flag' + (fit.tier === 2 ? ' warn' : '') + '">' +
-    '<div class="ft">' + head + '</div><p>' +
-    'Breakfast, both meals and ' + n0(fit.slots) + ' afternoon portion' +
-    (fit.slots === 1 ? '' : 's') +
-    (fit.snack ? ' of ' + esc(fit.snack.title) : '') + '. ' +
-    /* leftX is what the target still WANTS: positive is short, negative is
-       spare. Saying "-0.2 g fibre still owed" was both signs at once. */
-    'That leaves ' + roomOrOver(fit.leftKcal) + ', ' +
-    shortOrSpare(fit.leftP, 'g protein') + ' and ' +
-    shortOrSpare(fit.leftFib, 'g fibre') + '.' +
-    (fit.tier === 1
-      ? ' Finish it with ' + g(fit.husk) + ' g ' + esc(D.fineTuneFiber.name) +
-        ' in a glass of water.'
-      : '') +
-    (fit.tier === 2
-      ? ' Change one of the two, or take the gap knowingly.'
-      : '') +
-    '</p></div>';
-
-  return mismatch + fitFlag;
+  if(lunchDays === dinnerDays) return "";
+  return '<div class="flag warn"><div class="ft">Different lengths</div><p>' +
+    esc(b.lunch.title) + ' makes ' + (Math.round(lunchDays*10)/10) + ' day(s) of lunch for two, ' +
+    esc(b.dinner.title) + ' makes ' + (Math.round(dinnerDays*10)/10) + ' day(s) of dinner. ' +
+    'Cook the shorter one again partway through, or scale the batch by hand.</p></div>';
 }
 
 function shoppingListHTML(){
@@ -1747,12 +1329,48 @@ function baseBlockShoppingHTML(b){
     '</div>';
 }
 
+/* Same plate every day; when the day lands short you add protein or fibre
+   from the tub instead of reworking the meal. Every figure is derived from
+   foods.json / kitchen.json, nothing typed here. */
+function shortfallHTML(){
+  var who = PW.get();
+  var prof = D.profiles.people[who];
+  var pb = D.proteinBoost, ft = D.fineTuneFiber;
+  var rows = "";
+  if(pb){
+    rows += '<div class="lrow"><div class="lb">' + esc(pb.name) + '</div>' +
+      '<div class="lv">per 10 g</div>' +
+      '<div class="ls"><span class="tag">protein</span>' +
+      '<span>&asymp; <b>' + n0(pb.proteinPerG * 10) + ' g</b> protein</span></div></div>';
+  }
+  if(ft){
+    rows += '<div class="lrow"><div class="lb">' + esc(ft.name) + '</div>' +
+      '<div class="lv">up to ' + n0(ft.maxG) + ' g</div>' +
+      '<div class="ls"><span class="tag">fibre</span>' +
+      '<span>&asymp; <b>' + n0(ft.fiberPerG * ft.maxG) + ' g</b> fibre, in a glass of water</span></div></div>';
+  }
+  var card = '<div class="card"><div class="ch"><span class="k">If the day lands short</span>' +
+    '<span class="meta">same plate, then top up</span></div>' +
+    '<div class="ledger">' + rows + '</div>' +
+    '<div class="finetune">Lunch and dinner stay the same every day. If protein or fibre ' +
+    'is short at the end of the day, add it here &mdash; do not rework the meal.</div>';
+  if(prof.fixedBreakfast){
+    card += '<details><summary>' + esc(PW.PEOPLE[who].name) +
+      '&rsquo;s breakfast, as built</summary><div class="dl">' +
+      prof.fixedBreakfast.ingredients.map(function(i){
+        return '<div><div class="dk">' + esc(i.item) + '</div>' +
+               '<div class="dv"><strong>' + esc(i.amount) + '</strong></div></div>';
+      }).join("") + '</div></details>';
+  }
+  return card + '</div>';
+}
+
 function plannerHTML(){
   return '<div class="card"><div class="ch"><span class="k">Plan the batch</span>' +
     '<span class="meta">lunch &amp; dinner are the same for both of you</span></div>' +
     '<div class="planrow">' + slotHTML("lunch") + slotHTML("dinner") + '</div>' +
     snackSlotHTML() +
-    '</div>' + pairFlagsHTML();
+    '</div>' + lengthFlagHTML();
 }
 
 function recipesHTML(who){
@@ -1969,8 +1587,7 @@ function render(){
         '<b>Plan</b> and they appear here with their method and their split.</div></div>' +
         splitter + estimated + ing + steps;
   }else{
-    body = plannerHTML() +
-      ledgerHTML(PW.get()) + mealHTML() +
+    body = plannerHTML() + shortfallHTML() +
       recipesHTML(PW.get()) + extras;
   }
 

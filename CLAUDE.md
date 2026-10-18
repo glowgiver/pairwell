@@ -270,23 +270,27 @@ carb terms and `check_targets.py` searches those levels to prove the target is
 reachable; on a plate they round to a whole puck. If half blocks are ever
 wanted for real, freeze a second tray in smaller moulds.
 
-**The verdict is a DAY check, not a pair check.** For a while the planner
-asked whether lunch and dinner between them reached two mirror targets — 28 g
-of fibre out of two meals. That is not the question and it produced a nonsense
-answer: phở carries 4.8 g of fibre, so it was rejected against all eleven
-possible partners and the dinner list folded away entirely, which read as the
-app being broken.
+**There is no verdict any more — the plate is fixed and the day is topped up by
+hand.** From 2026-10-18 the Kitchen page does not rank dishes, judge pairs or
+close the day. Until then it did: `dayFit()` walked target minus breakfast
+minus both plates minus the best snack, sorted every lunch and dinner into
+three tiers (closes, closes with a spoon, cannot close) and ranked the snacks
+against what was left. It worked, and it was too much to read at a counter —
+the household wanted the same portions every time, and to eat a little protein
+powder or psyllium when a day came up short, rather than to be told which
+dinner would close it.
 
-The day is what has to close. Breakfast is fixed, lunch and dinner are the
-picks, the afternoon tub is part of the answer, and `dayFineTuning` is there
-for the last few grams. `dayFit()` walks exactly that: target, minus breakfast,
-minus both plates *with that person's blocks*, then the best snack at their
-portion count, then husk under its cap. Phở plus Lemon Herb closes Philipp's
-day with room to spare and Eunice's with 7 g of husk.
+What replaced it: lunch and dinner are plain lists, the same for both people.
+A single card, *If the day lands short*, names the two fixes — whey (per 10 g)
+and Flohsamenschalen (capped at `dayFineTuning`'s 10 g, in a glass of water),
+both derived from `foods.json`. The cap stays because the reasoning behind it
+did not change: psyllium closes a rounding error and cannot replace a dish.
 
-Three tiers follow from it: closes outright, closes with a spoon, cannot close.
-And when nothing qualifies the list stays **open** — folding every option away
-leaves you unable to choose at all, and you are cooking dinner either way.
+What was deliberately **kept**: the per-person block dial and snack counts
+(that is how 1900 and 1580 kcal share one plate), the "different lengths"
+warning when two dishes do not last the same days, and everything on the data
+side — `check_targets.py` and `adapt_recipe.py` still prove the targets are
+reachable and fit a dish to them. Only the page stopped judging.
 
 **Blocks are cooked ahead and frozen, in their own session.** So the shopping
 question is not "what does this plan need" but "what does it need that is not
